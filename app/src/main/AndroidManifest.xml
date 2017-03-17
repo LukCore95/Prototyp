@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="zpi.prototyp">
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="MainActivity"
+            android:name=".SplashScreen"
             android:label="@string/app_name"
             android:theme="@style/splashScreenTheme" >
             <intent-filter>
@@ -20,6 +18,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="MainActivity">
         </activity>
     </application>
 

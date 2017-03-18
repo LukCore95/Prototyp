@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Prototyp</string>
-
+    <string name="app_name">Mockowy Wrocław</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>

@@ -4,24 +4,24 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-    Button button2;
+    private Marker myMarker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -31,18 +31,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
-        
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        button2 = (Button) findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent Intent = new Intent(view.getContext(), Details.class);
-                view.getContext().startActivity(Intent);}
-        });
     }
 
     @Override
@@ -50,26 +42,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         try {
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.style_json));
+                            this, R.raw.michal_json));
             if (!success) {
             }
         } catch (Resources.NotFoundException e) {
         }
-        LatLng wroclaw = new LatLng(51.1115591, 17.0597695);
-        CameraUpdate center = CameraUpdateFactory.newLatLng(wroclaw);
+        LatLng renoma = new LatLng(51.103976, 17.030741);
+        CameraUpdate center = CameraUpdateFactory.newLatLng(renoma);
         CameraUpdate zoom=CameraUpdateFactory.zoomTo(15);
         googleMap.moveCamera(center);
         googleMap.animateCamera(zoom);
-        googleMap.addMarker(new MarkerOptions().position(wroclaw).title("Marker in Wrocław"));
-
-        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-                Intent intent = new Intent(MainActivity.this,Details.class);
-                startActivity(intent);
-            }
-        });
+        googleMap.setOnMarkerClickListener(this);
+        myMarker = googleMap.addMarker(new MarkerOptions().position(renoma).icon(BitmapDescriptorFactory.fromResource(R.drawable.renoma)));
     }
 
-
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        if (marker.equals(myMarker))
+        {
+            Intent intent = new Intent(MainActivity.this,Details.class);
+            startActivity(intent);
+        }
+        return false;
+    }
 }

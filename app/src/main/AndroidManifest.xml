@@ -21,6 +21,7 @@
 
         <activity
             android:name=".SplashScreen"
+            android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:theme="@style/splashScreenTheme">
             <intent-filter>
@@ -29,8 +30,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".Details"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".Details"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

@@ -13,4 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.zpi.prototyp.MainActivity" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:text="DETAILS"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

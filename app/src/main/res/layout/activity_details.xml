@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context="zpi.prototyp.Details">
 
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="349dp"
+        android:layout_height="241dp"
+        tools:layout_editor_absoluteX="21dp"
+        tools:layout_editor_absoluteY="11dp" />
+
 </android.support.constraint.ConstraintLayout>

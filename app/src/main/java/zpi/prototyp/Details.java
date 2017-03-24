@@ -1,7 +1,9 @@
 package zpi.prototyp;
 
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -10,6 +12,9 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
+
+import java.util.Locale;
 
 public class Details extends AppCompatActivity implements View.OnTouchListener {
 
@@ -24,10 +29,31 @@ public class Details extends AppCompatActivity implements View.OnTouchListener {
         setTheme(R.style.Theme_AppCompat_Light_NoActionBar);
         super.onCreate(savedInstanceState);
 
+        //ustawienie czcionki nagłówka
+//        AssetManager am = getApplicationContext().getAssets();
+//        Typeface typeface = Typeface.createFromAsset(am,
+//                String.format(Locale.US, "fonts/%s", "abc.ttf"));
+//        (typeface);
+//        TextView myTextView = (TextView) findViewById(R.id.renoma_de_name);
+//        Typeface typeface=Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
+//        myTextView.setTypeface(typeface);
+
+//        TextView tx = (TextView)findViewById(R.id.renoma_de_name);
+//        Typeface custom_font = Typeface.createFromAsset(getAssets(),
+//                "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
+//        tx.setTypeface(custom_font);
+
+
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_details);
+
+        TextView myTextView = (TextView) findViewById(R.id.renoma_de_name);
+        Typeface typeface=Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
+        myTextView.setTypeface(typeface);
+
 
         surf = (SurfaceView) findViewById(R.id.surfaceView);
         hold = surf.getHolder();

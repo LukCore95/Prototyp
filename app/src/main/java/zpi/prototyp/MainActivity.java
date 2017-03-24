@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
-    }
+    setSupportActionBar(toolbar);
+}
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

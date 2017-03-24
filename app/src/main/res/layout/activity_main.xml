@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     tools:context="zpi.prototyp.MainActivity">
 
     <include
@@ -12,9 +13,31 @@
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.zpi.prototyp.MainActivity" />
+        map:uiZoomGestures="false"
+        tools:context="com.zpi.prototyp.MainActivity"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:id="@+id/location"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_above="@+id/food"
+        android:layout_alignParentEnd="true"
+        android:background="@null"
+        android:src="@drawable/action_button_lokalizacja" />
+
+    <ImageButton
+        android:id="@+id/food"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/action_button_jedzenie"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@null"/>
 </RelativeLayout>

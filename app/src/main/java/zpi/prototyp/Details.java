@@ -4,6 +4,8 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -12,11 +14,12 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.Locale;
 
-public class Details extends AppCompatActivity implements View.OnTouchListener {
+public class Details extends AppCompatActivity implements View.OnTouchListener{
 
     private SurfaceView surf;
     private SurfaceHolder hold;
@@ -54,6 +57,17 @@ public class Details extends AppCompatActivity implements View.OnTouchListener {
         Typeface typeface=Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
         myTextView.setTypeface(typeface);
 
+        ImageButton imageButtonAudiobook = (ImageButton) findViewById(R.id.details_play_audiobook_icon);
+        imageButtonAudiobook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.play_icon).getConstantState()))
+                    v.setBackgroundResource(R.drawable.pause_icon);
+                else
+                    v.setBackgroundResource(R.drawable.play_icon);
+            }
+        });
+
 
         surf = (SurfaceView) findViewById(R.id.surfaceView);
         hold = surf.getHolder();
@@ -82,4 +96,10 @@ public class Details extends AppCompatActivity implements View.OnTouchListener {
     public void setPhotos(Bitmap[] _photos){
         photos = _photos;
     }
+
+//    @Override
+//    public void onClick(View v) {
+//        ImageButton imageButton = (ImageButton) findViewById(R.id.details_play_audiobook_icon);
+//        imageButton.setImageBitmap();
+//    }
 }

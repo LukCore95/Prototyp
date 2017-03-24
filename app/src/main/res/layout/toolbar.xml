@@ -5,27 +5,32 @@
     android:background="@color/colorPrimary"
     android:theme="@style/AppTheme"
     android:elevation="4dp">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <TextView
-        android:id="@+id/titleskill"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+    android:id="@+id/titleskill"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fontFamily="sans-serif-light"
+    android:maxLines="2"
+    android:text="abc"
+    android:textColor="@color/colorPrimaryDark"
+    android:textSize="50dp">
+    </TextView>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
         android:maxLines="2"
         android:text="abc"
         android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@id/titleskill"
         android:textSize="50dp">
     </TextView>
-    <TextView
-        android:id="@+id/skill"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:fontFamily="sans-serif-light"
-        android:maxLines="2"
-        android:text="abc"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="50dp"
-        android:layout_below="@id/titleskill">
-    </TextView>
+</RelativeLayout>
+
 
 </android.support.v7.widget.Toolbar>

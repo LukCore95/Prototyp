@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context="zpi.prototyp.MainActivity">
 
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/toolbar">
+    </include>
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"

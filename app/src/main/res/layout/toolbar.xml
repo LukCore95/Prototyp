@@ -3,7 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:elevation="14dp"
-    android:maxHeight="192dp">
+    android:theme="@style/AppTheme"
+    android:elevation="4dp">
+
+    <TextView
+        android:id="@+id/titleskill"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fontFamily="sans-serif-light"
+        android:maxLines="2"
+        android:text="abc"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="50dp">
+    </TextView>
+    <TextView
+        android:id="@+id/skill"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fontFamily="sans-serif-light"
+        android:maxLines="2"
+        android:text="abc"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="50dp"
+        android:layout_below="@id/titleskill">
+    </TextView>
+
 </android.support.v7.widget.Toolbar>

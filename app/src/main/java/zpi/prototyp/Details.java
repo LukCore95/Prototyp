@@ -29,7 +29,6 @@ public class Details extends AppCompatActivity implements View.OnTouchListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.Theme_AppCompat_Light_NoActionBar);
         super.onCreate(savedInstanceState);
 
         //ustawienie czcionki nagłówka

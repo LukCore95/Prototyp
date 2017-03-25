@@ -6,13 +6,16 @@
     android:layout_height="match_parent"
     tools:context="zpi.prototyp.Details">
 
+    <include
+        android:id="@+id/toolbar_det"
+        layout="@layout/toolbar_details"/>
+
     <ScrollView
         android:id="@+id/id_details_przewijanie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
         <RelativeLayout
@@ -27,12 +30,12 @@
                 android:id="@+id/renoma_de_name"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
                 android:gravity="center_vertical|center"
                 android:text="@string/renoma_nazwa_de"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="74dp" />
 
             <TextView
                 android:id="@+id/renoma_name"

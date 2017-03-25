@@ -6,30 +6,55 @@
     android:theme="@style/AppTheme"
     android:elevation="4dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-        <TextView
-            android:id="@+id/textUp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:maxLines="2"
-            android:text="abc"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="50dp"/>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="29dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon" />
 
-        <TextView
-            android:id="@+id/textDown"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="274dp"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:maxLines="2"
-            android:text="abc"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_below="@id/textUp"
-            android:textSize="50dp"/>
-    </RelativeLayout>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textUp"
+                android:layout_width="261dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:fontFamily="sans-serif-light"
+                android:maxLines="2"
+                android:text="@string/renoma_nazwa_de"
+                android:textColor="@color/colorTextBar"
+                android:textSize="26dp" />
+
+            <TextView
+                android:id="@+id/textDown"
+                android:layout_width="263dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textUp"
+                android:layout_marginStart="14dp"
+                android:fontFamily="sans-serif-light"
+                android:maxLines="2"
+                android:text="Polska nazwa: Odległość"
+                android:textColor="@color/colorTextBar"
+                android:textSize="13dp" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/menuButton"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.16"
+            android:background="@null"
+            android:src="@drawable/icon_action" />
+    </LinearLayout>
 </android.support.v7.widget.Toolbar>

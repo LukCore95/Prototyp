@@ -7,6 +7,8 @@
 
     <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:itemBackground">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorTextBar</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.NoActionBar">

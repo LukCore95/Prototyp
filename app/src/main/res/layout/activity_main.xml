@@ -7,7 +7,6 @@
     tools:context="zpi.prototyp.MainActivity">
 
     <include
-        android:id="@+id/tool_bar"
         layout="@layout/toolbar_main">
     </include>
 

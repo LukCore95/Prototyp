@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    android:theme="@style/AppTheme"
+    android:elevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/textPK"
+            android:layout_width="263dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:maxLines="2"
+            android:text="Punkt kontrolny"
+            android:textColor="@color/colorTextBar"
+            android:textSize="26dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_marginStart="14dp"
+            android:layout_weight="0.52" />
+
+        <ImageButton
+            android:id="@+id/closeImageButton"
+            android:layout_width="26dp"
+            android:layout_height="31dp"
+            android:background="@null"
+            android:src="@drawable/icon_action" />
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>

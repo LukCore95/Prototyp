@@ -1,11 +1,8 @@
 package zpi.prototyp;
 
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -17,8 +14,6 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.Locale;
-
 public class Details extends AppCompatActivity implements View.OnTouchListener{
 
     private SurfaceView surf;
@@ -26,6 +21,7 @@ public class Details extends AppCompatActivity implements View.OnTouchListener{
     private Thread init;
     private Thread slide;
     private Bitmap[] photos = new Bitmap[2];
+    private ImageButton closeIB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +41,24 @@ public class Details extends AppCompatActivity implements View.OnTouchListener{
 //                "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
 //        tx.setTypeface(custom_font);
 
-
-
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_details);
 
+        closeIB = (ImageButton) findViewById(R.id.closeImageButton);
+        closeIB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         TextView myTextView = (TextView) findViewById(R.id.renoma_de_name);
+        TextView myTextView1 = (TextView) findViewById(R.id.textPK);
         Typeface typeface=Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
         myTextView.setTypeface(typeface);
+        myTextView1.setTypeface(typeface);
 
         ImageButton imageButtonAudiobook = (ImageButton) findViewById(R.id.details_play_audiobook_icon);
         imageButtonAudiobook.setOnClickListener(new View.OnClickListener() {
@@ -100,5 +104,17 @@ public class Details extends AppCompatActivity implements View.OnTouchListener{
 //    public void onClick(View v) {
 //        ImageButton imageButton = (ImageButton) findViewById(R.id.details_play_audiobook_icon);
 //        imageButton.setImageBitmap();
+//    }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.close:
+//
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
 //    }
 }

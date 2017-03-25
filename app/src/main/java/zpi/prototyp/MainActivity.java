@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -48,25 +51,33 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener {
 
-    GoogleMap mGoogleMap;
-    SupportMapFragment mapFrag;
-    LocationRequest mLocationRequest;
-    GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
-    Marker mMarker;
+    private GoogleMap mGoogleMap;
+    private SupportMapFragment mapFrag;
+    private LocationRequest mLocationRequest;
+    private GoogleApiClient mGoogleApiClient;
+    private Location mLastLocation;
+    private Marker mMarker;
 
-    Route route;
-    Leg leg;
-    ArrayList<LatLng> directionPositionList;
-    PolylineOptions polylineOptions;
-    Polyline mPolyline;
+    private Route route;
+    private Leg leg;
+    private ArrayList<LatLng> directionPositionList;
+    private PolylineOptions polylineOptions;
+    private Polyline mPolyline;
 
-    ImageButton locIB;
-    ImageButton foodIB;
-    Info dystansInfo;
-    String dystansText;
-    TextView firstText;
-    TextView secondText;
+    private ImageButton locIB;
+    private ImageButton foodIB;
+    private Info dystansInfo;
+    private String dystansText;
+    private TextView firstText;
+    private TextView secondText;
+
+    private LatLng routeTo;
+    private LatLng place1;
+    private String plName;
+
+    private ImageButton menuUpIB;
+    private PopupMenu mPopupMenu;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -85,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         locIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                centerLocation();
+                centerLocationToMe();
             }
         });
 
@@ -93,12 +104,32 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         foodIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                centerLocation();
+                centerLocationToDestination();
             }
         });
 
         firstText = (TextView)findViewById(R.id.textUp);
         secondText = (TextView)findViewById(R.id.textDown);
+        Typeface deutschmeister = Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
+        Typeface roboto = Typeface.createFromAsset(getAssets(), "fonts/roboto/Roboto-Light.ttf");
+        firstText.setTypeface(deutschmeister);
+        secondText.setTypeface(roboto);
+
+        place1 = new LatLng(51.103976, 17.030741);
+        routeTo = place1;
+
+        plName = "Renoma";
+
+        menuUpIB = (ImageButton) findViewById(R.id.menuButton);
+        mPopupMenu = new PopupMenu(this, menuUpIB);
+        MenuInflater menuInflater = mPopupMenu.getMenuInflater();
+        menuInflater.inflate(R.menu.my_menu_up, mPopupMenu.getMenu());
+        menuUpIB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPopupMenu.show();
+            }
+        });
     }
 
     @Override
@@ -117,8 +148,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         googleMap.setOnMarkerClickListener(this);
 
-        LatLng renoma = new LatLng(51.103976, 17.030741);
-        CameraUpdate center = CameraUpdateFactory.newLatLng(renoma);
+        CameraUpdate center = CameraUpdateFactory.newLatLng(routeTo);
         mGoogleMap.moveCamera(center);
         CameraUpdate zoom = CameraUpdateFactory.zoomTo(17);
         mGoogleMap.animateCamera(zoom);
@@ -126,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        mMarker = mGoogleMap.addMarker(new MarkerOptions().position(renoma).icon(BitmapDescriptorFactory.fromResource(R.drawable.renoma)));
+        mMarker = mGoogleMap.addMarker(new MarkerOptions().position(place1).icon(BitmapDescriptorFactory.fromResource(R.drawable.renoma)));
     }
 
     @Override
@@ -139,13 +169,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         return false;
     }
 
-    public void centerLocation(){
+    public void centerLocationToMe(){
         if (mLastLocation != null){
             LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
         }
         else{
             Toast.makeText(MainActivity.this, "Spróbuj ponownie", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void centerLocationToDestination(){
+        if (mLastLocation != null){
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(routeTo,17));
         }
     }
 
@@ -156,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
                 .from(latLng)
-                .to(new LatLng(51.103976, 17.030741))
+                .to(routeTo)
                 .transportMode(TransportMode.WALKING)
                 .unit(Unit.METRIC)
                 .execute(new DirectionCallback() {
@@ -176,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             mPolyline = temp;
                             dystansInfo = leg.getDistance();
                             dystansText = dystansInfo.getText();
-                            secondText.setText(dystansText);
+                            secondText.setText(plName + ": " + dystansText);
                         }
                         else {
                             Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();

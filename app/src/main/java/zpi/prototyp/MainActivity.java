@@ -41,6 +41,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
@@ -52,7 +53,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
-    Marker myMarker;
+    Marker mMarker;
+
+    Route route;
+    Leg leg;
+    ArrayList<LatLng> directionPositionList;
+    PolylineOptions polylineOptions;
+    Polyline mPolyline;
+
     ImageButton locIB;
     ImageButton foodIB;
     Info dystansInfo;
@@ -99,13 +107,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mGoogleMap=googleMap;
 
         try {
-            boolean success = googleMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.michal_json));
-            if (!success) {
-            }
-        } catch (Resources.NotFoundException e) {
+            googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.michal_json));
         }
+        catch (Resources.NotFoundException e) {}
 
         buildGoogleApiClient();
         googleMap.setMyLocationEnabled(true);
@@ -122,12 +126,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        myMarker = mGoogleMap.addMarker(new MarkerOptions().position(renoma).icon(BitmapDescriptorFactory.fromResource(R.drawable.renoma)));
+        mMarker = mGoogleMap.addMarker(new MarkerOptions().position(renoma).icon(BitmapDescriptorFactory.fromResource(R.drawable.renoma)));
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        if (marker.equals(myMarker))
+        if (marker.equals(mMarker))
         {
             Intent intent = new Intent(MainActivity.this,Details.class);
             startActivity(intent);
@@ -139,36 +143,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (mLastLocation != null){
             LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
-
-            GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
-                    .from(latLng)
-                    .to(new LatLng(51.103976, 17.030741))
-                    .transportMode(TransportMode.WALKING)
-                    .unit(Unit.METRIC)
-                    .execute(new DirectionCallback() {
-                        @Override
-                        public void onDirectionSuccess(Direction direction, String rawBody) {
-                            String status = direction.getStatus();
-                            if(direction.isOK()) {
-                                Route route = direction.getRouteList().get(0);
-                                Leg leg = route.getLegList().get(0);
-                                ArrayList<LatLng> directionPositionList = leg.getDirectionPoint();
-                                PolylineOptions polylineOptions = DirectionConverter.createPolyline(MainActivity.this, directionPositionList, 5, Color.RED);
-                                mGoogleMap.addPolyline(polylineOptions);
-                                dystansInfo = leg.getDistance();
-                                dystansText = dystansInfo.getText();
-                                secondText.setText(dystansText);
-                            }
-                            else {
-                                Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();
-                            }
-                        }
-
-                        @Override
-                        public void onDirectionFailure(Throwable t) {
-                            Toast.makeText(MainActivity.this, "Ups...", Toast.LENGTH_LONG).show();
-                        }
-                    });
         }
         else{
             Toast.makeText(MainActivity.this, "Spróbuj ponownie", Toast.LENGTH_SHORT).show();
@@ -178,6 +152,42 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
+        LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+
+        GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
+                .from(latLng)
+                .to(new LatLng(51.103976, 17.030741))
+                .transportMode(TransportMode.WALKING)
+                .unit(Unit.METRIC)
+                .execute(new DirectionCallback() {
+                    @Override
+                    public void onDirectionSuccess(Direction direction, String rawBody) {
+                        String status = direction.getStatus();
+                        if(direction.isOK()) {
+                            route = direction.getRouteList().get(0);
+                            leg = route.getLegList().get(0);
+                            directionPositionList = leg.getDirectionPoint();
+                            polylineOptions = DirectionConverter.createPolyline(MainActivity.this, directionPositionList, 5, Color.RED);
+                            Polyline temp = mGoogleMap.addPolyline(polylineOptions);
+                            if(mPolyline != null){
+                                mPolyline.remove();
+                                mPolyline = null;
+                            }
+                            mPolyline = temp;
+                            dystansInfo = leg.getDistance();
+                            dystansText = dystansInfo.getText();
+                            secondText.setText(dystansText);
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onDirectionFailure(Throwable t) {
+                        Toast.makeText(MainActivity.this, "Ups...", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     protected synchronized void buildGoogleApiClient() {

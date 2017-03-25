@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -12,9 +13,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.akexorcist.googledirection.DirectionCallback;
+import com.akexorcist.googledirection.GoogleDirection;
+import com.akexorcist.googledirection.constant.TransportMode;
+import com.akexorcist.googledirection.constant.Unit;
+import com.akexorcist.googledirection.model.Direction;
+import com.akexorcist.googledirection.model.Info;
+import com.akexorcist.googledirection.model.Leg;
+import com.akexorcist.googledirection.model.Route;
+import com.akexorcist.googledirection.util.DirectionConverter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -30,6 +41,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener {
 
@@ -39,8 +53,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker myMarker;
-    ImageButton loc;
-    ImageButton food;
+    ImageButton locIB;
+    ImageButton foodIB;
+    Info dystansInfo;
+    String dystansText;
+    TextView firstText;
+    TextView secondText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,38 +73,30 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
 
-        loc = (ImageButton) findViewById(R.id.location);
-        loc.setOnClickListener(new View.OnClickListener() {
+        locIB = (ImageButton) findViewById(R.id.location);
+        locIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 centerLocation();
             }
         });
 
-        food = (ImageButton) findViewById(R.id.food);
-        food.setOnClickListener(new View.OnClickListener() {
+        foodIB = (ImageButton) findViewById(R.id.food);
+        foodIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 centerLocation();
             }
         });
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        //stop location updates when Activity is no longer active
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
+        firstText = (TextView)findViewById(R.id.textUp);
+        secondText = (TextView)findViewById(R.id.textDown);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap)
     {
         mGoogleMap=googleMap;
-
 
         try {
             boolean success = googleMap.setMapStyle(
@@ -126,8 +136,43 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void centerLocation(){
-        LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
+        if (mLastLocation != null){
+            LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
+
+            GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
+                    .from(latLng)
+                    .to(new LatLng(51.103976, 17.030741))
+                    .transportMode(TransportMode.WALKING)
+                    .unit(Unit.METRIC)
+                    .execute(new DirectionCallback() {
+                        @Override
+                        public void onDirectionSuccess(Direction direction, String rawBody) {
+                            String status = direction.getStatus();
+                            if(direction.isOK()) {
+                                Route route = direction.getRouteList().get(0);
+                                Leg leg = route.getLegList().get(0);
+                                ArrayList<LatLng> directionPositionList = leg.getDirectionPoint();
+                                PolylineOptions polylineOptions = DirectionConverter.createPolyline(MainActivity.this, directionPositionList, 5, Color.RED);
+                                mGoogleMap.addPolyline(polylineOptions);
+                                dystansInfo = leg.getDistance();
+                                dystansText = dystansInfo.getText();
+                                secondText.setText(dystansText);
+                            }
+                            else {
+                                Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onDirectionFailure(Throwable t) {
+                            Toast.makeText(MainActivity.this, "Ups...", Toast.LENGTH_LONG).show();
+                        }
+                    });
+        }
+        else{
+            Toast.makeText(MainActivity.this, "Spróbuj ponownie", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

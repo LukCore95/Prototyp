@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/titleskill"
+            android:id="@+id/textUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
@@ -22,14 +22,14 @@
             android:textSize="50dp"/>
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/textDown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:maxLines="2"
             android:text="abc"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_below="@id/titleskill"
+            android:layout_below="@id/textUp"
             android:textSize="50dp"/>
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

@@ -2,16 +2,18 @@ package zpi.prototyp;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -62,7 +64,7 @@ public class Details extends AppCompatActivity implements View.OnTouchListener{
         myTextView1.setTypeface(typeface);
 
         ImageButton imageButtonAudiobook = (ImageButton) findViewById(R.id.details_play_audiobook_icon);
-        // ZMIENIć TE SZAJSKIE IKONKI, BO TO JAKIEś Z NETA TYMCZASOWO WZIĄłEM
+        // ZMIENIć TE SZAJSKIE IKONKI, BO TO JAKIEś Z NETA TYMCZASOWO WZIĄłEM ~W
         imageButtonAudiobook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +80,23 @@ public class Details extends AppCompatActivity implements View.OnTouchListener{
             }
         });
 
+        //justowanie tekstu
+//        TextView renomaDescription = (TextView)findViewById(R.id.renoma_description);
+//        String textopisu = String.valueOf(Html.fromHtml("<![CDATA[<body style=\"text-align:justify;color:#222222; \">"
+//                + getResources().getString(R.string.renoma_description)
+//                + "</body>]]>"));
+//        ((View)renomaDescription).load
+        WebView renoma_description = (WebView) findViewById(R.id.renoma_decription_webview);
+        //polskie litery WTF
+        renoma_description.getSettings().setDefaultTextEncodingName("UTF-8");
+        renoma_description.setBackgroundColor(Color.TRANSPARENT);
+        String renoma_description_content = getString(R.string.renoma_description);
+        renoma_description.loadData("<html><body>"
+                + "<p align=\"justify\">" + renoma_description_content +  "</p> "
+                + "</body></html>", "text/html; charset=utf-8", "utf-8");
 
+
+        //Zabawa sliderem
         surf = (SurfaceView) findViewById(R.id.surfaceView);
         hold = surf.getHolder();
         surf.setOnTouchListener(this);
@@ -92,7 +110,7 @@ public class Details extends AppCompatActivity implements View.OnTouchListener{
 
         init = new Thread(new InitThread(photos[0], hold));
         init.start();
-    }
+    } //protected void onCreate(Bundle savedInstanceState)
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {

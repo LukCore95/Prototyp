@@ -83,6 +83,7 @@
 
                 <ImageButton
                     android:id="@+id/details_play_audiobook_icon"
+                    android:tag="play"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_alignParentBottom="true"

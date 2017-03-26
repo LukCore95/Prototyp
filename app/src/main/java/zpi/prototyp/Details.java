@@ -3,6 +3,7 @@ package zpi.prototyp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -61,13 +62,19 @@ public class Details extends AppCompatActivity implements View.OnTouchListener{
         myTextView1.setTypeface(typeface);
 
         ImageButton imageButtonAudiobook = (ImageButton) findViewById(R.id.details_play_audiobook_icon);
+        // ZMIENIć TE SZAJSKIE IKONKI, BO TO JAKIEś Z NETA TYMCZASOWO WZIĄłEM
         imageButtonAudiobook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.play_icon).getConstantState()))
-                    v.setBackgroundResource(R.drawable.pause_icon);
-                else
-                    v.setBackgroundResource(R.drawable.play_icon);
+                ImageButton ib = (ImageButton)v;
+                if (ib.getTag().equals("play")) {
+                    ib.setImageDrawable(getDrawable(R.drawable.pause_icon));
+                    ib.setTag("pause");
+                }
+                else {
+                    ib.setImageDrawable(getDrawable(R.drawable.play_icon));
+                    ib.setTag("play");
+                }
             }
         });
 

@@ -7,7 +7,8 @@
     tools:context="zpi.prototyp.MainActivity">
 
     <include
-        layout="@layout/toolbar_main">
+        layout="@layout/toolbar_main"
+        android:id="@+id/include">
     </include>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,17 +27,18 @@
         android:id="@+id/location"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:background="@null"
+        android:src="@drawable/action_button_lokalizacja"
         android:layout_above="@+id/food"
         android:layout_alignParentEnd="true"
-        android:background="@null"
-        android:src="@drawable/action_button_lokalizacja" />
+        android:layout_alignStart="@+id/food" />
 
     <ImageButton
         android:id="@+id/food"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/action_button_jedzenie"
+        android:background="@null"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:background="@null"/>
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

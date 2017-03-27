@@ -42,7 +42,7 @@ public class SlideThread implements Runnable {
         RectF dst2 = new RectF(x, 0, width, height);
 
         canv.drawBitmap(photos[0], src2, dst2, paint);
-        paint.setMaskFilter(new BlurMaskFilter(30.0f, BlurMaskFilter.Blur.NORMAL));
+        //paint.setMaskFilter(new BlurMaskFilter(30.0f, BlurMaskFilter.Blur.NORMAL));
         canv.drawBitmap(photos[1], src1, dst1, paint);
 
         hold.unlockCanvasAndPost(canv);

@@ -8,7 +8,7 @@
 
     <include
         layout="@layout/toolbar_main"
-        android:id="@+id/include">
+        android:id="@+id/actionbar">
     </include>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"

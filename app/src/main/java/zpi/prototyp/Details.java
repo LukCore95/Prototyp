@@ -1,12 +1,14 @@
 package zpi.prototyp;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -80,6 +82,17 @@ public class Details extends AppCompatActivity implements View.OnTouchListener{
             }
         });
 
+        TextView renomaDesriptionDetails = (TextView)findViewById(R.id.textView_readMore);
+        renomaDesriptionDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder adbuilder = new AlertDialog.Builder(v.getContext());
+                adbuilder.setMessage(R.string.renoma_description_full).setTitle(R.string.app_name).setCancelable(true);
+                AlertDialog ad = adbuilder.create();
+                ad.show();
+            }
+        });
+
         //justowanie tekstu
 //        TextView renomaDescription = (TextView)findViewById(R.id.renoma_description);
 //        String textopisu = String.valueOf(Html.fromHtml("<![CDATA[<body style=\"text-align:justify;color:#222222; \">"
@@ -87,7 +100,6 @@ public class Details extends AppCompatActivity implements View.OnTouchListener{
 //                + "</body>]]>"));
 //        ((View)renomaDescription).load
         WebView renoma_description = (WebView) findViewById(R.id.renoma_decription_webview);
-        //polskie litery WTF
         renoma_description.getSettings().setDefaultTextEncodingName("UTF-8");
         renoma_description.setBackgroundColor(Color.TRANSPARENT);
         String renoma_description_content = getString(R.string.renoma_description);

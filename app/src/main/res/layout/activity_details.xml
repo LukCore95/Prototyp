@@ -1,42 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/paper_tiling"
+    android:orientation="vertical"
     tools:context="zpi.prototyp.Details">
 
     <include
         android:id="@+id/toolbar_det"
-        layout="@layout/toolbar_details"/>
+        layout="@layout/toolbar_details"
+        android:layout_width="match_parent" />
 
     <ScrollView
         android:id="@+id/id_details_przewijanie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:layout_alignParentStart="true">
+        tools:layout_editor_absoluteY="8dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/id_relativelay_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="72dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="8dp">
+
+            <ImageView
+                android:id="@+id/image_topOfDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/paper_top" />
 
             <TextView
                 android:id="@+id/renoma_de_name"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_below="@id/image_topOfDetails"
                 android:gravity="center_vertical|center"
                 android:text="@string/renoma_nazwa_de"
-                android:textSize="30sp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="74dp" />
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/renoma_name"
@@ -46,18 +56,20 @@
                 android:layout_below="@+id/renoma_de_name"
                 android:gravity="center_vertical|center"
                 android:text="@string/renoma"
+                android:textColor="@android:color/black"
                 android:textSize="24sp"
                 android:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/renoma_de_name"
                 tools:layout_editor_absoluteX="1dp"
                 tools:layout_editor_absoluteY="-35dp" />
 
-            <WebView
-                android:id="@+id/renoma_decription_webview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/surfaceView"
-                android:layout_alignParentStart="true" />
+            <ImageView
+                android:id="@+id/image_newspaperHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/renoma_name"
+                android:layout_alignParentStart="true"
+                app:srcCompat="@drawable/header_newspaper" />
 
             <SurfaceView
                 android:id="@+id/surfaceView"
@@ -66,8 +78,59 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/renoma_name"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 app:layout_constraintTop_toBottomOf="@id/renoma_name"
                 tools:layout_editor_absoluteX="18dp" />
+
+            <WebView
+                android:id="@+id/renoma_decription_webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/surfaceView"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView_renomaGallery1"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:clickable="true"
+                        app:srcCompat="@drawable/renoma1" />
+
+                    <ImageView
+                        android:id="@+id/imageView_renomaGallery2"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        app:srcCompat="@drawable/renoma2" />
+
+                    <ImageView
+                        android:id="@+id/imageView_renomaGallery3"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        app:srcCompat="@drawable/renoma3" />
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -83,10 +146,10 @@
                     android:layout_height="60dp"
                     android:layout_alignParentBottom="true"
                     android:adjustViewBounds="true"
+                    android:background="@android:color/transparent"
                     android:contentDescription=""
                     android:tag="play"
                     android:visibility="visible"
-                    android:background="@android:color/transparent"
                     app:srcCompat="@drawable/play_icon" />
 
                 <TextView
@@ -98,9 +161,12 @@
                     android:layout_toEndOf="@+id/details_play_audiobook_icon"
                     android:gravity="center"
                     android:text="@string/audiobook"
+                    android:textColor="@android:color/black"
                     tools:layout_editor_absoluteX="8dp"
                     tools:layout_editor_absoluteY="0dp" />
+
             </RelativeLayout>
-        </RelativeLayout>
+
+        </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+</LinearLayout>

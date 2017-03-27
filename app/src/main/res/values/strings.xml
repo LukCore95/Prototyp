@@ -4,7 +4,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="renoma">Renoma</string>
-    <string name="renoma_description">Dom towarowy Wertheim został zbudowany w 1930 przez berlińską firmę handlową rodziny Wertheim w miejscu kwartału kamienic miejskich, w tym hotelu Residenz. Uroczyste otwarcie nastąpiło 2 kwietnia 1930. Ówcześnie był największym domem towarowym we Wrocławiu i miał stanowić konkurencję dla Domu Braci Barasch.</string>
+    <string name="renoma_description">\tDom towarowy Wertheim został zbudowany w 1930 przez berlińską firmę handlową rodziny Wertheim w miejscu kwartału kamienic miejskich, w tym hotelu Residenz. Uroczyste otwarcie nastąpiło 2 kwietnia 1930. Ówcześnie był największym domem towarowym we Wrocławiu i miał stanowić konkurencję dla Domu Braci Barasch.</string>
     <string name="renoma_nazwa_de">Warenhaus Wertheim</string>
     <string name="audiobook">Audiobook</string>
 </resources>

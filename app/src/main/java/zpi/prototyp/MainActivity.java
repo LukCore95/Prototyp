@@ -314,7 +314,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-
+//            Intent k = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName() );
+//            k.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(k);
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
                 // Show an explanation to the user *asynchronously* -- don't block
@@ -322,7 +324,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // sees the explanation, try again to request the permission.
                 new AlertDialog.Builder(this)
                         .setTitle("Location Permission Needed")
-                        .setMessage("This app needs the Location permission, please accept to use location functionality")
+                        .setMessage("Ta aplikacja potrzebuje zgody na lokalizację.")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -339,6 +341,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION );
+
             }
         }
     }

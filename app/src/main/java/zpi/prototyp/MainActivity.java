@@ -153,24 +153,30 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         catch (Resources.NotFoundException e) {}
 
-        //Initialize Google Play Services
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                //Location Permission already granted
-                buildGoogleApiClient();
-                mGoogleMap.setMyLocationEnabled(true);
-            } else {
-                //Request Location Permission
-                checkLocationPermission();
-            }
-        }
-        else {
-            buildGoogleApiClient();
-            mGoogleMap.setMyLocationEnabled(true);
-        }
+//        //Initialize Google Play Services
+//        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+//                //Location Permission already granted
+//                buildGoogleApiClient();
+//                mGoogleMap.setMyLocationEnabled(true);
+//            } else {
+//                //Request Location Permission
+//                checkLocationPermission();
+//            }
+//        }
+//        else {
+//            buildGoogleApiClient();
+//            mGoogleMap.setMyLocationEnabled(true);
+//        }
 
-//        buildGoogleApiClient();
-//        googleMap.setMyLocationEnabled(true);
+        //
+
+        buildGoogleApiClient();
+        googleMap.setMyLocationEnabled(true);
+        checkLocationPermission();
+
+        //
+
         googleMap.getUiSettings().setMapToolbarEnabled(false);
 
         googleMap.setOnMarkerClickListener(this);
@@ -184,6 +190,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             return;
         }
         mMarker = mGoogleMap.addMarker(new MarkerOptions().position(place1).icon(BitmapDescriptorFactory.fromResource(R.drawable.renoma)));
+    }
+
+    public void restartActivity(){
+        Intent intent = new Intent(MainActivity.this,MainActivity.class);
+        finish();
+        startActivity(intent);
     }
 
     @Override
@@ -314,9 +326,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-//            Intent k = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName() );
-//            k.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            startActivity(k);
+
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
                 // Show an explanation to the user *asynchronously* -- don't block
@@ -336,13 +346,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         })
                         .create()
                         .show();
-            } else {
+            }
+            else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION );
 
             }
+            restartActivity();
         }
     }
 }

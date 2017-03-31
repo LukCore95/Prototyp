@@ -65,6 +65,13 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
         setContentView(R.layout.activity_details);
 
+        //opis obiektu
+        final WebView renoma_description = (WebView) findViewById(R.id.renoma_decription_webview);
+        renoma_description.getSettings().setDefaultTextEncodingName("UTF-8");
+        renoma_description.setBackgroundColor(Color.TRANSPARENT);
+        clickToReadMoreDetails();
+
+
         closeIB = (ImageButton) findViewById(R.id.closeImageButton);
         closeIB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,22 +103,25 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
             }
         });
 
-        TextView renomaDesriptionDetails = (TextView)findViewById(R.id.textView_readMore);
-        renomaDesriptionDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder adbuilder = new AlertDialog.Builder(v.getContext());
-                adbuilder.setMessage(R.string.renoma_description_full).setTitle("Renoma - opis").
-                        setCancelable(true).setNeutralButton("Powrót", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog ad = adbuilder.create();
-                ad.show();
-            }
-        });
+//        final TextView renomaDesriptionDetails = (TextView)findViewById(R.id.textView_readMore);
+//        renomaDesriptionDetails.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                AlertDialog.Builder adbuilder = new AlertDialog.Builder(v.getContext());
+////                adbuilder.setMessage(R.string.renoma_description_full).setTitle("Renoma - opis").
+////                        setCancelable(true).setNeutralButton("Powrót", new DialogInterface.OnClickListener() {
+////                    @Override
+////                    public void onClick(DialogInterface dialog, int which) {
+////                        dialog.cancel();
+////                    }
+////                });
+////                AlertDialog ad = adbuilder.create();
+////                ad.show();
+//                clickToReadLessDetails();
+//
+//
+//            }
+//        });
 
         //justowanie tekstu
 //        TextView renomaDescription = (TextView)findViewById(R.id.renoma_description);
@@ -119,20 +129,11 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 //                + getResources().getString(R.string.renoma_description)
 //                + "</body>]]>"));
 //        ((View)renomaDescription).load
-        WebView renoma_description = (WebView) findViewById(R.id.renoma_decription_webview);
-        renoma_description.getSettings().setDefaultTextEncodingName("UTF-8");
-        renoma_description.setBackgroundColor(Color.TRANSPARENT);
-        String renoma_description_content = getString(R.string.renoma_description);
-        renoma_description.loadData("<html><body>"
-                + "<p align=\"justify\">" + renoma_description_content +  "</p> "
-                + "</body></html>", "text/html; charset=utf-8", "utf-8");
 
 
         //Zabawa sliderem -> sekcja onResume
 
         //powiększanie
-
-
         final View renomaSmall1 = findViewById(R.id.imageView_renomaGallery1);
         renomaSmall1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,8 +158,6 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
                         (ImageView) findViewById(R.id.renoma3_zoom));
             }
         });
-
-
         // Retrieve and cache the system's default "short" animation time.
         mShortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
@@ -350,6 +349,46 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
                 });
                 set.start();
                 mCurrentAnimator = set;
+            }
+        });
+    }
+
+    private void clickToReadLessDetails(){
+
+        final WebView renoma_description = (WebView)findViewById(R.id.renoma_decription_webview);
+        final TextView renomaDesriptionDetails = (TextView)findViewById(R.id.textView_readMore);
+
+//        renoma_description.reload();
+        renoma_description.loadData("<html><body>"
+                + "<p align=\"justify\">" + getString(R.string.renoma_description_full) +  "</p> "
+                + "</body></html>", "text/html; charset=utf-8", "utf-8");
+
+        renomaDesriptionDetails.setText("Zwiń");
+        renomaDesriptionDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickToReadMoreDetails();
+            }
+        });
+
+    }
+
+    private void clickToReadMoreDetails(){
+        final WebView renoma_description = (WebView)findViewById(R.id.renoma_decription_webview);
+        final TextView renomaDesriptionDetails = (TextView)findViewById(R.id.textView_readMore);
+
+//        renoma_description.setVisibility(View.GONE);
+        String renoma_description_content = getString(R.string.renoma_description);
+        renoma_description.loadData("<html><body>"
+                + "<p align=\"justify\">" + renoma_description_content +  "...</p> "
+                + "</body></html>", "text/html; charset=utf-8", "utf-8");
+        renomaDesriptionDetails.setText("Rozwiń");
+
+//        renoma_description.setVisibility(View.VISIBLE);
+        renomaDesriptionDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickToReadLessDetails();
             }
         });
     }

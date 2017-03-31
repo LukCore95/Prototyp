@@ -189,6 +189,7 @@
                         android:contentDescription=""
                         android:tag="play"
                         android:visibility="visible"
+                        android:src="@drawable/play_icon"
                         app:srcCompat="@drawable/play_icon" />
 
                     <TextView

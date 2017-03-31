@@ -25,20 +25,19 @@
 
     <ImageButton
         android:id="@+id/location"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:background="@null"
-        android:src="@drawable/action_button_lokalizacja"
+        android:src="@mipmap/action_button_lokalizacja"
         android:layout_above="@+id/food"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/food" />
+        android:layout_alignParentEnd="true" />
 
     <ImageButton
         android:id="@+id/food"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/action_button_jedzenie"
-        android:background="@null"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="@null"
+        android:src="@mipmap/action_button_jedzenie" />
 </RelativeLayout>

@@ -109,19 +109,7 @@ public class Details extends AppCompatActivity implements View.OnTouchListener{
 
 
         //Zabawa sliderem
-        surf = (SurfaceView) findViewById(R.id.surfaceView);
-        hold = surf.getHolder();
-        surf.setOnTouchListener(this);
 
-        try {
-            photos[0] = BitmapFactory.decodeResource(getResources(), R.drawable.zpi2);
-            photos[1] = BitmapFactory.decodeResource(getResources(), R.drawable.zpi1);
-        }catch(Exception e){
-            System.out.println(e);
-        }
-
-        init = new Thread(new InitThread(photos[0], hold));
-        init.start();
     } //protected void onCreate(Bundle savedInstanceState)
 
     @Override
@@ -154,4 +142,23 @@ public class Details extends AppCompatActivity implements View.OnTouchListener{
 //                return super.onOptionsItemSelected(item);
 //        }
 //    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        surf = (SurfaceView) findViewById(R.id.surfaceView);
+        hold = surf.getHolder();
+        surf.setOnTouchListener(this);
+
+        try {
+            photos[0] = BitmapFactory.decodeResource(getResources(), R.drawable.zpi2);
+            photos[1] = BitmapFactory.decodeResource(getResources(), R.drawable.zpi1);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+
+        init = new Thread(new InitThread(photos[0], hold));
+        init.start();
+
+    }
 }

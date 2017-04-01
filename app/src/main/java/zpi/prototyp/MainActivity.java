@@ -207,10 +207,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        mMarker1 = mGoogleMap.addMarker(new MarkerOptions().position(place1).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
-        mMarker2 = mGoogleMap.addMarker(new MarkerOptions().position(place2).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_podwale)));
-        mMarker3 = mGoogleMap.addMarker(new MarkerOptions().position(place3).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
-        mMarker4 = mGoogleMap.addMarker(new MarkerOptions().position(place4).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
+        mGoogleMap.addMarker(new MarkerOptions().position(place1).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
+        mGoogleMap.addMarker(new MarkerOptions().position(place2).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_podwale)));
+        mGoogleMap.addMarker(new MarkerOptions().position(place3).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
+        mGoogleMap.addMarker(new MarkerOptions().position(place4).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
     }
 
     public void restartActivity(){
@@ -223,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onMarkerClick(Marker marker) {
 //        if (marker.equals(mMarker))
 //        {
+            Toast.makeText(MainActivity.this, "Trwa ładowanie", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this,Details.class);
             startActivity(intent);
 //        }

@@ -4,15 +4,18 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -86,6 +89,14 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
         ImageButton imageButtonAudiobook = (ImageButton) findViewById(R.id.details_play_audiobook_icon);
         // ZMIENIć TE SZAJSKIE IKONKI, BO TO JAKIEś Z NETA TYMCZASOWO WZIĄłEM ~W
+        final MediaPlayer mediaPlayer = MediaPlayer.create(Details.this, R.raw.podwale_renoma_swidnicka_plac_teatralny);
+        try{
+            mediaPlayer.prepare();
+        }
+        catch (Exception e){
+            Log.e("AudioRecord", "prepare() failed");
+        }
+
         imageButtonAudiobook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,40 +104,17 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
                 if (ib.getTag().equals("play")) {
                     ib.setImageDrawable(getDrawable(R.drawable.pause_icon));
                     ib.setTag("pause");
+
+                    mediaPlayer.start();
                 }
                 else {
                     ib.setImageDrawable(getDrawable(R.drawable.play_icon));
                     ib.setTag("play");
+
+                    mediaPlayer.pause();
                 }
             }
         });
-
-//        final TextView renomaDesriptionDetails = (TextView)findViewById(R.id.textView_readMore);
-//        renomaDesriptionDetails.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                AlertDialog.Builder adbuilder = new AlertDialog.Builder(v.getContext());
-////                adbuilder.setMessage(R.string.renoma_description_full).setTitle("Renoma - opis").
-////                        setCancelable(true).setNeutralButton("Powrót", new DialogInterface.OnClickListener() {
-////                    @Override
-////                    public void onClick(DialogInterface dialog, int which) {
-////                        dialog.cancel();
-////                    }
-////                });
-////                AlertDialog ad = adbuilder.create();
-////                ad.show();
-//                clickToReadLessDetails();
-//
-//
-//            }
-//        });
-
-        //justowanie tekstu
-//        TextView renomaDescription = (TextView)findViewById(R.id.renoma_description);
-//        String textopisu = String.valueOf(Html.fromHtml("<![CDATA[<body style=\"text-align:justify;color:#222222; \">"
-//                + getResources().getString(R.string.renoma_description)
-//                + "</body>]]>"));
-//        ((View)renomaDescription).load
 
 
         //Zabawa sliderem -> sekcja onResume
@@ -214,6 +202,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     }
 
 
+    // ze strony androida
     private void zoomImageFromThumb(final View thumbView, int imageResId, ImageView viewToZoom) {
         // If there's an animation in progress, cancel it
         // immediately and proceed with this one.
@@ -356,7 +345,6 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         final WebView renoma_description = (WebView)findViewById(R.id.renoma_decription_webview);
         final TextView renomaDesriptionDetails = (TextView)findViewById(R.id.textView_readMore);
 
-//        renoma_description.reload();
         renoma_description.loadData("<html><body>"
                 + "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_short) +"</p>" +
                 "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_extended) + "</p> "
@@ -376,14 +364,11 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         final WebView renoma_description = (WebView)findViewById(R.id.renoma_decription_webview);
         final TextView renomaDesriptionDetails = (TextView)findViewById(R.id.textView_readMore);
 
-//        renoma_description.setVisibility(View.GONE);
-//        String renoma_description_content = getString(R.string.renoma_description_short);
         renoma_description.loadData("<html><body>"
                 + "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_short) +  "</p> "
                 + "</body></html>", "text/html; charset=utf-8", "utf-8");
         renomaDesriptionDetails.setText("Rozwiń");
 
-//        renoma_description.setVisibility(View.VISIBLE);
         renomaDesriptionDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

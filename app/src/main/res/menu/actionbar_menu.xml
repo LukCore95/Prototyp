@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/position1"
+        android:title="Podwale" />
+
+    <item android:id="@+id/position2"
+    android:title="Renoma" />
+
+    <item android:id="@+id/position3"
+    android:title="Świdnicka"/>
+
+    <item android:id="@+id/position4"
+        android:title="Pl. Teatralny" />
+</menu>

@@ -15,7 +15,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -59,7 +61,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener, PopupMenu.OnMenuItemClickListener {
 
     private GoogleMap mGoogleMap;
     private SupportMapFragment mapFrag;
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Polyline mPolyline;
 
     private ImageButton locIB;
-    private ImageButton destIB;
+    private ImageButton fullMapIB;
     private boolean locIBisPressed;
     private Info dystansInfo;
     private String dystansText;
@@ -93,10 +95,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LatLng place2;
     private LatLng place3;
     private LatLng place4;
+    private String deName;
     private String plName;
-
-    private ImageButton menuUpIB;
-    private PopupMenu mPopupMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -125,17 +125,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 else {
                     locIBisPressed = false;
                     locIB.setImageResource(R.mipmap.action_button_lokalizacja);
-                    showFullMap();
+                    centerLocationToDestination();
                 }
 
             }
         });
 
-        destIB = (ImageButton) findViewById(R.id.fullMap);
-        destIB.setOnClickListener(new View.OnClickListener() {
+        fullMapIB = (ImageButton) findViewById(R.id.fullMap);
+        fullMapIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                centerLocationToDestination();
+                locIBisPressed = false;
+                locIB.setImageResource(R.mipmap.action_button_lokalizacja);
+                showFullMap();
             }
         });
 
@@ -152,18 +154,49 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         place4 = new LatLng(51.105059, 17.031117);
         routeTo = place1;
 
+        deName = "Warenhaus Wertheim";
         plName = "Renoma";
 
-        menuUpIB = (ImageButton) findViewById(R.id.menuButton);
-        mPopupMenu = new PopupMenu(this, menuUpIB);
-        MenuInflater menuInflater = mPopupMenu.getMenuInflater();
-        menuInflater.inflate(R.menu.my_menu_up, mPopupMenu.getMenu());
-        menuUpIB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPopupMenu.show();
-            }
-        });
+        firstText.setText(deName);
+    }
+
+    public void showPopup(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.actionbar_menu);
+        popup.show();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.position1:
+                deName = "Schweidnitzer Stadtgraben";
+                plName = "Podwale";
+                routeTo = place2;
+                onLocationChanged(mLastLocation);
+                return true;
+            case R.id.position2:
+                deName = "Warenhaus Wertheim";
+                plName = "Renoma";
+                routeTo = place1;
+                onLocationChanged(mLastLocation);
+                return true;
+            case R.id.position3:
+                deName = "Schwiednitzer Strasse";
+                plName = "Świdnicka";
+                routeTo = place4;
+                onLocationChanged(mLastLocation);
+                return true;
+            case R.id.position4:
+                deName = "Zwingerplatz";
+                plName = "Pl. Teatralny";
+                routeTo = place3;
+                onLocationChanged(mLastLocation);
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override
@@ -279,6 +312,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             mPolyline = temp;
                             dystansInfo = leg.getDistance();
                             dystansText = dystansInfo.getText();
+                            firstText.setText(deName);
                             secondText.setText(plName + ": " + dystansText);
                         }
                         else {

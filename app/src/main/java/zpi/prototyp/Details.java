@@ -4,22 +4,20 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.os.Message;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
@@ -360,7 +358,8 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
 //        renoma_description.reload();
         renoma_description.loadData("<html><body>"
-                + "<p align=\"justify\">" + getString(R.string.renoma_description_full) +  "</p> "
+                + "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_short) +"</p>" +
+                "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_extended) + "</p> "
                 + "</body></html>", "text/html; charset=utf-8", "utf-8");
 
         renomaDesriptionDetails.setText("Zwiń");
@@ -378,9 +377,9 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         final TextView renomaDesriptionDetails = (TextView)findViewById(R.id.textView_readMore);
 
 //        renoma_description.setVisibility(View.GONE);
-        String renoma_description_content = getString(R.string.renoma_description);
+//        String renoma_description_content = getString(R.string.renoma_description_short);
         renoma_description.loadData("<html><body>"
-                + "<p align=\"justify\">" + renoma_description_content +  "...</p> "
+                + "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_short) +  "</p> "
                 + "</body></html>", "text/html; charset=utf-8", "utf-8");
         renomaDesriptionDetails.setText("Rozwiń");
 

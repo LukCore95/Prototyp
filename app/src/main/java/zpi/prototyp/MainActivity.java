@@ -9,7 +9,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
-import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -68,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
     private Marker mMarker;
+    private CameraUpdate mCenter;
+    private CameraUpdate mZoom;
+    private LatLng mLatLng;
 
     private Route route;
     private Leg leg;
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private ImageButton locIB;
     private ImageButton foodIB;
+    private boolean locIBisPressed;
     private Info dystansInfo;
     private String dystansText;
     private TextView firstText;
@@ -88,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private ImageButton menuUpIB;
     private PopupMenu mPopupMenu;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -103,21 +105,32 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
 
+        locIBisPressed = false;
+
         locIB = (ImageButton) findViewById(R.id.location);
         locIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                centerLocationToMe();
+                if(!locIBisPressed) {
+                    locIBisPressed = true;
+                    locIB.setImageResource(R.mipmap.action_button_jedzenie);
+                    centerLocationToMe();
+                }
+                else {
+                    locIBisPressed = false;
+                    locIB.setImageResource(R.mipmap.action_button_lokalizacja);
+                    showFullMap();
+                }
+
             }
         });
 
         foodIB = (ImageButton) findViewById(R.id.food);
-        foodIB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                centerLocationToDestination();
-            }
-        });
+//        foodIB.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//            }
+//        });
 
         firstText = (TextView)findViewById(R.id.textUp);
         secondText = (TextView)findViewById(R.id.textDown);
@@ -169,22 +182,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //            mGoogleMap.setMyLocationEnabled(true);
 //        }
 
-        //
-
         buildGoogleApiClient();
         googleMap.setMyLocationEnabled(true);
         checkLocationPermission();
 
-        //
-
         googleMap.getUiSettings().setMapToolbarEnabled(false);
-
         googleMap.setOnMarkerClickListener(this);
 
-        CameraUpdate center = CameraUpdateFactory.newLatLng(routeTo);
-        mGoogleMap.moveCamera(center);
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(17);
-        mGoogleMap.animateCamera(zoom);
+        mCenter = CameraUpdateFactory.newLatLng(routeTo);
+        mGoogleMap.moveCamera(mCenter);
+        mZoom = CameraUpdateFactory.zoomTo(17);
+        mGoogleMap.animateCamera(mZoom);
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -210,27 +218,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void centerLocationToMe(){
         if (mLastLocation != null){
-            LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
+            mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mLatLng,17));
         }
         else{
             Toast.makeText(MainActivity.this, "Spróbuj ponownie", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void centerLocationToDestination(){
+    public void showFullMap(){
         if (mLastLocation != null){
-            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(routeTo,17));
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(routeTo,14));
         }
     }
 
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
-        LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
         GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
-                .from(latLng)
+                .from(mLatLng)
                 .to(routeTo)
                 .transportMode(TransportMode.WALKING)
                 .unit(Unit.METRIC)

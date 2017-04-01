@@ -7,7 +7,7 @@
     tools:context="zpi.prototyp.MainActivity">
 
     <include
-        layout="@layout/toolbar_main"
+        layout="@layout/actionbar_main"
         android:id="@+id/actionbar">
     </include>
 
@@ -26,7 +26,7 @@
     <ImageButton
         android:id="@+id/location"
         android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:background="@null"
         android:src="@mipmap/action_button_lokalizacja"
         android:layout_above="@+id/food"

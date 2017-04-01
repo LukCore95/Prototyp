@@ -66,7 +66,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
-    private Marker mMarker;
+    private Marker mMarker1;
+    private Marker mMarker2;
+    private Marker mMarker3;
+    private Marker mMarker4;
     private CameraUpdate mCenter;
     private CameraUpdate mZoom;
     private LatLng mLatLng;
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Polyline mPolyline;
 
     private ImageButton locIB;
-    private ImageButton foodIB;
+    private ImageButton destIB;
     private boolean locIBisPressed;
     private Info dystansInfo;
     private String dystansText;
@@ -87,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private LatLng routeTo;
     private LatLng place1;
+    private LatLng place2;
+    private LatLng place3;
+    private LatLng place4;
     private String plName;
 
     private ImageButton menuUpIB;
@@ -125,12 +131,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        foodIB = (ImageButton) findViewById(R.id.food);
-//        foodIB.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            }
-//        });
+        destIB = (ImageButton) findViewById(R.id.fullMap);
+        destIB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                centerLocationToDestination();
+            }
+        });
 
         firstText = (TextView)findViewById(R.id.textUp);
         secondText = (TextView)findViewById(R.id.textDown);
@@ -139,7 +146,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         firstText.setTypeface(deutschmeister);
         secondText.setTypeface(roboto);
 
-        place1 = new LatLng(51.103976, 17.030741);
+        place1 = new LatLng(51.103851, 17.031064);
+        place2 = new LatLng(51.104082, 17.030082);
+        place3 = new LatLng(51.105483, 17.031921);
+        place4 = new LatLng(51.105059, 17.031117);
         routeTo = place1;
 
         plName = "Renoma";
@@ -197,7 +207,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        mMarker = mGoogleMap.addMarker(new MarkerOptions().position(place1).icon(BitmapDescriptorFactory.fromResource(R.mipmap.renoma)));
+        mMarker1 = mGoogleMap.addMarker(new MarkerOptions().position(place1).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
+        mMarker2 = mGoogleMap.addMarker(new MarkerOptions().position(place2).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_podwale)));
+        mMarker3 = mGoogleMap.addMarker(new MarkerOptions().position(place3).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
+        mMarker4 = mGoogleMap.addMarker(new MarkerOptions().position(place4).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
     }
 
     public void restartActivity(){
@@ -208,11 +221,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        if (marker.equals(mMarker))
-        {
+//        if (marker.equals(mMarker))
+//        {
             Intent intent = new Intent(MainActivity.this,Details.class);
             startActivity(intent);
-        }
+//        }
         return false;
     }
 
@@ -226,9 +239,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    public void centerLocationToDestination(){
+        if (mLastLocation != null){
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(routeTo,17));
+        }
+    }
+
     public void showFullMap(){
         if (mLastLocation != null){
-            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(routeTo,14));
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(routeTo,16));
         }
     }
 

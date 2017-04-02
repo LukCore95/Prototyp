@@ -9,19 +9,20 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,14 +53,20 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.gms.maps.model.Dot;
+import com.google.android.gms.maps.model.Gap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PatternItem;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener, PopupMenu.OnMenuItemClickListener {
 
@@ -68,10 +75,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
-    private Marker mMarker1;
-    private Marker mMarker2;
-    private Marker mMarker3;
-    private Marker mMarker4;
     private CameraUpdate mCenter;
     private CameraUpdate mZoom;
     private LatLng mLatLng;
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ArrayList<LatLng> directionPositionList;
     private PolylineOptions polylineOptions;
     private Polyline mPolyline;
+    private List<PatternItem> pattern;
 
     private ImageButton locIB;
     private ImageButton fullMapIB;
@@ -89,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private String dystansText;
     private TextView firstText;
     private TextView secondText;
+
+    private PopupMenu popup;
 
     private LatLng routeTo;
     private LatLng place1;
@@ -156,12 +162,57 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         deName = "Warenhaus Wertheim";
         plName = "Renoma";
-
         firstText.setText(deName);
+        pattern = Arrays.<PatternItem>asList(new Gap(20), new Dash(40));
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottombar);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.lists:
+                                if(mLastLocation != null) {
+                                    deName = "Schweidnitzer Stadtgraben";
+                                    plName = "Podwale";
+                                    routeTo = place2;
+                                    onLocationChanged(mLastLocation);
+                                }
+                                return true;
+                            case R.id.me:
+                                if(mLastLocation != null) {
+                                    deName = "Warenhaus Wertheim";
+                                    plName = "Renoma";
+                                    routeTo = place1;
+                                    onLocationChanged(mLastLocation);
+                                }
+                                return true;
+                            case R.id.destination:
+                                if(mLastLocation != null) {
+                                    deName = "Schwiednitzer Strasse";
+                                    plName = "Świdnicka";
+                                    routeTo = place4;
+                                    onLocationChanged(mLastLocation);
+                                }
+                                return true;
+                            case R.id.map:
+                                if(mLastLocation != null) {
+                                    deName = "Zwingerplatz";
+                                    plName = "Pl. Teatralny";
+                                    routeTo = place3;
+                                    onLocationChanged(mLastLocation);
+                                }
+                                return true;
+                        }
+                        return false;
+                    }
+                });
     }
 
     public void showPopup(View v) {
-        PopupMenu popup = new PopupMenu(this, v);
+        popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.actionbar_menu);
         popup.show();
@@ -171,28 +222,36 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.position1:
-                deName = "Schweidnitzer Stadtgraben";
-                plName = "Podwale";
-                routeTo = place2;
-                onLocationChanged(mLastLocation);
+                if(mLastLocation != null) {
+                    deName = "Schweidnitzer Stadtgraben";
+                    plName = "Podwale";
+                    routeTo = place2;
+                    onLocationChanged(mLastLocation);
+                }
                 return true;
             case R.id.position2:
-                deName = "Warenhaus Wertheim";
-                plName = "Renoma";
-                routeTo = place1;
-                onLocationChanged(mLastLocation);
+                if(mLastLocation != null) {
+                    deName = "Warenhaus Wertheim";
+                    plName = "Renoma";
+                    routeTo = place1;
+                    onLocationChanged(mLastLocation);
+                }
                 return true;
             case R.id.position3:
-                deName = "Schwiednitzer Strasse";
-                plName = "Świdnicka";
-                routeTo = place4;
-                onLocationChanged(mLastLocation);
+                if(mLastLocation != null) {
+                    deName = "Schwiednitzer Strasse";
+                    plName = "Świdnicka";
+                    routeTo = place4;
+                    onLocationChanged(mLastLocation);
+                }
                 return true;
             case R.id.position4:
-                deName = "Zwingerplatz";
-                plName = "Pl. Teatralny";
-                routeTo = place3;
-                onLocationChanged(mLastLocation);
+                if(mLastLocation != null) {
+                    deName = "Zwingerplatz";
+                    plName = "Pl. Teatralny";
+                    routeTo = place3;
+                    onLocationChanged(mLastLocation);
+                }
                 return true;
             default:
                 return false;
@@ -310,6 +369,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 mPolyline = null;
                             }
                             mPolyline = temp;
+                            mPolyline.setPattern(pattern);
                             dystansInfo = leg.getDistance();
                             dystansText = dystansInfo.getText();
                             firstText.setText(deName);

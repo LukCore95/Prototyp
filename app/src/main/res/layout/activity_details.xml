@@ -190,8 +190,8 @@
                         android:contentDescription=""
                         android:tag="play"
                         android:visibility="visible"
-                        android:src="@drawable/play_icon"
-                        app:srcCompat="@drawable/play_icon" />
+                        android:src="@mipmap/play"
+                        app:srcCompat="@mipmap/play" />
 
                     <TextView
                         android:id="@+id/text_audiobook"

@@ -108,7 +108,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
                     mediaPlayer.start();
                 }
                 else {
-                    ib.setImageDrawable(getDrawable(R.drawable.play_icon));
+                    ib.setImageDrawable(getDrawable(R.mipmap.play));
                     ib.setTag("play");
 
                     mediaPlayer.pause();

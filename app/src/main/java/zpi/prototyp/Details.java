@@ -27,7 +27,10 @@ import android.view.animation.DecelerateInterpolator;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Details extends FragmentActivity implements View.OnTouchListener{
 
@@ -36,7 +39,12 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     private Thread init;
     private Thread slide;
     private Bitmap[] photos = new Bitmap[2];
+    private Bitmap slider_background;
+    private Bitmap slider_background2;
+    private Bitmap slider;
     private ImageButton closeIB;
+
+    private static final float RATIO = 0.7956f;
 
     // powiększanie obrazka i animacja
     private Animator mCurrentAnimator;
@@ -154,7 +162,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         float x = event.getAxisValue(MotionEvent.AXIS_X);
-        slide = new Thread(new SlideThread(x, photos, hold));
+        slide = new Thread(new SlideThread(x, photos, slider, slider_background, slider_background2, hold, this));
         slide.start();
         //Toast.makeText(this, "Lol: " + x, Toast.LENGTH_SHORT).show();
         return true;
@@ -185,18 +193,25 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     protected void onResume()
     {
         super.onResume();
+
         surf = (SurfaceView) findViewById(R.id.surfaceView);
+        int width = 700;
+        //Toast.makeText(this, "szerokosc: " + width, Toast.LENGTH_SHORT).show();
+        surf.setLayoutParams(new LinearLayout.LayoutParams(width, (int)(width*RATIO)));
         hold = surf.getHolder();
         surf.setOnTouchListener(this);
 
         try {
-            photos[0] = BitmapFactory.decodeResource(getResources(), R.drawable.zpi2);
-            photos[1] = BitmapFactory.decodeResource(getResources(), R.drawable.zpi1);
+            photos[0] = BitmapFactory.decodeResource(getResources(), R.drawable.foto_nowe);
+            photos[1] = BitmapFactory.decodeResource(getResources(), R.drawable.foto_stare);
+            slider_background = BitmapFactory.decodeResource(getResources(), R.drawable.slider_background);
+            slider_background2 = BitmapFactory.decodeResource(getResources(), R.drawable.point_background);
+            slider = BitmapFactory.decodeResource(getResources(), R.drawable.slider);
         }catch(Exception e){
             System.out.println(e);
         }
 
-        init = new Thread(new InitThread(photos[0], hold));
+        init = new Thread(new SlideThread(350.0f, photos, slider, slider_background, slider_background2, hold, this));
         init.start();
 
     }

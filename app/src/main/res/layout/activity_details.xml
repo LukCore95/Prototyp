@@ -13,6 +13,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/point_background"
+        android:backgroundTintMode="multiply"
         android:orientation="vertical">
 
 
@@ -82,7 +84,7 @@
                 <SurfaceView
                     android:id="@+id/surfaceView"
                     android:layout_width="match_parent"
-                    android:layout_height="241dp"
+                    android:layout_height="565px"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/renoma_name"
@@ -188,9 +190,9 @@
                         android:adjustViewBounds="true"
                         android:background="@android:color/transparent"
                         android:contentDescription=""
+                        android:src="@mipmap/play"
                         android:tag="play"
                         android:visibility="visible"
-                        android:src="@mipmap/play"
                         app:srcCompat="@mipmap/play" />
 
                     <TextView

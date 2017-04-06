@@ -3,7 +3,7 @@
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="renoma">Renoma</string>
+    <string name="renoma">DOM HANDLOWY RENOMA</string>
     <string name="renoma_description_short">Teren przy skrzyżowaniu ul. Świdnickiej i Podwale –
         obecnie zajmowany przez Renomę – aż do XVII w. był praktycznie niezabudowany, stanowił
         jedynie przedpole średniowiecznych fortyfikacji miejskich. Na miejscu teraźniejszego
@@ -12,8 +12,8 @@
         prestiżowy Residenz Hotel z zachwycającymi, pałacowymi wnętrzami na parterze. Obiekt ten
         wielokrotnie przebudowywano.</string>
     <string name="renoma_nazwa_de">Warenhaus Wertheim</string>
-    <string name="audiobook">Audiobook</string>
-    <string name="opis_miejscaHead">Opis miejsca</string>
+    <string name="audiobook">Posłuchaj fragmentu audiobooka</string>
+    <string name="opis_miejscaHead">Przeczytaj o tym miejscu</string>
     <string name="renoma_description_extended"><!--Teren przy skrzyżowaniu ul. Świdnickiej i Podwale –
         obecnie zajmowany przez Renomę – aż do XVII w. był praktycznie niezabudowany, stanowił
         jedynie przedpole średniowiecznych fortyfikacji miejskich. Na miejscu teraźniejszego

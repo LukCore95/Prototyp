@@ -11,6 +11,9 @@ import android.graphics.RectF;
 import android.view.SurfaceHolder;
 
 public class SlideThread extends Thread {
+
+    private boolean stop = false;
+
     //współrzędna - do modyfikacji
     private float x;
 
@@ -102,6 +105,10 @@ public class SlideThread extends Thread {
         zmiana = (x!=xOld);
     }
 
+    public void stopThread(){
+        stop = true;
+    }
+
     synchronized  public float getX(){
         if (x < (margin+slider_half_width)){
            return margin+slider_half_width;
@@ -115,7 +122,7 @@ public class SlideThread extends Thread {
 
 
     public void run(){
-        while(true) {
+        while(!stop) {
             if(!zmiana)
                 continue;
 

@@ -1,5 +1,5 @@
 <bitmap
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:src="@mipmap/white_paper_texture_backg"
+    android:src="@drawable/point_background"
     android:tileMode="repeat"
     android:dither="true" />

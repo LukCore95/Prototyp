@@ -77,6 +77,15 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
         setContentView(R.layout.activity_details);
 
+//        final ScrollView scrollv = (ScrollView)findViewById(R.id.id_details_przewijanie);
+//        scrollv.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                scrollv.setOverScrollMode(View.OVER_SCROLL_ALWAYS);
+//                return v.onTouchEvent(event);
+//            }
+//        });
+
         //opis obiektu
         final WebView renoma_description = (WebView) findViewById(R.id.renoma_decription_webview);
         renoma_description.getSettings().setDefaultTextEncodingName("UTF-8");
@@ -167,6 +176,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        ScrollView sv = (ScrollView)findViewById(R.id.id_details_przewijanie);
             float x = event.getAxisValue(MotionEvent.AXIS_X);
             init.setX(x);
             /*slide = new Thread(new SlideThread(x, photos, slider, slider_background, slider_background2, hold, this));
@@ -219,6 +229,8 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         hold = surf.getHolder();
         hold.setFixedSize(width, (int)(width*RATIO));
         surf.setOnTouchListener(this);
+
+
 
         try {
             photos[0] = BitmapFactory.decodeResource(getResources(), R.drawable.foto_nowe);

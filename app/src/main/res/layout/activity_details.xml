@@ -5,9 +5,9 @@
     android:id="@+id/details_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/paper_tiling"
     android:orientation="vertical"
     tools:context="zpi.prototyp.Details">
+    <!---->
 
 
     <LinearLayout
@@ -34,6 +34,7 @@
 
             <LinearLayout
                 android:id="@+id/id_relativelay_content"
+                android:background="@drawable/paper_tiling"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"

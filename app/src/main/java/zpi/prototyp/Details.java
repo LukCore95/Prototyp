@@ -77,11 +77,11 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
         setContentView(R.layout.activity_details);
 
-//        final ScrollView scrollv = (ScrollView)findViewById(R.id.id_details_przewijanie);
+//        final LockScrollView scrollv= (LockScrollView)findViewById(R.id.id_details_przewijanie);
 //        scrollv.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View v, MotionEvent event) {
-//                scrollv.setOverScrollMode(View.OVER_SCROLL_ALWAYS);
+//                scrollv.setScrollingEnabled(false);
 //                return v.onTouchEvent(event);
 //            }
 //        });
@@ -176,7 +176,12 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        ScrollView sv = (ScrollView)findViewById(R.id.id_details_przewijanie);
+        if (event.getAction()==MotionEvent.ACTION_UP){
+            ((LockScrollView)findViewById(R.id.id_details_przewijanie)).setScrollingEnabled(true);
+        }
+        else{
+            ((LockScrollView)findViewById(R.id.id_details_przewijanie)).setScrollingEnabled(false);
+        }
             float x = event.getAxisValue(MotionEvent.AXIS_X);
             init.setX(x);
             /*slide = new Thread(new SlideThread(x, photos, slider, slider_background, slider_background2, hold, this));

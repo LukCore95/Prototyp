@@ -23,7 +23,7 @@
             layout="@layout/actionbar_details"
             android:layout_width="match_parent" />
 
-        <ScrollView
+        <zpi.prototyp.LockScrollView
             android:id="@+id/id_details_przewijanie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -215,7 +215,7 @@
                 </RelativeLayout>
 
             </LinearLayout>
-        </ScrollView>
+        </zpi.prototyp.LockScrollView>
 
 
     </LinearLayout>

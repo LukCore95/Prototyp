@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -163,50 +164,47 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         firstText.setText(deName);
         pattern = Arrays.<PatternItem>asList(new Gap(20), new Dash(40));
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.bottombar);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.lists:
-                                if(mLastLocation != null) {
-                                    deName = "Schweidnitzer Stadtgraben";
-                                    plName = "Podwale";
-                                    routeTo = place2;
-                                    onLocationChanged(mLastLocation);
-                                }
-                                return true;
-                            case R.id.me:
-                                if(mLastLocation != null) {
-                                    deName = "Warenhaus Wertheim";
-                                    plName = "Renoma";
-                                    routeTo = place1;
-                                    onLocationChanged(mLastLocation);
-                                }
-                                return true;
-                            case R.id.destination:
-                                if(mLastLocation != null) {
-                                    deName = "Schwiednitzer Strasse";
-                                    plName = "Świdnicka";
-                                    routeTo = place4;
-                                    onLocationChanged(mLastLocation);
-                                }
-                                return true;
-                            case R.id.map:
-                                if(mLastLocation != null) {
-                                    deName = "Zwingerplatz";
-                                    plName = "Pl. Teatralny";
-                                    routeTo = place3;
-                                    onLocationChanged(mLastLocation);
-                                }
-                                return true;
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottombar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.lists:
+                        if(mLastLocation != null) {
+                            deName = "Schweidnitzer Stadtgraben";
+                            plName = "Podwale";
+                            routeTo = place2;
+                            onLocationChanged(mLastLocation);
                         }
-                        return false;
-                    }
-                });
+                        return true;
+                    case R.id.me:
+                        if(mLastLocation != null) {
+                            deName = "Warenhaus Wertheim";
+                            plName = "Renoma";
+                            routeTo = place1;
+                            onLocationChanged(mLastLocation);
+                        }
+                        return true;
+                    case R.id.destination:
+                        if(mLastLocation != null) {
+                            deName = "Schwiednitzer Strasse";
+                            plName = "Świdnicka";
+                            routeTo = place4;
+                            onLocationChanged(mLastLocation);
+                        }
+                        return true;
+                    case R.id.map:
+                        if(mLastLocation != null) {
+                            deName = "Zwingerplatz";
+                            plName = "Pl. Teatralny";
+                            routeTo = place3;
+                            onLocationChanged(mLastLocation);
+                        }
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
     public void showPopup(View v) {
@@ -257,6 +255,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (checkLocationPermission()) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission. ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                if(mGoogleMap != null) {
+                    onMapReady(mGoogleMap);
+                }
+            }
+        }
+    }
+
+    @Override
     public void onMapReady(GoogleMap googleMap)
     {
         mGoogleMap=googleMap;
@@ -266,25 +277,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         catch (Resources.NotFoundException e) {}
 
-//        //Initialize Google Play Services
-//        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-//                //Location Permission already granted
-//                buildGoogleApiClient();
-//                mGoogleMap.setMyLocationEnabled(true);
-//            } else {
-//                //Request Location Permission
-//                checkLocationPermission();
-//            }
-//        }
-//        else {
-//            buildGoogleApiClient();
-//            mGoogleMap.setMyLocationEnabled(true);
-//        }
-
-        buildGoogleApiClient();
-        googleMap.setMyLocationEnabled(true);
-        checkLocationPermission();
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                buildGoogleApiClient();
+                mGoogleMap.setMyLocationEnabled(true);
+            }
+            else {
+                checkLocationPermission();
+            }
+        }
+        else {
+            buildGoogleApiClient();
+            mGoogleMap.setMyLocationEnabled(true);
+        }
 
         googleMap.getUiSettings().setMapToolbarEnabled(false);
         googleMap.setOnMarkerClickListener(this);
@@ -301,12 +306,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mGoogleMap.addMarker(new MarkerOptions().position(place2).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_podwale)));
         mGoogleMap.addMarker(new MarkerOptions().position(place3).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
         mGoogleMap.addMarker(new MarkerOptions().position(place4).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
-    }
-
-    public void restartActivity(){
-        Intent intent = new Intent(MainActivity.this,MainActivity.class);
-        finish();
-        startActivity(intent);
     }
 
     @Override
@@ -443,38 +442,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onConnectionFailed(ConnectionResult connectionResult) {}
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private void checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-                new AlertDialog.Builder(this)
-                        .setTitle("Location Permission Needed")
-                        .setMessage("Ta aplikacja potrzebuje zgody na lokalizację.")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(MainActivity.this,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_LOCATION );
-                            }
-                        })
-                        .create()
-                        .show();
-            }
-            else {
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION );
-
-            }
-            restartActivity();
+    private boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+            return false;
+        }
+        else {
+            return true;
         }
     }
 }

@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/lists"
-        android:title="Lista ciekawych miejsc"
-        android:icon="@mipmap/actionbar_map_icon"
-        app:showAsAction="ifRoom"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary">
 
-    <item android:id="@+id/me"
-        android:title="Ja"
+
+    <item android:id="@+id/miejsce1"
+        android:title="Narodowym Forum Muzyki"
         android:icon="@mipmap/actionbar_map_icon"/>
 
-    <item android:id="@+id/destination"
-        android:title="Cel"
+    <item android:id="@+id/miejsce2"
+        android:title="Opera Wrocławska"
         android:icon="@mipmap/actionbar_map_icon"/>
 
-    <item android:id="@+id/map"
-        android:title="Mapa"
+    <item android:id="@+id/miejsce3"
+        android:title="Kościół Bożego Ciała"
         android:icon="@mipmap/actionbar_map_icon"/>
 
 </menu>

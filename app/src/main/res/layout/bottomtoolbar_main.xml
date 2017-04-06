@@ -5,7 +5,7 @@
     android:background="@color/colorPrimary"
     android:theme="@style/AppTheme"
     android:elevation="4dp"
-    >
+    android:layout_alignParentBottom="true">
 
 
     <LinearLayout
@@ -15,12 +15,13 @@
         android:weightSum="1">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ciekaweMiejsceIkona"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/actionbar_marker_icon" />
+            android:src="@mipmap/actionbar_marker_icon"
+            android:onClick="showBottom"/>
 
         <LinearLayout
             android:layout_width="260dp"
@@ -29,36 +30,20 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textUp"
+                android:id="@+id/textBottomBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:fontFamily="sans-serif-light"
                 android:maxLines="2"
-                android:text="Niemiecka nazwa"
+                android:text="Ciekawe miejsca w pobliżu"
                 android:textColor="@color/colorTextBar"
-                android:textSize="26dp" />
+                android:textSize="20dp"
+                />
 
-            <TextView
-                android:id="@+id/textDown"
-                android:layout_width="263dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textUp"
-                android:layout_marginStart="14dp"
-                android:fontFamily="sans-serif-light"
-                android:maxLines="2"
-                android:text="Polska nazwa: Odległość"
-                android:textColor="@color/colorTextBar"
-                android:textSize="13dp" />
+
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/menuButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.16"
-            android:background="@null"
-            android:src="@mipmap/actionbar_map_icon"
-            android:onClick="showPopup"/>
+
     </LinearLayout>
 </android.support.v7.widget.Toolbar>

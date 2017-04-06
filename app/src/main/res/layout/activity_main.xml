@@ -9,7 +9,8 @@
 
     <include
         layout="@layout/actionbar_main"
-        android:id="@+id/actionbar">
+        android:id="@+id/actionbar"
+        >
     </include>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -48,16 +49,14 @@
         android:background="@null"
         android:src="@mipmap/action_button_mapa"
         android:layout_marginBottom="27dp"
-        android:layout_above="@+id/bottombar"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/bottombar"/>
 
-    <android.support.design.widget.BottomNavigationView
+
+    <include
+        layout="@layout/bottomtoolbar_main"
         android:id="@+id/bottombar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:itemBackground="@color/colorPrimary"
-        app:itemTextColor="@color/colorAccent"
-        app:itemIconTint="@drawable/selector"
-        app:menu="@menu/bottombar_menu" />
+        >
+    </include>
+
 </RelativeLayout>

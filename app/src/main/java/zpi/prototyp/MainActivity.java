@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private String dystansText;
     private TextView firstText;
     private TextView secondText;
+    private TextView thirdText; //bottombar text
 
     private PopupMenu popup;
 
@@ -148,10 +149,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         firstText = (TextView)findViewById(R.id.textUp);
         secondText = (TextView)findViewById(R.id.textDown);
+        thirdText = (TextView) findViewById(R.id.textBottomBar);
         Typeface deutschmeister = Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
         Typeface roboto = Typeface.createFromAsset(getAssets(), "fonts/roboto/Roboto-Light.ttf");
         firstText.setTypeface(deutschmeister);
         secondText.setTypeface(roboto);
+        thirdText.setTypeface(roboto);
 
         place1 = new LatLng(51.103851, 17.031064);
         place2 = new LatLng(51.104082, 17.030082);
@@ -164,53 +167,60 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         firstText.setText(deName);
         pattern = Arrays.<PatternItem>asList(new Gap(20), new Dash(40));
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottombar);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.lists:
-                        if(mLastLocation != null) {
-                            deName = "Schweidnitzer Stadtgraben";
-                            plName = "Podwale";
-                            routeTo = place2;
-                            onLocationChanged(mLastLocation);
-                        }
-                        return true;
-                    case R.id.me:
-                        if(mLastLocation != null) {
-                            deName = "Warenhaus Wertheim";
-                            plName = "Renoma";
-                            routeTo = place1;
-                            onLocationChanged(mLastLocation);
-                        }
-                        return true;
-                    case R.id.destination:
-                        if(mLastLocation != null) {
-                            deName = "Schwiednitzer Strasse";
-                            plName = "Świdnicka";
-                            routeTo = place4;
-                            onLocationChanged(mLastLocation);
-                        }
-                        return true;
-                    case R.id.map:
-                        if(mLastLocation != null) {
-                            deName = "Zwingerplatz";
-                            plName = "Pl. Teatralny";
-                            routeTo = place3;
-                            onLocationChanged(mLastLocation);
-                        }
-                        return true;
-                }
-                return false;
-            }
-        });
-    }
+//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottombar);
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.lists:
+//                        if(mLastLocation != null) {
+//                            deName = "Schweidnitzer Stadtgraben";
+//                            plName = "Podwale";
+//                            routeTo = place2;
+//                            onLocationChanged(mLastLocation);
+//                        }
+//                        return true;
+//                    case R.id.me:
+//                        if(mLastLocation != null) {
+//                            deName = "Warenhaus Wertheim";
+//                            plName = "Renoma";
+//                            routeTo = place1;
+//                            onLocationChanged(mLastLocation);
+//                        }
+//                        return true;
+//                    case R.id.destination:
+//                        if(mLastLocation != null) {
+//                            deName = "Schwiednitzer Strasse";
+//                            plName = "Świdnicka";
+//                            routeTo = place4;
+//                            onLocationChanged(mLastLocation);
+//                        }
+//                        return true;
+//                    case R.id.map:
+//                        if(mLastLocation != null) {
+//                            deName = "Zwingerplatz";
+//                            plName = "Pl. Teatralny";
+//                            routeTo = place3;
+//                            onLocationChanged(mLastLocation);
+//                        }
+//                        return true;
+//                }
+//                return false;
+//            }
+//        });
+   }
 
     public void showPopup(View v) {
         popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.actionbar_menu);
+        popup.show();
+    }
+
+    public void showBottom(View v) {
+        popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.bottombar_menu);
         popup.show();
     }
 

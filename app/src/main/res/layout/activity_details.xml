@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="visible"
-                    app:srcCompat="@mipmap/paper_top" />
+                    android:src="@mipmap/paper_top" />
 
                 <TextView
                     android:id="@+id/renoma_de_name"
@@ -81,7 +81,7 @@
                     android:layout_below="@+id/renoma_name"
                     android:layout_alignParentStart="true"
                     android:visibility="visible"
-                    app:srcCompat="@mipmap/header_newspaper" />
+                    android:src="@mipmap/header_newspaper" />
 
                 <SurfaceView
                     android:id="@+id/surfaceView"

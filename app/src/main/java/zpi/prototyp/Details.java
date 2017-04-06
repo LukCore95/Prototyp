@@ -110,7 +110,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
             public void onClick(View v) {
                 ImageButton ib = (ImageButton)v;
                 if (ib.getTag().equals("play")) {
-                    ib.setImageDrawable(getDrawable(R.drawable.pause_icon));
+                    ib.setImageDrawable(getDrawable(R.mipmap.pause));
                     ib.setTag("pause");
 
                     mediaPlayer.start();

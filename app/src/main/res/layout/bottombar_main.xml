@@ -7,7 +7,6 @@
     android:elevation="4dp"
     android:layout_alignParentBottom="true">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,27 +22,15 @@
             android:src="@mipmap/actionbar_marker_icon"
             android:onClick="showBottom"/>
 
-        <LinearLayout
-            android:layout_width="260dp"
+        <TextView
+            android:id="@+id/textBottomBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.53"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textBottomBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:fontFamily="sans-serif-light"
-                android:maxLines="2"
-                android:text="Ciekawe miejsca w pobliżu"
-                android:textColor="@color/colorTextBar"
-                android:textSize="20dp"
-                />
-
-
-        </LinearLayout>
-
-
+            android:layout_marginStart="14dp"
+            android:fontFamily="sans-serif-light"
+            android:maxLines="2"
+            android:text="Ciekawe miejsca w pobliżu"
+            android:textColor="@color/colorTextBar"
+            android:textSize="20dp" />
     </LinearLayout>
 </android.support.v7.widget.Toolbar>

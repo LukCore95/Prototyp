@@ -1,7 +1,6 @@
 package zpi.prototyp;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;;
@@ -10,11 +9,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -166,48 +162,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         plName = "Renoma";
         firstText.setText(deName);
         pattern = Arrays.<PatternItem>asList(new Gap(20), new Dash(40));
-
-//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottombar);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case R.id.lists:
-//                        if(mLastLocation != null) {
-//                            deName = "Schweidnitzer Stadtgraben";
-//                            plName = "Podwale";
-//                            routeTo = place2;
-//                            onLocationChanged(mLastLocation);
-//                        }
-//                        return true;
-//                    case R.id.me:
-//                        if(mLastLocation != null) {
-//                            deName = "Warenhaus Wertheim";
-//                            plName = "Renoma";
-//                            routeTo = place1;
-//                            onLocationChanged(mLastLocation);
-//                        }
-//                        return true;
-//                    case R.id.destination:
-//                        if(mLastLocation != null) {
-//                            deName = "Schwiednitzer Strasse";
-//                            plName = "Świdnicka";
-//                            routeTo = place4;
-//                            onLocationChanged(mLastLocation);
-//                        }
-//                        return true;
-//                    case R.id.map:
-//                        if(mLastLocation != null) {
-//                            deName = "Zwingerplatz";
-//                            plName = "Pl. Teatralny";
-//                            routeTo = place3;
-//                            onLocationChanged(mLastLocation);
-//                        }
-//                        return true;
-//                }
-//                return false;
-//            }
-//        });
    }
 
     public void showPopup(View v) {
@@ -356,42 +310,42 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLastLocation = location;
         mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
-        GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
-                .from(mLatLng)
-                .to(routeTo)
-                .transportMode(TransportMode.WALKING)
-                .unit(Unit.METRIC)
-                .execute(new DirectionCallback() {
-                    @Override
-                    public void onDirectionSuccess(Direction direction, String rawBody) {
-                        String status = direction.getStatus();
-                        if(direction.isOK()) {
-                            route = direction.getRouteList().get(0);
-                            leg = route.getLegList().get(0);
-                            directionPositionList = leg.getDirectionPoint();
-                            polylineOptions = DirectionConverter.createPolyline(MainActivity.this, directionPositionList, 5, Color.RED);
-                            Polyline temp = mGoogleMap.addPolyline(polylineOptions);
-                            if(mPolyline != null){
-                                mPolyline.remove();
-                                mPolyline = null;
-                            }
-                            mPolyline = temp;
-                            mPolyline.setPattern(pattern);
-                            dystansInfo = leg.getDistance();
-                            dystansText = dystansInfo.getText();
-                            firstText.setText(deName);
-                            secondText.setText(plName + ": " + dystansText);
-                        }
-                        else {
-//                            Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                    @Override
-                    public void onDirectionFailure(Throwable t) {
-//                        Toast.makeText(MainActivity.this, "Ups...", Toast.LENGTH_LONG).show();
-                    }
-                });
+//        GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
+//                .from(mLatLng)
+//                .to(routeTo)
+//                .transportMode(TransportMode.WALKING)
+//                .unit(Unit.METRIC)
+//                .execute(new DirectionCallback() {
+//                    @Override
+//                    public void onDirectionSuccess(Direction direction, String rawBody) {
+//                        String status = direction.getStatus();
+//                        if(direction.isOK()) {
+//                            route = direction.getRouteList().get(0);
+//                            leg = route.getLegList().get(0);
+//                            directionPositionList = leg.getDirectionPoint();
+//                            polylineOptions = DirectionConverter.createPolyline(MainActivity.this, directionPositionList, 5, Color.RED);
+//                            Polyline temp = mGoogleMap.addPolyline(polylineOptions);
+//                            if(mPolyline != null){
+//                                mPolyline.remove();
+//                                mPolyline = null;
+//                            }
+//                            mPolyline = temp;
+//                            mPolyline.setPattern(pattern);
+//                            dystansInfo = leg.getDistance();
+//                            dystansText = dystansInfo.getText();
+//                            firstText.setText(deName);
+//                            secondText.setText(plName + ": " + dystansText);
+//                        }
+//                        else {
+////                            Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onDirectionFailure(Throwable t) {
+////                        Toast.makeText(MainActivity.this, "Ups...", Toast.LENGTH_LONG).show();
+//                    }
+//                });
     }
 
     protected synchronized void buildGoogleApiClient() {

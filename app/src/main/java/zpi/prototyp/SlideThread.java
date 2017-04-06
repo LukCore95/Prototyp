@@ -52,7 +52,7 @@ public class SlideThread extends Thread {
     private int sliderWidth;
     private int sliderHeight;
     private final float sliderBaseHeight = 765.0f;
-    private final float bck2size = 256.0f;
+    private float bck2size = 256.0f;
     private float multip;
 
     private Rect src1;
@@ -96,6 +96,8 @@ public class SlideThread extends Thread {
 
         sliderHeight = slider.getHeight();
         sliderWidth = slider.getWidth();
+
+        bck2size = bck2size*multip;
     }
 
     synchronized public void setX(float x){

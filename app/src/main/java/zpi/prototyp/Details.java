@@ -8,6 +8,7 @@ import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -137,6 +138,12 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
             }
         });
 
+//        ImageView rno = (ImageView)findViewById(R.id.renoma1_zoom);
+//        rno.setScaleType(ImageView.ScaleType.MATRIX);
+//        Matrix m = new Matrix();
+//        m.postRotate(90);
+//        rno.setImageMatrix(m);
+
 
 
 
@@ -165,6 +172,14 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
             public void onClick(View view) {
                 zoomImageFromThumb(renomaSmall3, R.drawable.renoma3,
                         (ImageView) findViewById(R.id.renoma3_zoom));
+            }
+        });
+        final View renomaSmall4 = findViewById(R.id.imageView_renomaGallery4);
+        renomaSmall4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoomImageFromThumb(renomaSmall4, R.drawable.renoma4,
+                        (ImageView)findViewById(R.id.renoma4_zoom));
             }
         });
         // Retrieve and cache the system's default "short" animation time.
@@ -393,14 +408,15 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     private void clickToReadLessDetails(){
 
         final WebView renoma_description = (WebView)findViewById(R.id.renoma_decription_webview);
-        final TextView renomaDesriptionDetails = (TextView)findViewById(R.id.textView_readMore);
+        final ImageView renomaDesriptionDetails = (ImageView)findViewById(R.id.textView_readMore);
 
         renoma_description.loadData("<html><body>"
                 + "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_short) +"</p>" +
                 "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_extended) + "</p> "
                 + "</body></html>", "text/html; charset=utf-8", "utf-8");
 
-        renomaDesriptionDetails.setText("Zwiń");
+//        renomaDesriptionDetails.setText("Zwiń");
+        renomaDesriptionDetails.setRotation(180);
         renomaDesriptionDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -412,12 +428,13 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
     private void clickToReadMoreDetails(){
         final WebView renoma_description = (WebView)findViewById(R.id.renoma_decription_webview);
-        final TextView renomaDesriptionDetails = (TextView)findViewById(R.id.textView_readMore);
+        final ImageView renomaDesriptionDetails = (ImageView)findViewById(R.id.textView_readMore);
 
         renoma_description.loadData("<html><body>"
                 + "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_short) +  "</p> "
                 + "</body></html>", "text/html; charset=utf-8", "utf-8");
-        renomaDesriptionDetails.setText("Rozwiń");
+//        renomaDesriptionDetails.setText("Rozwiń");
+        renomaDesriptionDetails.setRotation(0);
 
         renomaDesriptionDetails.setOnClickListener(new View.OnClickListener() {
             @Override

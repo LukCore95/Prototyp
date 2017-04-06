@@ -44,6 +44,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     private Bitmap slider_background2;
     private Bitmap slider;
     private ImageButton closeIB;
+    private MediaPlayer odtworzAudiobook;
 
     private static final float RATIO = 0.8124f;
     private static final int x_margin = 20;
@@ -100,6 +101,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         ImageButton imageButtonAudiobook = (ImageButton) findViewById(R.id.details_play_audiobook_icon);
         // ZMIENIć TE SZAJSKIE IKONKI, BO TO JAKIEś Z NETA TYMCZASOWO WZIĄłEM ~W
         final MediaPlayer mediaPlayer = MediaPlayer.create(Details.this, R.raw.podwale_renoma_swidnicka_plac_teatralny);
+        odtworzAudiobook = mediaPlayer;
         try{
             mediaPlayer.prepare();
         }
@@ -125,6 +127,8 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
                 }
             }
         });
+
+
 
 
         //Zabawa sliderem -> sekcja onResume
@@ -230,7 +234,6 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         init.start();
 
     }
-
 
     // ze strony androida
     private void zoomImageFromThumb(final View thumbView, int imageResId, ImageView viewToZoom) {
@@ -410,6 +413,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     public void onPause(){
         super.onPause();
         init.stopThread();
+        odtworzAudiobook.stop();
         //init = null;
     }
 }

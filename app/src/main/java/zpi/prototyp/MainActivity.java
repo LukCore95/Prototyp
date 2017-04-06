@@ -383,13 +383,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             secondText.setText(plName + ": " + dystansText);
                         }
                         else {
-                            Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();
+//                            Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onDirectionFailure(Throwable t) {
-                        Toast.makeText(MainActivity.this, "Ups...", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(MainActivity.this, "Ups...", Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -409,9 +409,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);

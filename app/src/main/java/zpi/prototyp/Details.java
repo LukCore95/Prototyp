@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -36,15 +37,16 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
     private SurfaceView surf;
     private SurfaceHolder hold;
-    private Thread init;
-    private Thread slide;
+    private SlideThread init;
+   // private Thread slide;
     private Bitmap[] photos = new Bitmap[2];
     private Bitmap slider_background;
     private Bitmap slider_background2;
     private Bitmap slider;
     private ImageButton closeIB;
 
-    private static final float RATIO = 0.7956f;
+    private static final float RATIO = 0.8124f;
+    private static final int x_margin = 20;
 
     // powiększanie obrazka i animacja
     private Animator mCurrentAnimator;
@@ -161,9 +163,10 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        float x = event.getAxisValue(MotionEvent.AXIS_X);
-        slide = new Thread(new SlideThread(x, photos, slider, slider_background, slider_background2, hold, this));
-        slide.start();
+            float x = event.getAxisValue(MotionEvent.AXIS_X);
+            init.setX(x);
+            /*slide = new Thread(new SlideThread(x, photos, slider, slider_background, slider_background2, hold, this));
+            slide.start();*/
         //Toast.makeText(this, "Lol: " + x, Toast.LENGTH_SHORT).show();
         return true;
     }
@@ -189,16 +192,28 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 //                return super.onOptionsItemSelected(item);
 //        }
 //    }
+    private int getWidth(int margin){
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size.x-(2*margin);
+    }
+
     @Override
     protected void onResume()
     {
         super.onResume();
 
         surf = (SurfaceView) findViewById(R.id.surfaceView);
-        int width = 700;
+
         //Toast.makeText(this, "szerokosc: " + width, Toast.LENGTH_SHORT).show();
-        surf.setLayoutParams(new LinearLayout.LayoutParams(width, (int)(width*RATIO)));
+        //surf.setLayoutParams(new LinearLayout.LayoutParams(width, (int)(width*RATIO)));
+        int width = getWidth(x_margin);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new ViewGroup.MarginLayoutParams(width, (int)(width*RATIO)));
+        params.setMargins(x_margin, 0, x_margin, 0);
+        surf.setLayoutParams(params);
         hold = surf.getHolder();
+        hold.setFixedSize(width, (int)(width*RATIO));
         surf.setOnTouchListener(this);
 
         try {
@@ -211,7 +226,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
             System.out.println(e);
         }
 
-        init = new Thread(new SlideThread(350.0f, photos, slider, slider_background, slider_background2, hold, this));
+        init = new SlideThread(width/2, photos, slider, slider_background, slider_background2, hold, this);
         init.start();
 
     }

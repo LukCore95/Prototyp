@@ -406,4 +406,10 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
             }
         });
     }
+
+    public void onPause(){
+        super.onPause();
+        init.stopThread();
+        //init = null;
+    }
 }

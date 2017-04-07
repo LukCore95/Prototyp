@@ -276,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onMarkerClick(Marker marker) {
 //        if (marker.equals(mMarker))
 //        {
-            Toast.makeText(MainActivity.this, "Trwa ładowanie", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "Trwa ładowanie", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this,Details.class);
             startActivity(intent);
 //        }
@@ -309,6 +309,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onLocationChanged(Location location) {
         mLastLocation = location;
         mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+
+        firstText.setText(deName);
+        secondText.setText(plName);
 
         GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
                 .from(mLatLng)

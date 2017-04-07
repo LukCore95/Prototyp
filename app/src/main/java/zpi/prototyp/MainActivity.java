@@ -310,42 +310,42 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLastLocation = location;
         mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
-//        GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
-//                .from(mLatLng)
-//                .to(routeTo)
-//                .transportMode(TransportMode.WALKING)
-//                .unit(Unit.METRIC)
-//                .execute(new DirectionCallback() {
-//                    @Override
-//                    public void onDirectionSuccess(Direction direction, String rawBody) {
-//                        String status = direction.getStatus();
-//                        if(direction.isOK()) {
-//                            route = direction.getRouteList().get(0);
-//                            leg = route.getLegList().get(0);
-//                            directionPositionList = leg.getDirectionPoint();
-//                            polylineOptions = DirectionConverter.createPolyline(MainActivity.this, directionPositionList, 5, Color.RED);
-//                            Polyline temp = mGoogleMap.addPolyline(polylineOptions);
-//                            if(mPolyline != null){
-//                                mPolyline.remove();
-//                                mPolyline = null;
-//                            }
-//                            mPolyline = temp;
-//                            mPolyline.setPattern(pattern);
-//                            dystansInfo = leg.getDistance();
-//                            dystansText = dystansInfo.getText();
-//                            firstText.setText(deName);
-//                            secondText.setText(plName + ": " + dystansText);
-//                        }
-//                        else {
-////                            Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onDirectionFailure(Throwable t) {
-////                        Toast.makeText(MainActivity.this, "Ups...", Toast.LENGTH_LONG).show();
-//                    }
-//                });
+        GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
+                .from(mLatLng)
+                .to(routeTo)
+                .transportMode(TransportMode.WALKING)
+                .unit(Unit.METRIC)
+                .execute(new DirectionCallback() {
+                    @Override
+                    public void onDirectionSuccess(Direction direction, String rawBody) {
+                        String status = direction.getStatus();
+                        if(direction.isOK()) {
+                            route = direction.getRouteList().get(0);
+                            leg = route.getLegList().get(0);
+                            directionPositionList = leg.getDirectionPoint();
+                            polylineOptions = DirectionConverter.createPolyline(MainActivity.this, directionPositionList, 5, Color.RED);
+                            Polyline temp = mGoogleMap.addPolyline(polylineOptions);
+                            if(mPolyline != null){
+                                mPolyline.remove();
+                                mPolyline = null;
+                            }
+                            mPolyline = temp;
+                            mPolyline.setPattern(pattern);
+                            dystansInfo = leg.getDistance();
+                            dystansText = dystansInfo.getText();
+                            firstText.setText(deName);
+                            secondText.setText(plName + ": " + dystansText);
+                        }
+                        else {
+//                            Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onDirectionFailure(Throwable t) {
+//                        Toast.makeText(MainActivity.this, "Ups...", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     protected synchronized void buildGoogleApiClient() {

@@ -146,7 +146,63 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="25dp"
-                    android:src="@drawable/oddzielenie_sekcji" />
+                    android:src="@mipmap/oddzielenie_sekcji" />
+
+                <TextView
+                    android:id="@+id/textView_posluchajAudiobooka"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="25dp"
+                    android:text="@string/audiobook"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/textView_posluchajAudiobooka"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/surfaceView"
+                    tools:layout_editor_absoluteX="8dp">
+
+                    <ImageView
+                        android:id="@+id/image_audiobookRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_marginBottom="30dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/tlo_radio" />
+
+                    <ImageButton
+                        android:id="@+id/details_play_audiobook_icon"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:adjustViewBounds="true"
+                        android:background="@android:color/transparent"
+                        android:contentDescription=""
+                        android:src="@mipmap/play"
+                        android:tag="play"
+                        android:visibility="visible"
+                        app:srcCompat="@mipmap/play"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="16dp" />
+
+                </RelativeLayout>
+                
+                <ImageView
+                    android:id="@+id/image_oddzielenieSekcji2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:src="@mipmap/oddzielenie_sekcji" />
+
+
 
                 <TextView
                     android:id="@+id/textView_galeriaZdjec"
@@ -221,58 +277,7 @@
                     </LinearLayout>
                 </HorizontalScrollView>
 
-                <ImageView
-                    android:id="@+id/image_oddzielenieSekcji2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="25dp"
-                    android:src="@drawable/oddzielenie_sekcji" />
 
-                <TextView
-                    android:id="@+id/textView_posluchajAudiobooka"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="25dp"
-                    android:text="@string/audiobook"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/renoma_decription_webview"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    app:layout_constraintTop_toBottomOf="@+id/surfaceView"
-                    tools:layout_editor_absoluteX="8dp">
-
-                    <ImageView
-                        android:id="@+id/image_audiobookRadio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="150dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/tlo_radio" />
-
-                    <ImageButton
-                        android:id="@+id/details_play_audiobook_icon"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:adjustViewBounds="true"
-                        android:background="@android:color/transparent"
-                        android:contentDescription=""
-                        android:src="@mipmap/play"
-                        android:tag="play"
-                        android:visibility="visible"
-                        app:srcCompat="@mipmap/play"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="16dp" />
-
-                </RelativeLayout>
 
             </LinearLayout>
         </zpi.prototyp.LockScrollView>

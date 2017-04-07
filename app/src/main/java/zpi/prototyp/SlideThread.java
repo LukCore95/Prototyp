@@ -36,7 +36,7 @@ public class SlideThread extends Thread {
 
     //stałe wartości liczbowe
     private final int margin_top = 16;
-    private final int chwytak_height = 98;
+    private int chwytak_height = 98;
     private final int slider_half_width = 40;
     private int margin;
 
@@ -66,6 +66,8 @@ public class SlideThread extends Thread {
     private RectF sliderDst;
     private Rect sliderSrc2;
     private RectF sliderDst2;
+    private Rect sliderSrc3;
+    private RectF sliderDst3;
 
     int x1;
     int x2;
@@ -151,10 +153,12 @@ public class SlideThread extends Thread {
             dst2 = new RectF(xBis, 0 + margin + margin_top, width - margin, height - margin - chwytak_height - margin_top);
             dstbck = new RectF(0, 0 + margin_top, width, height - chwytak_height - margin_top);
             dstbck2 = new RectF(0, 0, width, height);
-            sliderSrc = new Rect(0, Math.max((int)(sliderHeight/multip - (int) height), 0), sliderWidth, sliderHeight);
+            sliderSrc = new Rect(0, Math.max((int)(sliderHeight/multip - (int) height), 0), sliderWidth, (int)((sliderHeight-chwytak_height)/multip));
             sliderSrc2 = new Rect(0, 0, sliderWidth, Math.max((int)((int)height-sliderHeight/multip), 0));
-            sliderDst = new RectF(xBis - slider_half_width, Math.max(((int)height-sliderHeight/multip), 0), xBis + slider_half_width, height - margin_top);
+            sliderDst = new RectF(xBis - slider_half_width, Math.max(((int)height-sliderHeight/multip), 0), xBis + slider_half_width, height - margin_top - chwytak_height);
             sliderDst2 = new RectF(xBis - slider_half_width, 0, xBis + slider_half_width, Math.max(((int)height-sliderHeight/multip), 0));
+            sliderSrc3 = new Rect(0, (int)((sliderHeight/multip-chwytak_height)*multip), sliderWidth, sliderHeight);
+            sliderDst3 = new RectF(xBis - slider_half_width, height - chwytak_height - margin_top, xBis + slider_half_width, height - margin_top);
             //canv.drawColor(ctx.getResources().getColor(R.color.alpha));
             for(int act = 0; act < width; act += bck2size) {
                 canv.drawBitmap(backgroundDeeper, null, new RectF(act, 0, act+bck2size, 0+bck2size), paint);
@@ -166,6 +170,7 @@ public class SlideThread extends Thread {
             canv.drawBitmap(photos[1], src1, dst1, paint);
             canv.drawBitmap(slider, sliderSrc2, sliderDst2, paint);
             canv.drawBitmap(slider, sliderSrc, sliderDst, paint);
+            canv.drawBitmap(slider, sliderSrc3, sliderDst3, paint);
 
             hold.unlockCanvasAndPost(canv);
 

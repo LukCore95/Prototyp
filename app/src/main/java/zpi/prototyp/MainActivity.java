@@ -137,9 +137,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         fullMapIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                locIBisPressed = false;
-                locIB.setImageResource(R.mipmap.action_button_lokalizacja);
-                showFullMap();
+                if(!locIBisPressed) {
+                    locIBisPressed = true;
+                    fullMapIB.setImageResource(R.mipmap.action_button_mapa);
+                    centerLocationToDestination();}
+                else {
+                    locIBisPressed = false;
+                    fullMapIB.setImageResource(R.mipmap.action_button_lokalizacja);
+                    showFullMap();
+
+                }
+
             }
         });
 
@@ -276,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onMarkerClick(Marker marker) {
 //        if (marker.equals(mMarker))
 //        {
-            Toast.makeText(MainActivity.this, "Trwa ładowanie", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "Trwa ładowanie", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this,Details.class);
             startActivity(intent);
 //        }

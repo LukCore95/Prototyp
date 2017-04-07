@@ -318,6 +318,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLastLocation = location;
         mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
+        firstText.setText(deName);
+        secondText.setText(plName);
+
         GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
                 .from(mLatLng)
                 .to(routeTo)

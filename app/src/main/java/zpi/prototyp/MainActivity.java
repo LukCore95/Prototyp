@@ -319,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
         firstText.setText(deName);
-        secondText.setText(plName);
+        secondText.setText(plName + ": " + dystansText);
 
         GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
                 .from(mLatLng)

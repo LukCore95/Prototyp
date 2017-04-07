@@ -46,7 +46,7 @@
                 android:layout_marginStart="14dp"
                 android:fontFamily="sans-serif-light"
                 android:maxLines="2"
-                android:text="Polska nazwa: Odległość"
+                android:text="Renoma: Odległość"
                 android:textColor="@color/colorTextBar"
                 android:textSize="13dp" />
         </LinearLayout>

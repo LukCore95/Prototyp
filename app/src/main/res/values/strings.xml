@@ -12,7 +12,7 @@
         prestiżowy Residenz Hotel z zachwycającymi, pałacowymi wnętrzami na parterze. Obiekt ten
         wielokrotnie przebudowywano.</string>
     <string name="renoma_nazwa_de">Warenhaus Wertheim</string>
-    <string name="audiobook">Posłuchaj fragmentu audiobooka</string>
+    <string name="audiobook">Posłuchaj fragmentu książki</string>
     <string name="opis_miejscaHead">Przeczytaj o tym miejscu</string>
     <string name="renoma_description_extended"><!--Teren przy skrzyżowaniu ul. Świdnickiej i Podwale –
         obecnie zajmowany przez Renomę – aż do XVII w. był praktycznie niezabudowany, stanowił
@@ -30,4 +30,5 @@
         do tej inwestycji braci Barasch przez 26 lat. 2 kwietnia 1930 r. na miejscu Residenz Hotel i
         kwartału kamienic miejskich, przy ul. Świdnickiej 40, stanął Dom Towarowy Wertheim –
         dzisiejsza Renoma – i to właśnie on przejął ten zaszczytny tytuł.</string>
+    <string name="string_fotografie">Zobacz zabytkowe fotografie</string>
 </resources>

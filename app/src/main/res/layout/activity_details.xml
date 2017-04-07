@@ -143,10 +143,20 @@
                 <ImageView
                     android:id="@+id/image_oddzielenieSekcji1"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="25dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
                     android:src="@drawable/oddzielenie_sekcji" />
+
+                <TextView
+                    android:id="@+id/textView_galeriaZdjec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="25dp"
+                    android:text="@string/string_fotografie"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
 
                 <HorizontalScrollView
                     android:id="@+id/gallery_layout"
@@ -211,39 +221,56 @@
                     </LinearLayout>
                 </HorizontalScrollView>
 
+                <ImageView
+                    android:id="@+id/image_oddzielenieSekcji2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:src="@drawable/oddzielenie_sekcji" />
+
+                <TextView
+                    android:id="@+id/textView_posluchajAudiobooka"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="25dp"
+                    android:text="@string/audiobook"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/renoma_decription_webview"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     app:layout_constraintTop_toBottomOf="@+id/surfaceView"
                     tools:layout_editor_absoluteX="8dp">
+
+                    <ImageView
+                        android:id="@+id/image_audiobookRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/tlo_radio" />
 
                     <ImageButton
                         android:id="@+id/details_play_audiobook_icon"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:layout_alignParentBottom="true"
                         android:adjustViewBounds="true"
                         android:background="@android:color/transparent"
                         android:contentDescription=""
                         android:src="@mipmap/play"
                         android:tag="play"
                         android:visibility="visible"
-                        app:srcCompat="@mipmap/play" />
-
-                    <TextView
-                        android:id="@+id/text_audiobook"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        app:srcCompat="@mipmap/play"
+                        android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@+id/details_play_audiobook_icon"
-                        android:gravity="center"
-                        android:text="@string/audiobook"
-                        android:textColor="@android:color/black"
-                        tools:layout_editor_absoluteX="8dp"
-                        tools:layout_editor_absoluteY="0dp" />
+                        android:layout_marginEnd="16dp" />
 
                 </RelativeLayout>
 
@@ -273,20 +300,20 @@
         app:srcCompat="@drawable/renoma2" />
 
     <ImageView
-        android:id="@+id/renoma3_zoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/renoma1"
-        android:visibility="invisible"
-        app:srcCompat="@drawable/renoma3" />
-
-    <ImageView
         android:id="@+id/renoma4_zoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/renoma1"
         android:visibility="invisible"
         app:srcCompat="@drawable/renoma4" />
+
+    <ImageView
+        android:id="@+id/renoma3_zoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/renoma1"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/renoma3" />
 
     <!--android:contentDescription="@string/description_zoom_touch_close"-->
 

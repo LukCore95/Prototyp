@@ -4,51 +4,48 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
-import android.view.Display;
 import android.view.MotionEvent;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import zpi.view.slider.BeforeAfterSlider;
+import zpi.view.slider.BeforeAfterSliderRed;
 
 public class Details extends FragmentActivity implements View.OnTouchListener{
 
     private SurfaceView surf;
-    private SurfaceHolder hold;
-    private SlideThread init;
+    //private SurfaceHolder hold;
+    //private SlideThread init;
    // private Thread slide;
-    private Bitmap[] photos = new Bitmap[2];
-    private Bitmap slider_background;
-    private Bitmap slider_background2;
-    private Bitmap slider;
+    private Bitmap bNew;
+    private Bitmap bOld;
+    //private Bitmap slider_background;
+    //private Bitmap slider_background2;
+    //private Bitmap slider;
     private ImageButton closeIB;
     private MediaPlayer odtworzAudiobook;
 
-    private static final float RATIO = 0.8124f;
-    private static final int x_margin = 20;
+    private BeforeAfterSlider slider;
+
+    //private static final float RATIO = 0.8124f;
+    //private static final int x_margin = 20;
 
     // powiększanie obrazka i animacja
     private Animator mCurrentAnimator;
@@ -191,22 +188,17 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if (event.getAction()==MotionEvent.ACTION_UP){
-            ((LockScrollView)findViewById(R.id.id_details_przewijanie)).setScrollingEnabled(true);
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            ((LockScrollView) findViewById(R.id.id_details_przewijanie)).setScrollingEnabled(true);
+        } else {
+            ((LockScrollView) findViewById(R.id.id_details_przewijanie)).setScrollingEnabled(false);
         }
-        else{
-            ((LockScrollView)findViewById(R.id.id_details_przewijanie)).setScrollingEnabled(false);
-        }
-            float x = event.getAxisValue(MotionEvent.AXIS_X);
-            init.setX(x);
+        float x = event.getAxisValue(MotionEvent.AXIS_X);
+        slider.slide(x);
             /*slide = new Thread(new SlideThread(x, photos, slider, slider_background, slider_background2, hold, this));
             slide.start();*/
         //Toast.makeText(this, "Lol: " + x, Toast.LENGTH_SHORT).show();
         return true;
-    }
-
-    public void setPhotos(Bitmap[] _photos){
-        photos = _photos;
     }
 
 //    @Override
@@ -226,12 +218,12 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 //                return super.onOptionsItemSelected(item);
 //        }
 //    }
-    private int getWidth(int margin){
+    /*private int getWidth(int margin){
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         return size.x-(2*margin);
-    }
+    }*/
 
     @Override
     protected void onResume()
@@ -242,29 +234,34 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
         //Toast.makeText(this, "szerokosc: " + width, Toast.LENGTH_SHORT).show();
         //surf.setLayoutParams(new LinearLayout.LayoutParams(width, (int)(width*RATIO)));
-        int width = getWidth(x_margin);
+        /*int width = getWidth(x_margin);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new ViewGroup.MarginLayoutParams(width, (int)(width*RATIO)));
         params.setMargins(x_margin, 0, x_margin, 0);
         surf.setLayoutParams(params);
         hold = surf.getHolder();
         hold.setFixedSize(width, (int)(width*RATIO));
-        surf.setOnTouchListener(this);
+        surf.setOnTouchListener(this);*/
+
 
 
 
         try {
-            photos[0] = BitmapFactory.decodeResource(getResources(), R.drawable.foto_nowe);
-            photos[1] = BitmapFactory.decodeResource(getResources(), R.drawable.foto_stare);
-            slider_background = BitmapFactory.decodeResource(getResources(), R.drawable.slider_background);
+            bNew = BitmapFactory.decodeResource(getResources(), R.drawable.foto_nowe);
+            bOld = BitmapFactory.decodeResource(getResources(), R.drawable.foto_stare);
+        }catch(Exception e){
+            System.err.println(e);
+        }
+       /*     slider_background = BitmapFactory.decodeResource(getResources(), R.drawable.slider_background);
             slider_background2 = BitmapFactory.decodeResource(getResources(), R.drawable.point_background);
             slider = BitmapFactory.decodeResource(getResources(), R.drawable.slider);
         }catch(Exception e){
             System.out.println(e);
-        }
+        }*/
 
-        init = new SlideThread(width/2, photos, slider, slider_background, slider_background2, hold, this);
-        init.start();
-
+        //init = new SlideThread(width/2, photos, slider, slider_background, slider_background2, hold);
+        //init.start();
+        slider = new BeforeAfterSliderRed(bNew, bOld, surf, this, this);
+        slider.initSlider();
     }
 
     // ze strony androida
@@ -446,7 +443,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
     public void onPause(){
         super.onPause();
-        init.stopThread();
+        slider.stopSlider();
         odtworzAudiobook.stop();
         //init = null;
     }

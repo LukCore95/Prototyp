@@ -104,9 +104,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             new Point(new LatLng(51.105483, 17.031921),"Pl. Teatralny","Zwingerplatz"),
             new Point(new LatLng(51.105059, 17.031117),"Świdnicka","Schwiednitzer Strasse")};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
+        //wczytanie z bazy danych TUTAJ
+
+
         super.onCreate(savedInstanceState);
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -267,6 +272,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         googleMap.getUiSettings().setMapToolbarEnabled(false);
+        googleMap.getUiSettings().setZoomGesturesEnabled(true);
         googleMap.setOnMarkerClickListener(this);
 
         mCenter = CameraUpdateFactory.newLatLng(routeTo);
@@ -278,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             return;
         }
 
-        //tutaj tworzenie w petli musi być:
+        //tutaj tworzenie w petli musi być + przechowywanie id markera w bazie danych!
         mGoogleMap.addMarker(new MarkerOptions().position(points[0].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
         mGoogleMap.addMarker(new MarkerOptions().position(points[1].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_podwale)));
         mGoogleMap.addMarker(new MarkerOptions().position(points[2].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
@@ -382,6 +388,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
+
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
 
         builder.setAlwaysShow(true);

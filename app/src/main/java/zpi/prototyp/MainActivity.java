@@ -86,19 +86,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private boolean locIBisPressed;
     private Info dystansInfo;
     private String dystansText;
-    private TextView firstText;
-    private TextView secondText;
-    private TextView thirdText; //bottombar text
+    private TextView textUpperToolbarGerman;
+    private TextView textUpperToolbarPolish;
+    private TextView textBottomToolbar; //bottombar text
 
     private PopupMenu popup;
 
     private LatLng routeTo;
-    private LatLng place1;
-    private LatLng place2;
-    private LatLng place3;
-    private LatLng place4;
+//    private LatLng place1;
+//    private LatLng place2;
+//    private LatLng place3;
+//    private LatLng place4;
     private String deName;
     private String plName;
+    public Point [] points = { new Point(new LatLng(51.103851, 17.031064), "Renoma", "Warenhaus Wertheim"),
+            new Point(new LatLng(51.104082, 17.030082),"Podwale","Schweidnitzer Stadtgraben"),
+            new Point(new LatLng(51.105483, 17.031921),"Pl. Teatralny","Zwingerplatz"),
+            new Point(new LatLng(51.105059, 17.031117),"Świdnicka","Schwiednitzer Strasse")};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -151,24 +155,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        firstText = (TextView)findViewById(R.id.textUp);
-        secondText = (TextView)findViewById(R.id.textDown);
-        thirdText = (TextView) findViewById(R.id.textBottomBar);
+        textUpperToolbarGerman = (TextView)findViewById(R.id.textUp);
+        textUpperToolbarPolish = (TextView)findViewById(R.id.textDown);
+        textBottomToolbar = (TextView) findViewById(R.id.textBottomBar);
         Typeface deutschmeister = Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
         Typeface roboto = Typeface.createFromAsset(getAssets(), "fonts/roboto/Roboto-Light.ttf");
-        firstText.setTypeface(deutschmeister);
-        secondText.setTypeface(roboto);
-        thirdText.setTypeface(roboto);
+        textUpperToolbarGerman.setTypeface(deutschmeister);
+        textUpperToolbarPolish.setTypeface(roboto);
+        textBottomToolbar.setTypeface(roboto);
 
-        place1 = new LatLng(51.103851, 17.031064);
-        place2 = new LatLng(51.104082, 17.030082);
-        place3 = new LatLng(51.105483, 17.031921);
-        place4 = new LatLng(51.105059, 17.031117);
-        routeTo = place1;
-
-        deName = "Warenhaus Wertheim";
-        plName = "Renoma";
-        firstText.setText(deName);
+//        place1 = new LatLng(51.103851, 17.031064);
+//        place2 = new LatLng(51.104082, 17.030082);
+//        place3 = new LatLng(51.105483, 17.031921);
+//        place4 = new LatLng(51.105059, 17.031117);
+        routeTo = points[0].getGeoLoc();
+        deName = points[0].getGermanName();
+        plName = points[0].getPolishName();
+        textUpperToolbarGerman.setText(deName);
         pattern = Arrays.<PatternItem>asList(new Gap(20), new Dash(40));
    }
 
@@ -191,33 +194,33 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (item.getItemId()) {
             case R.id.position1:
                 if(mLastLocation != null) {
-                    deName = "Schweidnitzer Stadtgraben";
-                    plName = "Podwale";
-                    routeTo = place2;
+                    deName = points[1].getGermanName();
+                    plName = points[1].getPolishName();
+                    routeTo = points[1].getGeoLoc();
                     onLocationChanged(mLastLocation);
                 }
                 return true;
             case R.id.position2:
                 if(mLastLocation != null) {
-                    deName = "Warenhaus Wertheim";
-                    plName = "Renoma";
-                    routeTo = place1;
+                    deName = points[0].getGermanName();
+                    plName = points[0].getPolishName();
+                    routeTo = points[0].getGeoLoc();
                     onLocationChanged(mLastLocation);
                 }
                 return true;
             case R.id.position3:
                 if(mLastLocation != null) {
-                    deName = "Schwiednitzer Strasse";
-                    plName = "Świdnicka";
-                    routeTo = place4;
+                    deName = points[3].getGermanName();
+                    plName = points[3].getPolishName();
+                    routeTo = points[3].getGeoLoc();
                     onLocationChanged(mLastLocation);
                 }
                 return true;
             case R.id.position4:
                 if(mLastLocation != null) {
-                    deName = "Zwingerplatz";
-                    plName = "Pl. Teatralny";
-                    routeTo = place3;
+                    deName = points[2].getGermanName();
+                    plName = points[2].getPolishName();
+                    routeTo = points[2].getGeoLoc();
                     onLocationChanged(mLastLocation);
                 }
                 return true;
@@ -274,10 +277,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        mGoogleMap.addMarker(new MarkerOptions().position(place1).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
-        mGoogleMap.addMarker(new MarkerOptions().position(place2).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_podwale)));
-        mGoogleMap.addMarker(new MarkerOptions().position(place3).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
-        mGoogleMap.addMarker(new MarkerOptions().position(place4).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
+
+        //tutaj tworzenie w petli musi być:
+        mGoogleMap.addMarker(new MarkerOptions().position(points[0].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
+        mGoogleMap.addMarker(new MarkerOptions().position(points[1].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_podwale)));
+        mGoogleMap.addMarker(new MarkerOptions().position(points[2].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
+        mGoogleMap.addMarker(new MarkerOptions().position(points[3].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
     }
 
     @Override
@@ -318,8 +323,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLastLocation = location;
         mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
-        firstText.setText(deName);
-        secondText.setText(plName + ": " + dystansText);
+        textUpperToolbarGerman.setText(deName);
+        textUpperToolbarPolish.setText(plName + ": " + dystansText);
 
         GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
                 .from(mLatLng)
@@ -344,8 +349,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             mPolyline.setPattern(pattern);
                             dystansInfo = leg.getDistance();
                             dystansText = dystansInfo.getText();
-                            firstText.setText(deName);
-                            secondText.setText(plName + ": " + dystansText);
+                            textUpperToolbarGerman.setText(deName);
+                            textUpperToolbarPolish.setText(plName + ": " + dystansText);
                         }
                         else {
 //                            Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();

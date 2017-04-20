@@ -6,23 +6,24 @@ import com.google.android.gms.maps.model.LatLng;
  * Created by Adrianna on 20/04/2017.
  */
 
-public class Location {
+public class Point {
     LatLng geoLoc;
     String polishName;
     String germanName;
     String description;
+    int markerID;
     String[] imgSource;
     boolean slider;
     String sliderSource;
 
-    Location(LatLng gl, String pN, String gN)
+    Point(LatLng gl, String pN, String gN)
     {
         geoLoc=gl;
         polishName=pN;
         germanName=gN;
     }
 
-    Location()
+    Point()
     {}
 
     public void setGeoLoc(LatLng l)
@@ -54,5 +55,4 @@ public class Location {
     {
         return germanName;
     }
-
 }

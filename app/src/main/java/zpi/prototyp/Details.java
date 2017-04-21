@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -50,20 +51,23 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     // powiększanie obrazka i animacja
     private Animator mCurrentAnimator;
     private int mShortAnimationDuration;
-
+    zpi.prototyp.Point[] points;
+    int markerID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        points=MainActivity.points;
+        Intent intentM=getIntent();
+        markerID=intentM.getIntExtra("markerID",69);
         //ustawienie czcionki nagłówka
 //        AssetManager am = getApplicationContext().getAssets();
-//        Typeface typeface = Typeface.createFromAsset(am,
+//        Typeface germanFont = Typeface.createFromAsset(am,
 //                String.format(Locale.US, "fonts/%s", "abc.ttf"));
-//        (typeface);
-//        TextView myTextView = (TextView) findViewById(R.id.renoma_de_name);
-//        Typeface typeface=Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
-//        myTextView.setTypeface(typeface);
+//        (germanFont);
+//        TextView germanNameHeader = (TextView) findViewById(R.id.renoma_de_name);
+//        Typeface germanFont=Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
+//        germanNameHeader.setTypeface(germanFont);
 
 //        TextView tx = (TextView)findViewById(R.id.renoma_de_name);
 //        Typeface custom_font = Typeface.createFromAsset(getAssets(),
@@ -99,11 +103,17 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
             }
         });
 
-        TextView myTextView = (TextView) findViewById(R.id.renoma_de_name);
-        TextView myTextView1 = (TextView) findViewById(R.id.textPK);
-        Typeface typeface=Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
-        myTextView.setTypeface(typeface);
-        myTextView1.setTypeface(typeface);
+        TextView germanNameHeader = (TextView) findViewById(R.id.renoma_de_name);
+        germanNameHeader.setText(points[markerID].getGermanName());
+        TextView polishNameHeader = (TextView) findViewById(R.id.renoma_name_pl);
+        polishNameHeader.setText(points[markerID].getPolishName().toUpperCase());
+        setFont(polishNameHeader,"fonts/montserrat/Montserrat-Light.otf");
+        setFont((TextView) findViewById(R.id.textPK),"fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf" );
+        setFont(germanNameHeader, "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
+        setFont((TextView) findViewById(R.id.textView_opismiejscaHeader),"fonts/cambria/cambria_bold.ttf");
+        setFont((TextView) findViewById(R.id.textView_posluchajAudiobooka),"fonts/cambria/cambria_bold.ttf");
+        setFont((TextView) findViewById(R.id.textView_galeriaZdjec),"fonts/cambria/cambria_bold.ttf");
+
 
         ImageButton imageButtonAudiobook = (ImageButton) findViewById(R.id.details_play_audiobook_icon);
         // ZMIENIć TE SZAJSKIE IKONKI, BO TO JAKIEś Z NETA TYMCZASOWO WZIĄłEM ~W
@@ -428,8 +438,10 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         final ImageView renomaDesriptionDetails = (ImageView)findViewById(R.id.textView_readMore);
 
         renoma_description.loadData("<html><body>"
-                + "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_short) +  "</p> "
+                + "<p align=\"justify\"; style=\"text-indent: 10%; \" >" + getString(R.string.renoma_description_short) +  "</p> "
                 + "</body></html>", "text/html; charset=utf-8", "utf-8");
+
+
 //        renomaDesriptionDetails.setText("Rozwiń");
         renomaDesriptionDetails.setRotation(0);
 
@@ -441,6 +453,11 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         });
     }
 
+    private void setFont(TextView tv, String font)
+    {
+        Typeface descriptionHeaderFont = Typeface.createFromAsset(getAssets(), font);
+        tv.setTypeface(descriptionHeaderFont);
+    }
     public void onPause(){
         super.onPause();
         slider.stopSlider();

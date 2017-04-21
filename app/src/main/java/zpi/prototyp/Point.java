@@ -23,6 +23,13 @@ public class Point {
         germanName=gN;
     }
 
+    Point(Point p)
+    {
+        geoLoc=p.getGeoLoc();
+        polishName=p.getPolishName();
+        germanName=p.getGermanName();
+    }
+
     Point()
     {}
 

@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //    private LatLng place4;
     private String deName;
     private String plName;
-    public Point [] points = { new Point(new LatLng(51.103851, 17.031064), "Renoma", "Warenhaus Wertheim"),
+    public static Point [] points = { new Point(new LatLng(51.103851, 17.031064), "Dom handlowy Renoma", "Warenhaus Wertheim"),
             new Point(new LatLng(51.104082, 17.030082),"Podwale","Schweidnitzer Stadtgraben"),
             new Point(new LatLng(51.105483, 17.031921),"Pl. Teatralny","Zwingerplatz"),
             new Point(new LatLng(51.105059, 17.031117),"Świdnicka","Schwiednitzer Strasse")};
@@ -297,9 +297,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        {
 //            Toast.makeText(MainActivity.this, "Trwa ładowanie", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this,Details.class);
+            intent.putExtra("markerID", getMarkersID(marker.getId()));
+           // intent.putExtra("punkty", points);
+            //Toast.makeText(MainActivity.this, getMarkersID(marker.getId())+ " ", Toast.LENGTH_SHORT).show();
             startActivity(intent);
 //        }
         return false;
+    }
+
+    public int getMarkersID(String m)
+    {
+        String mId="";
+        for(int i=0; i<m.length(); i++)
+        {
+            if(Character.isDigit(m.charAt(i)))
+            {
+                mId+=m.charAt(i);
+            }
+        }
+
+        return Integer.parseInt(mId);
     }
 
     public void centerLocationToMe(){

@@ -9,6 +9,6 @@ import zpi.data.model.ControlPoint;
  */
 
 public interface ControlPointPhotoDBAgent extends DBAgent {
-    public List<Integer> getControlPointsPhotos(int id);
+    public List<Integer> getControlPointsPhotos(String name);
     public boolean insertPhotosFromControlPoint(ControlPoint cp);
 }

@@ -23,6 +23,7 @@ public class ControlPointDBOptimizedAgent implements ControlPointDBAgent {
 
     public ControlPoint getControlPoint(String name){
         ControlPoint cp = null;
+        int cpId = -1;
 
         String selection = MockContract.ControlPointEntry.COLUMN_NAME_NAME + " = ?";
         String[] selectionArgs = {name};
@@ -39,8 +40,15 @@ public class ControlPointDBOptimizedAgent implements ControlPointDBAgent {
                 System.err.println(de);
             }
         }
-        return null; //TODO
 
+        if(cp != null) {
+            cpId = getId(name);
+
+            ControlPointPhotoDBAgent cppAgent = new ControlPointPhotoDBOptimizedAgent(readableDb, null);
+            cp.setOldPhotos(cppAgent.getControlPointsPhotos(name));
+        }
+
+        return cp;
     }
 
     public int createControlPoint(ControlPoint cp){
@@ -48,6 +56,17 @@ public class ControlPointDBOptimizedAgent implements ControlPointDBAgent {
     }
 
     public int getId(String name){
-        return -1; //TODO
+        int cpId = -1;
+
+        String[] projection = {MockContract.ControlPointEntry.COLUMN_NAME_ID};
+        String selection = MockContract.ControlPointEntry.COLUMN_NAME_NAME + " = ?";
+        String[] selectionArgs = {name};
+
+        Cursor cursor = readableDb.query(MockContract.ControlPointEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
+
+        if(cursor.moveToFirst())
+            cpId = cursor.getInt(0);
+
+        return cpId;
     }
 }

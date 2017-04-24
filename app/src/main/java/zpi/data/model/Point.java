@@ -63,4 +63,8 @@ public abstract class Point {
         else
             throw new DataException("description", "not null");
     }
+
+    public void setOldPhotos(List<Integer> oldPhotos){
+        this.oldPhotos = oldPhotos;
+    }
 }

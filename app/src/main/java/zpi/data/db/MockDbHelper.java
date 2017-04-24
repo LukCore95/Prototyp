@@ -48,4 +48,17 @@ public class MockDbHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion){
         //TODO something?
     }
+
+    public SQLiteDatabase enableReading(){
+        return getReadableDatabase();
+    }
+
+    public SQLiteDatabase enableWriting(){
+        return getWritableDatabase();
+    }
+
+    public void closeDb(SQLiteDatabase db){
+        if(db.isOpen())
+            db.close();
+    }
 }

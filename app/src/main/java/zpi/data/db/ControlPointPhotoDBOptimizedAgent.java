@@ -28,6 +28,7 @@ public class ControlPointPhotoDBOptimizedAgent implements ControlPointPhotoDBAge
 
         ContentValues values = new ContentValues();
         for(Integer photo: cp.getOldPhotos()){
+            values.clear();
             values.put(MockContract.ControlPointPhotoEntry.COLUMN_NAME_ID, photo);
             values.put(MockContract.ControlPointPhotoEntry.COLUMN_NAME_POINT, cpId);
             writableDb.insert(MockContract.ControlPointPhotoEntry.TABLE_NAME, null, values);

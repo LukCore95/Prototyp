@@ -21,4 +21,6 @@ public interface ControlPointDBAgent extends DBAgent {
      * @return ID of a new Control Point in database
      */
     public int createControlPoint(ControlPoint newControlPoint);
+
+    public ControlPoint getControlPoint(int id);
 }

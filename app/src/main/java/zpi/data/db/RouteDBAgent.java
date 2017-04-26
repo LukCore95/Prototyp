@@ -24,4 +24,6 @@ public interface RouteDBAgent extends DBAgent {
      * @return ID of a new route in database
      */
     public int createRoute(Route newRoute);
+
+    public Route getRoute(int id);
 }

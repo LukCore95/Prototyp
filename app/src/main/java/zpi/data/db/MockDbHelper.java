@@ -49,7 +49,7 @@ public class MockDbHelper extends SQLiteOpenHelper {
         //TODO something?
     }
 
-    public SQLiteDatabase enableReading(){
+    /*public SQLiteDatabase enableReading(){
         return getReadableDatabase();
     }
 
@@ -60,5 +60,5 @@ public class MockDbHelper extends SQLiteOpenHelper {
     public void closeDb(SQLiteDatabase db){
         if(db.isOpen())
             db.close();
-    }
+    }*/
 }

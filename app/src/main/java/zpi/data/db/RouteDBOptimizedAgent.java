@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import zpi.data.model.ControlPoint;
@@ -49,13 +50,16 @@ public class RouteDBOptimizedAgent implements RouteDBAgent {
 
         if(route != null){
             selection = MockContract.RoutePointEntry.COLUMN_NAME_ROUTE + " = ?";
-            Map<Integer, ControlPoint> points = new HashMap<Integer, ControlPoint>();
+            LinkedList<ControlPoint> points = new LinkedList<ControlPoint>();
             cursor = readableDb.query(MockContract.RoutePointEntry.TABLE_NAME, null, selection, selectionArgs2, null, null, null);
             ControlPointDBAgent cpAgent = new ControlPointDBOptimizedAgent(readableDb, null);
 
             while(cursor.moveToNext()){
-                points.put(cursor.getInt(0), cpAgent.getControlPoint(cursor.getInt(1)));
+                //points.put(cursor.getInt(0), cpAgent.getControlPoint(cursor.getInt(1)));
+                points.add(cursor.getInt(0), cpAgent.getControlPoint(cursor.getInt(1)));
             }
+
+            route.setRoutePoints(points);
         }
 
         return route;
@@ -70,7 +74,7 @@ public class RouteDBOptimizedAgent implements RouteDBAgent {
         if(route == null)
             return id;
 
-        Map<Integer, ControlPoint> cps = route.getRoutePoints();
+        LinkedList<ControlPoint> cps = route.getRoutePoints();
         String name = route.getName();
 
         ContentValues values = new ContentValues();
@@ -79,12 +83,12 @@ public class RouteDBOptimizedAgent implements RouteDBAgent {
         values.clear();
         id = getId(name);
 
-        for(int cpInd: cps.keySet()){
-            currentCp = cps.get(cpInd);
+        for(ControlPoint cp: cps){
+            currentCp = cp;
             cpAgent.createControlPoint(currentCp);
             currentCpId = cpAgent.getId(currentCp.getName());
 
-            values.put(MockContract.RoutePointEntry.COLUMN_NAME_NUMBER, cpInd);
+            values.put(MockContract.RoutePointEntry.COLUMN_NAME_NUMBER, cps.indexOf(cps));
             values.put(MockContract.RoutePointEntry.COLUMN_NAME_POINT, currentCpId);
             values.put(MockContract.RoutePointEntry.COLUMN_NAME_ROUTE, id);
             writableDb.insert(MockContract.RoutePointEntry.TABLE_NAME, null, values);
@@ -107,5 +111,20 @@ public class RouteDBOptimizedAgent implements RouteDBAgent {
             id = cursor.getInt(0);
 
         return id;
+    }
+
+    public Route getRoute(int id){
+        Route route = null;
+
+        String selection = MockContract.RouteEntry.COLUMN_NAME_ID + " = ?";
+        String[] selectionArgs = {"" + id};
+
+        Cursor cursor = readableDb.query(MockContract.RouteEntry.TABLE_NAME, null, selection, selectionArgs, null, null, null);
+
+        if(cursor.moveToFirst()){
+            route = getRoute(cursor.getString(1));
+        }
+
+        return route;
     }
 }

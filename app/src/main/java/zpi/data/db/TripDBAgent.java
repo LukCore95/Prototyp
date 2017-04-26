@@ -12,5 +12,5 @@ import zpi.data.model.Trip;
 public interface TripDBAgent extends DBAgent {
     public Trip getTrip(int ID);
     public int createTrip(Trip newTrip);
-    public boolean changeLastVisitedPoint(ControlPoint newLastVisitedPoint);
+    public boolean changeLastVisitedPoint(int id, ControlPoint newLastVisitedPoint);
 }

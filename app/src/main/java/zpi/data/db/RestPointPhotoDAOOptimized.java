@@ -7,18 +7,17 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import zpi.data.model.InterestingPlace;
 import zpi.data.model.RestPoint;
 
 /**
  * Created by Ania on 2017-04-25.
  */
 
-public class RestPointPhotoDBOptimizedAgent implements RestPointPhotoDBAgent {
+public class RestPointPhotoDAOOptimized implements RestPointPhotoDAO {
     SQLiteDatabase readableDb;
     SQLiteDatabase writableDb;
 
-    public RestPointPhotoDBOptimizedAgent(SQLiteDatabase read, SQLiteDatabase write){
+    public RestPointPhotoDAOOptimized(SQLiteDatabase read, SQLiteDatabase write){
         readableDb = read;
         writableDb = write;
     }
@@ -26,7 +25,7 @@ public class RestPointPhotoDBOptimizedAgent implements RestPointPhotoDBAgent {
     public List<Integer> getRestPointsPhotos(String name){
         List<Integer> oldPhotos = new ArrayList<Integer>();
 
-        RestPointDBAgent rpAgent = new RestPointDBOptimizedAgent(readableDb, null);
+        RestPointDAO rpAgent = new RestPointDAOOptimized(readableDb, null);
         int rpId = rpAgent.getId(name);
 
         String[] projection = {MockContract.RestPointPhotoEntry.COLUMN_NAME_ID};
@@ -43,7 +42,7 @@ public class RestPointPhotoDBOptimizedAgent implements RestPointPhotoDBAgent {
     }
 
     public boolean insertPhotosFromRestPoint(RestPoint rp){
-        RestPointDBAgent rpAgent = new RestPointDBOptimizedAgent(readableDb, null);
+        RestPointDAO rpAgent = new RestPointDAOOptimized(readableDb, null);
 
         int rpId = rpAgent.getId(rp.getName());
 

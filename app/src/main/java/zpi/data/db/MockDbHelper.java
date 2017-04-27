@@ -3,6 +3,7 @@ package zpi.data.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 /**
  * @author Wojciech Michałowski
@@ -12,6 +13,7 @@ public class MockDbHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Mock.db";
+    Context ctx;
 
     /**
      * Public constructor which constructDbHelper using current Context.
@@ -19,6 +21,7 @@ public class MockDbHelper extends SQLiteOpenHelper {
      */
     public MockDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        ctx = context;
     }
 
     /**
@@ -26,7 +29,14 @@ public class MockDbHelper extends SQLiteOpenHelper {
      * @param db Created database
      */
     public void onCreate(SQLiteDatabase db){
+        Toast.makeText(ctx, "Rozpoczynam tworzenie bazy!", Toast.LENGTH_SHORT).show();
+        System.out.println("Rozpoczynam tworzenie bazy!");
         db.execSQL(MockContract.createTables());
+        Toast.makeText(ctx, "Baza danych zainicjalizowana", Toast.LENGTH_SHORT).show();
+        System.out.println("Baza danych zainicjalizowana");
+        DataInitializer.InitializeData(db, db, ctx);
+        Toast.makeText(ctx, "Baza danych pomyślnie utworzona!", Toast.LENGTH_SHORT).show();
+        System.out.println("Baza danych pomyślnie utworzona!");
     }
 
     /**

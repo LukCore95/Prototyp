@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
@@ -62,6 +63,11 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import zpi.data.db.ControlPointDAO;
+import zpi.data.db.ControlPointDAOOptimized;
+import zpi.data.db.MockDbHelper;
+import zpi.data.model.ControlPoint;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener, PopupMenu.OnMenuItemClickListener {
 
@@ -178,6 +184,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         plName = points[0].getPolishName();
         textUpperToolbarGerman.setText(deName);
         pattern = Arrays.<PatternItem>asList(new Gap(20), new Dash(40));
+
+        //db test
+        /*MockDbHelper dbHelp = new MockDbHelper(this);
+        SQLiteDatabase database = dbHelp.getReadableDatabase();
+        ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
+        ControlPoint podwale = cpdao.getControlPoint("Podwale");
+        Toast.makeText(this, "Zwrócono punkt: " + podwale.getGermanName(), Toast.LENGTH_LONG).show();*/
    }
 
     public void showPopup(View v) {

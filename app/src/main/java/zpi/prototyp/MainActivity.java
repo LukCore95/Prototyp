@@ -189,9 +189,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         MockDbHelper dbHelp = new MockDbHelper(this);
         SQLiteDatabase database = dbHelp.getReadableDatabase();
         ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
-        ControlPoint podwale = cpdao.getControlPoint("Podwale");
+        ControlPoint cp = cpdao.getControlPoint("Podwale");
         //Toast.makeText(this, "Punkcior: " + database.rawQuery("SELECT * FROM ControlPoint", null).getString(1), Toast.LENGTH_LONG).show();
-        Toast.makeText(this, "Zwrócono punkt: " + podwale.getGermanName() + podwale.getDate() + podwale.getLatitude(), Toast.LENGTH_LONG).show();*/
+        Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();
+        cp = cpdao.getControlPoint("Dom handlowy Renoma");
+        Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();
+        cp = cpdao.getControlPoint("Ulica Świdnicka");
+        Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();
+        cp = cpdao.getControlPoint("Plac Teatralny");
+        Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();
+        database.close();*/
 
    }
 

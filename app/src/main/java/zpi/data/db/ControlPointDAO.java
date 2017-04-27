@@ -22,5 +22,10 @@ public interface ControlPointDAO extends DAO {
      */
     public int createControlPoint(ControlPoint newControlPoint);
 
+    /**
+     * Get the contorl point of a given id from database.
+     * @param id Id of needed Control Point
+     * @return Needed Control Point
+     */
     public ControlPoint getControlPoint(int id);
 }

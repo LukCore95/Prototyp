@@ -31,18 +31,10 @@ public class MockDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
        // Toast.makeText(ctx, "Rozpoczynam tworzenie bazy!", Toast.LENGTH_SHORT).show();
         //System.out.println("Rozpoczynam tworzenie bazy");
-        db.execSQL(MockContract.ControlPointPhotoCreation);
-        db.execSQL(MockContract.InterestingPlacePhotoCreation);
-        db.execSQL(MockContract.RestPointPhotoCreation);
-        db.execSQL(MockContract.RestPointCreation);
-        db.execSQL(MockContract.InterestingPlaceCreation);
-        db.execSQL(MockContract.ControlPointCreation);
-        db.execSQL(MockContract.RouteCreation);
-        db.execSQL(MockContract.RoutePointCreation);
-        db.execSQL(MockContract.TripCreation);
+        createTables(db);
         //Toast.makeText(ctx, "Baza danych zainicjalizowana", Toast.LENGTH_SHORT).show();
         //System.out.println("Baza danych zainicjalizowana");
-        DataInitializer.InitializeData(db, db, ctx);
+        DataInitializer.InitializeData(db, ctx, DATABASE_VERSION, 0);
         //Toast.makeText(ctx, "Baza danych pomyślnie utworzona!", Toast.LENGTH_SHORT).show();
         //System.out.println("Baza danych pomyślnie utworzona!");
     }
@@ -54,7 +46,7 @@ public class MockDbHelper extends SQLiteOpenHelper {
      * @param newVersion New (current) version number
      */
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
-        //TODO something?
+        DataInitializer.InitializeData(db, ctx, newVersion, oldVersion);
     }
 
     /**
@@ -64,7 +56,7 @@ public class MockDbHelper extends SQLiteOpenHelper {
      * @param newVersion New (current) version number
      */
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion){
-        //TODO something?
+        DataInitializer.InitializeData(db, ctx, newVersion, 0);
     }
 
     /*public SQLiteDatabase enableReading(){
@@ -79,4 +71,16 @@ public class MockDbHelper extends SQLiteOpenHelper {
         if(db.isOpen())
             db.close();
     }*/
+
+    private void createTables(SQLiteDatabase db){
+        db.execSQL(MockContract.ControlPointPhotoCreation);
+        db.execSQL(MockContract.InterestingPlacePhotoCreation);
+        db.execSQL(MockContract.RestPointPhotoCreation);
+        db.execSQL(MockContract.RestPointCreation);
+        db.execSQL(MockContract.InterestingPlaceCreation);
+        db.execSQL(MockContract.ControlPointCreation);
+        db.execSQL(MockContract.RouteCreation);
+        db.execSQL(MockContract.RoutePointCreation);
+        db.execSQL(MockContract.TripCreation);
+    }
 }

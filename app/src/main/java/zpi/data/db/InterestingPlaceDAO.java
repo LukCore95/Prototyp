@@ -4,7 +4,7 @@ import zpi.data.model.InterestingPlace;
 
 /**
  * @author Wojciech Michałowski
- * Interesting Place DataBase Agent provides basic operations on database in InterestingPlace table.
+ * Interesting Place DAO provides basic operations on database in InterestingPlace table.
  */
 public interface InterestingPlaceDAO extends DAO {
 

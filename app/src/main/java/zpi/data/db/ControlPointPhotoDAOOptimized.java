@@ -10,9 +10,12 @@ import java.util.List;
 import zpi.data.model.ControlPoint;
 
 /**
- * Created by Ania on 2017-04-24.
+ * @author Wojciech Michałowski
+ * Optimized implementation od ControlPointPhotoDAO interface. Using this class requires injection of readable and/or writable database. Writable database can be null if
+ * you're not planning to use writing method insertPhotosFromControlPoint. Using method insertPhotosFromControlPoint with a null-writableDb DAO object will result in Exception.
+ * To get your instance of readable/writable database simply call getWritableDatabase()/getReadableDatabase() of your MockDbHelper object. After performing DB operations on this class
+ * you need to close database connection by calling close() method of the database object.
  */
-
 public class ControlPointPhotoDAOOptimized implements ControlPointPhotoDAO {
     SQLiteDatabase readableDb;
     SQLiteDatabase writableDb;
@@ -55,6 +58,11 @@ public class ControlPointPhotoDAOOptimized implements ControlPointPhotoDAO {
         return oldPhotos;
     }
 
+    /**
+     * This method is disabled int this implementation and returns -1
+     * @param name Name of object (e.g. control point or route)
+     * @return Always returns -1
+     */
     public int getId(String name){
         return -1; //empty method
     }

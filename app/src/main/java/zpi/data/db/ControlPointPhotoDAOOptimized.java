@@ -13,17 +13,17 @@ import zpi.data.model.ControlPoint;
  * Created by Ania on 2017-04-24.
  */
 
-public class ControlPointPhotoDBOptimizedAgent implements ControlPointPhotoDBAgent {
+public class ControlPointPhotoDAOOptimized implements ControlPointPhotoDAO {
     SQLiteDatabase readableDb;
     SQLiteDatabase writableDb;
 
-    public ControlPointPhotoDBOptimizedAgent(SQLiteDatabase read, SQLiteDatabase write){
+    public ControlPointPhotoDAOOptimized(SQLiteDatabase read, SQLiteDatabase write){
         readableDb = read;
         writableDb = write;
     }
 
     public boolean insertPhotosFromControlPoint(ControlPoint cp){
-        ControlPointDBAgent cpAgent = new ControlPointDBOptimizedAgent(readableDb, null);
+        ControlPointDAO cpAgent = new ControlPointDAOOptimized(readableDb, null);
         int cpId = cpAgent.getId(cp.getName());
 
         ContentValues values = new ContentValues();
@@ -38,7 +38,7 @@ public class ControlPointPhotoDBOptimizedAgent implements ControlPointPhotoDBAge
     }
 
     public List<Integer> getControlPointsPhotos(String name){
-        ControlPointDBAgent cpAgent = new ControlPointDBOptimizedAgent(readableDb, null);
+        ControlPointDAO cpAgent = new ControlPointDAOOptimized(readableDb, null);
         int cpId = cpAgent.getId(name);
 
         List<Integer> oldPhotos = new ArrayList<Integer>();

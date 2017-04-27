@@ -6,7 +6,7 @@ import zpi.data.model.RestPoint;
  * @author Wojciech Michałowski
  * Rest Point DataBase Agent provides basic operations on database in RestType table.
  */
-public interface RestPointDBAgent extends DBAgent {
+public interface RestPointDAO extends DAO {
 
     /**
      * Get the rest point of a given name from database.

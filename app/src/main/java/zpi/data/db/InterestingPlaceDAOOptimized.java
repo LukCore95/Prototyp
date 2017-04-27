@@ -11,18 +11,18 @@ import zpi.data.model.InterestingPlace;
  * Created by Ania on 2017-04-25.
  */
 
-public class InterestingPlaceDBOptimizedAgent implements InterestingPlaceDBAgent {
+public class InterestingPlaceDAOOptimized implements InterestingPlaceDAO {
     SQLiteDatabase readableDb;
     SQLiteDatabase writableDb;
 
-    public InterestingPlaceDBOptimizedAgent(SQLiteDatabase read, SQLiteDatabase write){
+    public InterestingPlaceDAOOptimized(SQLiteDatabase read, SQLiteDatabase write){
         readableDb = read;
         writableDb = write;
     }
 
     public InterestingPlace getInterestingPlace(String name){
         InterestingPlace ip = null;
-        InterestingPlacePhotoDBAgent photoAgent;
+        InterestingPlacePhotoDAO photoAgent;
         int ipId = -1;
         String selection = MockContract.InterestingPlaceEntry.COLUMN_NAME_NAME + " = ?";
         String[] selectionArgs = {name};
@@ -41,7 +41,7 @@ public class InterestingPlaceDBOptimizedAgent implements InterestingPlaceDBAgent
         }
 
         if(ip != null){
-            photoAgent = new InterestingPlacePhotoDBOptimizedAgent(readableDb, null);
+            photoAgent = new InterestingPlacePhotoDAOOptimized(readableDb, null);
             ip.setOldPhotos(photoAgent.getInterestingPlacesPhotos(name));
         }
 
@@ -66,7 +66,7 @@ public class InterestingPlaceDBOptimizedAgent implements InterestingPlaceDBAgent
     public int createInterestingPlace(InterestingPlace ip){
         int id = -1;
         String name = ip.getName();
-        InterestingPlacePhotoDBAgent photoAgent = new InterestingPlacePhotoDBOptimizedAgent(readableDb, writableDb);
+        InterestingPlacePhotoDAO photoAgent = new InterestingPlacePhotoDAOOptimized(readableDb, writableDb);
 
         ContentValues values = new ContentValues();
         values.put(MockContract.InterestingPlaceEntry.COLUMN_NAME_NAME, name);

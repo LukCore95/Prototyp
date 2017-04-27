@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        fullMapIB = (ImageButton) findViewById(R.id.fullMap);
+        /*fullMapIB = (ImageButton) findViewById(R.id.fullMap);
         fullMapIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
 
             }
-        });
+        });*/
 
         textUpperToolbarGerman = (TextView)findViewById(R.id.textUp);
         textUpperToolbarPolish = (TextView)findViewById(R.id.textDown);

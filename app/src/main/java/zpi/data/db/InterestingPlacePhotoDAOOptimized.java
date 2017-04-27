@@ -13,11 +13,11 @@ import zpi.data.model.InterestingPlace;
  * Created by Ania on 2017-04-25.
  */
 
-public class InterestingPlacePhotoDBOptimizedAgent implements InterestingPlacePhotoDBAgent {
+public class InterestingPlacePhotoDAOOptimized implements InterestingPlacePhotoDAO {
     SQLiteDatabase readableDb;
     SQLiteDatabase writableDb;
 
-    public InterestingPlacePhotoDBOptimizedAgent(SQLiteDatabase read, SQLiteDatabase write){
+    public InterestingPlacePhotoDAOOptimized(SQLiteDatabase read, SQLiteDatabase write){
         readableDb = read;
         writableDb = write;
     }
@@ -25,7 +25,7 @@ public class InterestingPlacePhotoDBOptimizedAgent implements InterestingPlacePh
     public List<Integer> getInterestingPlacesPhotos(String name){
         List<Integer> oldPhotos = new ArrayList<Integer>();
 
-        InterestingPlaceDBAgent ipAgent = new InterestingPlaceDBOptimizedAgent(readableDb, null);
+        InterestingPlaceDAO ipAgent = new InterestingPlaceDAOOptimized(readableDb, null);
         int ipId = ipAgent.getId(name);
 
         String[] projection = {MockContract.InterestingPlacePhotoEntry.COLUMN_NAME_ID};
@@ -42,7 +42,7 @@ public class InterestingPlacePhotoDBOptimizedAgent implements InterestingPlacePh
     }
 
     public boolean insertPhotosFromInterestingPlace(InterestingPlace ip){
-        InterestingPlaceDBAgent ipAgent = new InterestingPlaceDBOptimizedAgent(readableDb, null);
+        InterestingPlaceDAO ipAgent = new InterestingPlaceDAOOptimized(readableDb, null);
 
         int ipId = ipAgent.getId(ip.getName());
 

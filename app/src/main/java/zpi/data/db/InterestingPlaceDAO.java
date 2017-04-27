@@ -6,7 +6,7 @@ import zpi.data.model.InterestingPlace;
  * @author Wojciech Michałowski
  * Interesting Place DataBase Agent provides basic operations on database in InterestingPlace table.
  */
-public interface InterestingPlaceDBAgent extends DBAgent {
+public interface InterestingPlaceDAO extends DAO {
 
     /**
      * Get the interesting place of a given name from database.

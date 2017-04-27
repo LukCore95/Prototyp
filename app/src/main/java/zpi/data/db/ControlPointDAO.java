@@ -6,7 +6,7 @@ import zpi.data.model.ControlPoint;
  * @author Wojciech Michałowski
  * Control Point DataBase Agent provides basic operations on database in ControlPoint table.
  */
-public interface ControlPointDBAgent extends DBAgent {
+public interface ControlPointDAO extends DAO {
 
     /**
      * Get the control point of a given name from database.

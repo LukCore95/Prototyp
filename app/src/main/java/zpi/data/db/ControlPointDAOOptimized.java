@@ -13,11 +13,11 @@ import zpi.data.model.DataException;
  * Created by Ania on 2017-04-24.
  */
 
-public class ControlPointDBOptimizedAgent implements ControlPointDBAgent {
+public class ControlPointDAOOptimized implements ControlPointDAO {
     SQLiteDatabase readableDb;
     SQLiteDatabase writableDb;
 
-    public ControlPointDBOptimizedAgent(SQLiteDatabase read, SQLiteDatabase write){
+    public ControlPointDAOOptimized(SQLiteDatabase read, SQLiteDatabase write){
         this.readableDb = read;
         this.writableDb = write;
     }
@@ -45,7 +45,7 @@ public class ControlPointDBOptimizedAgent implements ControlPointDBAgent {
         if(cp != null) {
             cpId = getId(name);
 
-            ControlPointPhotoDBAgent cppAgent = new ControlPointPhotoDBOptimizedAgent(readableDb, null);
+            ControlPointPhotoDAO cppAgent = new ControlPointPhotoDAOOptimized(readableDb, null);
             cp.setOldPhotos(cppAgent.getControlPointsPhotos(name));
         }
 
@@ -73,7 +73,7 @@ public class ControlPointDBOptimizedAgent implements ControlPointDBAgent {
         }
 
         if(cp != null) {
-            ControlPointPhotoDBAgent cppAgent = new ControlPointPhotoDBOptimizedAgent(readableDb, null);
+            ControlPointPhotoDAO cppAgent = new ControlPointPhotoDAOOptimized(readableDb, null);
             cp.setOldPhotos(cppAgent.getControlPointsPhotos(cp.getName()));
         }
 
@@ -83,7 +83,7 @@ public class ControlPointDBOptimizedAgent implements ControlPointDBAgent {
     public int createControlPoint(ControlPoint cp){
         int id = -1;
         String name = cp.getName();
-        ControlPointPhotoDBAgent photoAgent = new ControlPointPhotoDBOptimizedAgent(readableDb, writableDb);
+        ControlPointPhotoDAO photoAgent = new ControlPointPhotoDAOOptimized(readableDb, writableDb);
 
         ContentValues values = new ContentValues();
         values.put(MockContract.ControlPointEntry.COLUMN_NAME_NAME, name);

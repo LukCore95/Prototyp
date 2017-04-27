@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import zpi.data.model.DataException;
-import zpi.data.model.InterestingPlace;
 import zpi.data.model.RestPoint;
 import zpi.data.model.RestPointType;
 
@@ -13,18 +12,18 @@ import zpi.data.model.RestPointType;
  * Created by Ania on 2017-04-25.
  */
 
-public class RestPointDBOptimizedAgent implements RestPointDBAgent {
+public class RestPointDAOOptimized implements RestPointDAO {
     SQLiteDatabase readableDb;
     SQLiteDatabase writableDb;
 
-    public RestPointDBOptimizedAgent(SQLiteDatabase read, SQLiteDatabase write){
+    public RestPointDAOOptimized(SQLiteDatabase read, SQLiteDatabase write){
         readableDb = read;
         writableDb = write;
     }
 
     public RestPoint getRestPoint(String name){
         RestPoint rp = null;
-        RestPointPhotoDBAgent photoAgent;
+        RestPointPhotoDAO photoAgent;
         int rpId = -1;
         String selection = MockContract.RestPointEntry.COLUMN_NAME_NAME + " = ?";
         String[] selectionArgs = {name};
@@ -44,7 +43,7 @@ public class RestPointDBOptimizedAgent implements RestPointDBAgent {
         }
 
         if(rp != null){
-            photoAgent = new RestPointPhotoDBOptimizedAgent(readableDb, null);
+            photoAgent = new RestPointPhotoDAOOptimized(readableDb, null);
             rp.setOldPhotos(photoAgent.getRestPointsPhotos(name));
         }
 
@@ -69,7 +68,7 @@ public class RestPointDBOptimizedAgent implements RestPointDBAgent {
     public int createRestPoint(RestPoint rp){
         int id = -1;
         String name = rp.getName();
-        RestPointPhotoDBAgent photoAgent = new RestPointPhotoDBOptimizedAgent(readableDb, writableDb);
+        RestPointPhotoDAO photoAgent = new RestPointPhotoDAOOptimized(readableDb, writableDb);
 
         ContentValues values = new ContentValues();
         values.put(MockContract.RestPointEntry.COLUMN_NAME_NAME, name);

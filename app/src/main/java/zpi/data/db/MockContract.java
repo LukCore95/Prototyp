@@ -20,6 +20,9 @@ public class MockContract {
     private static final String ControlPointPhotoCreation = "create table " + ControlPointPhotoEntry.TABLE_NAME + " (" + ControlPointPhotoEntry.COLUMN_NAME_ID + " integer not null primary key, " + ControlPointPhotoEntry.COLUMN_NAME_POINT + " integer(10) not null, foreign key(" + ControlPointPhotoEntry.COLUMN_NAME_POINT + ") references " + ControlPointEntry.TABLE_NAME + "(" + ControlPointEntry.COLUMN_NAME_ID + "));";
 
 
+    //private static final String controlPointsInsertion =
+
+
     /**
      * Constructor is private because this class is not to instatiate!
      */

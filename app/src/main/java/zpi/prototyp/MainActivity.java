@@ -109,7 +109,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             new Point(new LatLng(51.104082, 17.030082),"Podwale","Schweidnitzer Stadtgraben"),
             new Point(new LatLng(51.105483, 17.031921),"Pl. Teatralny","Zwingerplatz"),
             new Point(new LatLng(51.105059, 17.031117),"Świdnicka","Schwiednitzer Strasse")};
-
+    static String [] namesOfControlPoints = {"Dom handlowy Renoma", "Podwale", "Plac Teatralny", "Ulica Świdnicka"};
+    ControlPointDAO cpdao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -185,11 +186,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         textUpperToolbarGerman.setText(deName);
         pattern = Arrays.<PatternItem>asList(new Gap(20), new Dash(40));
 
-        /*//db test
         MockDbHelper dbHelp = new MockDbHelper(this);
         SQLiteDatabase database = dbHelp.getReadableDatabase();
         ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
-        ControlPoint cp = cpdao.getControlPoint("Podwale");
+
+        /*//db test
+
         //Toast.makeText(this, "Punkcior: " + database.rawQuery("SELECT * FROM ControlPoint", null).getString(1), Toast.LENGTH_LONG).show();
         Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();
         cp = cpdao.getControlPoint("Dom handlowy Renoma");
@@ -319,7 +321,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        {
 //            Toast.makeText(MainActivity.this, "Trwa ładowanie", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this,Details.class);
-            intent.putExtra("markerID", getMarkersID(marker.getId()));
+
+            intent.putExtra("nazwaPunktu", namesOfControlPoints[getMarkersID(marker.getId())]);
            // intent.putExtra("punkty", points);
             //Toast.makeText(MainActivity.this, getMarkersID(marker.getId())+ " ", Toast.LENGTH_SHORT).show();
             startActivity(intent);

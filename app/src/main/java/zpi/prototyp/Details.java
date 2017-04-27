@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -26,6 +27,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import zpi.data.db.ControlPointDAO;
+import zpi.data.db.ControlPointDAOOptimized;
+import zpi.data.db.MockDbHelper;
+import zpi.data.model.ControlPoint;
 import zpi.view.slider.BeforeAfterSlider;
 import zpi.view.slider.BeforeAfterSliderRed;
 
@@ -42,6 +47,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     //private Bitmap slider;
     private ImageButton closeIB;
     private MediaPlayer odtworzAudiobook;
+    ControlPoint cp;
 
     private BeforeAfterSlider slider;
 
@@ -52,14 +58,20 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     private Animator mCurrentAnimator;
     private int mShortAnimationDuration;
     zpi.prototyp.Point[] points;
-    int markerID;
+    String controlPointName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         points=MainActivity.points;
         Intent intentM=getIntent();
-        markerID=intentM.getIntExtra("markerID",69);
+        controlPointName=intentM.getStringExtra("nazwaPunktu");
+        MockDbHelper dbHelp = new MockDbHelper(this);
+        SQLiteDatabase database = dbHelp.getReadableDatabase();
+        ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
+         cp=cpdao.getControlPoint(controlPointName);
+
+
         //ustawienie czcionki nagłówka
 //        AssetManager am = getApplicationContext().getAssets();
 //        Typeface germanFont = Typeface.createFromAsset(am,
@@ -92,6 +104,9 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         final WebView renoma_description = (WebView) findViewById(R.id.renoma_decription_webview);
         renoma_description.getSettings().setDefaultTextEncodingName("UTF-8");
         renoma_description.setBackgroundColor(Color.TRANSPARENT);
+        renoma_description.loadData(cp.getDescription(), "charset=utf-8" ,"UTF-8");
+        
+
         clickToReadMoreDetails();
 
 
@@ -104,9 +119,9 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         });
 
         TextView germanNameHeader = (TextView) findViewById(R.id.renoma_de_name);
-        germanNameHeader.setText(points[markerID].getGermanName());
+        germanNameHeader.setText(cp.getGermanName());
         TextView polishNameHeader = (TextView) findViewById(R.id.renoma_name_pl);
-        polishNameHeader.setText(points[markerID].getPolishName().toUpperCase());
+        polishNameHeader.setText(cp.getName().toUpperCase());
         setFont(polishNameHeader,"fonts/montserrat/Montserrat-Light.otf");
         setFont((TextView) findViewById(R.id.textPK),"fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf" );
         setFont(germanNameHeader, "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
@@ -193,7 +208,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         mShortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
 
-
+        dbHelp.close();
     } //protected void onCreate(Bundle savedInstanceState)
 
     @Override
@@ -414,17 +429,17 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
     private void clickToReadLessDetails(){
 
-        final WebView renoma_description = (WebView)findViewById(R.id.renoma_decription_webview);
-        final ImageView renomaDesriptionDetails = (ImageView)findViewById(R.id.textView_readMore);
+        final WebView point_description = (WebView)findViewById(R.id.renoma_decription_webview);
+        final ImageView readMoreButton = (ImageView)findViewById(R.id.textView_readMore);
 
-        renoma_description.loadData("<html><body>"
-                + "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_short) +"</p>" +
+        point_description.loadData("<html><body>"
+                + "<p align=\"justify\"; style=\"text-indent: 10%; \">" + cp.getDescription() +"</p>" +
                 "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_extended) + "</p> "
                 + "</body></html>", "text/html; charset=utf-8", "utf-8");
 
-//        renomaDesriptionDetails.setText("Zwiń");
-        renomaDesriptionDetails.setRotation(180);
-        renomaDesriptionDetails.setOnClickListener(new View.OnClickListener() {
+//        readMoreButton.setText("Zwiń");
+        readMoreButton.setRotation(180);
+        readMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickToReadMoreDetails();
@@ -438,7 +453,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         final ImageView renomaDesriptionDetails = (ImageView)findViewById(R.id.textView_readMore);
 
         renoma_description.loadData("<html><body>"
-                + "<p align=\"justify\"; style=\"text-indent: 10%; \" >" + getString(R.string.renoma_description_short) +  "</p> "
+                + "<p align=\"justify\"; style=\"text-indent: 10%; \" >" + cp.getDescription() +  "</p> "
                 + "</body></html>", "text/html; charset=utf-8", "utf-8");
 
 

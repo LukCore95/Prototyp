@@ -121,7 +121,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             new Point(new LatLng(51.104082, 17.030082),"Podwale","Schweidnitzer Stadtgraben"),
             new Point(new LatLng(51.105483, 17.031921),"Pl. Teatralny","Zwingerplatz"),
             new Point(new LatLng(51.105059, 17.031117),"Świdnicka","Schwiednitzer Strasse")};
-
+    static String [] namesOfControlPoints = {"Dom handlowy Renoma", "Podwale", "Plac Teatralny", "Ulica Świdnicka"};
+    ControlPointDAO cpdao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -350,7 +351,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        {
 //            Toast.makeText(MainActivity.this, "Trwa ładowanie", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this,Details.class);
-            intent.putExtra("markerID", getMarkersID(marker.getId()));
+
+            intent.putExtra("nazwaPunktu", namesOfControlPoints[getMarkersID(marker.getId())]);
            // intent.putExtra("punkty", points);
             //Toast.makeText(MainActivity.this, getMarkersID(marker.getId())+ " ", Toast.LENGTH_SHORT).show();
             startActivity(intent);

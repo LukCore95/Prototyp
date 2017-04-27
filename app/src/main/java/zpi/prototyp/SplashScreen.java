@@ -7,7 +7,9 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class SplashScreen extends Activity {
+import zpi.data.db.MockDbHelper;
+
+public class SplashScreen extends Activity implements Runnable {
 
     private static int SPLASH_TIME_OUT = 4500;
 
@@ -15,6 +17,8 @@ public class SplashScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_AppCompat_Light_NoActionBar);
         super.onCreate(savedInstanceState);
+
+        new Thread(this).start();
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -29,5 +33,9 @@ public class SplashScreen extends Activity {
                 finish();
             }
         }, SPLASH_TIME_OUT);
+    }
+
+    public void run(){
+        new MockDbHelper(this).getWritableDatabase().close();
     }
 }

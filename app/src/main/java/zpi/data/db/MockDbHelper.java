@@ -29,12 +29,16 @@ public class MockDbHelper extends SQLiteOpenHelper {
      * @param db Created database
      */
     public void onCreate(SQLiteDatabase db){
+        //System.out.println("Rozpoczynam tworzenie bazy danych...");
+        //long time = System.currentTimeMillis();
        // Toast.makeText(ctx, "Rozpoczynam tworzenie bazy!", Toast.LENGTH_SHORT).show();
         //System.out.println("Rozpoczynam tworzenie bazy");
         createTables(db);
         //Toast.makeText(ctx, "Baza danych zainicjalizowana", Toast.LENGTH_SHORT).show();
         //System.out.println("Baza danych zainicjalizowana");
         DataInitializer.InitializeData(db, ctx, DATABASE_VERSION, 0);
+        //time = System.currentTimeMillis()-time;
+        //System.out.println("Baza danych utworzona w " + time + "ms");
         //Toast.makeText(ctx, "Baza danych pomyślnie utworzona!", Toast.LENGTH_SHORT).show();
         //System.out.println("Baza danych pomyślnie utworzona!");
     }

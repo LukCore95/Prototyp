@@ -29,14 +29,22 @@ public class MockDbHelper extends SQLiteOpenHelper {
      * @param db Created database
      */
     public void onCreate(SQLiteDatabase db){
-        Toast.makeText(ctx, "Rozpoczynam tworzenie bazy!", Toast.LENGTH_SHORT).show();
-        System.out.println("Rozpoczynam tworzenie bazy!");
-        db.execSQL(MockContract.createTables());
-        Toast.makeText(ctx, "Baza danych zainicjalizowana", Toast.LENGTH_SHORT).show();
-        System.out.println("Baza danych zainicjalizowana");
+       // Toast.makeText(ctx, "Rozpoczynam tworzenie bazy!", Toast.LENGTH_SHORT).show();
+        //System.out.println("Rozpoczynam tworzenie bazy");
+        db.execSQL(MockContract.ControlPointPhotoCreation);
+        db.execSQL(MockContract.InterestingPlacePhotoCreation);
+        db.execSQL(MockContract.RestPointPhotoCreation);
+        db.execSQL(MockContract.RestPointCreation);
+        db.execSQL(MockContract.InterestingPlaceCreation);
+        db.execSQL(MockContract.ControlPointCreation);
+        db.execSQL(MockContract.RouteCreation);
+        db.execSQL(MockContract.RoutePointCreation);
+        db.execSQL(MockContract.TripCreation);
+        //Toast.makeText(ctx, "Baza danych zainicjalizowana", Toast.LENGTH_SHORT).show();
+        //System.out.println("Baza danych zainicjalizowana");
         DataInitializer.InitializeData(db, db, ctx);
-        Toast.makeText(ctx, "Baza danych pomyślnie utworzona!", Toast.LENGTH_SHORT).show();
-        System.out.println("Baza danych pomyślnie utworzona!");
+        //Toast.makeText(ctx, "Baza danych pomyślnie utworzona!", Toast.LENGTH_SHORT).show();
+        //System.out.println("Baza danych pomyślnie utworzona!");
     }
 
     /**

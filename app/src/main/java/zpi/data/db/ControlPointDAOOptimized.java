@@ -35,8 +35,8 @@ public class ControlPointDAOOptimized implements ControlPointDAO {
         if(cursor.moveToFirst()){
             try {
                 i = 1;
-                cp = new ControlPoint(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i++), cursor.getString(i++),
-                        new Date(cursor.getLong(i++)), cursor.getInt(i++), cursor.getInt(i++), cursor.getInt(i++), cursor.getInt(i++));
+                cp = new ControlPoint(cursor.getString(i++), cursor.getString(i++), cursor.getString(i++), new Date(cursor.getLong(i++)), cursor.getDouble(i++),
+                        cursor.getDouble(i++), cursor.getInt(i++), cursor.getInt(i++), cursor.getInt(i++), cursor.getInt(i++));
             }catch(DataException de){
                 System.err.println(de);
             }
@@ -65,8 +65,8 @@ public class ControlPointDAOOptimized implements ControlPointDAO {
         if(cursor.moveToFirst()){
             try {
                 i = 1;
-                cp = new ControlPoint(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i++), cursor.getString(i++),
-                        new Date(cursor.getLong(i++)), cursor.getInt(i++), cursor.getInt(i++), cursor.getInt(i++), cursor.getInt(i++));
+                cp = new ControlPoint(cursor.getString(i++), cursor.getString(i++), cursor.getString(i++), new Date(cursor.getLong(i++)), cursor.getDouble(i++),
+                        cursor.getDouble(i++), cursor.getInt(i++), cursor.getInt(i++), cursor.getInt(i++), cursor.getInt(i++));
             }catch(DataException de){
                 System.err.println(de);
             }

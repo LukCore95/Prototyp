@@ -26,13 +26,14 @@ public final class DataInitializer {
         List<Integer> podwalePhotos = new ArrayList<Integer>();
         podwalePhotos.add(new Integer(R.drawable.oldpodwale));
         try {
-            podwale = new ControlPoint(res.getString(R.string.podwale), res.getString(R.string.podwale_description), 17.030082, 51.104082, podwalePhotos, res.getString(R.string.podwale_german), new Date(), R.drawable.oldpodwale, R.drawable.oldpodwale, R.drawable.oldpodwale, R.raw.podwale_renoma_swidnicka_plac_teatralny);
+            podwale = new ControlPoint(res.getString(R.string.podwale), res.getString(R.string.podwale_german), res.getString(R.string.podwale_description), new Date(), 17.030082, 51.104082, R.drawable.oldpodwale, R.drawable.oldpodwale, R.drawable.oldpodwale, R.raw.podwale_renoma_swidnicka_plac_teatralny, podwalePhotos);
         }catch(DataException de){
             System.err.println("Nie udało się załadować danych do bazy: " + de);
         }
 
         ControlPointDAO cpdao = new ControlPointDAOOptimized(read, write);
         cpdao.createControlPoint(podwale);
-        Toast.makeText(ctx, "Pomyślnie dodano", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ctx, "Pomyślnie dodano", Toast.LENGTH_SHORT).show();
+        //System.out.println("DODANE DANE");
     }
 }

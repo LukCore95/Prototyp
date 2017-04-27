@@ -185,12 +185,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         textUpperToolbarGerman.setText(deName);
         pattern = Arrays.<PatternItem>asList(new Gap(20), new Dash(40));
 
-        //db test
-        /*MockDbHelper dbHelp = new MockDbHelper(this);
+        /*//db test
+        MockDbHelper dbHelp = new MockDbHelper(this);
         SQLiteDatabase database = dbHelp.getReadableDatabase();
         ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
         ControlPoint podwale = cpdao.getControlPoint("Podwale");
-        Toast.makeText(this, "Zwrócono punkt: " + podwale.getGermanName(), Toast.LENGTH_LONG).show();*/
+        //Toast.makeText(this, "Punkcior: " + database.rawQuery("SELECT * FROM ControlPoint", null).getString(1), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Zwrócono punkt: " + podwale.getGermanName() + podwale.getDate() + podwale.getLatitude(), Toast.LENGTH_LONG).show();*/
+
    }
 
     public void showPopup(View v) {

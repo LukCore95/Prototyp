@@ -16,7 +16,7 @@ public class ControlPoint extends Point {
     private int sliderNewPhoto;
     private int audiobook;
 
-    public ControlPoint(String name, String description, double longitude, double latitude, String germanName, Date date, int icon, int sliderOldPhoto, int sliderNewPhoto, int audiobook) throws DataException{
+    public ControlPoint(String name, String germanName, String description, Date date, double longitude, double latitude, int icon, int sliderOldPhoto, int sliderNewPhoto, int audiobook) throws DataException{
         super(name, description, longitude, latitude);
         setGermanName(germanName);
         this.date = date;
@@ -25,7 +25,7 @@ public class ControlPoint extends Point {
         this.audiobook = audiobook;
     }
 
-    public ControlPoint(String name, String description, double longitude, double latitude, List<Integer> oldPhotos, String germanName, Date date, int icon, int sliderOldPhoto, int sliderNewPhoto, int audiobook) throws DataException{
+    public ControlPoint(String name, String germanName, String description, Date date, double longitude, double latitude, int icon, int sliderOldPhoto, int sliderNewPhoto, int audiobook, List<Integer> oldPhotos) throws DataException{
         super(name, description, longitude, latitude, oldPhotos);
         setGermanName(germanName);
         this.date = date;

@@ -45,5 +45,7 @@
         kwartału kamienic miejskich, przy ul. Świdnickiej 40, stanął Dom Towarowy Wertheim –
         dzisiejsza Renoma – i to właśnie on przejął ten zaszczytny tytuł.</string>
     <string name="string_fotografie">Zobacz zabytkowe fotografie</string>
+    <string name="routePointsMenuTitle">Lista punktów trasy</string>
+    <string name="routePointsMenuExplanation">Wybierz punkt, do którego chcesz nawigować.</string>
 
 </resources>

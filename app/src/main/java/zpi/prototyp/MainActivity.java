@@ -10,16 +10,22 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Build;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
+import android.view.TextureView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +76,12 @@ import zpi.data.db.MockDbHelper;
 import zpi.data.model.ControlPoint;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener, PopupMenu.OnMenuItemClickListener {
+
+    //kod woja
+    private NavigationView navView;
+    private DrawerLayout drawer;
+    private ListView lv;
+    //end kod woja
 
     private GoogleMap mGoogleMap;
     private SupportMapFragment mapFrag;
@@ -124,6 +136,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
+
+        //kod woja
+        navView = (NavigationView) findViewById(R.id.navigation_view);
+        drawer = (DrawerLayout) findViewById(R.id.main_drawer);
+        //end kod woja
 
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
@@ -185,28 +202,42 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         textUpperToolbarGerman.setText(deName);
         pattern = Arrays.<PatternItem>asList(new Gap(20), new Dash(40));
 
-        /*//db test
+        //kod woja
+        ((TextView) findViewById(R.id.route_points_title)).setTypeface(deutschmeister);
+        ((TextView) findViewById(R.id.route_points_explanation)).setTypeface(roboto);
+
+        lv = (ListView) findViewById(R.id.route_points_list);
+        List<ControlPoint> testCPList = new ArrayList<ControlPoint>();
+
+        //db test
         MockDbHelper dbHelp = new MockDbHelper(this);
         SQLiteDatabase database = dbHelp.getReadableDatabase();
         ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
         ControlPoint cp = cpdao.getControlPoint("Podwale");
         //Toast.makeText(this, "Punkcior: " + database.rawQuery("SELECT * FROM ControlPoint", null).getString(1), Toast.LENGTH_LONG).show();
-        Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();
+        /*Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();
         cp = cpdao.getControlPoint("Dom handlowy Renoma");
         Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();
         cp = cpdao.getControlPoint("Ulica Świdnicka");
         Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();
         cp = cpdao.getControlPoint("Plac Teatralny");
-        Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();
-        database.close();*/
+        Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();*/
+        database.close();
+
+        for(int i = 0; i<4; i++)
+            testCPList.add(cp);
+
+        RouteListAdapter adapter = new RouteListAdapter(this, testCPList);
+        lv.setAdapter(adapter);
 
    }
 
     public void showPopup(View v) {
-        popup = new PopupMenu(this, v);
+        /*popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.actionbar_menu);
-        popup.show();
+        popup.show();*/
+        drawer.openDrawer(GravityCompat.END, true);
     }
 
     public void showBottom(View v) {

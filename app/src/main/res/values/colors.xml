@@ -5,6 +5,10 @@
     <color name="colorAccent">#ffff0000</color>
     <color name="colorBackground">#696969</color>
     <color name="colorTextBar">#ffffff</color>
+    <color name="routePointsTitle">#fcfcfc</color>
     <color name="black_overlay">#66000000</color>
     <color name="alpha">#00ffffff</color>
+    <color name="routePointsMenuItemTitle">#1e1e1e</color>
+    <color name="routeDistanceCurr">#ea2227</color>
+    <color name="routeDistance">#838383</color>
 </resources>

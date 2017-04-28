@@ -26,6 +26,7 @@ import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import zpi.data.db.ControlPointDAO;
 import zpi.data.db.ControlPointDAOOptimized;
@@ -62,6 +63,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        long time = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         points=MainActivity.points;
         Intent intentM=getIntent();
@@ -71,6 +73,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
          cp=cpdao.getControlPoint(controlPointName);
 
+        dbHelp.close();
 
         //ustawienie czcionki nagłówka
 //        AssetManager am = getApplicationContext().getAssets();
@@ -86,10 +89,14 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 //                "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
 //        tx.setTypeface(custom_font);
 
+
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+
         setContentView(R.layout.activity_details);
+
 
 //        final LockScrollView scrollv= (LockScrollView)findViewById(R.id.id_details_przewijanie);
 //        scrollv.setOnTouchListener(new View.OnTouchListener() {
@@ -208,7 +215,10 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         mShortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
 
-        dbHelp.close();
+        time = System.currentTimeMillis() - time;
+        Toast.makeText(this, "Czas wczytywania danych: " + time + "ms", Toast.LENGTH_LONG).show();
+
+
     } //protected void onCreate(Bundle savedInstanceState)
 
     @Override

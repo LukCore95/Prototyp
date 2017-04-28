@@ -22,10 +22,15 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.webkit.WebView;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.List;
 
 import zpi.data.db.ControlPointDAO;
 import zpi.data.db.ControlPointDAOOptimized;
@@ -69,7 +74,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         MockDbHelper dbHelp = new MockDbHelper(this);
         SQLiteDatabase database = dbHelp.getReadableDatabase();
         ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
-         cp=cpdao.getControlPoint(controlPointName);
+        cp=cpdao.getControlPoint(controlPointName);
 
 
         //ustawienie czcionki nagłówka
@@ -170,6 +175,38 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
 
         //Zabawa sliderem -> sekcja onResume
+
+        final HorizontalScrollView hsv=(HorizontalScrollView) findViewById(R.id.gallery_layout);
+        final LinearLayout layout_inside_hsv= (LinearLayout) findViewById(R.id.gallery_inside_layout);
+        final List<Integer> photosId=cp.getOldPhotos();
+        for(int i=0; i<photosId.size(); i++)
+        {
+            final ImageView imageView = new ImageView (this);
+            imageView.setTag(i);
+
+            imageView.setImageResource(photosId.get(i));
+
+            if(imageView.getWidth()<=imageView.getHeight())
+            {
+                imageView.setRotation(270);
+            }
+            imageView.setAdjustViewBounds(true);
+            LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(500,500);
+            lp.setMargins(30,30,30,30);
+            imageView.setLayoutParams(lp);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+           ;
+
+            layout_inside_hsv.addView(imageView);
+            final int temp = i;
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    zoomImageFromThumb(imageView, photosId.get(temp),
+                            (ImageView) findViewById(R.id.renoma1_zoom));
+                }
+            });
+        }
 
         //powiększanie
         final View renomaSmall1 = findViewById(R.id.imageView_renomaGallery1);

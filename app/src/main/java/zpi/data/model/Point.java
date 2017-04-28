@@ -1,5 +1,7 @@
 package zpi.data.model;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +46,11 @@ public abstract class Point {
 
     public double getLatitude(){
         return  latitude;
+    }
+
+    public LatLng getLocation()
+    {
+        return new LatLng(latitude, longitude);
     }
 
     public List<Integer> getOldPhotos(){

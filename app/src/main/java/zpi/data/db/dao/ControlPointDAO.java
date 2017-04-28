@@ -1,4 +1,4 @@
-package zpi.data.db;
+package zpi.data.db.dao;
 
 import zpi.data.model.ControlPoint;
 

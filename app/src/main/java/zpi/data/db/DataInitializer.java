@@ -3,13 +3,13 @@ package zpi.data.db;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
+import zpi.data.db.dao.ControlPointDAO;
+import zpi.data.db.dao.ControlPointDAOOptimized;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
 import zpi.prototyp.R;

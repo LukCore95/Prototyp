@@ -1,4 +1,4 @@
-package zpi.data.db;
+package zpi.data.db.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.Date;
 
+import zpi.data.db.MockContract;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
 

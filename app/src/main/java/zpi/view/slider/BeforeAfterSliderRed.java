@@ -1,5 +1,6 @@
 package zpi.view.slider;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -26,12 +27,15 @@ import zpi.prototyp.R;
  * @author Wojciech Michałowski
  */
 public class BeforeAfterSliderRed implements BeforeAfterSlider {
+    //context of app
+    private Context ctx;
+
     //needed bitmaps
-    private Bitmap bOld;
-    private Bitmap bNew;
-    private Bitmap bBar;
-    private Bitmap bBackground;
-    private Bitmap bBackground2;
+    private int bOld;
+    private int bNew;
+    private static final int bBar = R.drawable.slider;
+    private static final int bBackground = R.drawable.slider_background;
+    private static final int bBackground2 = R.drawable.point_background;
 
     //slider thread
     private SlideThread thread;
@@ -59,12 +63,13 @@ public class BeforeAfterSliderRed implements BeforeAfterSlider {
      * @param fActivity An activity which hosts the slider
      * @param listener  OnTouch listener for the SurfaceView - must use this class's slide() method to work properly!
      */
-    public BeforeAfterSliderRed(Bitmap bNew, Bitmap bOld, SurfaceView surfaceView, FragmentActivity fActivity, View.OnTouchListener listener) {
+    public BeforeAfterSliderRed(int bNew, int bOld, SurfaceView surfaceView, FragmentActivity fActivity, View.OnTouchListener listener, Context ctx) {
         this.bNew = bNew;
         this.bOld = bOld;
         this.surfaceView = surfaceView;
         this.fActivity = fActivity;
         this.listener = listener;
+        this.ctx = ctx;
 
         int width = getWidth(x_margin);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new ViewGroup.MarginLayoutParams(width, (int)(width*RATIO)));
@@ -74,20 +79,11 @@ public class BeforeAfterSliderRed implements BeforeAfterSlider {
         surfaceHolder.setFixedSize(width, (int)(width*RATIO));
         surfaceView.setOnTouchListener(listener);
 
-        try {
-            bNew = BitmapFactory.decodeResource(fActivity.getResources(), R.drawable.foto_nowe);
-            bOld = BitmapFactory.decodeResource(fActivity.getResources(), R.drawable.foto_stare);
-            bBackground = BitmapFactory.decodeResource(fActivity.getResources(), R.drawable.slider_background);
-            bBackground2 = BitmapFactory.decodeResource(fActivity.getResources(), R.drawable.point_background);
-            bBar = BitmapFactory.decodeResource(fActivity.getResources(), R.drawable.slider);
-        }catch(Exception e){
-            System.err.println(e);
-        }
 
-        Bitmap[] bArray = new Bitmap[2];
+        Integer[] bArray = new Integer[2];
         bArray[0] = bNew;
         bArray[1] = bOld;
-        thread = new SlideThread(width/2, bArray, bBar, bBackground, bBackground2, surfaceHolder);
+        thread = new SlideThread(width/2, bArray, bBar, bBackground, bBackground2, surfaceHolder, ctx);
     }
 
     /**
@@ -118,6 +114,11 @@ public class BeforeAfterSliderRed implements BeforeAfterSlider {
             thread.stopThread();
     }
 
+    @Override
+    public boolean isReady(){
+        return thread.isDrawn();
+    }
+
     /**
      * Internal method which gives needed width of a surfaceView.
      * @param margin Left and right margin in px.
@@ -129,4 +130,6 @@ public class BeforeAfterSliderRed implements BeforeAfterSlider {
         display.getSize(size);
         return size.x-(2*margin);
     }
+
+
 }

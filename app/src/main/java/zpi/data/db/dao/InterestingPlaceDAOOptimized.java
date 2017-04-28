@@ -1,9 +1,10 @@
-package zpi.data.db;
+package zpi.data.db.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import zpi.data.db.MockContract;
 import zpi.data.model.DataException;
 import zpi.data.model.InterestingPlace;
 

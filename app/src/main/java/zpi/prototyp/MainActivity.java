@@ -15,12 +15,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
-import android.view.TextureView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -70,8 +68,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import zpi.data.db.ControlPointDAO;
-import zpi.data.db.ControlPointDAOOptimized;
+import zpi.data.db.dao.ControlPointDAO;
+import zpi.data.db.dao.ControlPointDAOOptimized;
 import zpi.data.db.MockDbHelper;
 import zpi.data.model.ControlPoint;
 
@@ -348,14 +346,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public boolean onMarkerClick(Marker marker) {
 //        if (marker.equals(mMarker))
-//        {
+//        { l
 //            Toast.makeText(MainActivity.this, "Trwa ładowanie", Toast.LENGTH_SHORT).show();
+
             Intent intent = new Intent(MainActivity.this,Details.class);
 
             intent.putExtra("nazwaPunktu", namesOfControlPoints[getMarkersID(marker.getId())]);
            // intent.putExtra("punkty", points);
             //Toast.makeText(MainActivity.this, getMarkersID(marker.getId())+ " ", Toast.LENGTH_SHORT).show();
             startActivity(intent);
+
 //        }
         return false;
     }

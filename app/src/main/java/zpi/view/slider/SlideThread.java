@@ -1,6 +1,7 @@
 package zpi.view.slider;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BlurMaskFilter;
@@ -20,8 +21,13 @@ import android.view.SurfaceHolder;
  */
 public class SlideThread extends Thread {
 
+    private Context ctx;
+
     // stop the thread?
     private boolean stop = false;
+
+    //draw the view?
+    private boolean drawn = false;
 
     //coordinate x (dirt)
     private float x;
@@ -35,9 +41,13 @@ public class SlideThread extends Thread {
 
     //needed graphics
     private Bitmap[] photos;
+    private Integer[] iPhotos;
     private Bitmap background;
+    private int iBackground;
     private Bitmap backgroundDeeper;
+    private int iBackgroundDeeper;
     private Bitmap slider;
+    private int iSlider;
 
     //Surface to draw on
     private SurfaceHolder hold;
@@ -95,17 +105,19 @@ public class SlideThread extends Thread {
      * @param backgroundDeeper Bitmap of a background of all surface
      * @param hold SurfaceHolder needed to draw on a surface.
      */
-    public SlideThread(float x, Bitmap[] photos, Bitmap slider, Bitmap background, Bitmap backgroundDeeper, SurfaceHolder hold){
+    public SlideThread(float x, Integer[] photos, int slider, int background, int backgroundDeeper, SurfaceHolder hold, Context ctx){
         setX(x);
-        this.photos = photos;
+        this.iPhotos = photos;
         this.hold = hold;
-        this.background = background;
-        this.slider = slider;
-        this.backgroundDeeper = backgroundDeeper;
+        this.iBackground = background;
+        this.iSlider = slider;
+        this.iBackgroundDeeper = backgroundDeeper;
+        this.ctx = ctx;
+
+        this.photos = new Bitmap[2];
 
         paint = new Paint();
 
-        computeStaticDimensions();
     }
 
     /**
@@ -148,10 +160,25 @@ public class SlideThread extends Thread {
         stop = true;
     }
 
+    public synchronized boolean isDrawn(){
+        return drawn;
+    }
+
     /**
      * (Re)draw Before/After screen when change of X axis coordinate is noticed. Call stopThread method to stop this thread.
      */
     public void run(){
+
+        //decode bitmaps
+        Resources res = ctx.getResources();
+        photos[0] = BitmapFactory.decodeResource(res, iPhotos[0]);
+        photos[1] = BitmapFactory.decodeResource(res, iPhotos[1]);
+        background = BitmapFactory.decodeResource(res, iBackground);
+        backgroundDeeper = BitmapFactory.decodeResource(res, iBackgroundDeeper);
+        slider = BitmapFactory.decodeResource(res, iSlider);
+
+        computeStaticDimensions();
+
         while(!stop) {
             if(!zmiana) //if coordinate is not changed - continue
                 continue;
@@ -189,6 +216,8 @@ public class SlideThread extends Thread {
 
             //post drawn screen
             hold.unlockCanvasAndPost(canv);
+
+            setDrawn(true);
 
         }
     }
@@ -232,5 +261,9 @@ public class SlideThread extends Thread {
         sliderDst2 = new RectF(xBis - slider_half_width, 0, xBis + slider_half_width, Math.max(((int)height-sliderHeight/multip), 0));
         sliderSrc3 = new Rect(0, (int)((sliderHeight/multip-chwytak_height)*multip), sliderWidth, sliderHeight);
         sliderDst3 = new RectF(xBis - slider_half_width, height - chwytak_height - margin_top, xBis + slider_half_width, height - margin_top);
+    }
+
+    private synchronized void setDrawn(boolean drawn){
+        this.drawn = drawn;
     }
 }

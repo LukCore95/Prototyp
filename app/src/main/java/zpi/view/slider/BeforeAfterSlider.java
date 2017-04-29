@@ -26,4 +26,10 @@ public interface BeforeAfterSlider {
      * You need to reinitialize slider after stoping it if you want to slide.
      */
     public void stopSlider();
+
+    /**
+     * Check if the slider is ready to display.
+     */
+    public boolean isReady();
+
 }

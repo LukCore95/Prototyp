@@ -29,11 +29,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import zpi.data.db.ControlPointDAO;
 import zpi.data.db.ControlPointDAOOptimized;
+import zpi.data.db.dao.ControlPointDAO;
+import zpi.data.db.dao.ControlPointDAOOptimized;
 import zpi.data.db.MockDbHelper;
 import zpi.data.model.ControlPoint;
 import zpi.view.slider.BeforeAfterSlider;
@@ -45,8 +48,8 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     //private SurfaceHolder hold;
     //private SlideThread init;
    // private Thread slide;
-    private Bitmap bNew;
-    private Bitmap bOld;
+    private int bNew;
+    private int bOld;
     //private Bitmap slider_background;
     //private Bitmap slider_background2;
     //private Bitmap slider;
@@ -67,6 +70,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        long time = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         points=MainActivity.points;
         Intent intentM=getIntent();
@@ -76,6 +80,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
         cp=cpdao.getControlPoint(controlPointName);
 
+        dbHelp.close();
 
         //ustawienie czcionki nagłówka
 //        AssetManager am = getApplicationContext().getAssets();
@@ -91,10 +96,14 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 //                "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
 //        tx.setTypeface(custom_font);
 
+
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+
         setContentView(R.layout.activity_details);
+
 
 //        final LockScrollView scrollv= (LockScrollView)findViewById(R.id.id_details_przewijanie);
 //        scrollv.setOnTouchListener(new View.OnTouchListener() {
@@ -245,7 +254,10 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         mShortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
 
-        dbHelp.close();
+        time = System.currentTimeMillis() - time;
+        Toast.makeText(this, "Czas wczytywania danych: " + time + "ms", Toast.LENGTH_LONG).show();
+
+
     } //protected void onCreate(Bundle savedInstanceState)
 
     @Override
@@ -290,6 +302,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     @Override
     protected void onResume()
     {
+        long time = System.currentTimeMillis();
         super.onResume();
 
         surf = (SurfaceView) findViewById(R.id.surfaceView);
@@ -305,14 +318,15 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         surf.setOnTouchListener(this);*/
 
 
+        bNew = R.drawable.foto_nowe;
+        bOld = R.drawable.foto_stare;
 
-
-        try {
+        /*try {
             bNew = BitmapFactory.decodeResource(getResources(), R.drawable.foto_nowe);
             bOld = BitmapFactory.decodeResource(getResources(), R.drawable.foto_stare);
         }catch(Exception e){
             System.err.println(e);
-        }
+        }*/
        /*     slider_background = BitmapFactory.decodeResource(getResources(), R.drawable.slider_background);
             slider_background2 = BitmapFactory.decodeResource(getResources(), R.drawable.point_background);
             slider = BitmapFactory.decodeResource(getResources(), R.drawable.slider);
@@ -322,8 +336,12 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
         //init = new SlideThread(width/2, photos, slider, slider_background, slider_background2, hold);
         //init.start();
-        slider = new BeforeAfterSliderRed(bNew, bOld, surf, this, this);
+        slider = new BeforeAfterSliderRed(bNew, bOld, surf, this, this, this);
         slider.initSlider();
+        //TODO hide slider while not loaded!!!!! USE isReady method
+
+        time = System.currentTimeMillis() - time;
+        Toast.makeText(this, "Czas ładowania slidera: " + time + "ms", Toast.LENGTH_LONG).show();
     }
 
     // ze strony androida

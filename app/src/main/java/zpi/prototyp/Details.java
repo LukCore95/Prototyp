@@ -33,8 +33,6 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import zpi.data.db.ControlPointDAO;
-import zpi.data.db.ControlPointDAOOptimized;
 import zpi.data.db.dao.ControlPointDAO;
 import zpi.data.db.dao.ControlPointDAOOptimized;
 import zpi.data.db.MockDbHelper;
@@ -67,6 +65,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     private int mShortAnimationDuration;
     zpi.prototyp.Point[] points;
     String controlPointName;
+    String shortDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,12 +114,11 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 //        });
 
         //opis obiektu
+        shortDescription();
         final WebView renoma_description = (WebView) findViewById(R.id.renoma_decription_webview);
         renoma_description.getSettings().setDefaultTextEncodingName("UTF-8");
         renoma_description.setBackgroundColor(Color.TRANSPARENT);
-        renoma_description.loadData(cp.getDescription(), "charset=utf-8" ,"UTF-8");
-        
-
+        renoma_description.loadData(shortDescription, "charset=utf-8" ,"UTF-8");
         clickToReadMoreDetails();
 
 
@@ -488,9 +486,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         final ImageView readMoreButton = (ImageView)findViewById(R.id.textView_readMore);
 
         point_description.loadData("<html><body>"
-                + "<p align=\"justify\"; style=\"text-indent: 10%; \">" + cp.getDescription() +"</p>" +
-                "<p align=\"justify\"; style=\"text-indent: 10%; \">" + getString(R.string.renoma_description_extended) + "</p> "
-                + "</body></html>", "text/html; charset=utf-8", "utf-8");
+                + "<p align=\"justify\"; style=\"text-indent: 10%; \">" + cp.getDescription() +"</p>" + "</body></html>", "text/html; charset=utf-8", "utf-8");
 
 //        readMoreButton.setText("Zwiń");
         readMoreButton.setRotation(180);
@@ -508,7 +504,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         final ImageView renomaDesriptionDetails = (ImageView)findViewById(R.id.textView_readMore);
 
         renoma_description.loadData("<html><body>"
-                + "<p align=\"justify\"; style=\"text-indent: 10%; \" >" + cp.getDescription() +  "</p> "
+                + "<p align=\"justify\"; style=\"text-indent: 10%; \" >" + shortDescription+  "</p> "
                 + "</body></html>", "text/html; charset=utf-8", "utf-8");
 
 
@@ -534,4 +530,16 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         odtworzAudiobook.stop();
         //init = null;
     }
+
+    private void shortDescription()
+    {
+        String sD="";
+        for(int i=0; i<275; i++)
+        {
+            sD+=cp.getDescription().charAt(i);
+        }
+        sD+="...";
+       shortDescription=sD;
+    }
+
 }

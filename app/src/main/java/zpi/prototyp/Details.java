@@ -6,8 +6,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -22,7 +20,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
 import android.webkit.WebView;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
@@ -69,8 +66,10 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        long time = System.currentTimeMillis();
+
         super.onCreate(savedInstanceState);
+
+        //connection with a database
         points=MainActivity.points;
         Intent intentM=getIntent();
         controlPointName=intentM.getStringExtra("nazwaPunktu");
@@ -78,32 +77,14 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         SQLiteDatabase database = dbHelp.getReadableDatabase();
         ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
         cp=cpdao.getControlPoint(controlPointName);
-
         dbHelp.close();
-
-        //ustawienie czcionki nagłówka
-//        AssetManager am = getApplicationContext().getAssets();
-//        Typeface germanFont = Typeface.createFromAsset(am,
-//                String.format(Locale.US, "fonts/%s", "abc.ttf"));
-//        (germanFont);
-//        TextView germanNameHeader = (TextView) findViewById(R.id.renoma_de_name);
-//        Typeface germanFont=Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
-//        germanNameHeader.setTypeface(germanFont);
-
-//        TextView tx = (TextView)findViewById(R.id.renoma_de_name);
-//        Typeface custom_font = Typeface.createFromAsset(getAssets(),
-//                "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
-//        tx.setTypeface(custom_font);
-
-
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
         setContentView(R.layout.activity_details);
 
 
+        //UWAGA: do czego to jest? można to usunąc?
 //        final LockScrollView scrollv= (LockScrollView)findViewById(R.id.id_details_przewijanie);
 //        scrollv.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
@@ -113,12 +94,13 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 //            }
 //        });
 
-        //opis obiektu
+
+        //description
         shortDescription();
-        final WebView renoma_description = (WebView) findViewById(R.id.renoma_decription_webview);
-        renoma_description.getSettings().setDefaultTextEncodingName("UTF-8");
-        renoma_description.setBackgroundColor(Color.TRANSPARENT);
-        renoma_description.loadData(shortDescription, "charset=utf-8" ,"UTF-8");
+        final WebView description = (WebView) findViewById(R.id.description_webview);
+        description.getSettings().setDefaultTextEncodingName("UTF-8");
+        description.setBackgroundColor(Color.TRANSPARENT);
+        description.loadData(shortDescription, "charset=utf-8" ,"UTF-8");
         clickToReadMoreDetails();
 
 
@@ -130,9 +112,10 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
             }
         });
 
-        TextView germanNameHeader = (TextView) findViewById(R.id.renoma_de_name);
+        //setting font
+        TextView germanNameHeader = (TextView) findViewById(R.id.de_name);
         germanNameHeader.setText(cp.getGermanName());
-        TextView polishNameHeader = (TextView) findViewById(R.id.renoma_name_pl);
+        TextView polishNameHeader = (TextView) findViewById(R.id.pl_name);
         polishNameHeader.setText(cp.getName().toUpperCase());
         setFont(polishNameHeader,"fonts/montserrat/Montserrat-Light.otf");
         setFont((TextView) findViewById(R.id.textPK),"fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf" );
@@ -141,10 +124,9 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         setFont((TextView) findViewById(R.id.textView_posluchajAudiobooka),"fonts/cambria/cambria_bold.ttf");
         setFont((TextView) findViewById(R.id.textView_galeriaZdjec),"fonts/cambria/cambria_bold.ttf");
 
-
+        //audiobook
         ImageButton imageButtonAudiobook = (ImageButton) findViewById(R.id.details_play_audiobook_icon);
-        // ZMIENIć TE SZAJSKIE IKONKI, BO TO JAKIEś Z NETA TYMCZASOWO WZIĄłEM ~W
-        final MediaPlayer mediaPlayer = MediaPlayer.create(Details.this, R.raw.podwale_renoma_swidnicka_plac_teatralny);
+        final MediaPlayer mediaPlayer = MediaPlayer.create(Details.this, cp.getAudiobook());
         odtworzAudiobook = mediaPlayer;
         try{
             mediaPlayer.prepare();
@@ -172,17 +154,16 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
             }
         });
 
+        //UWAGA CO TO JEST MOZNA TO USUNĄC?
 //        ImageView rno = (ImageView)findViewById(R.id.renoma1_zoom);
 //        rno.setScaleType(ImageView.ScaleType.MATRIX);
 //        Matrix m = new Matrix();
 //        m.postRotate(90);
 //        rno.setImageMatrix(m);
 
-
-
-
         //Zabawa sliderem -> sekcja onResume
 
+        //Gallery
         final HorizontalScrollView hsv=(HorizontalScrollView) findViewById(R.id.gallery_layout);
         final LinearLayout layout_inside_hsv= (LinearLayout) findViewById(R.id.gallery_inside_layout);
         final List<Integer> photosId=cp.getOldPhotos();
@@ -193,67 +174,32 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
             imageView.setImageResource(photosId.get(i));
 
-            if(imageView.getWidth()<=imageView.getHeight())
-            {
-                imageView.setRotation(270);
-            }
             imageView.setAdjustViewBounds(true);
             LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(500,500);
             lp.setMargins(30,30,30,30);
             imageView.setLayoutParams(lp);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-           ;
-
+            //check if image needs to be rotated
+            String name=getResources().getResourceName(photosId.get(i));
+            String n=name.charAt(name.length()-1)+"";
+            if(n.equals("h"))
+            {
+                imageView.setRotation(270);
+            }
             layout_inside_hsv.addView(imageView);
             final int temp = i;
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     zoomImageFromThumb(imageView, photosId.get(temp),
-                            (ImageView) findViewById(R.id.renoma1_zoom));
+                            (ImageView) findViewById(R.id.zoom));
                 }
             });
         }
 
-        //powiększanie
-        final View renomaSmall1 = findViewById(R.id.imageView_renomaGallery1);
-        renomaSmall1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoomImageFromThumb(renomaSmall1, R.drawable.renoma1,
-                        (ImageView) findViewById(R.id.renoma1_zoom));
-            }
-        });
-        final View renomaSmall2 = findViewById(R.id.imageView_renomaGallery2);
-        renomaSmall2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoomImageFromThumb(renomaSmall2, R.drawable.renoma2,
-                        (ImageView) findViewById(R.id.renoma2_zoom));
-            }
-        });
-        final View renomaSmall3 = findViewById(R.id.imageView_renomaGallery3);
-        renomaSmall3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoomImageFromThumb(renomaSmall3, R.drawable.renoma3,
-                        (ImageView) findViewById(R.id.renoma3_zoom));
-            }
-        });
-        final View renomaSmall4 = findViewById(R.id.imageView_renomaGallery4);
-        renomaSmall4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoomImageFromThumb(renomaSmall4, R.drawable.renoma4,
-                        (ImageView)findViewById(R.id.renoma4_zoom));
-            }
-        });
         // Retrieve and cache the system's default "short" animation time.
         mShortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
-
-        time = System.currentTimeMillis() - time;
-        Toast.makeText(this, "Czas wczytywania danych: " + time + "ms", Toast.LENGTH_LONG).show();
 
 
     } //protected void onCreate(Bundle savedInstanceState)
@@ -316,8 +262,8 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         surf.setOnTouchListener(this);*/
 
 
-        bNew = R.drawable.foto_nowe;
-        bOld = R.drawable.foto_stare;
+        bNew = cp.getSliderNewPhoto();
+        bOld = cp.getSliderOldPhoto();
 
         /*try {
             bNew = BitmapFactory.decodeResource(getResources(), R.drawable.foto_nowe);
@@ -482,7 +428,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
     private void clickToReadLessDetails(){
 
-        final WebView point_description = (WebView)findViewById(R.id.renoma_decription_webview);
+        final WebView point_description = (WebView)findViewById(R.id.description_webview);
         final ImageView readMoreButton = (ImageView)findViewById(R.id.textView_readMore);
 
         point_description.loadData("<html><body>"
@@ -500,18 +446,16 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     }
 
     private void clickToReadMoreDetails(){
-        final WebView renoma_description = (WebView)findViewById(R.id.renoma_decription_webview);
-        final ImageView renomaDesriptionDetails = (ImageView)findViewById(R.id.textView_readMore);
+        final WebView description = (WebView)findViewById(R.id.description_webview);
+        final ImageView buttonDesriptionDetails = (ImageView)findViewById(R.id.textView_readMore);
 
-        renoma_description.loadData("<html><body>"
+        description.loadData("<html><body>"
                 + "<p align=\"justify\"; style=\"text-indent: 10%; \" >" + shortDescription+  "</p> "
                 + "</body></html>", "text/html; charset=utf-8", "utf-8");
+        
+        buttonDesriptionDetails.setRotation(0);
 
-
-//        renomaDesriptionDetails.setText("Rozwiń");
-        renomaDesriptionDetails.setRotation(0);
-
-        renomaDesriptionDetails.setOnClickListener(new View.OnClickListener() {
+        buttonDesriptionDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickToReadLessDetails();

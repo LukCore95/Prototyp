@@ -49,7 +49,7 @@
                     android:src="@mipmap/paper_top"/>
 
                 <TextView
-                    android:id="@+id/renoma_de_name"
+                    android:id="@+id/de_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -57,22 +57,20 @@
                     android:layout_alignParentTop="true"
                     android:layout_below="@id/image_topOfDetails"
                     android:gravity="center_vertical|center"
-                    android:text="@string/renoma_nazwa_de"
                     android:textColor="@android:color/black"
                     android:textSize="30sp" />
 
                 <TextView
-                    android:id="@+id/renoma_name_pl"
+                    android:id="@+id/pl_name"
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/renoma_de_name"
+                    android:layout_below="@+id/de_name"
                     android:gravity="center_vertical|center"
-                    android:text="@string/renoma"
                     android:textColor="@android:color/black"
                     android:textSize="15dp"
                     android:visibility="visible"
-                    app:layout_constraintTop_toBottomOf="@+id/renoma_de_name"
+                    app:layout_constraintTop_toBottomOf="@+id/de_name"
                     tools:layout_editor_absoluteX="1dp"
                     tools:layout_editor_absoluteY="-35dp" />
 
@@ -95,7 +93,7 @@
                     android:layout_below="@+id/image_newspaperHeader"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    app:layout_constraintTop_toBottomOf="@id/renoma_name_pl"
+                    app:layout_constraintTop_toBottomOf="@id/pl_name"
                     tools:layout_editor_absoluteX="18dp"
                     />
 
@@ -132,7 +130,7 @@
                 </RelativeLayout>
 
                 <WebView
-                    android:id="@+id/renoma_decription_webview"
+                    android:id="@+id/description_webview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -227,56 +225,7 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <ImageButton
-                            android:id="@+id/imageView_renomaGallery1"
-                            android:layout_width="250dp"
-                            android:layout_height="250dp"
-                            android:layout_margin="15dp"
-                            android:layout_weight="1"
-                            android:clickable="true"
-                            android:rotation="270"
-                            android:scaleType="centerCrop"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/renoma1"
-                            app:srcCompat="@drawable/renoma1"/>
 
-                        <ImageView
-                            android:id="@+id/imageView_renomaGallery2"
-                            android:layout_width="250dp"
-                            android:layout_height="250dp"
-                            android:layout_margin="15dp"
-                            android:layout_weight="1"
-                            android:clickable="true"
-                            android:rotation="270"
-                            android:scaleType="centerCrop"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/renoma2"
-                            app:srcCompat="@drawable/renoma2" />
-
-                        <ImageView
-                            android:id="@+id/imageView_renomaGallery3"
-                            android:layout_width="250dp"
-                            android:layout_height="250dp"
-                            android:layout_margin="15dp"
-                            android:layout_weight="1"
-                            android:rotation="270"
-                            android:scaleType="centerCrop"
-                            android:clickable="true"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/renoma3"
-                            app:srcCompat="@drawable/renoma3"/>
-
-                        <ImageView
-                            android:id="@+id/imageView_renomaGallery4"
-                            android:layout_width="250dp"
-                            android:layout_height="250dp"
-                            android:layout_margin="15dp"
-                            android:layout_weight="1"
-                            android:clickable="true"
-                            android:scaleType="centerCrop"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/renoma4"
-                            app:srcCompat="@drawable/renoma4"/>
                     </LinearLayout>
                 </HorizontalScrollView>
 
@@ -292,36 +241,12 @@
 
 
     <ImageView
-        android:id="@+id/renoma1_zoom"
+        android:id="@+id/zoom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/renoma1"
         android:visibility="invisible"
-        app:srcCompat="@drawable/renoma1" />
+         />
 
-    <ImageView
-        android:id="@+id/renoma2_zoom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/renoma1"
-        android:visibility="invisible"
-        app:srcCompat="@drawable/renoma2" />
-
-    <ImageView
-        android:id="@+id/renoma4_zoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/renoma1"
-        android:visibility="invisible"
-        app:srcCompat="@drawable/renoma4" />
-
-    <ImageView
-        android:id="@+id/renoma3_zoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/renoma1"
-        android:visibility="invisible"
-        app:srcCompat="@drawable/renoma3" />
 
     <!--android:contentDescription="@string/description_zoom_touch_close"-->
 

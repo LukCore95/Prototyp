@@ -53,20 +53,21 @@ public final class DataInitializer {
             List<Integer> swidnickaPhotos = new ArrayList<Integer>();
             List<Integer> plteatralnyPhotos = new ArrayList<Integer>();
 
-            podwalePhotos.add(new Integer(R.drawable.oldpodwale));
-            renomaPhotos.add(new Integer(R.drawable.renoma1));
-            renomaPhotos.add(new Integer(R.drawable.renoma2));
-            renomaPhotos.add(new Integer(R.drawable.renoma3));
+            podwalePhotos.add(new Integer(R.drawable.oldpodwaleh));
+            podwalePhotos.add(new Integer(R.drawable.oldpodwale2h));
+            renomaPhotos.add(new Integer(R.drawable.renoma1h));
+            renomaPhotos.add(new Integer(R.drawable.renoma2h));
+            renomaPhotos.add(new Integer(R.drawable.renoma3h));
             renomaPhotos.add(new Integer(R.drawable.renoma4));
             swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka1));
-            swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka2));
-            swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka3));
-            swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka4));
-            swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka5));
-            swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka6));
-            swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka7));
-            plteatralnyPhotos.add(new Integer(R.drawable.oldplacteatralny1));
-            plteatralnyPhotos.add(new Integer(R.drawable.oldplacteatralny2));
+            swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka2h));
+            swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka3h));
+            swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka4h));
+            swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka5h));
+            swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka6h));
+            swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka7h));
+            plteatralnyPhotos.add(new Integer(R.drawable.oldplacteatralny1h));
+            plteatralnyPhotos.add(new Integer(R.drawable.oldplacteatralny2h));
 
             Calendar maj131933 = Calendar.getInstance();
             Calendar maj151933 = Calendar.getInstance();
@@ -74,10 +75,10 @@ public final class DataInitializer {
             maj151933.set(YEAR_1933, Calendar.MAY, DAY_15);
 
             try {
-                podwale = new ControlPoint(res.getString(R.string.podwale), res.getString(R.string.podwale_german), res.getString(R.string.podwale_description), maj131933.getTime(), 17.030082, 51.104082, R.mipmap.marker_podwale, R.drawable.oldpodwale, R.drawable.oldpodwale, R.raw.podwale_renoma_swidnicka_plac_teatralny, podwalePhotos);
+                podwale = new ControlPoint(res.getString(R.string.podwale), res.getString(R.string.podwale_german), res.getString(R.string.podwale_description), maj131933.getTime(), 17.030082, 51.104082, R.mipmap.marker_podwale, R.drawable.oldpodwale, R.drawable.newpodwale, R.raw.podwale_renoma_swidnicka_plac_teatralny, podwalePhotos);
                 renoma = new ControlPoint(res.getString(R.string.renoma), res.getString(R.string.renoma_german), res.getString(R.string.renoma_description), maj131933.getTime(), 17.031064, 51.103851, R.mipmap.marker_renoma, R.drawable.foto_stare, R.drawable.foto_nowe, R.raw.podwale_renoma_swidnicka_plac_teatralny, renomaPhotos);
-                swidnicka = new ControlPoint(res.getString(R.string.swidnicka), res.getString(R.string.swidnicka_german), res.getString(R.string.swidnicka_description), maj131933.getTime(), 17.031117, 51.105059, R.mipmap.marker_renoma, R.drawable.oldswidnicka2, R.drawable.oldswidnicka2, R.raw.podwale_renoma_swidnicka_plac_teatralny, swidnickaPhotos);
-                plteatralny = new ControlPoint(res.getString(R.string.placTeatralny), res.getString(R.string.placTeatralny_german), res.getString(R.string.placTeatralny_description), maj131933.getTime(), 17.031921, 51.105483, R.mipmap.marker_renoma, R.drawable.oldplacteatralny2, R.drawable.oldplacteatralny2, R.raw.podwale_renoma_swidnicka_plac_teatralny, plteatralnyPhotos);
+                swidnicka = new ControlPoint(res.getString(R.string.swidnicka), res.getString(R.string.swidnicka_german), res.getString(R.string.swidnicka_description), maj131933.getTime(), 17.031117, 51.105059, R.mipmap.marker_renoma, R.drawable.oldswidnicka, R.drawable.newswidnicka, R.raw.podwale_renoma_swidnicka_plac_teatralny, swidnickaPhotos);
+                plteatralny = new ControlPoint(res.getString(R.string.placTeatralny), res.getString(R.string.placTeatralny_german), res.getString(R.string.placTeatralny_description), maj131933.getTime(), 17.031921, 51.105483, R.mipmap.marker_renoma, R.drawable.oldplteatralny, R.drawable.newplteatralny, R.raw.podwale_renoma_swidnicka_plac_teatralny, plteatralnyPhotos);
 
             } catch (DataException de) {
                 System.err.println("Nie udało się załadować danych do bazy: " + de);

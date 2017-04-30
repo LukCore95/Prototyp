@@ -96,7 +96,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
 
         //description
-        shortDescription();
+        shortDescription=shortDescription();
         final WebView description = (WebView) findViewById(R.id.description_webview);
         description.getSettings().setDefaultTextEncodingName("UTF-8");
         description.setBackgroundColor(Color.TRANSPARENT);
@@ -475,15 +475,17 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         //init = null;
     }
 
-    private void shortDescription()
+    private String shortDescription()
     {
-        String sD="";
-        for(int i=0; i<275; i++)
+        String sD=cp.getDescription();
+        if(sD.length()>275)
         {
-            sD+=cp.getDescription().charAt(i);
+            return shortDescription=sD.substring(0,275)+ "...";
         }
-        sD+="...";
-       shortDescription=sD;
+        else {
+            return sD;
+        }
+
     }
 
 }

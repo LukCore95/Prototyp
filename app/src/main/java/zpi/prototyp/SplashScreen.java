@@ -2,17 +2,24 @@ package zpi.prototyp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.Window;
 import android.view.WindowManager;
 
 import zpi.data.db.MockDbHelper;
+import zpi.data.db.dao.ControlPointDAO;
+import zpi.data.db.dao.ControlPointDAOOptimized;
+import zpi.data.model.ControlPoint;
+import zpi.data.model.DataException;
 
 public class SplashScreen extends Activity implements Runnable {
 
     private static int SPLASH_TIME_OUT = 4500;
-
+    static String [] namesOfControlPoints = {"Dom handlowy Renoma", "Podwale", "Plac Teatralny", "Ulica Świdnicka"};
+    static ControlPoint[] controlPoints;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_AppCompat_Light_NoActionBar);
@@ -20,11 +27,26 @@ public class SplashScreen extends Activity implements Runnable {
 
         new Thread(this).start();
 
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_splash_screen);
+        controlPoints= new ControlPoint[namesOfControlPoints.length];
+        MockDbHelper dbHelp = new MockDbHelper(this);
+        SQLiteDatabase database = dbHelp.getReadableDatabase();
+        ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
 
+        for(int i=0; i<namesOfControlPoints.length; i++)
+        {
+            try {
+                controlPoints[i]=new ControlPoint(cpdao.getControlPoint(namesOfControlPoints[i]));
+            } catch (DataException e) {
+                System.out.println("SplashScreen DataBase exception");
+                e.printStackTrace();
+            }
+        }
+        dbHelp.close();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -37,5 +59,10 @@ public class SplashScreen extends Activity implements Runnable {
 
     public void run(){
         new MockDbHelper(this).getWritableDatabase().close();
+    }
+    
+    public static ControlPoint[] getControlPoints()
+    {
+        return controlPoints;
     }
 }

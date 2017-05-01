@@ -23,6 +23,7 @@ public class ControlPoint extends Point {
         this.sliderOldPhoto = sliderOldPhoto;
         this.sliderNewPhoto = sliderNewPhoto;
         this.audiobook = audiobook;
+        this.icon=icon; //brakowalo
     }
 
     public ControlPoint(String name, String germanName, String description, Date date, double longitude, double latitude, int icon, int sliderOldPhoto, int sliderNewPhoto, int audiobook, List<Integer> oldPhotos) throws DataException{
@@ -32,6 +33,17 @@ public class ControlPoint extends Point {
         this.sliderOldPhoto = sliderOldPhoto;
         this.sliderNewPhoto = sliderNewPhoto;
         this.audiobook = audiobook;
+        this.icon=icon; //brakowało
+    }
+    //Ada
+    public ControlPoint(ControlPoint controlPoint) throws DataException{
+        super(controlPoint);
+        setGermanName(controlPoint.getGermanName());
+        this.date=controlPoint.getDate();
+        this.sliderNewPhoto=controlPoint.getSliderNewPhoto();
+        this.sliderOldPhoto=controlPoint.getSliderOldPhoto();
+        this.audiobook=controlPoint.getAudiobook();
+        this.icon= controlPoint.getIcon();
     }
 
     public String getGermanName(){

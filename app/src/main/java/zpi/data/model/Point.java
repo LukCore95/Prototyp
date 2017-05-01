@@ -31,7 +31,15 @@ public abstract class Point {
         this.latitude = latitude;
         this.oldPhotos = oldPhotos;
     }
-
+    //Ada
+    public Point(Point p) throws DataException
+    {
+        setName(p.getName());
+        setDescription(p.getDescription());
+        this.longitude=p.getLongitude();
+        this.latitude=p.getLatitude();
+        this.oldPhotos=p.getOldPhotos();
+    }
     public String getName(){
         return name;
     }

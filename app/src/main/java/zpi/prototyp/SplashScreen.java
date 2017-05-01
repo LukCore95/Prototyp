@@ -18,7 +18,7 @@ import zpi.data.model.DataException;
 public class SplashScreen extends Activity implements Runnable {
 
     private static int SPLASH_TIME_OUT = 4500;
-    static String [] namesOfControlPoints = {"Dom handlowy Renoma", "Podwale", "Plac Teatralny", "Ulica Świdnicka"};
+    static String [] namesOfControlPoints = {"Dom handlowy Renoma", "Podwale", "Plac Teatralny", "Ulica Świdnicka", "Ulica Sądowa"};
     static ControlPoint[] controlPoints;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -45,6 +45,7 @@ public final class DataInitializer {
             ControlPoint renoma = null;
             ControlPoint swidnicka = null;
             ControlPoint plteatralny = null;
+            ControlPoint sadowa = null;
 
             Resources res = ctx.getResources();
 
@@ -52,6 +53,7 @@ public final class DataInitializer {
             List<Integer> renomaPhotos = new ArrayList<Integer>();
             List<Integer> swidnickaPhotos = new ArrayList<Integer>();
             List<Integer> plteatralnyPhotos = new ArrayList<Integer>();
+            List<Integer> sadowaPhotos = new ArrayList<Integer>();
 
             podwalePhotos.add(new Integer(R.drawable.oldpodwaleh));
             podwalePhotos.add(new Integer(R.drawable.oldpodwale2h));
@@ -68,6 +70,9 @@ public final class DataInitializer {
             swidnickaPhotos.add(new Integer(R.drawable.oldswidnicka7h));
             plteatralnyPhotos.add(new Integer(R.drawable.oldplacteatralny1h));
             plteatralnyPhotos.add(new Integer(R.drawable.oldplacteatralny2h));
+            sadowaPhotos.add(new Integer(R.drawable.oldsadowa1h));
+            sadowaPhotos.add(new Integer(R.drawable.oldsadowa2h));
+
 
             Calendar maj131933 = Calendar.getInstance();
             Calendar maj151933 = Calendar.getInstance();
@@ -79,6 +84,7 @@ public final class DataInitializer {
                 renoma = new ControlPoint(res.getString(R.string.renoma), res.getString(R.string.renoma_german), res.getString(R.string.renoma_description), maj131933.getTime(), 17.031064, 51.103851, R.mipmap.marker_renoma, R.drawable.foto_stare, R.drawable.foto_nowe, R.raw.podwale_renoma_swidnicka_plac_teatralny, renomaPhotos);
                 swidnicka = new ControlPoint(res.getString(R.string.swidnicka), res.getString(R.string.swidnicka_german), res.getString(R.string.swidnicka_description), maj131933.getTime(), 17.031117, 51.105059, R.mipmap.marker_renoma, R.drawable.oldswidnicka, R.drawable.newswidnicka, R.raw.podwale_renoma_swidnicka_plac_teatralny, swidnickaPhotos);
                 plteatralny = new ControlPoint(res.getString(R.string.placTeatralny), res.getString(R.string.placTeatralny_german), res.getString(R.string.placTeatralny_description), maj131933.getTime(), 17.031921, 51.105483, R.mipmap.marker_renoma, R.drawable.oldplteatralny, R.drawable.newplteatralny, R.raw.podwale_renoma_swidnicka_plac_teatralny, plteatralnyPhotos);
+                sadowa = new ControlPoint(res.getString(R.string.sadowa), res.getString(R.string.sadowa_german), res.getString(R.string.sadowa_description), maj151933.getTime(), 17.027947, 51.105328, R.mipmap.marker_podwale, R.drawable.oldsadowa, R.drawable.oldsadowa, R.raw.sadowa, sadowaPhotos );
 
             } catch (DataException de) {
                 System.err.println("Nie udało się załadować danych do bazy: " + de);
@@ -89,6 +95,7 @@ public final class DataInitializer {
             cpdao.createControlPoint(renoma);
             cpdao.createControlPoint(swidnicka);
             cpdao.createControlPoint(plteatralny);
+            cpdao.createControlPoint(sadowa);
         }
         //Toast.makeText(ctx, "Pomyślnie dodano", Toast.LENGTH_SHORT).show();
         //System.out.println("DODANE DANE");

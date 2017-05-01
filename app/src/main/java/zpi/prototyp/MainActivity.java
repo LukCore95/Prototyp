@@ -18,6 +18,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -106,10 +107,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private TextView textUpperToolbarPolish;
     private TextView textBottomToolbar; //bottombar text
     private PopupMenu popup;
-    private LatLng routeTo; // current target
-    private String deName; //first target
-    private String plName; //first target
+    private LatLng routeTo=new LatLng(51.103851, 17.031064); // current target
+    private String deName = "Warenhaus Werheim" ;//first target
+    private String plName = "Dom handlowy Renoma"; //first target
     ControlPoint[] controlPoints;
+    boolean firstRoute=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -186,9 +188,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        place4 = new LatLng(51.105059, 17.031117);
 
         //first route - tutaj powinna byc metoda do najblizszego punktu - dopisze / Ada
-        routeTo = controlPoints[0].getGeoLoc();
-        deName = controlPoints[0].getGermanName();
-        plName = controlPoints[0].getName();
+        firstRoute=true;
+      //  routeTo = controlPoints[0].getGeoLoc();
+        //deName = controlPoints[0].getGermanName();
+       // plName = controlPoints[0].getName();
         textUpperToolbarGerman.setText(deName);
 
 
@@ -388,6 +391,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onLocationChanged(Location location) {
+
+        //Toast.makeText(this, "wlazlem tu", Toast.LENGTH_LONG).show();
+        if(firstRoute)
+        {
+            Location l=location;
+            int index=0;
+            float distance=Float.MAX_VALUE;
+            for(int i=0; i<controlPoints.length; i++)
+            {
+                float tempDistance=l.distanceTo(new Location(controlPoints[i].getLatitude()+ ", " + controlPoints[i].getLongitude()));
+             //   Toast.makeText(this, tempDistance+" " + controlPoints[i].getGermanName(), Toast.LENGTH_LONG).show();
+                if(tempDistance<distance) {
+                    distance = tempDistance;
+                    index = i;
+
+                }
+            }
+
+            firstRoute=false;
+            routeTo=controlPoints[index].getGeoLoc();
+            deName=controlPoints[index].getGermanName();
+            plName=controlPoints[index].getName();
+
+
+        }
         mLastLocation = location;
         mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 

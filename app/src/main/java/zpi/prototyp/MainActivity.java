@@ -115,19 +115,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //    private LatLng place4;
     private String deName;
     private String plName;
-    public static Point [] points = { new Point(new LatLng(51.103851, 17.031064), "Dom handlowy Renoma", "Warenhaus Wertheim"),
-            new Point(new LatLng(51.104082, 17.030082),"Podwale","Schweidnitzer Stadtgraben"),
-            new Point(new LatLng(51.105483, 17.031921),"Pl. Teatralny","Zwingerplatz"),
-            new Point(new LatLng(51.105059, 17.031117),"Świdnicka","Schwiednitzer Strasse")};
+   // public static Point [] points = { new Point(new LatLng(51.103851, 17.031064), "Dom handlowy Renoma", "Warenhaus Wertheim"),
+    //////        new Point(new LatLng(51.104082, 17.030082),"Podwale","Schweidnitzer Stadtgraben"),
+          //  new Point(new LatLng(51.105483, 17.031921),"Pl. Teatralny","Zwingerplatz"),
+        //    new Point(new LatLng(51.105059, 17.031117),"Świdnicka","Schwiednitzer Strasse")};
     static String [] namesOfControlPoints = {"Dom handlowy Renoma", "Podwale", "Plac Teatralny", "Ulica Świdnicka"};
     ControlPointDAO cpdao;
+    ControlPoint[] controlPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
 
         //wczytanie z bazy danych TUTAJ
-
+        controlPoints=SplashScreen.getControlPoints();
 
         super.onCreate(savedInstanceState);
 
@@ -195,9 +196,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        place2 = new LatLng(51.104082, 17.030082);
 //        place3 = new LatLng(51.105483, 17.031921);
 //        place4 = new LatLng(51.105059, 17.031117);
-        routeTo = points[0].getGeoLoc();
-        deName = points[0].getGermanName();
-        plName = points[0].getPolishName();
+        routeTo = controlPoints[0].getGeoLoc();
+        deName = controlPoints[0].getGermanName();
+        plName = controlPoints[0].getName();
         textUpperToolbarGerman.setText(deName);
         pattern = Arrays.<PatternItem>asList(new Gap(20), new Dash(40));
 
@@ -251,33 +252,33 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (item.getItemId()) {
             case R.id.position1:
                 if(mLastLocation != null) {
-                    deName = points[1].getGermanName();
-                    plName = points[1].getPolishName();
-                    routeTo = points[1].getGeoLoc();
+                    deName = controlPoints[1].getGermanName();
+                    plName = controlPoints[1].getName();
+                    routeTo = controlPoints[1].getGeoLoc();
                     onLocationChanged(mLastLocation);
                 }
                 return true;
             case R.id.position2:
                 if(mLastLocation != null) {
-                    deName = points[0].getGermanName();
-                    plName = points[0].getPolishName();
-                    routeTo = points[0].getGeoLoc();
+                    deName = controlPoints[0].getGermanName();
+                    plName = controlPoints[0].getName();
+                    routeTo = controlPoints[0].getGeoLoc();
                     onLocationChanged(mLastLocation);
                 }
                 return true;
             case R.id.position3:
                 if(mLastLocation != null) {
-                    deName = points[3].getGermanName();
-                    plName = points[3].getPolishName();
-                    routeTo = points[3].getGeoLoc();
+                    deName = controlPoints[3].getGermanName();
+                    plName = controlPoints[3].getName();
+                    routeTo = controlPoints[3].getGeoLoc();
                     onLocationChanged(mLastLocation);
                 }
                 return true;
             case R.id.position4:
                 if(mLastLocation != null) {
-                    deName = points[2].getGermanName();
-                    plName = points[2].getPolishName();
-                    routeTo = points[2].getGeoLoc();
+                    deName = controlPoints[2].getGermanName();
+                    plName = controlPoints[2].getName();
+                    routeTo = controlPoints[2].getGeoLoc();
                     onLocationChanged(mLastLocation);
                 }
                 return true;
@@ -337,10 +338,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         //tutaj tworzenie w petli musi być + przechowywanie id markera w bazie danych!
-        mGoogleMap.addMarker(new MarkerOptions().position(points[0].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
-        mGoogleMap.addMarker(new MarkerOptions().position(points[1].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_podwale)));
-        mGoogleMap.addMarker(new MarkerOptions().position(points[2].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
-        mGoogleMap.addMarker(new MarkerOptions().position(points[3].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
+        mGoogleMap.addMarker(new MarkerOptions().position(controlPoints[0].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
+        mGoogleMap.addMarker(new MarkerOptions().position(controlPoints[1].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_podwale)));
+        mGoogleMap.addMarker(new MarkerOptions().position(controlPoints[2].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
+        mGoogleMap.addMarker(new MarkerOptions().position(controlPoints[3].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_renoma)));
     }
 
     @Override

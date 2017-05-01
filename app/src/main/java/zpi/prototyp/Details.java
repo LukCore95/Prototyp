@@ -60,7 +60,6 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     // powiększanie obrazka i animacja
     private Animator mCurrentAnimator;
     private int mShortAnimationDuration;
-    zpi.prototyp.Point[] points;
     String controlPointName;
     String shortDescription;
 
@@ -70,7 +69,6 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         super.onCreate(savedInstanceState);
 
         //connection with a database
-        points=MainActivity.points;
         Intent intentM=getIntent();
         controlPointName=intentM.getStringExtra("nazwaPunktu");
         MockDbHelper dbHelp = new MockDbHelper(this);

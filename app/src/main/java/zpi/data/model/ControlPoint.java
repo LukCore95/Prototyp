@@ -1,5 +1,7 @@
 package zpi.data.model;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -75,5 +77,10 @@ public class ControlPoint extends Point {
             this.germanName = germanName;
         else
             throw new DataException("germanName", "not null");
+    }
+
+    public LatLng getGeoLoc()
+    {
+        return new LatLng(getLatitude(), getLongitude());
     }
 }

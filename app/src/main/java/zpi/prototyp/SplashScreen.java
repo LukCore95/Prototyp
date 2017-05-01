@@ -60,7 +60,7 @@ public class SplashScreen extends Activity implements Runnable {
     public void run(){
         new MockDbHelper(this).getWritableDatabase().close();
     }
-    
+
     public static ControlPoint[] getControlPoints()
     {
         return controlPoints;

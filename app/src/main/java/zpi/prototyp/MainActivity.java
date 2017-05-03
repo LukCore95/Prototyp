@@ -18,6 +18,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
+import android.util.FloatMath;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -187,11 +188,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        place3 = new LatLng(51.105483, 17.031921);
 //        place4 = new LatLng(51.105059, 17.031117);
 
-        //first route - tutaj powinna byc metoda do najblizszego punktu - dopisze / Ada
+        //first route - boolean do sprawdzenia najblizszego punktu w pierwszym wywołaniu onLocationChanged
+        //powinna tu byc metoda do sprawdzenia czy nie mammy aktualnie wyznaczonego juz konkretnego puntku do którego zmierzamy
+        // pobranego z bazy danych
         firstRoute=true;
-      //  routeTo = controlPoints[0].getGeoLoc();
-        //deName = controlPoints[0].getGermanName();
-       // plName = controlPoints[0].getName();
         textUpperToolbarGerman.setText(deName);
 
 
@@ -395,15 +395,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //Toast.makeText(this, "wlazlem tu", Toast.LENGTH_LONG).show();
         if(firstRoute)
         {
-            Location l=location;
+
             int index=0;
             float distance=Float.MAX_VALUE;
             for(int i=0; i<controlPoints.length; i++)
             {
-                float tempDistance=l.distanceTo(new Location(controlPoints[i].getLatitude()+ ", " + controlPoints[i].getLongitude()));
-             //   Toast.makeText(this, tempDistance+" " + controlPoints[i].getGermanName(), Toast.LENGTH_LONG).show();
+                Location l= new Location(location);
+             //   float tempDistance=l.distanceTo(new Location(controlPoints[i].getLatitude()+ ", " + controlPoints[i].getLongitude()));
+                double tempDistance=distance(location.getLatitude(), location.getLongitude(), controlPoints[i].getLatitude(), controlPoints[i].getLongitude());
+                 Toast.makeText(this, tempDistance+" " + controlPoints[i].getGermanName(), Toast.LENGTH_LONG).show();
                 if(tempDistance<distance) {
-                    distance = tempDistance;
+                    distance = (float)tempDistance;
                     index = i;
 
                 }
@@ -525,5 +527,22 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         else {
             return true;
         }
+    }
+
+
+
+
+
+    public double distance(Double latitude, Double longitude, double e, double f) {
+        double d2r = Math.PI / 180;
+
+        double dlong = (longitude - f) * d2r;
+        double dlat = (latitude - e) * d2r;
+        double a = Math.pow(Math.sin(dlat / 2.0), 2) + Math.cos(e * d2r)
+                * Math.cos(latitude * d2r) * Math.pow(Math.sin(dlong / 2.0), 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double d = 6367 * c;
+        return d;
+
     }
 }

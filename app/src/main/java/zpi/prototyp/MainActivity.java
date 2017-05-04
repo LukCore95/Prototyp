@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ListView lv;
     private TripControler tripControler;
     private RouteListAdapter adapter;
+    private List<ControlPoint> basicRoute;
     //end kod woja
 
     private GoogleMap mGoogleMap;
@@ -250,10 +251,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 routeTo = firstCp.getGeoLoc();
                 deName = firstCp.getGermanName();
                 plName= firstCp.getName();
+                drawer.closeDrawer(GravityCompat.END, true);
             }
         });
 
-        routeTo = controlPoints.get(0).getGeoLoc();
+        basicRoute = tripControler.getCurrentTrip().getRoute().getRoutePoints();
+
+        Point currentCp = tripControler.getCurrentCP();
+        System.out.println("OBECNY PUNKT: " + currentCp.getName());
+        routeTo = currentCp.getGeoLoc();
+        deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():"";
+        plName = currentCp.getName();
    }
 
     public void showPopup(View v) {
@@ -362,9 +370,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         //adding markes
-        for(int i=0; i<controlPoints.size(); i++)
+        for(int i=0; i<basicRoute.size(); i++)
         {
-            mGoogleMap.addMarker(new MarkerOptions().position(controlPoints.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(controlPoints.get(i).getIcon())));
+            mGoogleMap.addMarker(new MarkerOptions().position(basicRoute.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(basicRoute.get(i).getIcon())));
         }
 
     }
@@ -376,7 +384,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //
             Intent intent = new Intent(MainActivity.this,Details.class);
 
-            intent.putExtra("nazwaPunktu", controlPoints.get(getMarkersID((marker.getId()))).getName());
+            intent.putExtra("nazwaPunktu", basicRoute.get(getMarkersID((marker.getId()))).getName());
             startActivity(intent);
 
 //        }
@@ -457,6 +465,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         Point current = tripControler.getCurrentCP();
+        System.out.println("OBECNY PUNKT: " + current.getName());
         routeTo=current.getGeoLoc();
         deName = (current instanceof ControlPoint)?((ControlPoint)current).getGermanName():"";
         plName=current.getName();

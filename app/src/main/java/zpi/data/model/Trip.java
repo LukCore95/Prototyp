@@ -31,7 +31,11 @@ public class Trip {
 		setRoute(route);
 		setStartPoint(startPoint);
 		lastVisitedPoint = lastVisited;
-		setCurrentTarget(points.get(points.indexOf(lastVisitedPoint)+1));
+		if(lastVisited != null)
+			setCurrentTarget(points.get(indexOf(lastVisitedPoint)+1));
+		else
+			setCurrentTarget(startPoint);
+		
 		this.ID = ID;
 		setModifiedRoute();
 	}
@@ -95,6 +99,19 @@ public class Trip {
 
 	private int indexOfStart(){
 		String sName = startPoint.getName();
+		int ind = -1;
+		int i = 0;
+		for(ControlPoint cp: route.getRoutePoints()){
+			if(cp.getName().equals(sName))
+				ind = i;
+			i++;
+		}
+
+		return  ind;
+	}
+
+	private int indexOf(ControlPoint point){
+		String sName = point.getName();
 		int ind = -1;
 		int i = 0;
 		for(ControlPoint cp: route.getRoutePoints()){

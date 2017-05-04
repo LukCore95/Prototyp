@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         ((TextView) findViewById(R.id.route_points_explanation)).setTypeface(roboto);
 
         lv = (ListView) findViewById(R.id.route_points_list);
-        List<ControlPoint> testCPList = new ArrayList<ControlPoint>();
+        //List<ControlPoint> testCPList = new ArrayList<ControlPoint>();
 
         //db test
         /*MockDbHelper dbHelp = new MockDbHelper(this);

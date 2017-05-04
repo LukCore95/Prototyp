@@ -115,8 +115,8 @@ public final class DataInitializer {
             testTrasa.add(renoma);
             testTrasa.add(podwale);
 
-            for(ControlPoint cp: testTrasa)
-                System.out.println("Dodany punkt: " + cp.getName());
+           /* for(ControlPoint cp: testTrasa)
+                System.out.println("Dodany punkt: " + cp.getName());*/
 
             rTest.setRoutePoints(testTrasa);
 

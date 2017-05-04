@@ -1,5 +1,7 @@
 package zpi.data.db.dao;
 
+import java.util.List;
+
 import zpi.data.model.InterestingPlace;
 
 /**
@@ -21,4 +23,6 @@ public interface InterestingPlaceDAO extends DAO {
      * @return ID of a new Interesting Place in database
      */
     public int createInterestingPlace(InterestingPlace newInterestingPlace);
+
+    public List<InterestingPlace> getAllInterestingPlaces();
 }

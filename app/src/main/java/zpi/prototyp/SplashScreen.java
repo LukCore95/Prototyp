@@ -15,12 +15,15 @@ import java.util.List;
 import zpi.data.db.MockDbHelper;
 import zpi.data.db.dao.ControlPointDAO;
 import zpi.data.db.dao.ControlPointDAOOptimized;
+import zpi.data.db.dao.InterestingPlaceDAO;
+import zpi.data.db.dao.InterestingPlaceDAOOptimized;
 import zpi.data.db.dao.RouteDAO;
 import zpi.data.db.dao.RouteDAOOptimized;
 import zpi.data.db.dao.TripDAO;
 import zpi.data.db.dao.TripDAOOptimized;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
+import zpi.data.model.InterestingPlace;
 import zpi.data.model.Route;
 import zpi.data.model.Trip;
 
@@ -30,6 +33,7 @@ public class SplashScreen extends Activity implements Runnable {
     //static String [] namesOfControlPoints = {"Dom handlowy Renoma", "Podwale", "Plac Teatralny", "Ulica Świdnicka", "Ulica Sądowa"};
     //static List<ControlPoint> controlPoints;
     static Trip currentTrip;
+    static List<InterestingPlace> ipList;
     static boolean firstTrip = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,7 @@ public class SplashScreen extends Activity implements Runnable {
         SQLiteDatabase readableDb = dbHelp.getReadableDatabase();
         SQLiteDatabase writableDb = dbHelp.getWritableDatabase();
         TripDAO tripdao = new TripDAOOptimized(readableDb, writableDb);
+        InterestingPlaceDAO ipDao = new InterestingPlaceDAOOptimized(readableDb, null);
 
         /*for(int i=0; i<namesOfControlPoints.length; i++)
         {
@@ -59,6 +64,7 @@ public class SplashScreen extends Activity implements Runnable {
             }
         }*/
         Trip trip = tripdao.getTrip(1);
+        ipList = ipDao.getAllInterestingPlaces();
         if(trip != null) {
             System.out.println("WCZYTANO TRIP. PUNKT STARTOWY: " + trip.getStartPoint().getName());
             System.out.println("TRASA: ");

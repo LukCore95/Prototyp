@@ -15,6 +15,7 @@ import zpi.data.db.dao.RouteDAO;
 import zpi.data.db.dao.RouteDAOOptimized;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
+import zpi.data.model.InterestingPlace;
 import zpi.data.model.Route;
 import zpi.prototyp.R;
 
@@ -51,6 +52,13 @@ public final class DataInitializer {
             ControlPoint plteatralny = null;
             ControlPoint sadowa = null;
 
+            InterestingPlace sad=null;
+            InterestingPlace promenada=null;
+            InterestingPlace kosciol_bc=null;
+            InterestingPlace opera=null;
+            InterestingPlace pomnik_bc=null;
+            InterestingPlace teatrlalek =null;
+
             Resources res = ctx.getResources();
 
             List<Integer> podwalePhotos = new ArrayList<Integer>();
@@ -58,6 +66,12 @@ public final class DataInitializer {
             List<Integer> swidnickaPhotos = new ArrayList<Integer>();
             List<Integer> plteatralnyPhotos = new ArrayList<Integer>();
             List<Integer> sadowaPhotos = new ArrayList<Integer>();
+            List<Integer> sadPhoto=new ArrayList<Integer>();
+            List<Integer> promenadaPhoto=new ArrayList<Integer>();
+            List<Integer> operaPhoto = new ArrayList<Integer>();
+            List<Integer> kosciol_bcPhoto=new ArrayList<Integer>();
+            List<Integer> pomnik_bcPhoto=new ArrayList<Integer>();
+            List<Integer> teatrLalekPhoto=new ArrayList<Integer>();
 
             podwalePhotos.add(new Integer(R.drawable.oldpodwaleh));
             podwalePhotos.add(new Integer(R.drawable.oldpodwale2h));
@@ -90,6 +104,12 @@ public final class DataInitializer {
                 plteatralny = new ControlPoint(res.getString(R.string.placTeatralny), res.getString(R.string.placTeatralny_german), res.getString(R.string.placTeatralny_description), maj131933.getTime(), 17.031921, 51.105483, R.mipmap.marker_plteatralny, R.drawable.oldplteatralny, R.drawable.newplteatralny, R.raw.podwale_renoma_swidnicka_plac_teatralny, plteatralnyPhotos);
                 sadowa = new ControlPoint(res.getString(R.string.sadowa), res.getString(R.string.sadowa_german), res.getString(R.string.sadowa_description), maj151933.getTime(), 17.027947, 51.105328, R.mipmap.marker_sadowa, R.drawable.oldsadowa, R.drawable.oldsadowa, R.raw.sadowa, sadowaPhotos );
 
+                sad=new InterestingPlace(res.getString(R.string.ip_sad), res.getString(R.string.ip_sad_description),17.025995, 51.105936, sadPhoto );
+                promenada = new InterestingPlace(res.getString(R.string.ip_promenada), res.getString(R.string.ip_promenada_description), 17.025415, 51.107015, promenadaPhoto );
+                kosciol_bc=new InterestingPlace(res.getString(R.string.ip_kosciol_bc), res.getString(R.string.ip_kosciol_bc_description), 17.031296, 51.105006, kosciol_bcPhoto);
+                opera=new InterestingPlace(res.getString(R.string.ip_opera), res.getString(R.string.ip_opera_description), 17.031189, 51.105582, operaPhoto);
+                pomnik_bc=new InterestingPlace(res.getString(R.string.ip_pomnik_bc), res.getString(R.string.ip_pomnik_bc_description), 17.030988, 51.104368, pomnik_bcPhoto);
+                teatrlalek =new InterestingPlace(res.getString(R.string.ip_teatrlalek), res.getString(R.string.ip_teatrlalek_description), 17.033139, 51.105328, teatrLalekPhoto);
             } catch (DataException de) {
                 System.err.println("Nie udało się załadować danych do bazy: " + de);
             }

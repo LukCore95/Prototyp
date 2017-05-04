@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 routeTo = firstCp.getGeoLoc();
                 deName = firstCp.getGermanName();
                 plName= firstCp.getName();
-                drawer.closeDrawer(GravityCompat.END, true);
+                //drawer.closeDrawer(GravityCompat.END, true);
             }
         });
 

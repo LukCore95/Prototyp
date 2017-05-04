@@ -35,7 +35,7 @@ public class Trip {
 			setCurrentTarget(points.get(indexOf(lastVisitedPoint)+1));
 		else
 			setCurrentTarget(startPoint);
-		
+
 		this.ID = ID;
 		setModifiedRoute();
 	}

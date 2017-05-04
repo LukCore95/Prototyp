@@ -77,6 +77,7 @@ import zpi.data.db.MockDbHelper;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.Point;
 import zpi.data.model.Trip;
+import zpi.utils.DistanceCalculator;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener, PopupMenu.OnMenuItemClickListener {
 
@@ -231,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
        // testCPList = controlPoints;
 
-        adapter = new RouteListAdapter(this, tripControler.getCurrentTrip());
+        adapter = new RouteListAdapter(this, tripControler.getCurrentTrip(), tripControler.getUserLoc());
         lv.setAdapter(adapter);
 
    }
@@ -402,6 +403,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onLocationChanged(Location location) {
 
+        tripControler.setUserLoc(new LatLng(location.getLatitude(), location.getLongitude()));
+        adapter.setUserLoc(tripControler.getUserLoc());
+        adapter.notifyDataSetChanged();
         //Toast.makeText(this, "wlazlem tu", Toast.LENGTH_LONG).show();
         if(firstRoute)
         {
@@ -412,7 +416,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             {
                 Location l= new Location(location);
              //   float tempDistance=l.distanceTo(new Location(controlPoints[i].getLatitude()+ ", " + controlPoints[i].getLongitude()));
-                double tempDistance=distance(location.getLatitude(), location.getLongitude(), controlPoints.get(i).getLatitude(), controlPoints.get(i).getLongitude());
+                double tempDistance= DistanceCalculator.distance(location.getLatitude(), location.getLongitude(), controlPoints.get(i).getLatitude(), controlPoints.get(i).getLongitude());
                  Toast.makeText(this, tempDistance+" " + controlPoints.get(i).getGermanName(), Toast.LENGTH_LONG).show();
                 if(tempDistance<distance) {
                     distance = (float)tempDistance;
@@ -425,8 +429,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             zpi.data.model.Route route = tripControler.getCurrentTrip().getRoute();
             tripControler.setNewTrip(route, newStartCP);
             controlPoints = tripControler.getRouteControlPoints();
-            adapter = new RouteListAdapter(this, tripControler.getCurrentTrip());
-            lv.setAdapter(adapter);
+            //adapter = new RouteListAdapter(this, tripControler.getCurrentTrip(), tripControler.getUserLoc());
+            adapter.setTrip(tripControler.getCurrentTrip());
+            //lv.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
 
             firstRoute=false;
             Point current = tripControler.getCurrentCP();
@@ -547,20 +553,4 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-
-
-
-
-    public double distance(Double latitude, Double longitude, double e, double f) {
-        double d2r = Math.PI / 180;
-
-        double dlong = (longitude - f) * d2r;
-        double dlat = (latitude - e) * d2r;
-        double a = Math.pow(Math.sin(dlat / 2.0), 2) + Math.cos(e * d2r)
-                * Math.cos(latitude * d2r) * Math.pow(Math.sin(dlong / 2.0), 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        double d = 6367 * c;
-        return d;
-
-    }
 }

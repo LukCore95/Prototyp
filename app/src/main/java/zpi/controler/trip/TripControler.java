@@ -3,6 +3,8 @@ package zpi.controler.trip;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.List;
 
 import zpi.data.db.MockDbHelper;
@@ -23,6 +25,7 @@ import zpi.data.model.Trip;
 public final class TripControler {
     private Trip currentTrip;
     private Context ctx;
+    private LatLng userLoc = null;
 
     public TripControler(Context ctx, Route route){
         this.ctx = ctx;
@@ -82,5 +85,13 @@ public final class TripControler {
 
     public Trip getCurrentTrip(){
         return currentTrip;
+    }
+
+    public void setUserLoc(LatLng newLoc){
+        userLoc = newLoc;
+    }
+
+    public LatLng getUserLoc(){
+        return userLoc;
     }
 }

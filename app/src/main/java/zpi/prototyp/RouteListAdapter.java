@@ -9,11 +9,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.PatternItem;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import zpi.data.model.ControlPoint;
 import zpi.data.model.Trip;
+import zpi.utils.DistanceCalculator;
 
 /**
  * Created by Wojtek on 2017-04-28.
@@ -22,12 +26,14 @@ import zpi.data.model.Trip;
 public class RouteListAdapter extends BaseAdapter {
     //List<ControlPoint> list;
     private Trip trip;
-    Context ctx;
+    private Context ctx;
+    private LatLng userLoc;
 
 
-    public RouteListAdapter(Context ctx, Trip trip){
+    public RouteListAdapter(Context ctx, Trip trip, LatLng userLoc){
         this.ctx = ctx;
         this.trip = trip;
+        this.userLoc = userLoc;
     }
 
     public int getCount(){
@@ -83,9 +89,28 @@ public class RouteListAdapter extends BaseAdapter {
         else{
             img.setImageDrawable(ctx.getDrawable(R.drawable.pkt_n_odw));
         }
+
+
+        if(userLoc != null) {
+            int dist = (int)(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, currentCp.getGeoLoc().latitude, currentCp.getGeoLoc().longitude)*1000);
+            if(dist >= 2000)
+                distance.setText("" + dist/1000 + "km");
+            else
+                distance.setText("" + dist + "m");
+        }
+        else
+            distance.setText("");
         
 
 
         return  mV;
+    }
+
+    public void setUserLoc(LatLng userLoc){
+        this.userLoc = userLoc;
+    }
+
+    public void setTrip(Trip trip){
+        this.trip = trip;
     }
 }

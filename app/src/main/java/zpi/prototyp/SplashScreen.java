@@ -30,6 +30,7 @@ public class SplashScreen extends Activity implements Runnable {
     //static String [] namesOfControlPoints = {"Dom handlowy Renoma", "Podwale", "Plac Teatralny", "Ulica Świdnicka", "Ulica Sądowa"};
     //static List<ControlPoint> controlPoints;
     static Trip currentTrip;
+    static boolean firstTrip = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_AppCompat_Light_NoActionBar);
@@ -57,11 +58,19 @@ public class SplashScreen extends Activity implements Runnable {
                 e.printStackTrace();
             }
         }*/
-        Trip trip = tripdao.getTrip(tripdao.getId("Trasa testowa"));
+        Trip trip = tripdao.getTrip(1);
+        if(trip != null) {
+            System.out.println("WCZYTANO TRIP. PUNKT STARTOWY: " + trip.getStartPoint().getName());
+            System.out.println("TRASA: ");
+            for (ControlPoint cp : trip.getModifiedRoute())
+                System.out.println("" + cp.getName());
+        }
         if(trip == null){
+            System.out.println("NIE WCZYTANO TRIPA");
+            firstTrip = true;
             Route route = new RouteDAOOptimized(readableDb, null).getRoute("Trasa testowa");
             try {
-                trip = new Trip(route, route.getRoutePoints().getFirst(), 0);
+                trip = new Trip(route, route.getRoutePoints().getFirst(), 1);
             }catch(DataException de){
                 System.err.println(de);
             }

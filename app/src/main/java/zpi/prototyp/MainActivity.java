@@ -70,6 +70,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import zpi.controler.trip.TripControler;
 import zpi.data.db.dao.ControlPointDAO;
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private TextView textUpperToolbarPolish;
     private TextView textBottomToolbar; //bottombar text
     private PopupMenu popup;
-    private LatLng routeTo=new LatLng(51.103851, 17.031064); // current target
+    private LatLng routeTo;
     private String deName = "Warenhaus Werheim" ;//first target
     private String plName = "Dom handlowy Renoma"; //first target
     private List<ControlPoint> controlPoints;
@@ -203,9 +204,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        place4 = new LatLng(51.105059, 17.031117);
 
         //first route - boolean do sprawdzenia najblizszego punktu w pierwszym wywołaniu onLocationChanged
-        //powinna tu byc metoda do sprawdzenia czy nie mammy aktualnie wyznaczonego juz konkretnego puntku do którego zmierzamy
-        // pobranego z bazy danych
-        firstRoute=true;
+        firstRoute=SplashScreen.firstTrip;
         textUpperToolbarGerman.setText(deName);
 
 
@@ -236,15 +235,25 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         adapter = new RouteListAdapter(this, tripControler.getCurrentTrip(), tripControler.getUserLoc());
         lv.setAdapter(adapter);
+        //lv.setClickable(true);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Trip newTrip = new Trip(tripControler.getCurrentTrip().getRoute(), (ControlPoint) parent.getItemAtPosition(position), 2); //TODO generate an index
                 zpi.data.model.Route route = tripControler.getCurrentTrip().getRoute();
                 tripControler.setNewTrip(route, (ControlPoint) parent.getItemAtPosition(position));
+                adapter.setTrip(tripControler.getCurrentTrip());
+                adapter.notifyDataSetChanged();
+                controlPoints = tripControler.getRouteControlPoints();
+                ControlPoint firstCp = controlPoints.get(0);
+
+                routeTo = firstCp.getGeoLoc();
+                deName = firstCp.getGermanName();
+                plName= firstCp.getName();
             }
         });
 
+        routeTo = controlPoints.get(0).getGeoLoc();
    }
 
     public void showPopup(View v) {
@@ -445,13 +454,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             adapter.notifyDataSetChanged();
 
             firstRoute=false;
-            Point current = tripControler.getCurrentCP();
-            routeTo=current.getGeoLoc();
-            deName = (current instanceof ControlPoint)?((ControlPoint)current).getGermanName():"";
-            plName=current.getName();
-
-
         }
+
+        Point current = tripControler.getCurrentCP();
+        routeTo=current.getGeoLoc();
+        deName = (current instanceof ControlPoint)?((ControlPoint)current).getGermanName():"";
+        plName=current.getName();
+
         mLastLocation = location;
         mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 

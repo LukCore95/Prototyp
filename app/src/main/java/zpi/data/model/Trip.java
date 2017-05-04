@@ -81,7 +81,9 @@ public class Trip {
 	private void setModifiedRoute(){
 		List<ControlPoint> routePoints = route.getRoutePoints();
 		modifiedRoute = new LinkedList<ControlPoint>();
-		int startId = routePoints.indexOf(startPoint);
+		int startId = indexOfStart();
+		System.out.println("DŁUGOSĆ WCZYTANEJ TRASY: " + routePoints.size());
+		System.out.println("INDEKS STARTU: " + startId);
 		modifiedRoute.addAll(routePoints.subList(startId, routePoints.size()));
 		if(startId > 0)
 			modifiedRoute.addAll(routePoints.subList(0, startId));
@@ -89,5 +91,18 @@ public class Trip {
 
 	public List<ControlPoint> getModifiedRoute(){
 		return modifiedRoute;
+	}
+
+	private int indexOfStart(){
+		String sName = startPoint.getName();
+		int ind = -1;
+		int i = 0;
+		for(ControlPoint cp: route.getRoutePoints()){
+			if(cp.getName().equals(sName))
+				ind = i;
+			i++;
+		}
+
+		return  ind;
 	}
 }

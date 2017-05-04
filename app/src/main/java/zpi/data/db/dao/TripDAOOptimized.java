@@ -35,6 +35,8 @@ public class TripDAOOptimized implements TripDAO {
                 (rId = routeAgent.getId(trip.getRoute().getName())) == -1)
             return id;
 
+        System.out.println("BAZA DANYCH: INDEKS STARTU: " + startId);
+
         ContentValues values = new ContentValues();
         values.put(MockContract.TripEntry.COLUMN_NAME_START, startId);
 
@@ -68,6 +70,8 @@ public class TripDAOOptimized implements TripDAO {
             } catch(DataException de){
                 System.err.println(de);
             }
+
+            System.out.println("WCZYTANO Z BAZY DANYCH: INDEKS STARTU: " + cursor.getInt(1));
         }
         cursor.close();
 

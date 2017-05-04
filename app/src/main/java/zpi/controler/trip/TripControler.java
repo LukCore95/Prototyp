@@ -78,7 +78,8 @@ public final class TripControler {
         }
 
         try {
-            currentTrip = new Trip(route, startPoint, 2); //TODO generate an index
+            System.out.println("ZAPISUJĘ TRIP DO BD: " + route.getName() + "; " + startPoint.getName());
+            currentTrip = new Trip(route, startPoint, 1); //TODO generate an index
             tripDAO.createTrip(currentTrip);
         }catch(DataException de){
             System.err.println(de);

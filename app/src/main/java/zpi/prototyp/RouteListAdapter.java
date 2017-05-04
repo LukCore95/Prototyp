@@ -56,7 +56,6 @@ public class RouteListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup groupParents){
         ControlPoint curr = ((ControlPoint) getItem(position));
         int lastPosition = trip.getLastVisitedPoint()!=null?trip.getModifiedRoute().indexOf(trip.getLastVisitedPoint()):-1;
-        int targetPosition = (trip.getCurrentTarget() instanceof ControlPoint)?trip.getModifiedRoute().indexOf(trip.getCurrentTarget()):-1;
 
         View mV;
         LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -80,7 +79,7 @@ public class RouteListAdapter extends BaseAdapter {
 
         polish.setText(currentCp.getName());
         german.setText(currentCp.getGermanName());
-        if(position == targetPosition){
+        if(position == (lastPosition+1)){
             img.setImageDrawable(ctx.getDrawable(R.drawable.pkt_akt));
         }
         else if(position <= lastPosition){

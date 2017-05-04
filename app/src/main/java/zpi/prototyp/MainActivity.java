@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -75,6 +76,7 @@ import zpi.data.db.dao.ControlPointDAO;
 import zpi.data.db.dao.ControlPointDAOOptimized;
 import zpi.data.db.MockDbHelper;
 import zpi.data.model.ControlPoint;
+import zpi.data.model.DataException;
 import zpi.data.model.Point;
 import zpi.data.model.Trip;
 import zpi.utils.DistanceCalculator;
@@ -234,6 +236,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         adapter = new RouteListAdapter(this, tripControler.getCurrentTrip(), tripControler.getUserLoc());
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Trip newTrip = new Trip(tripControler.getCurrentTrip().getRoute(), (ControlPoint) parent.getItemAtPosition(position), 2); //TODO generate an index
+                zpi.data.model.Route route = tripControler.getCurrentTrip().getRoute();
+                tripControler.setNewTrip(route, (ControlPoint) parent.getItemAtPosition(position));
+            }
+        });
 
    }
 
@@ -551,6 +561,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         else {
             return true;
         }
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        tripControler.saveTripState();
     }
 
 }

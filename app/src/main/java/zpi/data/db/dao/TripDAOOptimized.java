@@ -94,14 +94,18 @@ public class TripDAOOptimized implements TripDAO {
     }
 
     public boolean changeLastVisitedPoint(int id, ControlPoint cp){
-        ControlPointDAO cpAgent = new ControlPointDAOOptimized(readableDb, null);
+        if(cp != null) {
+            ControlPointDAO cpAgent = new ControlPointDAOOptimized(readableDb, null);
 
-        String where = MockContract.TripEntry.COLUMN_NAME_ID + " = ?";
-        String[] whereArgs = {"" + id};
-        ContentValues values = new ContentValues();
-        values.put(MockContract.TripEntry.COLUMN_NAME_LAST, cpAgent.getId(cp.getName()));
+            String where = MockContract.TripEntry.COLUMN_NAME_ID + " = ?";
+            String[] whereArgs = {"" + id};
+            ContentValues values = new ContentValues();
+            values.put(MockContract.TripEntry.COLUMN_NAME_LAST, cpAgent.getId(cp.getName()));
 
-        return writableDb.update(MockContract.TripEntry.TABLE_NAME, values, where, whereArgs)>0;
+            return writableDb.update(MockContract.TripEntry.TABLE_NAME, values, where, whereArgs) > 0;
+        }
+        else
+            return false;
     }
 
     public boolean deleteTrip(int ID){

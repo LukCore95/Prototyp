@@ -68,19 +68,24 @@ public final class TripControler {
     }
 
     public void setNewTrip(Route route, ControlPoint startPoint){
+        MockDbHelper dbHelper = new MockDbHelper(ctx);
+        SQLiteDatabase readDb = dbHelper.getReadableDatabase();
+        SQLiteDatabase writeDb = dbHelper.getWritableDatabase();
+        TripDAO tripDAO = new TripDAOOptimized(readDb, writeDb);
+
         if(currentTrip != null && currentTrip.getRoute().getName() == route.getName()){
-            MockDbHelper dbHelper = new MockDbHelper(ctx);
-            SQLiteDatabase readDb = dbHelper.getReadableDatabase();
-            SQLiteDatabase writeDb = dbHelper.getWritableDatabase();
-            TripDAO tripDAO = new TripDAOOptimized(readDb, writeDb);
             tripDAO.deleteTrip(currentTrip.getID());
         }
 
         try {
             currentTrip = new Trip(route, startPoint, 2); //TODO generate an index
+            tripDAO.createTrip(currentTrip);
         }catch(DataException de){
             System.err.println(de);
         }
+
+        readDb.close();
+        writeDb.close();
     }
 
     public Trip getCurrentTrip(){
@@ -93,5 +98,17 @@ public final class TripControler {
 
     public LatLng getUserLoc(){
         return userLoc;
+    }
+
+    public void saveTripState(){
+        MockDbHelper dbHelper = new MockDbHelper(ctx);
+        SQLiteDatabase readDb = dbHelper.getReadableDatabase();
+        SQLiteDatabase writeDb = dbHelper.getWritableDatabase();
+        TripDAO tripDAO = new TripDAOOptimized(readDb, writeDb);
+
+        tripDAO.changeLastVisitedPoint(currentTrip.getID(), currentTrip.getLastVisitedPoint());
+
+        readDb.close();
+        writeDb.close();
     }
 }

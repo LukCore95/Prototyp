@@ -244,8 +244,9 @@
         android:id="@+id/zoom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:src="@drawable/renoma1h"
         android:visibility="invisible"
-         />
+        app:srcCompat="@drawable/renoma1h" />
 
 
     <!--android:contentDescription="@string/description_zoom_touch_close"-->

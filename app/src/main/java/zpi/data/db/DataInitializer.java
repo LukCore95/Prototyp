@@ -11,6 +11,8 @@ import java.util.List;
 
 import zpi.data.db.dao.ControlPointDAO;
 import zpi.data.db.dao.ControlPointDAOOptimized;
+import zpi.data.db.dao.InterestingPlaceDAO;
+import zpi.data.db.dao.InterestingPlaceDAOOptimized;
 import zpi.data.db.dao.RouteDAO;
 import zpi.data.db.dao.RouteDAOOptimized;
 import zpi.data.model.ControlPoint;
@@ -149,7 +151,14 @@ public final class DataInitializer {
             RouteDAO routeDAO = new RouteDAOOptimized(db, db);
             routeDAO.createRoute(rTest);
 
+            InterestingPlaceDAO ipDao = new InterestingPlaceDAOOptimized(db, db);
 
+            ipDao.createInterestingPlace(sad);
+            ipDao.createInterestingPlace(promenada);
+            ipDao.createInterestingPlace(kosciol_bc);
+            ipDao.createInterestingPlace(opera);
+            ipDao.createInterestingPlace(pomnik_bc);
+            ipDao.createInterestingPlace(teatrlalek);
 
 
         }

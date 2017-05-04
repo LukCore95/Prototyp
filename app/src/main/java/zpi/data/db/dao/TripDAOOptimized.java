@@ -67,6 +67,7 @@ public class TripDAOOptimized implements TripDAO {
                 System.err.println(de);
             }
         }
+        cursor.close();
 
         return trip;
     }
@@ -86,6 +87,7 @@ public class TripDAOOptimized implements TripDAO {
             id = cursor.getInt(0);
         }
 
+        cursor.close();
         return id;
     }
 
@@ -106,4 +108,5 @@ public class TripDAOOptimized implements TripDAO {
 
         return writableDb.delete(MockContract.TripEntry.TABLE_NAME, where, whereArgs)>0;
     }
+
 }

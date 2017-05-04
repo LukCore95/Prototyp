@@ -9,17 +9,22 @@ import android.provider.Settings;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import zpi.data.db.MockDbHelper;
 import zpi.data.db.dao.ControlPointDAO;
 import zpi.data.db.dao.ControlPointDAOOptimized;
+import zpi.data.db.dao.RouteDAO;
+import zpi.data.db.dao.RouteDAOOptimized;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
 
 public class SplashScreen extends Activity implements Runnable {
 
     private static int SPLASH_TIME_OUT = 4500;
-    static String [] namesOfControlPoints = {"Dom handlowy Renoma", "Podwale", "Plac Teatralny", "Ulica Świdnicka", "Ulica Sądowa"};
-    static ControlPoint[] controlPoints;
+    //static String [] namesOfControlPoints = {"Dom handlowy Renoma", "Podwale", "Plac Teatralny", "Ulica Świdnicka", "Ulica Sądowa"};
+    static List<ControlPoint> controlPoints;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_AppCompat_Light_NoActionBar);
@@ -32,12 +37,12 @@ public class SplashScreen extends Activity implements Runnable {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_splash_screen);
-        controlPoints= new ControlPoint[namesOfControlPoints.length];
+        controlPoints= new LinkedList<ControlPoint>();
         MockDbHelper dbHelp = new MockDbHelper(this);
         SQLiteDatabase database = dbHelp.getReadableDatabase();
-        ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
+        RouteDAO routedao = new RouteDAOOptimized(database, null);
 
-        for(int i=0; i<namesOfControlPoints.length; i++)
+        /*for(int i=0; i<namesOfControlPoints.length; i++)
         {
             try {
                 controlPoints[i]=new ControlPoint(cpdao.getControlPoint(namesOfControlPoints[i]));
@@ -45,7 +50,12 @@ public class SplashScreen extends Activity implements Runnable {
                 System.out.println("SplashScreen DataBase exception");
                 e.printStackTrace();
             }
-        }
+        }*/
+        controlPoints = routedao.getRoute("Trasa testowa").getRoutePoints();
+
+        for(ControlPoint cp: controlPoints)
+            System.out.println("Wczytano punkt: " + cp.getName());
+
         dbHelp.close();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -61,7 +71,7 @@ public class SplashScreen extends Activity implements Runnable {
         new MockDbHelper(this).getWritableDatabase().close();
     }
 
-    public static ControlPoint[] getControlPoints()
+    public static List<ControlPoint> getControlPoints()
     {
         return controlPoints;
     }

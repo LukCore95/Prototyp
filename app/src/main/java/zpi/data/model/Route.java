@@ -21,6 +21,15 @@ public class Route {
 		routePoints = new LinkedList<ControlPoint>();
 	}
 
+	public Route(Route other){
+		this.routePoints = new LinkedList<ControlPoint>();
+		for(ControlPoint cp: other.getRoutePoints()){
+			this.routePoints.add(cp);
+		}
+
+		this.name = other.getName();
+	}
+
 	public Route(String name, LinkedList<ControlPoint> routePoints) throws DataException {
 		setName(name);
 		this.routePoints = routePoints;

@@ -6,12 +6,16 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 
 import zpi.data.db.dao.ControlPointDAO;
 import zpi.data.db.dao.ControlPointDAOOptimized;
+import zpi.data.db.dao.RouteDAO;
+import zpi.data.db.dao.RouteDAOOptimized;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
+import zpi.data.model.Route;
 import zpi.prototyp.R;
 
 /**
@@ -90,12 +94,38 @@ public final class DataInitializer {
                 System.err.println("Nie udało się załadować danych do bazy: " + de);
             }
 
-            ControlPointDAO cpdao = new ControlPointDAOOptimized(db, db);
+         /*   ControlPointDAO cpdao = new ControlPointDAOOptimized(db, db);
             cpdao.createControlPoint(podwale);
             cpdao.createControlPoint(renoma);
             cpdao.createControlPoint(swidnicka);
             cpdao.createControlPoint(plteatralny);
-            cpdao.createControlPoint(sadowa);
+            cpdao.createControlPoint(sadowa);*/
+
+            //ADDING A ROUTE
+            Route rTest = null;
+            try {
+                rTest = new Route("Trasa testowa");
+            }catch(DataException de){
+                System.err.println(de);
+            }
+            LinkedList<ControlPoint> testTrasa = new LinkedList<ControlPoint>();
+            testTrasa.add(podwale);
+            testTrasa.add(renoma);
+            testTrasa.add(swidnicka);
+            testTrasa.add(plteatralny);
+            testTrasa.add(sadowa);
+
+            for(ControlPoint cp: testTrasa)
+                System.out.println("Dodany punkt: " + cp.getName());
+
+            rTest.setRoutePoints(testTrasa);
+
+            RouteDAO routeDAO = new RouteDAOOptimized(db, db);
+            routeDAO.createRoute(rTest);
+
+
+
+
         }
         //Toast.makeText(ctx, "Pomyślnie dodano", Toast.LENGTH_SHORT).show();
         //System.out.println("DODANE DANE");

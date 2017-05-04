@@ -55,7 +55,7 @@ public class RouteDAOOptimized implements RouteDAO {
 
             while(cursor.moveToNext()){
                 //points.put(cursor.getInt(0), cpAgent.getControlPoint(cursor.getInt(1)));
-                points.add(cursor.getInt(0), cpAgent.getControlPoint(cursor.getInt(1)));
+                points.add(cursor.getInt(0)-1, cpAgent.getControlPoint(cursor.getInt(1)));
             }
 
             route.setRoutePoints(points);
@@ -81,13 +81,13 @@ public class RouteDAOOptimized implements RouteDAO {
         writableDb.insert(MockContract.RouteEntry.TABLE_NAME, null, values);
         values.clear();
         id = getId(name);
-
+        int i = 1;
         for(ControlPoint cp: cps){
             currentCp = cp;
             cpAgent.createControlPoint(currentCp);
             currentCpId = cpAgent.getId(currentCp.getName());
 
-            values.put(MockContract.RoutePointEntry.COLUMN_NAME_NUMBER, cps.indexOf(cps));
+            values.put(MockContract.RoutePointEntry.COLUMN_NAME_NUMBER, i++);
             values.put(MockContract.RoutePointEntry.COLUMN_NAME_POINT, currentCpId);
             values.put(MockContract.RoutePointEntry.COLUMN_NAME_ROUTE, id);
             writableDb.insert(MockContract.RoutePointEntry.TABLE_NAME, null, values);

@@ -54,6 +54,8 @@ public class RouteListAdapter extends BaseAdapter {
         }
         mV = (View) convertView;
 
+        ControlPoint currentCp = (ControlPoint) getItem(position);
+
         ImageView img = (ImageView) mV.findViewById(R.id.route_points_icon);
         TextView polish = (TextView) mV.findViewById(R.id.route_points_name);
         TextView german = (TextView) mV.findViewById(R.id.route_points_german);
@@ -64,30 +66,10 @@ public class RouteListAdapter extends BaseAdapter {
         german.setTypeface(roboto);
         distance.setTypeface(roboto);
 
-        switch(position){
-            case 0:
-                polish.setText("Podwale");
-                german.setText(ctx.getResources().getString(R.string.podwale_german));
-                distance.setText("500m");
-                break;
-            case 1:
-                polish.setText("Renoma");
-                german.setText(ctx.getResources().getString(R.string.renoma_german));
-                distance.setText("300m");
-                break;
-            case 2:
-                img.setImageDrawable(ctx.getDrawable(R.drawable.pkt_akt));
-                polish.setText("Świdnicka");
-                german.setText(ctx.getResources().getString(R.string.swidnicka_german));
-                distance.setText("100m");
-                break;
-            case 3:
-                img.setImageDrawable(ctx.getDrawable(R.drawable.pkt_n_odw));
-                polish.setText("Pl. Teatralny");
-                german.setText(ctx.getResources().getString(R.string.placTeatralny_german));
-                distance.setText("250m");
-                break;
-        }
+        polish.setText(currentCp.getName());
+        german.setText(currentCp.getGermanName());
+        
+
 
         return  mV;
     }

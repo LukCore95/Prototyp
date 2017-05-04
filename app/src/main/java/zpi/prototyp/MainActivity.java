@@ -111,22 +111,24 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LatLng routeTo=new LatLng(51.103851, 17.031064); // current target
     private String deName = "Warenhaus Werheim" ;//first target
     private String plName = "Dom handlowy Renoma"; //first target
-    ControlPoint[] controlPoints;
+    private List<ControlPoint> controlPoints;
     boolean firstRoute=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
-        //wczytanie z bazy danych TUTAJ
-        controlPoints=SplashScreen.getControlPoints();
-
         super.onCreate(savedInstanceState);
+
+
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
+
+        //wczytanie z bazy danych TUTAJ
+        controlPoints=SplashScreen.getControlPoints();
+        System.out.println("Wczytano " + controlPoints.size() + " punktów kontrolnych");
 
         //kod woja
         navView = (NavigationView) findViewById(R.id.navigation_view);
@@ -218,8 +220,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();*/
         database.close();
 
-        for(int i = 0; i<4; i++)
-            testCPList.add(cp);
+        testCPList = controlPoints;
 
         RouteListAdapter adapter = new RouteListAdapter(this, testCPList);
         lv.setAdapter(adapter);
@@ -246,33 +247,33 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (item.getItemId()) {
             case R.id.position1:
                 if(mLastLocation != null) {
-                    deName = controlPoints[1].getGermanName();
-                    plName = controlPoints[1].getName();
-                    routeTo = controlPoints[1].getGeoLoc();
+                    deName = controlPoints.get(0).getGermanName();
+                    plName = controlPoints.get(0).getName();
+                    routeTo = controlPoints.get(0).getGeoLoc();
                     onLocationChanged(mLastLocation);
                 }
                 return true;
             case R.id.position2:
                 if(mLastLocation != null) {
-                    deName = controlPoints[0].getGermanName();
-                    plName = controlPoints[0].getName();
-                    routeTo = controlPoints[0].getGeoLoc();
+                    deName = controlPoints.get(1).getGermanName();
+                    plName = controlPoints.get(1).getName();
+                    routeTo = controlPoints.get(1).getGeoLoc();
                     onLocationChanged(mLastLocation);
                 }
                 return true;
             case R.id.position3:
                 if(mLastLocation != null) {
-                    deName = controlPoints[3].getGermanName();
-                    plName = controlPoints[3].getName();
-                    routeTo = controlPoints[3].getGeoLoc();
+                    deName = controlPoints.get(2).getGermanName();
+                    plName = controlPoints.get(2).getName();
+                    routeTo = controlPoints.get(2).getGeoLoc();
                     onLocationChanged(mLastLocation);
                 }
                 return true;
             case R.id.position4:
                 if(mLastLocation != null) {
-                    deName = controlPoints[2].getGermanName();
-                    plName = controlPoints[2].getName();
-                    routeTo = controlPoints[2].getGeoLoc();
+                    deName = controlPoints.get(3).getGermanName();
+                    plName = controlPoints.get(3).getName();
+                    routeTo = controlPoints.get(3).getGeoLoc();
                     onLocationChanged(mLastLocation);
                 }
                 return true;
@@ -332,9 +333,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         //adding markes
-        for(int i=0; i<controlPoints.length; i++)
+        for(int i=0; i<controlPoints.size(); i++)
         {
-            mGoogleMap.addMarker(new MarkerOptions().position(controlPoints[i].getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(controlPoints[i].getIcon())));
+            mGoogleMap.addMarker(new MarkerOptions().position(controlPoints.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(controlPoints.get(i).getIcon())));
         }
 
     }
@@ -346,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //
             Intent intent = new Intent(MainActivity.this,Details.class);
 
-            intent.putExtra("nazwaPunktu", controlPoints[getMarkersID((marker.getId()))].getName());
+            intent.putExtra("nazwaPunktu", controlPoints.get(getMarkersID((marker.getId()))).getName());
             startActivity(intent);
 
 //        }
@@ -398,12 +399,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             int index=0;
             float distance=Float.MAX_VALUE;
-            for(int i=0; i<controlPoints.length; i++)
+            for(int i=0; i<controlPoints.size(); i++)
             {
                 Location l= new Location(location);
              //   float tempDistance=l.distanceTo(new Location(controlPoints[i].getLatitude()+ ", " + controlPoints[i].getLongitude()));
-                double tempDistance=distance(location.getLatitude(), location.getLongitude(), controlPoints[i].getLatitude(), controlPoints[i].getLongitude());
-                 Toast.makeText(this, tempDistance+" " + controlPoints[i].getGermanName(), Toast.LENGTH_LONG).show();
+                double tempDistance=distance(location.getLatitude(), location.getLongitude(), controlPoints.get(i).getLatitude(), controlPoints.get(i).getLongitude());
+                 Toast.makeText(this, tempDistance+" " + controlPoints.get(i).getGermanName(), Toast.LENGTH_LONG).show();
                 if(tempDistance<distance) {
                     distance = (float)tempDistance;
                     index = i;
@@ -412,9 +413,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             firstRoute=false;
-            routeTo=controlPoints[index].getGeoLoc();
-            deName=controlPoints[index].getGermanName();
-            plName=controlPoints[index].getName();
+            routeTo=controlPoints.get(index).getGeoLoc();
+            deName=controlPoints.get(index).getGermanName();
+            plName=controlPoints.get(index).getName();
 
 
         }

@@ -41,12 +41,13 @@ public class Interesting_Details extends AppCompatActivity {
 
         //actionBar text+font
         TextView actionBar_text =(TextView) findViewById(R.id.textPK);
-        setFont((TextView) findViewById(R.id.textPK),"fonts/montserrat/Montserrat-Light.otf" );
+        setFont((TextView) findViewById(R.id.textPK),"fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf" );
         actionBar_text.setText("Ciekawe miejsce");
 
         //header Interesting_Place_Name
         TextView interesting_place_name = (TextView) findViewById(R.id.interesting_place_name);
         interesting_place_name.setText(interestingPlace.getName());
+        setFont(interesting_place_name, "fonts/montserrat/Montserrat-Light.otf");
 
         //photo
         ImageView interesting_place_image=(ImageView) findViewById(R.id.interesting_place_image);

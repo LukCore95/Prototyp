@@ -13,29 +13,32 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import zpi.data.model.ControlPoint;
+import zpi.data.model.Trip;
 
 /**
  * Created by Wojtek on 2017-04-28.
  */
 
 public class RouteListAdapter extends BaseAdapter {
-    List<ControlPoint> list;
+    //List<ControlPoint> list;
+    private Trip trip;
     Context ctx;
 
-    public RouteListAdapter(Context ctx, List<ControlPoint> list){
+
+    public RouteListAdapter(Context ctx, Trip trip){
         this.ctx = ctx;
-        this.list = list;
+        this.trip = trip;
     }
 
     public int getCount(){
-        return list.size();
+        return trip.getModifiedRoute().size();
     }
 
     public Object getItem(int i){
         if(i >= getCount())
             return null;
         else
-            return list.get(i);
+            return trip.getModifiedRoute().get(i);
     }
 
     public long getItemId(int i){
@@ -46,6 +49,9 @@ public class RouteListAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup groupParents){
         ControlPoint curr = ((ControlPoint) getItem(position));
+        int lastPosition = trip.getLastVisitedPoint()!=null?trip.getModifiedRoute().indexOf(trip.getLastVisitedPoint()):-1;
+        int targetPosition = (trip.getCurrentTarget() instanceof ControlPoint)?trip.getModifiedRoute().indexOf(trip.getCurrentTarget()):-1;
+
         View mV;
         LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -68,6 +74,15 @@ public class RouteListAdapter extends BaseAdapter {
 
         polish.setText(currentCp.getName());
         german.setText(currentCp.getGermanName());
+        if(position == targetPosition){
+            img.setImageDrawable(ctx.getDrawable(R.drawable.pkt_akt));
+        }
+        else if(position <= lastPosition){
+            img.setImageDrawable(ctx.getDrawable(R.drawable.pkt_odw));
+        }
+        else{
+            img.setImageDrawable(ctx.getDrawable(R.drawable.pkt_n_odw));
+        }
         
 
 

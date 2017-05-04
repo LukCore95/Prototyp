@@ -17,14 +17,19 @@ import zpi.data.db.dao.ControlPointDAO;
 import zpi.data.db.dao.ControlPointDAOOptimized;
 import zpi.data.db.dao.RouteDAO;
 import zpi.data.db.dao.RouteDAOOptimized;
+import zpi.data.db.dao.TripDAO;
+import zpi.data.db.dao.TripDAOOptimized;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
+import zpi.data.model.Route;
+import zpi.data.model.Trip;
 
 public class SplashScreen extends Activity implements Runnable {
 
     private static int SPLASH_TIME_OUT = 4500;
     //static String [] namesOfControlPoints = {"Dom handlowy Renoma", "Podwale", "Plac Teatralny", "Ulica Świdnicka", "Ulica Sądowa"};
-    static List<ControlPoint> controlPoints;
+    //static List<ControlPoint> controlPoints;
+    static Trip currentTrip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_AppCompat_Light_NoActionBar);
@@ -37,10 +42,11 @@ public class SplashScreen extends Activity implements Runnable {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_splash_screen);
-        controlPoints= new LinkedList<ControlPoint>();
+        //controlPoints= new LinkedList<ControlPoint>();
         MockDbHelper dbHelp = new MockDbHelper(this);
-        SQLiteDatabase database = dbHelp.getReadableDatabase();
-        RouteDAO routedao = new RouteDAOOptimized(database, null);
+        SQLiteDatabase readableDb = dbHelp.getReadableDatabase();
+        SQLiteDatabase writableDb = dbHelp.getWritableDatabase();
+        TripDAO tripdao = new TripDAOOptimized(readableDb, writableDb);
 
         /*for(int i=0; i<namesOfControlPoints.length; i++)
         {
@@ -51,10 +57,23 @@ public class SplashScreen extends Activity implements Runnable {
                 e.printStackTrace();
             }
         }*/
-        controlPoints = routedao.getRoute("Trasa testowa").getRoutePoints();
+        Trip trip = tripdao.getTrip(tripdao.getId("Trasa testowa"));
+        if(trip == null){
+            Route route = new RouteDAOOptimized(readableDb, null).getRoute("Trasa testowa");
+            try {
+                trip = new Trip(route, route.getRoutePoints().getFirst(), 0);
+            }catch(DataException de){
+                System.err.println(de);
+            }
 
-        for(ControlPoint cp: controlPoints)
-            System.out.println("Wczytano punkt: " + cp.getName());
+            tripdao.createTrip(trip);
+        }
+
+        //controlPoints = trip.getModifiedRoute();
+        currentTrip = trip;
+
+       /* for(ControlPoint cp: controlPoints)
+            System.out.println("Wczytano punkt: " + cp.getName());*/
 
         dbHelp.close();
         new Handler().postDelayed(new Runnable() {
@@ -71,8 +90,8 @@ public class SplashScreen extends Activity implements Runnable {
         new MockDbHelper(this).getWritableDatabase().close();
     }
 
-    public static List<ControlPoint> getControlPoints()
+    public static Trip getTrip()
     {
-        return controlPoints;
+        return currentTrip;
     }
 }

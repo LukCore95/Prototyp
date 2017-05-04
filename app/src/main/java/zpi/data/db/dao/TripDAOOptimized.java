@@ -32,13 +32,15 @@ public class TripDAOOptimized implements TripDAO {
         RouteDAO routeAgent = new RouteDAOOptimized(readableDb, null);
 
         if((startId = cpAgent.getId(trip.getStartPoint().getName())) == -1 ||
-                (lastId = cpAgent.getId(trip.getLastVisitedPoint().getName())) == -1 ||
                 (rId = routeAgent.getId(trip.getRoute().getName())) == -1)
             return id;
 
         ContentValues values = new ContentValues();
         values.put(MockContract.TripEntry.COLUMN_NAME_START, startId);
-        values.put(MockContract.TripEntry.COLUMN_NAME_LAST, lastId);
+
+        if(trip.getLastVisitedPoint() != null)
+            values.put(MockContract.TripEntry.COLUMN_NAME_LAST, lastId);
+
         values.put(MockContract.TripEntry.COLUMN_NAME_ROUTE, rId);
         id = (int)writableDb.insert(MockContract.TripEntry.TABLE_NAME, null, values);
 

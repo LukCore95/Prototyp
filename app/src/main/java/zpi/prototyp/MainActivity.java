@@ -70,10 +70,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import zpi.controler.trip.TripControler;
 import zpi.data.db.dao.ControlPointDAO;
 import zpi.data.db.dao.ControlPointDAOOptimized;
 import zpi.data.db.MockDbHelper;
 import zpi.data.model.ControlPoint;
+import zpi.data.model.Point;
+import zpi.data.model.Trip;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener, PopupMenu.OnMenuItemClickListener {
 
@@ -81,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private NavigationView navView;
     private DrawerLayout drawer;
     private ListView lv;
+    private TripControler tripControler;
+    private RouteListAdapter adapter;
     //end kod woja
 
     private GoogleMap mGoogleMap;
@@ -112,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private String deName = "Warenhaus Werheim" ;//first target
     private String plName = "Dom handlowy Renoma"; //first target
     private List<ControlPoint> controlPoints;
+    //private Trip currentTrip;
     boolean firstRoute=true;
 
     @Override
@@ -127,7 +133,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_main);
 
         //wczytanie z bazy danych TUTAJ
-        controlPoints=SplashScreen.getControlPoints();
+       // currentTrip=SplashScreen.getTrip();
+        tripControler = new TripControler(this, SplashScreen.getTrip());
+        controlPoints = tripControler.getRouteControlPoints();
+
         System.out.println("Wczytano " + controlPoints.size() + " punktów kontrolnych");
 
         //kod woja
@@ -206,10 +215,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         List<ControlPoint> testCPList = new ArrayList<ControlPoint>();
 
         //db test
-        MockDbHelper dbHelp = new MockDbHelper(this);
+        /*MockDbHelper dbHelp = new MockDbHelper(this);
         SQLiteDatabase database = dbHelp.getReadableDatabase();
         ControlPointDAO cpdao = new ControlPointDAOOptimized(database, null);
-        ControlPoint cp = cpdao.getControlPoint("Podwale");
+        ControlPoint cp = cpdao.getControlPoint("Podwale");*/
         //Toast.makeText(this, "Punkcior: " + database.rawQuery("SELECT * FROM ControlPoint", null).getString(1), Toast.LENGTH_LONG).show();
         /*Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();
         cp = cpdao.getControlPoint("Dom handlowy Renoma");
@@ -218,11 +227,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();
         cp = cpdao.getControlPoint("Plac Teatralny");
         Toast.makeText(this, "Zwrócono punkt: " + cp.getGermanName() + cp.getDate() + cp.getLatitude(), Toast.LENGTH_LONG).show();*/
-        database.close();
+        //database.close();
 
-        testCPList = controlPoints;
+       // testCPList = controlPoints;
 
-        RouteListAdapter adapter = new RouteListAdapter(this, testCPList);
+        adapter = new RouteListAdapter(this, tripControler.getCurrentTrip());
         lv.setAdapter(adapter);
 
    }
@@ -412,10 +421,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             }
 
+            ControlPoint newStartCP = controlPoints.get(index);
+            zpi.data.model.Route route = tripControler.getCurrentTrip().getRoute();
+            tripControler.setNewTrip(route, newStartCP);
+            controlPoints = tripControler.getRouteControlPoints();
+            adapter = new RouteListAdapter(this, tripControler.getCurrentTrip());
+            lv.setAdapter(adapter);
+
             firstRoute=false;
-            routeTo=controlPoints.get(index).getGeoLoc();
-            deName=controlPoints.get(index).getGermanName();
-            plName=controlPoints.get(index).getName();
+            Point current = tripControler.getCurrentCP();
+            routeTo=current.getGeoLoc();
+            deName = (current instanceof ControlPoint)?((ControlPoint)current).getGermanName():"";
+            plName=current.getName();
 
 
         }

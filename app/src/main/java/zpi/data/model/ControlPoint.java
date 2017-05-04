@@ -79,8 +79,4 @@ public class ControlPoint extends Point {
             throw new DataException("germanName", "not null");
     }
 
-    public LatLng getGeoLoc()
-    {
-        return new LatLng(getLatitude(), getLongitude());
-    }
 }

@@ -82,4 +82,9 @@ public abstract class Point {
     public void setOldPhotos(List<Integer> oldPhotos){
         this.oldPhotos = oldPhotos;
     }
+
+    public LatLng getGeoLoc()
+    {
+        return new LatLng(getLatitude(), getLongitude());
+    }
 }

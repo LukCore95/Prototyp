@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Build;
 import android.support.design.widget.NavigationView;
@@ -26,6 +27,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -251,20 +253,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 controlPoints = tripControler.getRouteControlPoints();
                 ControlPoint firstCp = controlPoints.get(0);
 
-                routeTo = firstCp.getGeoLoc();
-                deName = firstCp.getGermanName();
-                plName= firstCp.getName();
+                refreshCurrentTarget();
                 //drawer.closeDrawer(GravityCompat.END, true);
             }
         });
 
         basicRoute = tripControler.getCurrentTrip().getRoute().getRoutePoints();
 
-        Point currentCp = tripControler.getCurrentCP();
-        System.out.println("OBECNY PUNKT: " + currentCp.getName());
-        routeTo = currentCp.getGeoLoc();
-        deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():"";
-        plName = currentCp.getName();
+        refreshCurrentTarget();
    }
 
     public void showPopup(View v) {
@@ -482,11 +478,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             firstRoute=false;
         }
 
-        Point current = tripControler.getCurrentCP();
-        System.out.println("OBECNY PUNKT: " + current.getName());
-        routeTo=current.getGeoLoc();
-        deName = (current instanceof ControlPoint)?((ControlPoint)current).getGermanName():"";
-        plName=current.getName();
+        //Point current = tripControler.getCurrentCP();
+        //System.out.println("OBECNY PUNKT: " + current.getName());
+        refreshCurrentTarget();
 
         mLastLocation = location;
         mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
@@ -603,6 +597,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onPause(){
         super.onPause();
         tripControler.saveTripState();
+    }
+
+    private void refreshCurrentTarget(){
+        Point currentCp = tripControler.getCurrentCP();
+        routeTo = currentCp.getGeoLoc();
+        deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():"";
+        plName = currentCp.getName();
+
+        ImageView menuIcon = (ImageView) findViewById(R.id.route_points_icon);
+        Drawable img = (currentCp instanceof ControlPoint)?getDrawable(((ControlPoint) currentCp).getIcon()):null;
+        menuIcon.setImageDrawable(img);
+
     }
 
 }

@@ -92,7 +92,13 @@ public final class DataInitializer {
             plteatralnyPhotos.add(new Integer(R.drawable.oldplacteatralny2h));
             sadowaPhotos.add(new Integer(R.drawable.oldsadowa1h));
             sadowaPhotos.add(new Integer(R.drawable.oldsadowa2h));
-
+            //interesting place photos
+            operaPhoto.add(new Integer(R.drawable.ip_opera));
+            kosciol_bcPhoto.add(new Integer(R.drawable.ip_kosciol_bc));
+            teatrLalekPhoto.add(new Integer(R.drawable.ip_teatrlalek));
+            sadPhoto.add(new Integer(R.drawable.ip_sad));
+            promenadaPhoto.add(new Integer(R.drawable.ip_promenada));
+            pomnik_bcPhoto.add(new Integer(R.drawable.ip_pomnik_bc));
 
             Calendar maj131933 = Calendar.getInstance();
             Calendar maj151933 = Calendar.getInstance();

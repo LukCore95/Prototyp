@@ -374,6 +374,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mGoogleMap.addMarker(new MarkerOptions().position(basicRoute.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(basicRoute.get(i).getIcon())));
         }
 
+        for(int i=0; i<interestingPlaces.size(); i++)
+        {
+            mGoogleMap.addMarker(new MarkerOptions().position(interestingPlaces.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ip_museum)));
+        }
+
+
     }
 
     @Override

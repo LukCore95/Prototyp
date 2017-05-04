@@ -391,10 +391,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        if (marker.equals(mMarker))
 //        { l
 //
-            Intent intent = new Intent(MainActivity.this,Details.class);
+        if(getMarkersID(marker.getId()) <basicRoute.size()) {
+            Intent intent = new Intent(MainActivity.this, Details.class);
 
-            intent.putExtra("nazwaPunktu", basicRoute.get(getMarkersID((marker.getId()))).getName());
+            intent.putExtra("nazwaPunktu", basicRoute.get(getMarkersID(marker.getId())).getName());
             startActivity(intent);
+        }
+        else
+        {
+            Intent intent = new Intent(MainActivity.this, Interesting_Details.class);
+
+            intent.putExtra("nazwaPunktu", interestingPlaces.get(getMarkersID(marker.getId())-basicRoute.size()).getName());
+            startActivity(intent);
+        }
 
 //        }
         return false;

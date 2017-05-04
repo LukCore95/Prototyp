@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import zpi.data.db.MockContract;
 import zpi.data.model.DataException;
 import zpi.data.model.InterestingPlace;
@@ -84,5 +87,29 @@ public class InterestingPlaceDAOOptimized implements InterestingPlaceDAO {
             id = getId(name);
 
         return id;
+    }
+
+    public List<InterestingPlace> getAllInterestingPlaces(){
+        InterestingPlacePhotoDAO ipPhotoDao = new InterestingPlacePhotoDAOOptimized(readableDb, null);
+        List<InterestingPlace> ipList = new ArrayList<InterestingPlace>();
+        List<Integer> photos;
+        InterestingPlace curr;
+        Cursor cursor = readableDb.query(MockContract.InterestingPlaceEntry.TABLE_NAME, null, null, null, null, null, null);
+
+        while(cursor.moveToNext()){
+            int i = 1;
+            try {
+                curr = new InterestingPlace(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i));
+                photos = ipPhotoDao.getInterestingPlacesPhotos(curr.getName());
+                curr.setOldPhotos(photos);
+                ipList.add(curr);
+            }catch (DataException de){
+                System.err.println(de);
+            }
+        }
+
+        cursor.close();
+
+        return ipList;
     }
 }

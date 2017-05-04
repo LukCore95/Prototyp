@@ -78,6 +78,7 @@ import zpi.data.db.dao.ControlPointDAOOptimized;
 import zpi.data.db.MockDbHelper;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
+import zpi.data.model.InterestingPlace;
 import zpi.data.model.Point;
 import zpi.data.model.Trip;
 import zpi.utils.DistanceCalculator;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private TripControler tripControler;
     private RouteListAdapter adapter;
     private List<ControlPoint> basicRoute;
+    private List<InterestingPlace> interestingPlaces;
     //end kod woja
 
     private GoogleMap mGoogleMap;
@@ -141,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
        // currentTrip=SplashScreen.getTrip();
         tripControler = new TripControler(this, SplashScreen.getTrip());
         controlPoints = tripControler.getRouteControlPoints();
+        interestingPlaces = SplashScreen.ipList;
 
         System.out.println("Wczytano " + controlPoints.size() + " punktów kontrolnych");
 

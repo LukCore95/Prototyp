@@ -253,7 +253,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        routeTo = controlPoints.get(0).getGeoLoc();
+        Point currentCp = tripControler.getCurrentCP();
+        routeTo = currentCp.getGeoLoc();
+        deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():"";
+        plName = currentCp.getName();
    }
 
     public void showPopup(View v) {

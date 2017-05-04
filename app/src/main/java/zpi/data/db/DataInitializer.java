@@ -109,11 +109,11 @@ public final class DataInitializer {
                 System.err.println(de);
             }
             LinkedList<ControlPoint> testTrasa = new LinkedList<ControlPoint>();
-            testTrasa.add(podwale);
-            testTrasa.add(renoma);
-            testTrasa.add(swidnicka);
-            testTrasa.add(plteatralny);
             testTrasa.add(sadowa);
+            testTrasa.add(plteatralny);
+            testTrasa.add(swidnicka);
+            testTrasa.add(renoma);
+            testTrasa.add(podwale);
 
             for(ControlPoint cp: testTrasa)
                 System.out.println("Dodany punkt: " + cp.getName());

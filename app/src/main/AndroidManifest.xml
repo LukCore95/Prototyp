@@ -40,7 +40,9 @@
         <activity
             android:name=".Details"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".Interesting_Details"></activity>
+        <activity android:name=".Interesting_Details"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

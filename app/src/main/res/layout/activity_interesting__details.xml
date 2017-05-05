@@ -51,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_below="@id/interesting_place_topOfDetails"
@@ -72,10 +73,11 @@
     <ImageView
         android:id="@+id/interesting_place_image"
         android:layout_width="match_parent"
-        android:layout_height="565px"
+        android:layout_height="465px"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/interesting_place_newspaperHeader"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         app:layout_constraintTop_toBottomOf="@id/pl_name"
@@ -112,13 +114,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp" />
 
-    <ImageView
-        android:id="@+id/interesting_place_section_delimiter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:src="@mipmap/oddzielenie_sekcji" />
 
      </LinearLayout>
     </zpi.prototyp.LockScrollView>

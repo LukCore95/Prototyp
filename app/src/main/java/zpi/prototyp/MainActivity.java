@@ -652,13 +652,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void showKrajewskiFace(View v)
     {
        final  ImageView imView=new ImageView(MainActivity.this);
-        final DrawerLayout dr=(DrawerLayout) findViewById(R.id.main_drawer);
-        final DrawerLayout.LayoutParams dl= new DrawerLayout.LayoutParams(
-            RelativeLayout.LayoutParams.MATCH_PARENT,
-            RelativeLayout.LayoutParams.MATCH_PARENT);
+        final RelativeLayout rl=(RelativeLayout) findViewById(R.id.my_root);
+        final RelativeLayout.LayoutParams rp= new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT);
 
         imView.setImageResource(R.drawable.suprise);
-        dr.addView(imView, dl);
+        rl.addView(imView, rp);
         new CountDownTimer(2000, 1000) { // 5000 = 5 sec
 
             public void onTick(long millisUntilFinished) {
@@ -666,7 +666,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             public void onFinish() {
                 imView.setVisibility(View.INVISIBLE);
-                dr.removeView(imView);
+                rl.removeView(imView);
             }
         }.start();
 

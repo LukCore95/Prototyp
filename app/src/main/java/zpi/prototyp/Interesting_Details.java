@@ -43,7 +43,7 @@ public class Interesting_Details extends AppCompatActivity {
 
         //actionBar text+font
         TextView actionBar_text =(TextView) findViewById(R.id.textPK);
-        setFont((TextView) findViewById(R.id.textPK),"fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf" );
+        setFont(actionBar_text,"fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf" );
         actionBar_text.setText("Ciekawe miejsce");
 
         //header Interesting_Place_Name
@@ -55,11 +55,15 @@ public class Interesting_Details extends AppCompatActivity {
         ImageView interesting_place_image=(ImageView) findViewById(R.id.interesting_place_image);
         interesting_place_image.setImageResource(interestingPlace.getOldPhotos().get(0));
 
+        //description header
+        TextView interesting_place_description_header = (TextView) findViewById(R.id.interesting_place_description_header);
+        setFont(interesting_place_description_header, "fonts/cambria/cambria_bold.ttf");
         //description
         final WebView description = (WebView) findViewById(R.id.interesting_place_description_webview);
         description.getSettings().setDefaultTextEncodingName("UTF-8");
         description.setBackgroundColor(Color.TRANSPARENT);
-        description.loadData(interestingPlace.getDescription(), "charset=utf-8" ,"UTF-8");
+        description.loadData("<html><body>"
+                + "<p align=\"justify\"; style=\"text-indent: 10%; \">" + interestingPlace.getDescription() +"</p>" + "</body></html>", "text/html; charset=utf-8", "utf-8");
 
         //close button
         ImageButton  closeImageButton = (ImageButton) findViewById(R.id.closeImageButton);

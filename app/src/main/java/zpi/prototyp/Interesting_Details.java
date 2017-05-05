@@ -6,9 +6,11 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -58,6 +60,15 @@ public class Interesting_Details extends AppCompatActivity {
         description.getSettings().setDefaultTextEncodingName("UTF-8");
         description.setBackgroundColor(Color.TRANSPARENT);
         description.loadData(interestingPlace.getDescription(), "charset=utf-8" ,"UTF-8");
+
+        //close button
+        ImageButton  closeImageButton = (ImageButton) findViewById(R.id.closeImageButton);
+        closeImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 

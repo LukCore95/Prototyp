@@ -11,4 +11,8 @@
     <color name="routePointsMenuItemTitle">#1e1e1e</color>
     <color name="routeDistanceCurr">#ea2227</color>
     <color name="routeDistance">#838383</color>
+    <color name="ip_list_header">#717171</color>
+    <color name="ip_list_name">#202020</color>
+    <color name="ip_list_type">#757575</color>
+    <color name="ip_list_dist">#c4c4c4</color>
 </resources>

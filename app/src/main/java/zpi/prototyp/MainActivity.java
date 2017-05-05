@@ -28,6 +28,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +69,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PatternItem;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,6 +97,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private RouteListAdapter adapter;
     private List<ControlPoint> basicRoute;
     private List<InterestingPlace> interestingPlaces;
+    private SlidingUpPanelLayout slidingUp;
+    private LinearLayout bottombar;
+    private InterestingPlaceAdapter ipAdapter;
+    private ListView ipList;
     //end kod woja
 
     private GoogleMap mGoogleMap;
@@ -152,6 +158,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //kod woja
         navView = (NavigationView) findViewById(R.id.navigation_view);
         drawer = (DrawerLayout) findViewById(R.id.main_drawer);
+        slidingUp = (SlidingUpPanelLayout) findViewById(R.id.sliding_up_panel);
+        bottombar = (LinearLayout) findViewById(R.id.bottombarlay);
+       // slidingUp.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
+
+        bottombar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                slidingUp.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+                System.out.println("KLiknięto bottombar");
+            }
+        });
         //end kod woja
 
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -197,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         textUpperToolbarGerman = (TextView)findViewById(R.id.textUp);
         textUpperToolbarPolish = (TextView)findViewById(R.id.textDown);
-        textBottomToolbar = (TextView) findViewById(R.id.textBottomBar);
+        textBottomToolbar = (TextView) findViewById(R.id.textbottombar);
         Typeface deutschmeister = Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
         Typeface roboto = Typeface.createFromAsset(getAssets(), "fonts/roboto/Roboto-Light.ttf");
         textUpperToolbarGerman.setTypeface(deutschmeister);
@@ -220,6 +237,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         ((TextView) findViewById(R.id.route_points_explanation)).setTypeface(roboto);
 
         lv = (ListView) findViewById(R.id.route_points_list);
+        ipList = (ListView) findViewById(R.id.ip_list_list);
+        ipAdapter = new InterestingPlaceAdapter(this, interestingPlaces, tripControler.getUserLoc());
+        ipList.setAdapter(ipAdapter);
+
         //List<ControlPoint> testCPList = new ArrayList<ControlPoint>();
 
         //db test
@@ -444,9 +465,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onLocationChanged(Location location) {
 
+        LatLng llLoc = new LatLng(location.getLatitude(), location.getLongitude());
+        ipAdapter.setUserLoc(llLoc);
         tripControler.setUserLoc(new LatLng(location.getLatitude(), location.getLongitude()));
         adapter.setUserLoc(tripControler.getUserLoc());
         adapter.notifyDataSetChanged();
+        ipAdapter.notifyDataSetChanged();
         //Toast.makeText(this, "wlazlem tu", Toast.LENGTH_LONG).show();
         if(firstRoute)
         {

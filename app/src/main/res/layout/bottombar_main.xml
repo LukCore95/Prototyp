@@ -2,7 +2,7 @@
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     android:theme="@style/AppTheme"
     android:elevation="4dp"
     android:layout_alignParentBottom="true">
@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:id="@+id/bottombarlay"
         android:weightSum="1">
 
         <ImageView
@@ -23,14 +24,12 @@
             android:onClick="showBottom"/>
 
         <TextView
-            android:id="@+id/textBottomBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:fontFamily="sans-serif-light"
-            android:maxLines="2"
-            android:text="Ciekawe miejsca w pobliżu"
-            android:textColor="@color/colorTextBar"
-            android:textSize="20dp" />
+            android:text="@string/ip_list_header"
+            android:id="@+id/textbottombar"
+            android:textSize="23dp"
+            android:textColor="@color/ip_list_header"
+            android:layout_marginStart="55px"/>
     </LinearLayout>
 </android.support.v7.widget.Toolbar>

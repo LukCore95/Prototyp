@@ -666,6 +666,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             public void onFinish() {
                 imView.setVisibility(View.INVISIBLE);
+                dr.removeView(imView);
             }
         }.start();
 

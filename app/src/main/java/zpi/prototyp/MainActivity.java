@@ -10,7 +10,9 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.media.Image;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -30,6 +32,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -493,7 +496,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Location l= new Location(location);
              //   float tempDistance=l.distanceTo(new Location(controlPoints[i].getLatitude()+ ", " + controlPoints[i].getLongitude()));
                 double tempDistance= DistanceCalculator.distance(location.getLatitude(), location.getLongitude(), controlPoints.get(i).getLatitude(), controlPoints.get(i).getLongitude());
-                 Toast.makeText(this, tempDistance+" " + controlPoints.get(i).getGermanName(), Toast.LENGTH_LONG).show();
+               //  Toast.makeText(this, tempDistance+" " + controlPoints.get(i).getGermanName(), Toast.LENGTH_LONG).show();
                 if(tempDistance<distance) {
                     distance = (float)tempDistance;
                     index = i;
@@ -646,4 +649,29 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    public void showKrajewskiFace(View v)
+    {
+       final  ImageView imView=new ImageView(MainActivity.this);
+        final DrawerLayout dr=(DrawerLayout) findViewById(R.id.main_drawer);
+        final DrawerLayout.LayoutParams dl= new DrawerLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.MATCH_PARENT);
+
+        imView.setImageResource(R.drawable.suprise);
+        dr.addView(imView, dl);
+        new CountDownTimer(2000, 1000) { // 5000 = 5 sec
+
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                imView.setVisibility(View.INVISIBLE);
+            }
+        }.start();
+
+
+
+
+
+    }
 }

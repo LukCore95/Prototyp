@@ -86,6 +86,7 @@ import zpi.data.db.MockDbHelper;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
 import zpi.data.model.InterestingPlace;
+import zpi.data.model.InterestingPlaceType;
 import zpi.data.model.Point;
 import zpi.data.model.Trip;
 import zpi.utils.DistanceCalculator;
@@ -411,7 +412,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         for(int i=0; i<interestingPlaces.size(); i++)
         {
-            mGoogleMap.addMarker(new MarkerOptions().position(interestingPlaces.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ip_museum)));
+            int icon = R.mipmap.ip_museum;
+            if(interestingPlaces.get(i).getType() == InterestingPlaceType.sakralny)
+                icon = R.mipmap.ip_church;
+
+            mGoogleMap.addMarker(new MarkerOptions().position(interestingPlaces.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(icon)));
         }
 
 

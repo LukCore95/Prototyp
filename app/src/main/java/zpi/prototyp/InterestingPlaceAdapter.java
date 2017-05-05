@@ -2,6 +2,7 @@ package zpi.prototyp;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import zpi.data.model.ControlPoint;
 import zpi.data.model.InterestingPlace;
+import zpi.data.model.InterestingPlaceType;
 import zpi.data.model.Trip;
 import zpi.utils.DistanceCalculator;
 
@@ -66,13 +68,28 @@ public class InterestingPlaceAdapter extends BaseAdapter {
         TextView name = (TextView) mV.findViewById(R.id.ip_list_name);
         TextView type = (TextView) mV.findViewById(R.id.ip_list_type);
         TextView tvdist = (TextView) mV.findViewById(R.id.ip_list_dist);
+        ImageView image = (ImageView) mV.findViewById(R.id.imageView2);
 
         Typeface roboto = Typeface.createFromAsset(ctx.getAssets(), "fonts/roboto/Roboto-Light.ttf");
         name.setTypeface(roboto);
         type.setTypeface(roboto);
         tvdist.setTypeface(roboto);
 
+        InterestingPlaceType cpType = currentCp.getType();
         name.setText(currentCp.getName());
+        type.setText(InterestingPlaceType.fromTypeToString(cpType));
+
+        Drawable icon = null;
+        switch(cpType){
+            case sakralny:
+                icon = ctx.getDrawable(R.drawable.ikona_kosciol_szara);
+                break;
+            case kultury:
+                icon = ctx.getDrawable(R.drawable.ikona_budynek_szara);
+                break;
+        }
+
+        image.setImageDrawable(icon);
 
         if(userLoc != null) {
             int dist = (int)(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, currentCp.getGeoLoc().latitude, currentCp.getGeoLoc().longitude)*1000);

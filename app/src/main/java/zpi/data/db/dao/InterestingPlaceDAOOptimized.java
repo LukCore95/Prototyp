@@ -10,6 +10,7 @@ import java.util.List;
 import zpi.data.db.MockContract;
 import zpi.data.model.DataException;
 import zpi.data.model.InterestingPlace;
+import zpi.data.model.InterestingPlaceType;
 
 /**
  * @author Wojciech Michałowski
@@ -40,7 +41,7 @@ public class InterestingPlaceDAOOptimized implements InterestingPlaceDAO {
 
         if(cursor.moveToFirst()){
             try {
-                ip = new InterestingPlace(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i));
+                ip = new InterestingPlace(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i++), cursor.getString(i++), InterestingPlaceType.fromIntToType(cursor.getInt(i)));
                 ipId = getId(name);
             }catch(DataException de){
                 System.err.println(de);
@@ -80,6 +81,8 @@ public class InterestingPlaceDAOOptimized implements InterestingPlaceDAO {
         values.put(MockContract.InterestingPlaceEntry.COLUMN_NAME_DESC, ip.getDescription());
         values.put(MockContract.InterestingPlaceEntry.COLUMN_NAME_LONG, ip.getLongitude());
         values.put(MockContract.InterestingPlaceEntry.COLUMN_NAME_LAT, ip.getLatitude());
+        values.put(MockContract.InterestingPlaceEntry.COLUMN_NAME_ADDRESS, ip.getAddress());
+        values.put(MockContract.InterestingPlaceEntry.COLUMN_NAME_TYPE, InterestingPlaceType.fromTypeToInt(ip.getType()));
 
         writableDb.insert(MockContract.InterestingPlaceEntry.TABLE_NAME, null, values);
 
@@ -99,7 +102,7 @@ public class InterestingPlaceDAOOptimized implements InterestingPlaceDAO {
         while(cursor.moveToNext()){
             int i = 1;
             try {
-                curr = new InterestingPlace(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i));
+                curr = new InterestingPlace(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i++), cursor.getString(i++), InterestingPlaceType.fromIntToType(cursor.getInt(i)));
                 photos = ipPhotoDao.getInterestingPlacesPhotos(curr.getName());
                 curr.setOldPhotos(photos);
                 ipList.add(curr);

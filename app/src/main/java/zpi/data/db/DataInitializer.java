@@ -18,6 +18,7 @@ import zpi.data.db.dao.RouteDAOOptimized;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
 import zpi.data.model.InterestingPlace;
+import zpi.data.model.InterestingPlaceType;
 import zpi.data.model.Route;
 import zpi.prototyp.R;
 
@@ -112,12 +113,12 @@ public final class DataInitializer {
                 plteatralny = new ControlPoint(res.getString(R.string.placTeatralny), res.getString(R.string.placTeatralny_german), res.getString(R.string.placTeatralny_description), maj131933.getTime(), 17.031921, 51.105483, R.mipmap.marker_plteatralny, R.drawable.oldplteatralny, R.drawable.newplteatralny, R.raw.podwale_renoma_swidnicka_plac_teatralny, plteatralnyPhotos);
                 sadowa = new ControlPoint(res.getString(R.string.sadowa), res.getString(R.string.sadowa_german), res.getString(R.string.sadowa_description), maj151933.getTime(), 17.027947, 51.105328, R.mipmap.marker_sadowa, R.drawable.oldsadowa, R.drawable.oldsadowa, R.raw.sadowa, sadowaPhotos );
 
-                sad=new InterestingPlace(res.getString(R.string.ip_sad), res.getString(R.string.ip_sad_description),17.025995, 51.105936, sadPhoto );
-                promenada = new InterestingPlace(res.getString(R.string.ip_promenada), res.getString(R.string.ip_promenada_description), 17.025415, 51.107015, promenadaPhoto );
-                kosciol_bc=new InterestingPlace(res.getString(R.string.ip_kosciol_bc), res.getString(R.string.ip_kosciol_bc_description), 17.031296, 51.105006, kosciol_bcPhoto);
-                opera=new InterestingPlace(res.getString(R.string.ip_opera), res.getString(R.string.ip_opera_description), 17.031189, 51.105582, operaPhoto);
-                pomnik_bc=new InterestingPlace(res.getString(R.string.ip_pomnik_bc), res.getString(R.string.ip_pomnik_bc_description), 17.030988, 51.104368, pomnik_bcPhoto);
-                teatrlalek =new InterestingPlace(res.getString(R.string.ip_teatrlalek), res.getString(R.string.ip_teatrlalek_description), 17.033139, 51.105328, teatrLalekPhoto);
+                sad=new InterestingPlace(res.getString(R.string.ip_sad), res.getString(R.string.ip_sad_description),17.025995, 51.105936, "Tutaj będzie adres.", InterestingPlaceType.kultury, sadPhoto);
+                promenada = new InterestingPlace(res.getString(R.string.ip_promenada), res.getString(R.string.ip_promenada_description), 17.025415, 51.107015, "Tutaj będzie adres.", InterestingPlaceType.kultury, promenadaPhoto );
+                kosciol_bc=new InterestingPlace(res.getString(R.string.ip_kosciol_bc), res.getString(R.string.ip_kosciol_bc_description), 17.031296, 51.105006, "Tutaj będzie adres.", InterestingPlaceType.sakralny, kosciol_bcPhoto);
+                opera=new InterestingPlace(res.getString(R.string.ip_opera), res.getString(R.string.ip_opera_description), 17.031189, 51.105582, "Tutaj będzie adres.", InterestingPlaceType.kultury, operaPhoto);
+                pomnik_bc=new InterestingPlace(res.getString(R.string.ip_pomnik_bc), res.getString(R.string.ip_pomnik_bc_description), 17.030988, 51.104368, "Tutaj będzie adres.", InterestingPlaceType.kultury, pomnik_bcPhoto);
+                teatrlalek =new InterestingPlace(res.getString(R.string.ip_teatrlalek), res.getString(R.string.ip_teatrlalek_description), 17.033139, 51.105328, "Tutaj będzie adres.", InterestingPlaceType.kultury, teatrLalekPhoto);
             } catch (DataException de) {
                 System.err.println("Nie udało się załadować danych do bazy: " + de);
             }

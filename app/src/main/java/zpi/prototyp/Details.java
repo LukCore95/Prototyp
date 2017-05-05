@@ -283,7 +283,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         //TODO hide slider while not loaded!!!!! USE isReady method
 
         time = System.currentTimeMillis() - time;
-        Toast.makeText(this, "Czas ładowania slidera: " + time + "ms", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Czas ładowania slidera: " + time + "ms", Toast.LENGTH_LONG).show();
     }
 
     // ze strony androida

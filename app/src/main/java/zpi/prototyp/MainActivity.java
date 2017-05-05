@@ -240,6 +240,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         ipList = (ListView) findViewById(R.id.ip_list_list);
         ipAdapter = new InterestingPlaceAdapter(this, interestingPlaces, tripControler.getUserLoc());
         ipList.setAdapter(ipAdapter);
+        ipList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                InterestingPlace ip = (InterestingPlace) parent.getItemAtPosition(position);
+
+                Intent intentToInterestingPlace=new Intent(MainActivity.this, Interesting_Details.class);
+                intentToInterestingPlace.putExtra("nazwaPunktu", ip.getName());
+                startActivity(intentToInterestingPlace);
+
+            }
+        });
 
         //List<ControlPoint> testCPList = new ArrayList<ControlPoint>();
 

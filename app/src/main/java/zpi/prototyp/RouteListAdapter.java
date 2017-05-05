@@ -93,7 +93,7 @@ public class RouteListAdapter extends BaseAdapter {
         if(userLoc != null) {
             int dist = (int)(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, currentCp.getGeoLoc().latitude, currentCp.getGeoLoc().longitude)*1000);
             if(dist >= 2000)
-                distance.setText("" + dist/1000 + "km");
+                distance.setText("" + String.format("%.1f", ((float)dist)/1000) + "km");
             else
                 distance.setText("" + dist + "m");
         }

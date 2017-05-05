@@ -77,7 +77,7 @@ public class InterestingPlaceAdapter extends BaseAdapter {
         if(userLoc != null) {
             int dist = (int)(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, currentCp.getGeoLoc().latitude, currentCp.getGeoLoc().longitude)*1000);
             if(dist >= 2000)
-                tvdist.setText("" + dist/1000 + "km");
+                tvdist.setText("" + String.format("%.1f", ((float)dist)/1000) + "km");
             else
                 tvdist.setText("" + dist + "m");
         }

@@ -13,6 +13,8 @@ import zpi.data.db.dao.ControlPointDAO;
 import zpi.data.db.dao.ControlPointDAOOptimized;
 import zpi.data.db.dao.InterestingPlaceDAO;
 import zpi.data.db.dao.InterestingPlaceDAOOptimized;
+import zpi.data.db.dao.RestPointDAO;
+import zpi.data.db.dao.RestPointDAOOptimized;
 import zpi.data.db.dao.RouteDAO;
 import zpi.data.db.dao.RouteDAOOptimized;
 import zpi.data.model.ControlPoint;
@@ -138,7 +140,17 @@ public final class DataInitializer {
                 teatrlalek =new InterestingPlace(res.getString(R.string.ip_teatrlalek), res.getString(R.string.ip_teatrlalek_description), 17.033139, 51.105328, "Tutaj będzie adres.", InterestingPlaceType.kultury, teatrLalekPhoto);
 
                 cafeBarMonopol = new RestPoint(res.getString(R.string.cafeBarMonopol), res.getString(R.string.cafeBarMonopol_description), 17.0306989, 51.1060844, RestPointType.cafe);
-
+                costacoffee= new RestPoint(res.getString(R.string.costaCoffee), res.getString(R.string.costaCoffee_description), 17.0321131, 51.103495, RestPointType.cafe);
+                dinette= new RestPoint(res.getString(R.string.dinette), res.getString(R.string.dinette_description), 17.0313198,51.1060407, RestPointType.cafe);
+                haggisPub = new RestPoint(res.getString(R.string.haggisPub), res.getString(R.string.haggisPub_description), 17.030317, 51.103787, RestPointType.pub);
+                hanaSushi=new RestPoint(res.getString(R.string.hanaSushi), res.getString(R.string.hanaSushi_description), 17.0310187, 51.1036146, RestPointType.restaurant);
+                polishLody=new RestPoint(res.getString(R.string.polishLody), res.getString(R.string.polishLody_description), 17.0317952, 51.1062136, RestPointType.cafe);
+                niezlyDym=new RestPoint(res.getString(R.string.niezlyDym), res.getString(R.string.niezlyDym), 17.03181, 51.105474, RestPointType.restaurant);
+                pubWedrowki=new RestPoint(res.getString(R.string.pubWedrowki), res.getString(R.string.pubWedrowki_description), 17.0299611, 51.104158, RestPointType.pub);
+                staraPaczkarnia=new RestPoint(res.getString(R.string.staraPaczkarnia), res.getString(R.string.staraPaczkarnia_description), 17.0313768, 51.1063027, RestPointType.cafe);
+                tuttiFrutti = new RestPoint(res.getString(R.string.tuttiFrutti), res.getString(R.string.tuttiFrutti_description), 17.0301108, 51.1035695, RestPointType.cafe);
+                wloszczyzna=new RestPoint(res.getString(R.string.wloszczyzna), res.getString(R.string.wloszczyzna_description), 17.0320742, 51.1036891, RestPointType.restaurant);
+                nespressoBoutique =new RestPoint(res.getString(R.string.nespressoBoutique), res.getString(R.string.nespressoBoutique_description), 17.031265, 51.105982, RestPointType.cafe);
 
             } catch (DataException de) {
                 System.err.println("Nie udało się załadować danych do bazy: " + de);
@@ -181,6 +193,22 @@ public final class DataInitializer {
             ipDao.createInterestingPlace(opera);
             ipDao.createInterestingPlace(pomnik_bc);
             ipDao.createInterestingPlace(teatrlalek);
+
+            RestPointDAO rpDao=new RestPointDAOOptimized(db, db);
+
+            rpDao.createRestPoint(cafeBarMonopol);
+            rpDao.createRestPoint(costacoffee);
+            rpDao.createRestPoint(dinette);
+            rpDao.createRestPoint(haggisPub);
+            rpDao.createRestPoint(hanaSushi);
+            rpDao.createRestPoint(polishLody);
+            rpDao.createRestPoint(niezlyDym);
+            rpDao.createRestPoint(pubWedrowki);
+            rpDao.createRestPoint(staraPaczkarnia);
+            rpDao.createRestPoint(tuttiFrutti);
+            rpDao.createRestPoint(wloszczyzna);
+            rpDao.createRestPoint(nespressoBoutique);
+
 
 
         }

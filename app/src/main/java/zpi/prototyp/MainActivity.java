@@ -1,6 +1,9 @@
 package zpi.prototyp;
 
 import android.Manifest;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;;
@@ -15,6 +18,7 @@ import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -80,6 +84,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import zpi.controler.trip.TripControler;
+import zpi.controler.trip.TripNotificator;
 import zpi.data.db.dao.ControlPointDAO;
 import zpi.data.db.dao.ControlPointDAOOptimized;
 import zpi.data.db.MockDbHelper;
@@ -138,25 +143,33 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private List<ControlPoint> controlPoints;
     //private Trip currentTrip;
     boolean firstRoute=true;
+    public TripNotificator tn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
-
-
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
 
+
         //wczytanie z bazy danych TUTAJ
+
        // currentTrip=SplashScreen.getTrip();
         tripControler = new TripControler(this, SplashScreen.getTrip());
         controlPoints = tripControler.getRouteControlPoints();
         interestingPlaces = SplashScreen.ipList;
-
+        //powiadomienie do pokazania
+            tn= null;
+//        try {
+//            tn = new TripNotificator(controlPoints);
+//            tn.setNotification(this);
+//        } catch (DataException e) {
+//            e.printStackTrace();
+//        }
         System.out.println("Wczytano " + controlPoints.size() + " punktów kontrolnych");
 
         //kod woja
@@ -490,7 +503,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         adapter.setUserLoc(tripControler.getUserLoc());
         adapter.notifyDataSetChanged();
         ipAdapter.notifyDataSetChanged();
-        //Toast.makeText(this, "wlazlem tu", Toast.LENGTH_LONG).show();
+
+         tn= null;
+//        try {
+//            tn = new TripNotificator(controlPoints);
+//            tn.setNotification(this);
+//        } catch (DataException e) {
+//            e.printStackTrace();
+//        }
+
         if(firstRoute)
         {
 

@@ -19,6 +19,7 @@ import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
 import zpi.data.model.InterestingPlace;
 import zpi.data.model.InterestingPlaceType;
+import zpi.data.model.RestPoint;
 import zpi.data.model.Route;
 import zpi.prototyp.R;
 
@@ -61,6 +62,21 @@ public final class DataInitializer {
             InterestingPlace opera=null;
             InterestingPlace pomnik_bc=null;
             InterestingPlace teatrlalek =null;
+
+            RestPoint cafeBarMonopol=null;
+            RestPoint costacoffee=null;
+            RestPoint dinette = null;
+            RestPoint haggisPub = null;
+            RestPoint hanaSushi =null;
+            RestPoint polishLody=null;
+            RestPoint niezlyDym=null;
+            RestPoint pubWedrowki = null;
+            RestPoint staraPaczkarnia = null;
+            RestPoint tuttiFrutti=null;
+            RestPoint wloszczyzna=null;
+            RestPoint nespressoBoutique=null;
+
+
 
             Resources res = ctx.getResources();
 

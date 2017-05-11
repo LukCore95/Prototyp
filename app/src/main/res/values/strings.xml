@@ -60,6 +60,29 @@
     <string name="ip_teatrlalek">Teatr Lalek</string>
     <string name="ip_teatrlalek_description">Neobarokowy budynek dawnego klubu kupieckiego został zbudowany w latach 1892 - 1894. Wrocławski Teatr Lalek ma w swoim stałym repertuarze adaptacje utworów z kanonu literatury dziecięcej i młodzieżowej oraz najpopularniejszych baśni, gra jednak nie tylko klasykę. Ostatnie premiery to w większości przedstawienia powstałe w oparciu o współczesne sztuki napisane specjalnie dla Teatru – nowoczesne i odważne spektakle wykraczające poza konwencję tradycyjnego teatru lalkowego.</string>
     <string name="ip_list_header">Inne ciekawe miejsca</string>
+    <string name="cafeBarMonopol"></string>
+    <string name="cafeBarMonopol_descriotion"></string>
+    <string name="costaCoffee"></string>
+    <string name="costaCoffee_description"></string>
+    <string name="dinette"></string>
+    <string name="dinette_description"></string>
+    <string name="haggisPub"></string>
+    <string name="haggisPub_description"></string>
+    <string name="hanaSushi"></string>
+    <string name="hanaSushi_description"></string>
+    <string name="polishLody"></string>
+    <string name="polishLody_description"></string>
+    <string name="niezlyDym"></string>
+    <string name="niezlyDym_description"></string>
+    <string name="pubWedrowki"></string>
+    <string name="pubWedrowki_description"></string>
+    <string name="staraPaczkarnia"></string>
+    <string name="staraPaczkarnia_description"></string>
+    <string name="tuttiFrutti"></string>
+    <string name="tuttiFrutti_description"></string>
+    <string name="wloszczyzna"></string>
+    <string name="nespressoBoutique"></string>
+    <string name="nespressoBoutique_description"></string>
 
 
 </resources>

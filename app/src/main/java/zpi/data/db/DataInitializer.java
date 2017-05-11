@@ -20,6 +20,7 @@ import zpi.data.model.DataException;
 import zpi.data.model.InterestingPlace;
 import zpi.data.model.InterestingPlaceType;
 import zpi.data.model.RestPoint;
+import zpi.data.model.RestPointType;
 import zpi.data.model.Route;
 import zpi.prototyp.R;
 
@@ -135,6 +136,10 @@ public final class DataInitializer {
                 opera=new InterestingPlace(res.getString(R.string.ip_opera), res.getString(R.string.ip_opera_description), 17.031189, 51.105582, "Tutaj będzie adres.", InterestingPlaceType.kultury, operaPhoto);
                 pomnik_bc=new InterestingPlace(res.getString(R.string.ip_pomnik_bc), res.getString(R.string.ip_pomnik_bc_description), 17.030988, 51.104368, "Tutaj będzie adres.", InterestingPlaceType.kultury, pomnik_bcPhoto);
                 teatrlalek =new InterestingPlace(res.getString(R.string.ip_teatrlalek), res.getString(R.string.ip_teatrlalek_description), 17.033139, 51.105328, "Tutaj będzie adres.", InterestingPlaceType.kultury, teatrLalekPhoto);
+
+                cafeBarMonopol = new RestPoint(res.getString(R.string.cafeBarMonopol), res.getString(R.string.cafeBarMonopol_description), 17.0306989, 51.1060844, RestPointType.cafe);
+
+
             } catch (DataException de) {
                 System.err.println("Nie udało się załadować danych do bazy: " + de);
             }

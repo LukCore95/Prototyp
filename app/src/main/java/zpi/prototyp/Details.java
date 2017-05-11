@@ -28,7 +28,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import zpi.data.db.dao.ControlPointDAO;
 import zpi.data.db.dao.ControlPointDAOOptimized;
@@ -115,12 +120,23 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         germanNameHeader.setText(cp.getGermanName());
         TextView polishNameHeader = (TextView) findViewById(R.id.pl_name);
         polishNameHeader.setText(cp.getName().toUpperCase());
+        TextView date= (TextView) findViewById(R.id.date) ;
+        //dodanie daty
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(cp.getDate());
+        SimpleDateFormat sdf=new SimpleDateFormat("dd MMMM yyyy", new Locale("pl"));
+        Date d=new Date();
+        d.setTime(cal.getTimeInMillis());
+        date.setText("     " + sdf.format(d));
+
         setFont(polishNameHeader,"fonts/montserrat/Montserrat-Light.otf");
         setFont((TextView) findViewById(R.id.textPK),"fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf" );
         setFont(germanNameHeader, "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
         setFont((TextView) findViewById(R.id.textView_opismiejscaHeader),"fonts/cambria/cambria_bold.ttf");
         setFont((TextView) findViewById(R.id.textView_posluchajAudiobooka),"fonts/cambria/cambria_bold.ttf");
         setFont((TextView) findViewById(R.id.textView_galeriaZdjec),"fonts/cambria/cambria_bold.ttf");
+        setFont(date, "fonts/cambria/cambria_regular.ttc");
+       // setFont((TextView) findViewById(R.id.marekkrajewski), "fonts/montserrat/Montserrat-Light.otf");
 
         //audiobook
         ImageButton imageButtonAudiobook = (ImageButton) findViewById(R.id.details_play_audiobook_icon);

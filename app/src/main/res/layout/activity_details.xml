@@ -176,6 +176,18 @@
                         android:scaleType="fitXY"
                         android:src="@drawable/tlo_radio" />
 
+
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:text="  17 maja 2017"
+                        android:textSize="26dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="21dp"
+
+                        />
+
                     <ImageButton
                         android:id="@+id/details_play_audiobook_icon"
                         android:layout_width="60dp"

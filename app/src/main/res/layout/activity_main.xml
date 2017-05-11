@@ -81,48 +81,45 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-        
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="275px"
-            android:orientation="vertical"
-            android:background="@drawable/tlo_mapa">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/route_points_icon"
-            android:src="@mipmap/marker_renoma"
-            android:layout_gravity="start"
-            android:layout_margin="21px"
-            />
-
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/route_points_title"
-                android:textColor="@color/routePointsTitle"
-                android:textSize="17dp"
-                android:layout_marginLeft="21px"
-                android:layout_below="@id/route_points_icon"
-                android:text="@string/routePointsMenuTitle"
-                />
+                android:layout_height="375px"
+                android:background="@drawable/tlo_mapa"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/route_points_explanation"
-                android:textColor="@color/routePointsTitle"
-                android:textSize="12dp"
-                android:layout_marginLeft="21px"
-                android:layout_marginTop="4px"
-                android:layout_marginBottom="4px"
-                android:layout_below="@id/route_points_title"
-                android:text="@string/routePointsMenuExplanation"
-                />
+                <ImageView
+                    android:id="@+id/route_points_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_margin="21px"
+                    android:src="@mipmap/marker_renoma" />
+
+                <TextView
+                    android:id="@+id/route_points_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/route_points_icon"
+                    android:layout_marginLeft="21px"
+                    android:text="@string/routePointsMenuTitle"
+                    android:textColor="@color/routePointsTitle"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/route_points_explanation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/route_points_title"
+                    android:layout_marginBottom="4px"
+                    android:layout_marginLeft="21px"
+                    android:layout_marginTop="4px"
+                    android:text="@string/routePointsMenuExplanation"
+                    android:textColor="@color/routePointsTitle"
+                    android:textSize="12dp" />
 
 
-        </RelativeLayout>
+            </RelativeLayout>
 
         <ListView
             android:layout_width="match_parent"

@@ -54,4 +54,9 @@ public class Route {
 		this.routePoints = cps;
 	}
 
+	@Override
+	public boolean equals(Object other){
+		return (other instanceof Route)&&this.getName().equals(((Route) other).getName());
+	}
+
 }

@@ -164,12 +164,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         interestingPlaces = SplashScreen.ipList;
         //powiadomienie do pokazania
             tn= null;
-//        try {
-//            tn = new TripNotificator(controlPoints);
-//            tn.setNotification(this);
-//        } catch (DataException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            tn = new TripNotificator(controlPoints);
+            tn.setNotification(this);
+        } catch (DataException e) {
+            e.printStackTrace();
+        }
         System.out.println("Wczytano " + controlPoints.size() + " punktów kontrolnych");
 
         //kod woja

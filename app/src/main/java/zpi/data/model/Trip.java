@@ -122,4 +122,9 @@ public class Trip {
 
 		return  ind;
 	}
+
+	@Override
+	public boolean equals(Object other){
+		return (other instanceof Trip)&&this.getID()==((Trip) other).getID();
+	}
 }

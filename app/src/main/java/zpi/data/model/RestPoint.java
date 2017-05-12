@@ -23,4 +23,9 @@ public class RestPoint extends Point {
     public RestPointType getType(){
         return type;
     }
+
+    @Override
+    public boolean equals(Object other){
+        return (other instanceof RestPoint)&&this.getName().equals(((RestPoint) other).getName());
+    }
 }

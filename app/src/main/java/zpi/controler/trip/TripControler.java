@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import zpi.data.db.MockDbHelper;
@@ -111,5 +112,32 @@ public final class TripControler {
 
         readDb.close();
         writeDb.close();
+    }
+
+    public void nextControlPoint(){
+        int index = -1;
+        List<ControlPoint> cpList= currentTrip.getModifiedRoute();
+
+        if(currentTrip.getCurrentTarget() instanceof ControlPoint){
+            index = cpList.indexOf((ControlPoint) currentTrip.getCurrentTarget());
+        }
+        else{
+            index = cpList.indexOf(currentTrip.getLastVisitedPoint());
+        }
+
+        try {
+            if (index != -1)
+                currentTrip.setCurrentTarget(cpList.get(index));
+        }catch(DataException de){
+            de.printStackTrace();
+        }
+    }
+
+    public void setNavigation(Point navigateTo){
+        try {
+            currentTrip.setCurrentTarget(navigateTo);
+        }catch(DataException de){
+            de.printStackTrace();
+        }
     }
 }

@@ -3,6 +3,7 @@ package zpi.controler.trip;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -29,7 +30,7 @@ public final class TripController {
     private Trip currentTrip;
     private Context ctx;
     private LatLng userLoc = null;
-    private static final int MIN_DISTANCE=50;
+    private static final float MIN_DISTANCE=0.05f;
     private TripNotificator tripNotificator;
 
     public TripController(Context ctx, Route route){
@@ -126,6 +127,7 @@ public final class TripController {
 
         if(currentTrip.getCurrentTarget() instanceof ControlPoint){
             index = cpList.indexOf((ControlPoint) currentTrip.getCurrentTarget());
+            currentTrip.setLastVisitedPoint((ControlPoint) currentTrip.getCurrentTarget());
         }
         else{
             index = cpList.indexOf(currentTrip.getLastVisitedPoint());
@@ -152,7 +154,8 @@ public final class TripController {
 
     public int checkIfPointReached() throws Exception {
         Point point=currentTrip.getCurrentTarget();
-        if(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude())<=40)
+        Toast.makeText(ctx, "Dystans: " + DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude()), Toast.LENGTH_LONG).show();
+        if(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude())<=MIN_DISTANCE)
         {
             tripNotificator.setNotification(ctx, point);
             int nextControlPoint = nextControlPoint();

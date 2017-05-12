@@ -493,11 +493,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         ipAdapter.notifyDataSetChanged();
 
          tn= null;
-        try {
-            tripController.checkIfPointReached();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 //        try {
 //            tn = new TripNotificator(controlPoints);
 //            tn.setNotification(this);
@@ -534,7 +530,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             firstRoute=false;
         }
-
+        try {
+            if(tripController.checkIfPointReached()==1){
+                adapter.setTrip(tripController.getCurrentTrip());
+                adapter.notifyDataSetChanged();
+                Toast.makeText(this, "OBECNY PUNKT: " + adapter.trip.getCurrentTarget().getName(), Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //Point current = tripController.getCurrentCP();
         //System.out.println("OBECNY PUNKT: " + current.getName());
         refreshCurrentTarget();

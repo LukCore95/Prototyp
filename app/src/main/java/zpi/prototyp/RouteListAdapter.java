@@ -25,7 +25,7 @@ import zpi.utils.DistanceCalculator;
 
 public class RouteListAdapter extends BaseAdapter {
     //List<ControlPoint> list;
-    private Trip trip;
+    /*private*/ Trip trip;
     private Context ctx;
     private LatLng userLoc;
 

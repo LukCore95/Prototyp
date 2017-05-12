@@ -58,6 +58,7 @@ public final class DataInitializer {
             ControlPoint swidnicka = null;
             ControlPoint plteatralny = null;
             ControlPoint sadowa = null;
+            ControlPoint punktTestowy=null;
 
             InterestingPlace sad=null;
             InterestingPlace promenada=null;
@@ -131,6 +132,7 @@ public final class DataInitializer {
                 swidnicka = new ControlPoint(res.getString(R.string.swidnicka), res.getString(R.string.swidnicka_german), res.getString(R.string.swidnicka_description), maj131933.getTime(), 17.031117, 51.105059, R.mipmap.marker_swidnicka, R.drawable.oldswidnicka, R.drawable.newswidnicka, R.raw.podwale_renoma_swidnicka_plac_teatralny, swidnickaPhotos);
                 plteatralny = new ControlPoint(res.getString(R.string.placTeatralny), res.getString(R.string.placTeatralny_german), res.getString(R.string.placTeatralny_description), maj131933.getTime(), 17.031921, 51.105483, R.mipmap.marker_plteatralny, R.drawable.oldplteatralny, R.drawable.newplteatralny, R.raw.podwale_renoma_swidnicka_plac_teatralny, plteatralnyPhotos);
                 sadowa = new ControlPoint(res.getString(R.string.sadowa), res.getString(R.string.sadowa_german), res.getString(R.string.sadowa_description), maj151933.getTime(), 17.027947, 51.105328, R.mipmap.marker_sadowa, R.drawable.oldsadowa, R.drawable.oldsadowa, R.raw.sadowa, sadowaPhotos );
+                punktTestowy=new ControlPoint("kakakaka", "hihiihihihih", "ameba ameba", maj131933.getTime(),  17.058119,51.110392,R.mipmap.marker_plteatralny,R.drawable.oldpodwale, R.drawable.oldplacteatralny1h, R.raw.podwale_renoma_swidnicka_plac_teatralny, sadowaPhotos);
 
                 sad=new InterestingPlace(res.getString(R.string.ip_sad), res.getString(R.string.ip_sad_description),17.025995, 51.105936, "Tutaj będzie adres.", InterestingPlaceType.kultury, sadPhoto);
                 promenada = new InterestingPlace(res.getString(R.string.ip_promenada), res.getString(R.string.ip_promenada_description), 17.025415, 51.107015, "Tutaj będzie adres.", InterestingPlaceType.kultury, promenadaPhoto );
@@ -176,6 +178,7 @@ public final class DataInitializer {
             testTrasa.add(swidnicka);
             testTrasa.add(renoma);
             testTrasa.add(podwale);
+            testTrasa.add(punktTestowy);
 
            /* for(ControlPoint cp: testTrasa)
                 System.out.println("Dodany punkt: " + cp.getName());*/

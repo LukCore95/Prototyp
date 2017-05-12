@@ -79,4 +79,9 @@ public class ControlPoint extends Point {
             throw new DataException("germanName", "not null");
     }
 
+    @Override
+    public boolean equals(Object other){
+        return (other instanceof ControlPoint)&&this.getName().equals(((ControlPoint) other).getName());
+    }
+
 }

@@ -45,4 +45,9 @@ public class InterestingPlace extends Point {
     public void setType(InterestingPlaceType type){
         this.type = type;
     }
+
+    @Override
+    public boolean equals(Object other){
+        return (other instanceof InterestingPlace)&&this.getName().equals(((InterestingPlace) other).getName());
+    }
 }

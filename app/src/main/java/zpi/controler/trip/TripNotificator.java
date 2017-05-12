@@ -14,8 +14,10 @@ import java.util.List;
 
 import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
+import zpi.data.model.Point;
 import zpi.prototyp.MainActivity;
 import zpi.prototyp.R;
+import zpi.utils.DistanceCalculator;
 
 /**
  * Created by Adrianna on 11/05/2017.
@@ -23,27 +25,23 @@ import zpi.prototyp.R;
 
 public class TripNotificator {
     int minDistance=50;
+    private Context context;
 
     public List<ControlPoint> controlPoints;
 
-    public TripNotificator(List<ControlPoint> pointList) throws DataException
+    public TripNotificator()
     {
-        controlPoints=new ArrayList<ControlPoint>();
-        for(int i=0; i<pointList.size();i++)
-        {
-            controlPoints.add(new ControlPoint(pointList.get(i)));
-        }
+
     }
 
-    public  void setNotification(Context ctx, Location loc)
+    public  void setNotification(Context ctx, Point point)
     {
-        int pointToNotification=pointToNotification(loc);
-        if(pointToNotification!=-1)
-        {
+
+
             long[] pattern1 = {0, 1000, 1000};
             NotificationCompat.Builder mBuilder =   new NotificationCompat.Builder(ctx)
                     .setSmallIcon(R.mipmap.actionbar_marker_icon) // notification icon
-                    .setContentTitle("Doszedłeś do punktu " + controlPoints.get(pointToNotification).getName()+"!") // title for notification
+                    .setContentTitle("Doszedłeś do punktu " + point.getName()+"!") // title for notification
                     .setContentText("Stuknij, aby wyświetlić detale!") // message for notification
                     .setAutoCancel(true)
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
@@ -55,14 +53,13 @@ public class TripNotificator {
                     (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.notify(0, mBuilder.build());
 
-        }
     }
 
     int pointToNotification(Location loc)
     {
        for(int i=0; i<controlPoints.size(); i++)
        {
-           if(distance(loc.getLatitude(), loc.getLongitude(), controlPoints.get(i).getLatitude(), controlPoints.get(i).getLongitude())<=minDistance)
+           if(DistanceCalculator.distance(loc.getLatitude(), loc.getLongitude(), controlPoints.get(i).getLatitude(), controlPoints.get(i).getLongitude())<=minDistance)
            {
                return i;
            }

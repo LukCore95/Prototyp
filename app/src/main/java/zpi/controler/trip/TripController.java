@@ -22,19 +22,23 @@ import zpi.data.model.Trip;
  * Created by Ania on 2017-05-04.
  */
 
-public final class TripControler {
+public final class TripController {
     private Trip currentTrip;
     private Context ctx;
     private LatLng userLoc = null;
+    private static final int MIN_DISTANCE=50;
+    private TripNotificator tripNotificator;
 
-    public TripControler(Context ctx, Route route){
+    public TripController(Context ctx, Route route){
         this.ctx = ctx;
         loadTripFromDatabase(route);
+        tripNotificator=new TripNotificator();
     }
 
-    public TripControler(Context ctx, Trip trip){
+    public TripController(Context ctx, Trip trip){
         currentTrip = trip;
         this.ctx = ctx;
+        tripNotificator=new TripNotificator();
     }
 
     private void loadTripFromDatabase(Route route){

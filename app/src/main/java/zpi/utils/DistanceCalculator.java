@@ -5,6 +5,7 @@ package zpi.utils;
  */
 
 public final class DistanceCalculator {
+
     private DistanceCalculator(){}
 
     public static double distance(Double latitude, Double longitude, double e, double f) {

@@ -1,32 +1,24 @@
 package zpi.prototyp;
 
 import android.Manifest;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;;
 import android.content.res.Resources;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.media.Image;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
-import android.util.FloatMath;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -81,19 +73,13 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ResourceBundle;
 
-import zpi.controler.trip.TripControler;
+import zpi.controler.trip.TripController;
 import zpi.controler.trip.TripNotificator;
-import zpi.data.db.dao.ControlPointDAO;
-import zpi.data.db.dao.ControlPointDAOOptimized;
-import zpi.data.db.MockDbHelper;
 import zpi.data.model.ControlPoint;
-import zpi.data.model.DataException;
 import zpi.data.model.InterestingPlace;
 import zpi.data.model.InterestingPlaceType;
 import zpi.data.model.Point;
-import zpi.data.model.Trip;
 import zpi.utils.DistanceCalculator;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener, PopupMenu.OnMenuItemClickListener {
@@ -102,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private NavigationView navView;
     private DrawerLayout drawer;
     private ListView lv;
-    private TripControler tripControler;
+    private TripController tripController;
     private RouteListAdapter adapter;
     private List<ControlPoint> basicRoute;
     private List<InterestingPlace> interestingPlaces;
@@ -159,8 +145,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //wczytanie z bazy danych TUTAJ
 
        // currentTrip=SplashScreen.getTrip();
-        tripControler = new TripControler(this, SplashScreen.getTrip());
-        controlPoints = tripControler.getRouteControlPoints();
+        tripController = new TripController(this, SplashScreen.getTrip());
+        controlPoints = tripController.getRouteControlPoints();
         interestingPlaces = SplashScreen.ipList;
         //powiadomienie do pokazania
             tn= null;
@@ -255,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         lv = (ListView) findViewById(R.id.route_points_list);
         ipList = (ListView) findViewById(R.id.ip_list_list);
-        ipAdapter = new InterestingPlaceAdapter(this, interestingPlaces, tripControler.getUserLoc());
+        ipAdapter = new InterestingPlaceAdapter(this, interestingPlaces, tripController.getUserLoc());
         ipList.setAdapter(ipAdapter);
         ipList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -288,18 +274,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
        // testCPList = controlPoints;
 
-        adapter = new RouteListAdapter(this, tripControler.getCurrentTrip(), tripControler.getUserLoc());
+        adapter = new RouteListAdapter(this, tripController.getCurrentTrip(), tripController.getUserLoc());
         lv.setAdapter(adapter);
         //lv.setClickable(true);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Trip newTrip = new Trip(tripControler.getCurrentTrip().getRoute(), (ControlPoint) parent.getItemAtPosition(position), 2); //TODO generate an index
-                zpi.data.model.Route route = tripControler.getCurrentTrip().getRoute();
-                tripControler.setNewTrip(route, (ControlPoint) parent.getItemAtPosition(position));
-                adapter.setTrip(tripControler.getCurrentTrip());
+                //Trip newTrip = new Trip(tripController.getCurrentTrip().getRoute(), (ControlPoint) parent.getItemAtPosition(position), 2); //TODO generate an index
+                zpi.data.model.Route route = tripController.getCurrentTrip().getRoute();
+                tripController.setNewTrip(route, (ControlPoint) parent.getItemAtPosition(position));
+                adapter.setTrip(tripController.getCurrentTrip());
                 adapter.notifyDataSetChanged();
-                controlPoints = tripControler.getRouteControlPoints();
+                controlPoints = tripController.getRouteControlPoints();
                 ControlPoint firstCp = controlPoints.get(0);
 
                 refreshCurrentTarget();
@@ -307,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        basicRoute = tripControler.getCurrentTrip().getRoute().getRoutePoints();
+        basicRoute = tripController.getCurrentTrip().getRoute().getRoutePoints();
 
         refreshCurrentTarget();
    }
@@ -499,18 +485,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         LatLng llLoc = new LatLng(location.getLatitude(), location.getLongitude());
         ipAdapter.setUserLoc(llLoc);
-        tripControler.setUserLoc(new LatLng(location.getLatitude(), location.getLongitude()));
-        adapter.setUserLoc(tripControler.getUserLoc());
+        tripController.setUserLoc(new LatLng(location.getLatitude(), location.getLongitude()));
+        adapter.setUserLoc(tripController.getUserLoc());
         adapter.notifyDataSetChanged();
         ipAdapter.notifyDataSetChanged();
 
          tn= null;
-        try {
-            tn = new TripNotificator(controlPoints);
-            tn.setNotification(this, location);
-        } catch (DataException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            tn = new TripNotificator(controlPoints);
+//            tn.setNotification(this);
+//        } catch (DataException e) {
+//            e.printStackTrace();
+//        }
 
         if(firstRoute)
         {
@@ -531,18 +517,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             ControlPoint newStartCP = controlPoints.get(index);
-            zpi.data.model.Route route = tripControler.getCurrentTrip().getRoute();
-            tripControler.setNewTrip(route, newStartCP);
-            controlPoints = tripControler.getRouteControlPoints();
-            //adapter = new RouteListAdapter(this, tripControler.getCurrentTrip(), tripControler.getUserLoc());
-            adapter.setTrip(tripControler.getCurrentTrip());
+            zpi.data.model.Route route = tripController.getCurrentTrip().getRoute();
+            tripController.setNewTrip(route, newStartCP);
+            controlPoints = tripController.getRouteControlPoints();
+            //adapter = new RouteListAdapter(this, tripController.getCurrentTrip(), tripController.getUserLoc());
+            adapter.setTrip(tripController.getCurrentTrip());
             //lv.setAdapter(adapter);
             adapter.notifyDataSetChanged();
 
             firstRoute=false;
         }
 
-        //Point current = tripControler.getCurrentCP();
+        //Point current = tripController.getCurrentCP();
         //System.out.println("OBECNY PUNKT: " + current.getName());
         refreshCurrentTarget();
 
@@ -660,11 +646,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onPause(){
         super.onPause();
-        tripControler.saveTripState();
+        tripController.saveTripState();
     }
 
     private void refreshCurrentTarget(){
-        Point currentCp = tripControler.getCurrentCP();
+        Point currentCp = tripController.getCurrentCP();
         routeTo = currentCp.getGeoLoc();
         deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():"";
         plName = currentCp.getName();

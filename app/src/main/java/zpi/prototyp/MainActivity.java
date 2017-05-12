@@ -149,13 +149,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         controlPoints = tripController.getRouteControlPoints();
         interestingPlaces = SplashScreen.ipList;
         //powiadomienie do pokazania
-            tn= null;
-        try {
-            tn = new TripNotificator(controlPoints);
-            tn.setNotification(this);
-        } catch (DataException e) {
-            e.printStackTrace();
-        }
+//            tn= null;
+//        try {
+//            tn = new TripNotificator(controlPoints);
+//            tn.setNotification(this);
+//        } catch (DataException e) {
+//            e.printStackTrace();
+//        }
+
+
         System.out.println("Wczytano " + controlPoints.size() + " punktów kontrolnych");
 
         //kod woja
@@ -491,6 +493,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         ipAdapter.notifyDataSetChanged();
 
          tn= null;
+        try {
+            tripController.checkIfPointReached();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //        try {
 //            tn = new TripNotificator(controlPoints);
 //            tn.setNotification(this);

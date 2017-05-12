@@ -2,6 +2,7 @@ package zpi.controler.trip;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -18,6 +19,7 @@ import zpi.data.model.DataException;
 import zpi.data.model.Point;
 import zpi.data.model.Route;
 import zpi.data.model.Trip;
+import zpi.utils.DistanceCalculator;
 
 /**
  * Created by Ania on 2017-05-04.
@@ -118,7 +120,7 @@ public final class TripController {
         writeDb.close();
     }
 
-    public void nextControlPoint(){
+    private int nextControlPoint(){
         int index = -1;
         List<ControlPoint> cpList= currentTrip.getModifiedRoute();
 
@@ -130,11 +132,14 @@ public final class TripController {
         }
 
         try {
-            if (index != -1)
-                currentTrip.setCurrentTarget(cpList.get(index));
+            if (index != -1) {
+                currentTrip.setCurrentTarget(cpList.get(++index));
+            }
         }catch(DataException de){
             de.printStackTrace();
         }
+
+        return index<0?-1: index< cpList.size()?0:1;
     }
 
     public void setNavigation(Point navigateTo){
@@ -143,5 +148,28 @@ public final class TripController {
         }catch(DataException de){
             de.printStackTrace();
         }
+    }
+
+    public int checkIfPointReached() throws Exception {
+        Point point=currentTrip.getCurrentTarget();
+        if(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude())<=40)
+        {
+            tripNotificator.setNotification(ctx, point);
+            int nextControlPoint = nextControlPoint();
+            if(nextControlPoint==0)
+            {
+                return 1;
+            }
+            if(nextControlPoint==1)
+            {
+                return 2;
+            }
+            else
+            {
+                throw new Exception("Następny punkt -1 / TripController, nextControlPoint");
+            }
+        }
+
+        return 0;
     }
 }

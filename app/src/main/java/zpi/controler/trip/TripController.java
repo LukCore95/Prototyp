@@ -121,6 +121,7 @@ public final class TripController {
         writeDb.close();
     }
 
+    //return -1 - ERROR; 0 - success; 1 - no more points on list (current target before this method is the last one)
     private int nextControlPoint(){
         int index = -1;
         List<ControlPoint> cpList= currentTrip.getModifiedRoute();
@@ -144,7 +145,11 @@ public final class TripController {
         return index<0?-1: index< cpList.size()?0:1;
     }
 
+    //not working for ControlPoint!!!
     public void setNavigation(Point navigateTo){
+        if(navigateTo instanceof ControlPoint)
+            return;
+
         try {
             currentTrip.setCurrentTarget(navigateTo);
         }catch(DataException de){
@@ -152,9 +157,10 @@ public final class TripController {
         }
     }
 
+    //return 0 - target not reached yet; 1 - target reached; 2 - last target on list reached
     public int checkIfPointReached() throws Exception {
         Point point=currentTrip.getCurrentTarget();
-        Toast.makeText(ctx, "Dystans: " + DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude()), Toast.LENGTH_LONG).show();
+        //Toast.makeText(ctx, "Dystans: " + DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude()), Toast.LENGTH_LONG).show();
         if(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude())<=MIN_DISTANCE)
         {
             tripNotificator.setNotification(ctx, point);

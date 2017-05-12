@@ -50,9 +50,9 @@ public final class DataInitializer {
      * @param newVersion current data version
      * @param oldVersion former data version (if 0 - creation mode)
      */
-    public static void InitializeData(SQLiteDatabase db, Context ctx, int newVersion, int oldVersion){
-        //VERSION CHECK - validate if it's version 1. Now we have only 1 version, but we can expand the code during the app developing process.
-        if(newVersion == 1) {
+    public static void InitializeData(SQLiteDatabase db, Context ctx){
+        //NO VERSION CHECK NOW. All DB is being reloaded.
+
             ControlPoint podwale = null;
             ControlPoint renoma = null;
             ControlPoint swidnicka = null;
@@ -214,7 +214,7 @@ public final class DataInitializer {
 
 
 
-        }
+
         //Toast.makeText(ctx, "Pomyślnie dodano", Toast.LENGTH_SHORT).show();
         //System.out.println("DODANE DANE");
     }

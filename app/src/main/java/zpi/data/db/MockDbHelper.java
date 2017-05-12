@@ -11,7 +11,7 @@ import android.widget.Toast;
  */
 public class MockDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "Mock.db";
     Context ctx;
 
@@ -36,7 +36,7 @@ public class MockDbHelper extends SQLiteOpenHelper {
         createTables(db);
         //Toast.makeText(ctx, "Baza danych zainicjalizowana", Toast.LENGTH_SHORT).show();
         //System.out.println("Baza danych zainicjalizowana");
-        DataInitializer.InitializeData(db, ctx, DATABASE_VERSION, 0);
+        DataInitializer.InitializeData(db, ctx);
         //time = System.currentTimeMillis()-time;
         //System.out.println("Baza danych utworzona w " + time + "ms");
         //Toast.makeText(ctx, "Baza danych pomyślnie utworzona!", Toast.LENGTH_SHORT).show();
@@ -50,7 +50,16 @@ public class MockDbHelper extends SQLiteOpenHelper {
      * @param newVersion New (current) version number
      */
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
-        DataInitializer.InitializeData(db, ctx, newVersion, oldVersion);
+        db.delete(MockContract.RoutePointEntry.TABLE_NAME, null, null);
+        db.delete(MockContract.TripEntry.TABLE_NAME, null, null);
+        db.delete(MockContract.RouteEntry.TABLE_NAME, null, null);
+        db.delete(MockContract.ControlPointEntry.TABLE_NAME, null, null);
+        db.delete(MockContract.ControlPointPhotoEntry.TABLE_NAME, null, null);
+        db.delete(MockContract.InterestingPlaceEntry.TABLE_NAME, null, null);
+        db.delete(MockContract.InterestingPlacePhotoEntry.TABLE_NAME, null, null);
+        db.delete(MockContract.RestPointEntry.TABLE_NAME, null, null);
+        db.delete(MockContract.RestPointPhotoEntry.TABLE_NAME, null, null);
+        DataInitializer.InitializeData(db, ctx);
     }
 
     /**
@@ -60,7 +69,7 @@ public class MockDbHelper extends SQLiteOpenHelper {
      * @param newVersion New (current) version number
      */
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion){
-        DataInitializer.InitializeData(db, ctx, newVersion, 0);
+        onUpgrade(db, oldVersion, newVersion);
     }
 
     /*public SQLiteDatabase enableReading(){

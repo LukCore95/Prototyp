@@ -127,7 +127,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         SimpleDateFormat sdf=new SimpleDateFormat("dd MMMM yyyy", new Locale("pl"));
         Date d=new Date();
         d.setTime(cal.getTimeInMillis());
-        date.setText("     " + sdf.format(d));
+        date.setText(sdf.format(d));
 
         setFont(polishNameHeader,"fonts/montserrat/Montserrat-Light.otf");
         setFont((TextView) findViewById(R.id.textPK),"fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf" );
@@ -136,6 +136,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         setFont((TextView) findViewById(R.id.textView_posluchajAudiobooka),"fonts/cambria/cambria_bold.ttf");
         setFont((TextView) findViewById(R.id.textView_galeriaZdjec),"fonts/cambria/cambria_bold.ttf");
         setFont(date, "fonts/cambria/cambria_regular.ttc");
+        setFont((TextView) findViewById(R.id.textView_audiobook_authorname), "fonts/montserrat/Montserrat-Light.otf");
        // setFont((TextView) findViewById(R.id.marekkrajewski), "fonts/montserrat/Montserrat-Light.otf");
 
         //audiobook

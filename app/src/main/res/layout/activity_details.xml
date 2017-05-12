@@ -178,15 +178,35 @@
 
 
 
+                    <!--<TextView-->
+                        <!--android:id="@+id/date"-->
+                        <!--android:text="  17 maja 2017"-->
+                        <!--android:textSize="26dp"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="21dp"-->
+
+                        <!--/>-->
+
                     <TextView
-                        android:id="@+id/date"
-                        android:text="  17 maja 2017"
-                        android:textSize="26dp"
+                        android:id="@+id/textView_audiobook_authorname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="21dp"
+                        android:layout_alignBottom="@id/image_audiobookRadio"
+                        android:text="MAREK KRAJEWSKI"
+                        android:layout_marginBottom="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="8dp"/>
 
-                        />
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/image_audiobookRadio"
+                        android:layout_marginBottom="-28dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="17 maja 2017"
+                        android:textSize="20dp" />
 
                     <ImageButton
                         android:id="@+id/details_play_audiobook_icon"

@@ -23,58 +23,86 @@ import zpi.data.model.Trip;
 import zpi.utils.DistanceCalculator;
 
 /**
- * Created by Ania on 2017-05-04.
+ * @author Wojciech Michałowski, Adrianna Łapucha
+ * Controller for any actions that allows user to get through the trip.
  */
-
 public final class TripController {
+    private static final float MIN_DISTANCE=0.05f; //activation distance
+
     private Trip currentTrip;
     private Context ctx;
     private LatLng userLoc = null;
-    private static final float MIN_DISTANCE=0.05f;
     private TripNotificator tripNotificator;
 
+    /**
+     * This constructor gets the Route parameter and extracts Trip related to the given route.
+     * @param ctx Context of application
+     * @param route Route to extract trip from. This trip will be managed during the controller work.
+     */
     public TripController(Context ctx, Route route){
         this.ctx = ctx;
         loadTripFromDatabase(route);
         tripNotificator=new TripNotificator();
     }
 
+    /**
+     * @param ctx Context of application
+     * @param trip Trip to manage
+     */
     public TripController(Context ctx, Trip trip){
         currentTrip = trip;
         this.ctx = ctx;
         tripNotificator=new TripNotificator();
     }
 
-    private void loadTripFromDatabase(Route route){
-        MockDbHelper dbHelper = new MockDbHelper(ctx);
-        SQLiteDatabase readDb = dbHelper.getReadableDatabase();
-        SQLiteDatabase writeDb = dbHelper.getWritableDatabase();
-        TripDAO tripDAO = new TripDAOOptimized(readDb, writeDb);
-        currentTrip = tripDAO.getTrip(tripDAO.getId(route.getName()));
-        if(currentTrip == null){
-            try {
-                currentTrip = new Trip(route, route.getRoutePoints().getFirst(), 1); //TODO generate an index
-            }catch(DataException de){
-                System.err.println(de);
-            }
-            tripDAO.createTrip(currentTrip);
-        }
-        readDb.close();
-        writeDb.close();
-    }
-
+    /**
+     * @return The list of control points ordered from the startPoint of the trip.
+     */
     public List<ControlPoint> getRouteControlPoints(){
         return currentTrip.getModifiedRoute();
     }
 
+    /**
+     * @return Current navigation target.
+     */
     public Point getCurrentCP(){
         return currentTrip.getCurrentTarget();
     }
 
+    /**
+     * @return Start point of the trip.
+     */
     public ControlPoint getStartCP(){
         return currentTrip.getStartPoint();
     }
 
+    /**
+     * @return Trip being managed by this controller.
+     */
+    public Trip getCurrentTrip(){
+        return currentTrip;
+    }
+
+    /**
+     * Updated user coordinates in this controller
+     * @param newLoc User coordinates
+     */
+    public void setUserLoc(LatLng newLoc){
+        userLoc = newLoc;
+    }
+
+    /**
+     * @return User coordinates registered in this controller.
+     */
+    public LatLng getUserLoc(){
+        return userLoc;
+    }
+
+    /**
+     * Creates new trip, adds it to DB and to this controller. Deletes current trip if its related to the same route.
+     * @param route New trip's route
+     * @param startPoint New start point (must be contained in the route!)
+     */
     public void setNewTrip(Route route, ControlPoint startPoint){
         MockDbHelper dbHelper = new MockDbHelper(ctx);
         SQLiteDatabase readDb = dbHelper.getReadableDatabase();
@@ -97,18 +125,9 @@ public final class TripController {
         writeDb.close();
     }
 
-    public Trip getCurrentTrip(){
-        return currentTrip;
-    }
-
-    public void setUserLoc(LatLng newLoc){
-        userLoc = newLoc;
-    }
-
-    public LatLng getUserLoc(){
-        return userLoc;
-    }
-
+    /**
+     * Makes changes to the DB that saves the lastVisitedPoint of managed trip.
+     */
     public void saveTripState(){
         MockDbHelper dbHelper = new MockDbHelper(ctx);
         SQLiteDatabase readDb = dbHelper.getReadableDatabase();
@@ -117,6 +136,69 @@ public final class TripController {
 
         tripDAO.changeLastVisitedPoint(currentTrip.getID(), currentTrip.getLastVisitedPoint());
 
+        readDb.close();
+        writeDb.close();
+    }
+
+    /**
+     * Set navigation to given point. Not working for Control Point!
+     * Control Point may be set as current target only in order by calling private nextControlPoint method!
+     * @param navigateTo Point to navigate to
+     */
+    public void setNavigation(Point navigateTo){
+        if(navigateTo instanceof ControlPoint)
+            return;
+
+        try {
+            currentTrip.setCurrentTarget(navigateTo);
+        }catch(DataException de){
+            de.printStackTrace();
+        }
+    }
+
+    /**
+     * Check's if the current target is reached by user and navigates to next control point if available.
+     * @return Code: 0 - target not reached yet; 1 - target reached; 2 - last target on list reached
+     * @throws Exception Error in nextControlPoint private method implementation. Current target seems to be missing in the control point list!
+     */
+    public int checkIfPointReached() throws Exception {
+        Point point=currentTrip.getCurrentTarget();
+        //Toast.makeText(ctx, "Dystans: " + DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude()), Toast.LENGTH_LONG).show();
+        if(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude())<=MIN_DISTANCE)
+        {
+            tripNotificator.setNotification(ctx, point);
+            int nextControlPoint = nextControlPoint();
+            if(nextControlPoint==0)
+            {
+                return 1;
+            }
+            if(nextControlPoint==1)
+            {
+                return 2;
+            }
+            else
+            {
+                throw new Exception("Error in nextControlPoint private method implementation. Current target seems to be missing in the control point list!");
+            }
+        }
+
+        return 0;
+    }
+
+    private void loadTripFromDatabase(Route route){
+        MockDbHelper dbHelper = new MockDbHelper(ctx);
+        SQLiteDatabase readDb = dbHelper.getReadableDatabase();
+        SQLiteDatabase writeDb = dbHelper.getWritableDatabase();
+        TripDAO tripDAO = new TripDAOOptimized(readDb, writeDb);
+        currentTrip = tripDAO.getTrip(tripDAO.getId(route.getName()));
+        if(currentTrip == null){
+            try {
+                currentTrip = new Trip(route, route.getRoutePoints().getFirst(), 1); //TODO generate an index
+            }catch(DataException de){
+                System.err.println(de);
+            }
+            tripDAO.createTrip(currentTrip);
+        }
         readDb.close();
         writeDb.close();
     }
@@ -143,42 +225,5 @@ public final class TripController {
         }
 
         return index<0?-1: index< cpList.size()?0:1;
-    }
-
-    //not working for ControlPoint!!!
-    public void setNavigation(Point navigateTo){
-        if(navigateTo instanceof ControlPoint)
-            return;
-
-        try {
-            currentTrip.setCurrentTarget(navigateTo);
-        }catch(DataException de){
-            de.printStackTrace();
-        }
-    }
-
-    //return 0 - target not reached yet; 1 - target reached; 2 - last target on list reached
-    public int checkIfPointReached() throws Exception {
-        Point point=currentTrip.getCurrentTarget();
-        //Toast.makeText(ctx, "Dystans: " + DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude()), Toast.LENGTH_LONG).show();
-        if(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude())<=MIN_DISTANCE)
-        {
-            tripNotificator.setNotification(ctx, point);
-            int nextControlPoint = nextControlPoint();
-            if(nextControlPoint==0)
-            {
-                return 1;
-            }
-            if(nextControlPoint==1)
-            {
-                return 2;
-            }
-            else
-            {
-                throw new Exception("Następny punkt -1 / TripController, nextControlPoint");
-            }
-        }
-
-        return 0;
     }
 }

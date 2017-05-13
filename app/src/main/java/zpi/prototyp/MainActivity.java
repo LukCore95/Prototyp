@@ -534,7 +534,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             firstRoute=false;
         }
-
+        try {
+            if(tripController.checkIfPointReached()==1){
+                adapter.setTrip(tripController.getCurrentTrip());
+                adapter.notifyDataSetChanged();
+               // Toast.makeText(this, "OBECNY PUNKT: " + adapter.trip.getCurrentTarget().getName(), Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //Point current = tripController.getCurrentCP();
         //System.out.println("OBECNY PUNKT: " + current.getName());
         refreshCurrentTarget();

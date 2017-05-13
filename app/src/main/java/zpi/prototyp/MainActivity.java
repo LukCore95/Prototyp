@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private List<ControlPoint> controlPoints;
     //private Trip currentTrip;
     boolean firstRoute=true;
-    public TripNotificator tn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -492,7 +492,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         adapter.notifyDataSetChanged();
         ipAdapter.notifyDataSetChanged();
 
-         tn= null;
+
         try {
             tripController.checkIfPointReached();
         } catch (Exception e) {

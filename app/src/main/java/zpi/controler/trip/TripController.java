@@ -29,7 +29,7 @@ public final class TripController {
     private Trip currentTrip;
     private Context ctx;
     private LatLng userLoc = null;
-    private static final int MIN_DISTANCE=50;
+    private static final float MIN_DISTANCE=0.05f;
     private TripNotificator tripNotificator;
 
     public TripController(Context ctx, Route route){
@@ -152,7 +152,7 @@ public final class TripController {
 
     public int checkIfPointReached() throws Exception {
         Point point=currentTrip.getCurrentTarget();
-        if(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude())<=40)
+        if(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude())<=MIN_DISTANCE)
         {
             tripNotificator.setNotification(ctx, point);
             int nextControlPoint = nextControlPoint();

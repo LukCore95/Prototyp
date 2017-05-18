@@ -1,5 +1,7 @@
 package zpi.data.db.dao;
 
+import java.util.List;
+
 import zpi.data.model.RestPoint;
 
 /**
@@ -22,4 +24,5 @@ public interface RestPointDAO extends DAO {
      */
     public int createRestPoint(RestPoint newRestPoint);
 
+    public List<RestPoint> getAllRestPoints();
 }

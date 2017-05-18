@@ -85,6 +85,7 @@ import zpi.data.model.DataException;
 import zpi.data.model.InterestingPlace;
 import zpi.data.model.InterestingPlaceType;
 import zpi.data.model.Point;
+import zpi.data.model.RestPoint;
 import zpi.utils.DistanceCalculator;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener, PopupMenu.OnMenuItemClickListener {
@@ -101,6 +102,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LinearLayout bottombar;
     private InterestingPlaceAdapter ipAdapter;
     private ListView ipList;
+    private ListView rpList;
+    private RestPointAdapter rpAdapter;
+    private List<RestPoint> restPoints;
     //end kod woja
 
     private GoogleMap mGoogleMap;
@@ -153,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         tripController = new TripController(this, SplashScreen.getTrip());
         controlPoints = tripController.getRouteControlPoints();
         interestingPlaces = SplashScreen.ipList;
+        restPoints = SplashScreen.rpList;
         //powiadomienie do pokazania
 //            tn= null;
 //        try {
@@ -262,6 +267,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        /*rpList = (ListView) findViewById(R.id.rp_list_list);
+        rpAdapter = new RestPointAdapter(this, restPoints, tripController.getUserLoc(), tripController);
+        rpList.setAdapter(rpAdapter);*/ //TODO nie działa
+        //TODO click listener
         //List<ControlPoint> testCPList = new ArrayList<ControlPoint>();
 
         //db test

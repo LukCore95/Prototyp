@@ -4,8 +4,13 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import zpi.data.db.MockContract;
 import zpi.data.model.DataException;
+import zpi.data.model.InterestingPlace;
+import zpi.data.model.InterestingPlaceType;
 import zpi.data.model.RestPoint;
 import zpi.data.model.RestPointType;
 
@@ -85,5 +90,29 @@ public class RestPointDAOOptimized implements RestPointDAO {
             id = getId(name);
 
         return id;
+    }
+
+    public List<RestPoint> getAllRestPoints(){
+        RestPointPhotoDAO rpPhotoDao = new RestPointPhotoDAOOptimized(readableDb, null);
+        List<RestPoint> rpList = new ArrayList<RestPoint>();
+        List<Integer> photos;
+        RestPoint curr;
+        Cursor cursor = readableDb.query(MockContract.RestPointEntry.TABLE_NAME, null, null, null, null, null, null);
+
+        while(cursor.moveToNext()){
+            int i = 1;
+            try {
+                curr = new RestPoint(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i++), RestPointType.fromIntToType(cursor.getInt(i)), cursor.getString(i));
+                photos = rpPhotoDao.getRestPointsPhotos(curr.getName());
+                curr.setOldPhotos(photos);
+                rpList.add(curr);
+            }catch (DataException de){
+                System.err.println(de);
+            }
+        }
+
+        cursor.close();
+
+        return rpList;
     }
 }

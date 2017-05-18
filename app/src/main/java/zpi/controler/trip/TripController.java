@@ -129,12 +129,14 @@ public final class TripController {
      * Makes changes to the DB that saves the lastVisitedPoint of managed trip.
      */
     public void saveTripState(){
+        System.out.println("WYKONUJEM SIEM");
         MockDbHelper dbHelper = new MockDbHelper(ctx);
         SQLiteDatabase readDb = dbHelper.getReadableDatabase();
         SQLiteDatabase writeDb = dbHelper.getWritableDatabase();
         TripDAO tripDAO = new TripDAOOptimized(readDb, writeDb);
 
-        tripDAO.changeLastVisitedPoint(currentTrip.getID(), currentTrip.getLastVisitedPoint());
+        if(tripDAO.changeLastVisitedPoint(currentTrip.getID(), currentTrip.getLastVisitedPoint()))
+            System.out.println("POPRAWNIE SIĘ WYKONAUO");
 
         readDb.close();
         writeDb.close();

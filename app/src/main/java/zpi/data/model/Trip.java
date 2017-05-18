@@ -32,7 +32,7 @@ public class Trip {
 		setStartPoint(startPoint);
 		lastVisitedPoint = lastVisited;
 		if(lastVisited != null)
-			setCurrentTarget(points.get(indexOf(lastVisitedPoint)+1));
+			setCurrentTarget(points.get((indexOf(lastVisitedPoint)+1)%points.size()));
 		else
 			setCurrentTarget(startPoint);
 

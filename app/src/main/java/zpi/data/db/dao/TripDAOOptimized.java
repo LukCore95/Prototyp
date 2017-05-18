@@ -63,7 +63,7 @@ public class TripDAOOptimized implements TripDAO {
         if(cursor.moveToFirst()){
             try {
                 ControlPoint lastVisited = cpAgent.getControlPoint(cursor.getInt(2));
-                if(lastVisited != null)
+                if(lastVisited == null)
                     trip = new Trip(routeAgent.getRoute(cursor.getInt(3)), cpAgent.getControlPoint(cursor.getInt(1)), cursor.getInt(0));
                 else
                     trip = new Trip(routeAgent.getRoute(cursor.getInt(3)), cpAgent.getControlPoint(cursor.getInt(1)), cpAgent.getControlPoint(cursor.getInt(2)), cursor.getInt(0));

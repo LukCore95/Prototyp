@@ -5,51 +5,81 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="43px"
-        android:layout_height="48px"
-        android:layout_margin="32px"
-        android:layout_weight="1"
-        android:layout_alignParentStart="true"
-        app:srcCompat="@drawable/ikona_budynek_szara" />
+    <RelativeLayout
+        android:id="@+id/ip_click_details"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginTop="20px"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/imageView2">
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="21px"
+            android:layout_height="24px"
+            android:layout_marginBottom="51px"
+            android:layout_marginEnd="24px"
+            android:layout_marginStart="24px"
+            android:layout_marginTop="51px"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ikona_budynek_szara" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9px"
+            android:layout_toRightOf="@id/imageView2"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ip_list_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="10px"
+                android:text="TextView"
+                android:textColor="@color/ip_list_name"
+                android:textSize="11dp" />
+
+            <TextView
+                android:id="@+id/ip_list_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="5px"
+                android:text="Ośrodek kultury"
+                android:textColor="@color/ip_list_type"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/ip_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5px"
+                android:text="ul. Świdnicka 35"
+                android:textColor="@color/ip_list_type"
+                android:textSize="10dp" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/ip_list_name"
-            android:layout_width="match_parent"
+            android:id="@+id/ip_list_dist"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="55px"
-            android:layout_marginTop="10px"
-            android:text="TextView"
-            android:textSize="11dp"
-            android:textColor="@color/ip_list_name"/>
-        <TextView
-            android:id="@+id/ip_list_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="55px"
-            android:layout_marginTop="10px"
-            android:text="Ośrodek kultury"
-            android:textSize="10dp"
-            android:textColor="@color/ip_list_type"/>
-    </LinearLayout>
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="5px"
+            android:layout_marginTop="45px"
+            android:text="500m"
+            android:textColor="@color/ip_list_dist"
+            android:textSize="15dp" />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/ip_list_dist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="20px"
-        android:layout_marginTop="40px"
-        android:text="500m"
-        android:textSize="15dp"
-        android:textColor="@color/ip_list_dist"/>
+    <Button
+        android:id="@+id/button_navigate"
+        android:layout_width="30px"
+        android:layout_height="30px"
+        android:layout_toEndOf="@id/ip_click_details"
+        android:layout_marginEnd="12px"
+        android:layout_marginStart="12px"
+        android:layout_marginTop="48px"
+        android:background="@drawable/ikona_nawiguj" />
+
 </RelativeLayout>

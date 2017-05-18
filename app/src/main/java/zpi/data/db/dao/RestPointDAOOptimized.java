@@ -36,7 +36,7 @@ public class RestPointDAOOptimized implements RestPointDAO {
 
         if(cursor.moveToFirst()){
             try {
-                rp = new RestPoint(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i++), RestPointType.fromIntToType(cursor.getInt(i)));
+                rp = new RestPoint(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i++), RestPointType.fromIntToType(cursor.getInt(i++)), cursor.getString(i));
                 rpId = getId(name);
             }catch(DataException de){
                 System.err.println(de);
@@ -77,6 +77,7 @@ public class RestPointDAOOptimized implements RestPointDAO {
         values.put(MockContract.RestPointEntry.COLUMN_NAME_LONG, rp.getLongitude());
         values.put(MockContract.RestPointEntry.COLUMN_NAME_LAT, rp.getLatitude());
         values.put(MockContract.RestPointEntry.COLUMN_NAME_TYPE, RestPointType.fromTypeToInt(rp.getType()));
+        values.put(MockContract.RestPointEntry.COLUMN_NAME_ADDRESS, rp.getAddress());
 
         writableDb.insert(MockContract.RestPointEntry.TABLE_NAME, null, values);
 

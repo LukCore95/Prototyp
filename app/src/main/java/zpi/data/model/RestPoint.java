@@ -9,19 +9,26 @@ import java.util.List;
  */
 public class RestPoint extends Point {
     private RestPointType type;
+    private String address;
 
-    public RestPoint(String name, String description, double longitude, double latitude, RestPointType type) throws DataException{
+    public RestPoint(String name, String description, double longitude, double latitude, RestPointType type, String address) throws DataException{
         super(name, description, longitude, latitude);
         this.type = type;
+        this.address = address;
     }
 
-    public RestPoint(String name, String description, double longitude, double latitude, List<Integer> oldPhotos, RestPointType type) throws DataException{
+    public RestPoint(String name, String description, double longitude, double latitude, List<Integer> oldPhotos, RestPointType type, String address) throws DataException{
         super(name, description, longitude, latitude, oldPhotos);
         this.type = type;
+        this.address = address;
     }
 
     public RestPointType getType(){
         return type;
+    }
+
+    public String getAddress(){
+        return address;
     }
 
     @Override

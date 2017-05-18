@@ -1,6 +1,7 @@
 package zpi.prototyp;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;;
@@ -16,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -79,6 +81,7 @@ import java.util.List;
 import zpi.controler.trip.TripController;
 import zpi.controler.trip.TripNotificator;
 import zpi.data.model.ControlPoint;
+import zpi.data.model.DataException;
 import zpi.data.model.InterestingPlace;
 import zpi.data.model.InterestingPlaceType;
 import zpi.data.model.Point;
@@ -223,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         textUpperToolbarPolish = (TextView)findViewById(R.id.textDown);
         textBottomToolbar = (TextView) findViewById(R.id.textbottombar);
         Typeface deutschmeister = Typeface.createFromAsset(getAssets(), "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
-        Typeface roboto = Typeface.createFromAsset(getAssets(), "fonts/roboto/Roboto-Light.ttf");
+        final Typeface roboto = Typeface.createFromAsset(getAssets(), "fonts/roboto/Roboto-Light.ttf");
         textUpperToolbarGerman.setTypeface(deutschmeister);
         textUpperToolbarPolish.setTypeface(roboto);
         textBottomToolbar.setTypeface(roboto);
@@ -283,17 +286,36 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //lv.setClickable(true);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Trip newTrip = new Trip(tripController.getCurrentTrip().getRoute(), (ControlPoint) parent.getItemAtPosition(position), 2); //TODO generate an index
-                zpi.data.model.Route route = tripController.getCurrentTrip().getRoute();
-                tripController.setNewTrip(route, (ControlPoint) parent.getItemAtPosition(position));
-                adapter.setTrip(tripController.getCurrentTrip());
-                adapter.notifyDataSetChanged();
-                controlPoints = tripController.getRouteControlPoints();
-                ControlPoint firstCp = controlPoints.get(0);
+            public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
 
-                refreshCurrentTarget();
-                //drawer.closeDrawer(GravityCompat.END, true);
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(parent.getContext());
+                alertBuilder.setMessage(getString(R.string.routelist_alert_message))
+                        .setTitle(R.string.routePointsMenuTitle);
+                alertBuilder.setPositiveButton(R.string.routelist_alert_reply_jump, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tripController.setNavigation((ControlPoint) parent.getItemAtPosition(position));
+                        adapter.setTrip(tripController.getCurrentTrip());
+                        adapter.notifyDataSetChanged();
+
+                        refreshCurrentTarget();
+                    }
+                });
+                alertBuilder.setNegativeButton(getString(R.string.routelist_alert_reply_newtrip), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        zpi.data.model.Route route = tripController.getCurrentTrip().getRoute();
+                        tripController.setNewTrip(route, (ControlPoint) parent.getItemAtPosition(position));
+                        adapter.setTrip(tripController.getCurrentTrip());
+                        controlPoints = tripController.getRouteControlPoints();
+                        ControlPoint firstCp = controlPoints.get(0);
+                        adapter.notifyDataSetChanged();
+
+                        refreshCurrentTarget();
+                    }
+                });
+                AlertDialog dialog = alertBuilder.create();
+                dialog.show();
             }
         });
 
@@ -667,7 +689,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         tripController.saveTripState();
     }
 
-    private void refreshCurrentTarget(){
+    public void refreshCurrentTarget(){
         Point currentCp = tripController.getCurrentCP();
         routeTo = currentCp.getGeoLoc();
         deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():getString(R.string.ip_navigation_bar_title);

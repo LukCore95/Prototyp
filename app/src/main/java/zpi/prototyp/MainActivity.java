@@ -520,7 +520,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         try {
-            tripController.checkIfPointReached();
+            if(tripController.checkIfPointReached()==1)
+                Toast.makeText(this, getString(R.string.target_reached_message), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }

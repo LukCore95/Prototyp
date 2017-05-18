@@ -1,19 +1,27 @@
 package zpi.prototyp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
+import zpi.controler.trip.TripController;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.InterestingPlace;
 import zpi.data.model.InterestingPlaceType;
@@ -25,14 +33,16 @@ import zpi.utils.DistanceCalculator;
  */
 
 public class InterestingPlaceAdapter extends BaseAdapter {
-    private Context ctx;
+    private MainActivity ctx;
     private List<InterestingPlace> ipList;
+    private TripController tripController;
     private LatLng userLoc;
 
-    public InterestingPlaceAdapter(Context ctx, List<InterestingPlace> ipList, LatLng userLoc){
+    public InterestingPlaceAdapter(MainActivity ctx, List<InterestingPlace> ipList, LatLng userLoc, TripController tc){
         this.ctx = ctx;
         this.ipList = ipList;
         this.userLoc = userLoc;
+        this.tripController = tc;
     }
 
     public int getCount(){
@@ -63,21 +73,45 @@ public class InterestingPlaceAdapter extends BaseAdapter {
         }
         mV = (View) convertView;
 
-        InterestingPlace currentCp = (InterestingPlace) getItem(position);
+        final InterestingPlace currentCp = (InterestingPlace) getItem(position);
 
         TextView name = (TextView) mV.findViewById(R.id.ip_list_name);
         TextView type = (TextView) mV.findViewById(R.id.ip_list_type);
         TextView tvdist = (TextView) mV.findViewById(R.id.ip_list_dist);
+        TextView tvaddress = (TextView) mV.findViewById(R.id.ip_address);
         ImageView image = (ImageView) mV.findViewById(R.id.imageView2);
+        Button navigate = (Button) mV.findViewById(R.id.button_navigate);
+        RelativeLayout clickDetails = (RelativeLayout) mV.findViewById(R.id.ip_click_details);
 
         Typeface roboto = Typeface.createFromAsset(ctx.getAssets(), "fonts/roboto/Roboto-Light.ttf");
         name.setTypeface(roboto);
         type.setTypeface(roboto);
         tvdist.setTypeface(roboto);
+        tvaddress.setTypeface(roboto);
+        navigate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tripController.setNavigation(currentCp);
+                Toast.makeText(ctx, "Teraz zmierzasz do: " + currentCp.getName(), Toast.LENGTH_SHORT).show();
+                Animation buttonAnim = new AlphaAnimation(0.3f, 1.0f);
+                buttonAnim.setDuration(1000);
+                v.setAnimation(buttonAnim);
+                v.startAnimation(buttonAnim);
+            }
+        });
+        clickDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentToInterestingPlace=new Intent(ctx, Interesting_Details.class);
+                intentToInterestingPlace.putExtra("nazwaPunktu", currentCp.getName());
+                ctx.startActivity(intentToInterestingPlace);
+            }
+        });
 
         InterestingPlaceType cpType = currentCp.getType();
         name.setText(currentCp.getName());
         type.setText(InterestingPlaceType.fromTypeToString(cpType));
+        tvaddress.setText(currentCp.getAddress());
 
         Drawable icon = null;
         switch(cpType){

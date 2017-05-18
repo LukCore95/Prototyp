@@ -45,8 +45,6 @@ public final class DataInitializer {
      * Use this method for inserting data into freshly created or updated database.
      * @param db Database that needs to be fulfilled with data
      * @param ctx Context of application
-     * @param newVersion current data version
-     * @param oldVersion former data version (if 0 - creation mode)
      */
     public static void InitializeData(SQLiteDatabase db, Context ctx){
         //NO VERSION CHECK NOW. All DB is being reloaded.
@@ -64,6 +62,7 @@ public final class DataInitializer {
             InterestingPlace opera=null;
             InterestingPlace pomnik_bc=null;
             InterestingPlace teatrlalek =null;
+            InterestingPlace wat = null;
 
             RestPoint cafeBarMonopol=null;
             RestPoint costacoffee=null;
@@ -138,6 +137,7 @@ public final class DataInitializer {
                 opera=new InterestingPlace(res.getString(R.string.ip_opera), res.getString(R.string.ip_opera_description), 17.031189, 51.105582, "Tutaj będzie adres.", InterestingPlaceType.kultury, operaPhoto);
                 pomnik_bc=new InterestingPlace(res.getString(R.string.ip_pomnik_bc), res.getString(R.string.ip_pomnik_bc_description), 17.030988, 51.104368, "Tutaj będzie adres.", InterestingPlaceType.kultury, pomnik_bcPhoto);
                 teatrlalek =new InterestingPlace(res.getString(R.string.ip_teatrlalek), res.getString(R.string.ip_teatrlalek_description), 17.033139, 51.105328, "Tutaj będzie adres.", InterestingPlaceType.kultury, teatrLalekPhoto);
+                wat = new InterestingPlace("Wojteks house", "Wojteguuu hałsuu", 16.845156, 51.389567, "Skokowa, ul. Żmigrodzka 11b", InterestingPlaceType.kultury, sadowaPhotos);
 
                 cafeBarMonopol = new RestPoint(res.getString(R.string.rp_cafeBarMonopol), res.getString(R.string.rp_cafeBarMonopol_description), 17.0306989, 51.1060844, RestPointType.cafe);
                 costacoffee= new RestPoint(res.getString(R.string.re_costaCoffee), res.getString(R.string.re_costaCoffee_description), 17.0321131, 51.103495, RestPointType.cafe);
@@ -194,6 +194,7 @@ public final class DataInitializer {
             ipDao.createInterestingPlace(opera);
             ipDao.createInterestingPlace(pomnik_bc);
             ipDao.createInterestingPlace(teatrlalek);
+            ipDao.createInterestingPlace(wat);
 
             RestPointDAO rpDao=new RestPointDAOOptimized(db, db);
 

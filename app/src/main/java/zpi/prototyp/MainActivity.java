@@ -23,6 +23,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -243,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         lv = (ListView) findViewById(R.id.route_points_list);
         ipList = (ListView) findViewById(R.id.ip_list_list);
-        ipAdapter = new InterestingPlaceAdapter(this, interestingPlaces, tripController.getUserLoc());
+        ipAdapter = new InterestingPlaceAdapter(this, interestingPlaces, tripController.getUserLoc(), tripController);
         ipList.setAdapter(ipAdapter);
         ipList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -428,6 +430,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        if (marker.equals(mMarker))
 //        { l
 //
+
         if(getMarkersID(marker.getId()) <basicRoute.size()) {
             Intent intent = new Intent(MainActivity.this, Details.class);
 

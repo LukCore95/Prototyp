@@ -77,16 +77,17 @@
         android:fitsSystemWindows="true"
         android:background="@color/colorPrimaryDark">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="375px"
+                android:layout_height="140dp"
                 android:background="@drawable/tlo_mapa"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/route_points_head">
 
                 <ImageView
                     android:id="@+id/route_points_icon"
@@ -117,19 +118,16 @@
                     android:text="@string/routePointsMenuExplanation"
                     android:textColor="@color/routePointsTitle"
                     android:textSize="12dp" />
-
-
             </RelativeLayout>
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/route_points_list"
-            android:layout_below="@id/route_points_explanation">
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/route_points_list"
+                android:layout_below="@id/route_points_head">
+            </ListView>
 
-        </ListView>
-
-        </LinearLayout>
+        </RelativeLayout>
 
 
      </android.support.design.widget.NavigationView>

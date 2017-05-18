@@ -102,6 +102,7 @@ public class InterestingPlaceAdapter extends BaseAdapter {
                 buttonAnim.setDuration(1000);
                 v.setAnimation(buttonAnim);
                 v.startAnimation(buttonAnim);
+                ctx.refreshCurrentTarget();
             }
         });
         clickDetails.setOnClickListener(new View.OnClickListener() {

@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">Śladami Mocka</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="routelist_alert_message">Chcesz przeskoczyć do wybranego punktu, czy rozpocząć od niego nową podróż?</string>
+    <string name="routelist_alert_reply_jump">Przeskocz</string>
+    <string name="routelist_alert_reply_newtrip">Nowa podróż</string>
     <string name="dummy_button">Dummy Button</string>
+    <string name="ip_navigation_bar_title">Ciekawe miejsce</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="renoma">Dom handlowy Renoma</string>
     <string name="renoma_german">Warenhaus Werheim</string>

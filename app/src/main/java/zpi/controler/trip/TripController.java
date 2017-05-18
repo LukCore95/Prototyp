@@ -129,14 +129,12 @@ public final class TripController {
      * Makes changes to the DB that saves the lastVisitedPoint of managed trip.
      */
     public void saveTripState(){
-        System.out.println("WYKONUJEM SIEM");
         MockDbHelper dbHelper = new MockDbHelper(ctx);
         SQLiteDatabase readDb = dbHelper.getReadableDatabase();
         SQLiteDatabase writeDb = dbHelper.getWritableDatabase();
         TripDAO tripDAO = new TripDAOOptimized(readDb, writeDb);
 
-        if(tripDAO.changeLastVisitedPoint(currentTrip.getID(), currentTrip.getLastVisitedPoint()))
-            System.out.println("POPRAWNIE SIĘ WYKONAUO");
+        tripDAO.changeLastVisitedPoint(currentTrip.getID(), currentTrip.getLastVisitedPoint());
 
         readDb.close();
         writeDb.close();
@@ -148,13 +146,23 @@ public final class TripController {
      * @param navigateTo Point to navigate to
      */
     public void setNavigation(Point navigateTo){
-        if(navigateTo instanceof ControlPoint)
-            return;
+        if(navigateTo instanceof ControlPoint) {
+            try {
+                List<ControlPoint> cplist = currentTrip.getModifiedRoute();
+                int currentIndex = cplist.indexOf(navigateTo);
+                currentTrip.setCurrentTarget(navigateTo);
+                currentTrip.setLastVisitedPoint(currentIndex>0?cplist.get(currentIndex-1):null);
+            }catch(DataException de){
+                de.printStackTrace();
+            }
+        }
 
-        try {
-            currentTrip.setCurrentTarget(navigateTo);
-        }catch(DataException de){
-            de.printStackTrace();
+        else {
+            try {
+                currentTrip.setCurrentTarget(navigateTo);
+            } catch (DataException de) {
+                de.printStackTrace();
+            }
         }
     }
 

@@ -670,7 +670,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void refreshCurrentTarget(){
         Point currentCp = tripController.getCurrentCP();
         routeTo = currentCp.getGeoLoc();
-        deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():"";
+        deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():getString(R.string.ip_navigation_bar_title);
         plName = currentCp.getName();
 
         ImageView menuIcon = (ImageView) findViewById(R.id.route_points_icon);

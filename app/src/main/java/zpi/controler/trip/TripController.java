@@ -27,7 +27,7 @@ import zpi.utils.DistanceCalculator;
  */
 
 public final class TripController {
-    private static final float MIN_DISTANCE=0.05f; //activation distance
+    protected static final float MIN_DISTANCE=0.05f; //activation distance
 
     private Trip currentTrip;
     private Context ctx;

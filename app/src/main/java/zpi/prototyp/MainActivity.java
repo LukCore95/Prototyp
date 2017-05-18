@@ -490,6 +490,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         LatLng llLoc = new LatLng(location.getLatitude(), location.getLongitude());
         ipAdapter.setUserLoc(llLoc);
+        ipAdapter.choosePointsOnList();
         tripController.setUserLoc(new LatLng(location.getLatitude(), location.getLongitude()));
         adapter.setUserLoc(tripController.getUserLoc());
         adapter.notifyDataSetChanged();

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +18,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import zpi.controler.trip.TripController;
-import zpi.data.model.ControlPoint;
 import zpi.data.model.InterestingPlace;
 import zpi.data.model.InterestingPlaceType;
-import zpi.data.model.Trip;
 import zpi.utils.DistanceCalculator;
 
 /**
@@ -35,14 +33,20 @@ import zpi.utils.DistanceCalculator;
 public class InterestingPlaceAdapter extends BaseAdapter {
     private MainActivity ctx;
     private List<InterestingPlace> ipList;
+    private List<InterestingPlace> fullList;
     private TripController tripController;
     private LatLng userLoc;
 
+    private static final double RANGE = 4; //4 KM RANGE
+
     public InterestingPlaceAdapter(MainActivity ctx, List<InterestingPlace> ipList, LatLng userLoc, TripController tc){
         this.ctx = ctx;
-        this.ipList = ipList;
+
+        this.fullList=ipList;
         this.userLoc = userLoc;
         this.tripController = tc;
+        choosePointsOnList();
+
     }
 
     public int getCount(){
@@ -92,6 +96,7 @@ public class InterestingPlaceAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 tripController.setNavigation(currentCp);
+
                 Toast.makeText(ctx, "Teraz zmierzasz do: " + currentCp.getName(), Toast.LENGTH_SHORT).show();
                 Animation buttonAnim = new AlphaAnimation(0.3f, 1.0f);
                 buttonAnim.setDuration(1000);
@@ -140,5 +145,23 @@ public class InterestingPlaceAdapter extends BaseAdapter {
 
     public void setUserLoc(LatLng userLoc){
         this.userLoc = userLoc;
+    }
+
+    public void choosePointsOnList()
+    {
+        if(userLoc!=null) {
+            ipList = new ArrayList<InterestingPlace>();
+
+            for (int i = 0; i < fullList.size(); i++) {
+                if (DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, fullList.get(i).getLatitude(), fullList.get(i).getLongitude()) < RANGE)
+                {
+                    ipList.add(fullList.get(i));
+                }
+            }
+        }
+        else
+        {
+            ipList=fullList;
+        }
     }
 }

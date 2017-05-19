@@ -70,7 +70,7 @@ public class SplashScreen extends Activity implements Runnable {
         Trip trip = tripdao.getTrip(1);
         ipList = ipDao.getAllInterestingPlaces();
         rpList = rpDao.getAllRestPoints();
-        //System.out.println("Wczytano " + rpList.size() + " miejsc odpoczynku");
+        System.out.println("Wczytano " + rpList.size() + " miejsc odpoczynku");
         if(trip != null) {
             System.out.println("WCZYTANO TRIP. PUNKT STARTOWY: " + trip.getStartPoint().getName());
             System.out.println("TRASA: ");

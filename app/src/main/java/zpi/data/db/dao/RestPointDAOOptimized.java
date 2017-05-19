@@ -41,7 +41,7 @@ public class RestPointDAOOptimized implements RestPointDAO {
 
         if(cursor.moveToFirst()){
             try {
-                rp = new RestPoint(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i++), RestPointType.fromIntToType(cursor.getInt(i++)), cursor.getString(i));
+                rp = new RestPoint(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i++), RestPointType.fromIntToType(cursor.getInt(i++)), cursor.getString(i++), cursor.getString(i));
                 rpId = getId(name);
             }catch(DataException de){
                 System.err.println(de);
@@ -83,12 +83,14 @@ public class RestPointDAOOptimized implements RestPointDAO {
         values.put(MockContract.RestPointEntry.COLUMN_NAME_LAT, rp.getLatitude());
         values.put(MockContract.RestPointEntry.COLUMN_NAME_TYPE, RestPointType.fromTypeToInt(rp.getType()));
         values.put(MockContract.RestPointEntry.COLUMN_NAME_ADDRESS, rp.getAddress());
+        values.put(MockContract.RestPointEntry.COLUMN_NAME_WEB, rp.getWeb());
 
         writableDb.insert(MockContract.RestPointEntry.TABLE_NAME, null, values);
 
         if(photoAgent.insertPhotosFromRestPoint(rp))
             id = getId(name);
 
+        //System.out.println("DODANO RP: " + id);
         return id;
     }
 
@@ -102,7 +104,7 @@ public class RestPointDAOOptimized implements RestPointDAO {
         while(cursor.moveToNext()){
             int i = 1;
             try {
-                curr = new RestPoint(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i++), RestPointType.fromIntToType(cursor.getInt(i)), cursor.getString(i));
+                curr = new RestPoint(cursor.getString(i++), cursor.getString(i++), cursor.getDouble(i++), cursor.getDouble(i++), RestPointType.fromIntToType(cursor.getInt(i++)), cursor.getString(i++), cursor.getString(i));
                 photos = rpPhotoDao.getRestPointsPhotos(curr.getName());
                 curr.setOldPhotos(photos);
                 rpList.add(curr);

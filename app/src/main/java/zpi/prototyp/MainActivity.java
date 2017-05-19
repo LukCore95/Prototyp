@@ -267,9 +267,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        /*rpList = (ListView) findViewById(R.id.rp_list_list);
+        rpList = (ListView) findViewById(R.id.rp_list_list);
         rpAdapter = new RestPointAdapter(this, restPoints, tripController.getUserLoc(), tripController);
-        rpList.setAdapter(rpAdapter);*/ //TODO nie działa
+        rpList.setAdapter(rpAdapter); //TODO nie działa
+        rpList.setDivider(null);
         //TODO click listener
         //List<ControlPoint> testCPList = new ArrayList<ControlPoint>();
 
@@ -586,9 +587,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLastLocation = location;
         mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
-        textUpperToolbarGerman.setText(deName);
-        textUpperToolbarPolish.setText(plName + ": " + dystansText);
-
         GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
                 .from(mLatLng)
                 .to(routeTo)
@@ -700,11 +698,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         tripController.saveTripState();
     }
 
-    public void refreshCurrentTarget(){
+    public void refreshCurrentTarget(){//System.out.println("REFRESH");
         Point currentCp = tripController.getCurrentCP();
         routeTo = currentCp.getGeoLoc();
         deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():getString(R.string.ip_navigation_bar_title);
+       // System.out.println("DENAME: " + deName);
         plName = currentCp.getName();
+        textUpperToolbarGerman.setText(deName);
+        textUpperToolbarPolish.setText(plName + ": " + dystansText);
+        //System.out.println("PLNAME: " + plName);
 
         ImageView menuIcon = (ImageView) findViewById(R.id.route_points_icon);
         Drawable img = (currentCp instanceof ControlPoint)?getDrawable(((ControlPoint) currentCp).getIcon()):null;

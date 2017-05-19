@@ -66,8 +66,8 @@
     <string name="ip_teatrlalek_description">Neobarokowy budynek dawnego klubu kupieckiego został zbudowany w latach 1892 - 1894. Wrocławski Teatr Lalek ma w swoim stałym repertuarze adaptacje utworów z kanonu literatury dziecięcej i młodzieżowej oraz najpopularniejszych baśni, gra jednak nie tylko klasykę. Ostatnie premiery to w większości przedstawienia powstałe w oparciu o współczesne sztuki napisane specjalnie dla Teatru – nowoczesne i odważne spektakle wykraczające poza konwencję tradycyjnego teatru lalkowego.</string>
     <string name="ip_list_header">Inne ciekawe miejsca</string>
     <string name="rp_cafeBarMonopol">Cafe Bar Monopol</string>
-    <string name="rp_cafeBarMonopol_web">ul. Heleny Modrzejewskiej 2</string>
-    <string name="rp_cafeBarMonopol_address">www.monopolwroclaw.hotel.com.pl</string>
+    <string name="rp_cafeBarMonopol_address">ul. Heleny Modrzejewskiej 2</string>
+    <string name="rp_cafeBarMonopol_web">www.monopolwroclaw.hotel.com.pl</string>
     <string name="rp_cafeBarMonopol_description">
         Niedziela – Czwartek: 10:00 – 03:00
         Piątek – Sobota: 10:00 – 05:00
@@ -76,7 +76,7 @@
     <string name="rp_costaCoffee_address">ul. Świdnicka 40</string>
     <string name="rp_costaCoffee_web">www.costacoffee.pl</string>
     <string name="rp_costaCoffee_description">
-        Poniedziałek – Piątek: 08:00 – 21:00
+        Poniedziałek – Piątek: 08:00 – 21:00\n
         Sobota: 08:00 – 21:00
         Niedziela: 09:30 – 20:00</string>
     <string name="rp_dinette">Dinette</string>

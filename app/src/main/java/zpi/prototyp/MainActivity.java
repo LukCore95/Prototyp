@@ -86,6 +86,7 @@ import zpi.data.model.InterestingPlace;
 import zpi.data.model.InterestingPlaceType;
 import zpi.data.model.Point;
 import zpi.data.model.RestPoint;
+import zpi.data.model.RestPointType;
 import zpi.utils.DistanceCalculator;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener, LocationListener, PopupMenu.OnMenuItemClickListener {
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private RouteListAdapter adapter;
     private List<ControlPoint> basicRoute;
     private List<InterestingPlace> interestingPlaces;
+
     private SlidingUpPanelLayout slidingUp;
     private LinearLayout bottombar;
     private InterestingPlaceAdapter ipAdapter;
@@ -441,11 +443,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         //adding markes
-        for(int i=0; i<basicRoute.size(); i++)
-        {
-            mGoogleMap.addMarker(new MarkerOptions().position(basicRoute.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(basicRoute.get(i).getIcon())));
-        }
 
+        for(int i=0; i<restPoints.size(); i++)
+        {
+            int icon=R.mipmap.ikona_pubu;
+            if(restPoints.get(i).getType()== RestPointType.restaurant)
+            {
+                icon=R.mipmap.ikona_restauracji;
+            }
+            if(restPoints.get(i).getType()== RestPointType.cafe)
+            {
+                icon=R.mipmap.ikona_kawiarni;
+            }
+
+            mGoogleMap.addMarker(new MarkerOptions().position(restPoints.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(icon)));
+
+
+        }
         for(int i=0; i<interestingPlaces.size(); i++)
         {
             int icon = R.mipmap.ip_museum;
@@ -453,6 +467,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 icon = R.mipmap.ip_church;
 
             mGoogleMap.addMarker(new MarkerOptions().position(interestingPlaces.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(icon)));
+        }
+        for(int i=0; i<basicRoute.size(); i++)
+        {
+            mGoogleMap.addMarker(new MarkerOptions().position(basicRoute.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(basicRoute.get(i).getIcon())));
         }
 
 
@@ -464,18 +482,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        { l
 //
 
-        if(getMarkersID(marker.getId()) <basicRoute.size()) {
+        if(getMarkersID(marker.getId()) > interestingPlaces.size()+restPoints.size()) {
             Intent intent = new Intent(MainActivity.this, Details.class);
 
-            intent.putExtra("nazwaPunktu", basicRoute.get(getMarkersID(marker.getId())).getName());
+            intent.putExtra("nazwaPunktu", basicRoute.get(getMarkersID(marker.getId())-(restPoints.size()+interestingPlaces.size())).getName());
             startActivity(intent);
         }
         else
         {
-            Intent intent = new Intent(MainActivity.this, Interesting_Details.class);
+            if(getMarkersID(marker.getId()) >restPoints.size()) {
+                Intent intent = new Intent(MainActivity.this, Interesting_Details.class);
 
-            intent.putExtra("nazwaPunktu", interestingPlaces.get(getMarkersID(marker.getId())-basicRoute.size()).getName());
-            startActivity(intent);
+                intent.putExtra("nazwaPunktu", interestingPlaces.get(getMarkersID(marker.getId()) - restPoints.size()).getName());
+                startActivity(intent);
+            }
         }
 
 //        }

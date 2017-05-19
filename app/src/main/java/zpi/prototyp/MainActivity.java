@@ -21,6 +21,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ListView rpList;
     private RestPointAdapter rpAdapter;
     private List<RestPoint> restPoints;
+    private ImageButton food;
     //end kod woja
 
     private GoogleMap mGoogleMap;
@@ -178,6 +180,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         drawer = (DrawerLayout) findViewById(R.id.main_drawer);
         slidingUp = (SlidingUpPanelLayout) findViewById(R.id.sliding_up_panel);
         bottombar = (LinearLayout) findViewById(R.id.bottombarlay);
+        food = (ImageButton) findViewById(R.id.food);
+        food.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawer.openDrawer(Gravity.START);
+            }
+        });
        // slidingUp.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
 
         bottombar.setOnClickListener(new View.OnClickListener() {
@@ -272,9 +281,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         rpList = (ListView) findViewById(R.id.rp_list_list);
         rpAdapter = new RestPointAdapter(this, restPoints, tripController.getUserLoc(), tripController);
-        rpList.setAdapter(rpAdapter); //TODO nie działa
+        rpList.setAdapter(rpAdapter);
         rpList.setDivider(null);
-        //TODO click listener
         //List<ControlPoint> testCPList = new ArrayList<ControlPoint>();
 
         //db test
@@ -739,7 +747,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    public void showKrajewskiFace(View v)
+    /*public void showKrajewskiFace(View v)
     {
        final  ImageView imView=new ImageView(MainActivity.this);
         final RelativeLayout rl=(RelativeLayout) findViewById(R.id.my_root);
@@ -764,5 +772,5 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
 
-    }
+    }*/
 }

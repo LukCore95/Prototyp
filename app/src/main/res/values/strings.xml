@@ -129,9 +129,7 @@
     <string name="rp_tuttiFrutti_address">pl. Kościuszki 1</string>
     <string name="rp_tuttiFrutti_web">www.tutti-frutti.pl</string>
     <string name="rp_tuttiFrutti_description">
-        Poniedziałek – Piątek: 08:00 – 22:00
-        Sobota: 09:00 – 22:00
-        Niedziela: 10:00 – 22:00</string>
+        Poniedziałek – Piątek: 08:00 – 22:00\nSobota: 09:00 – 22:00\nNiedziela: 10:00 – 22:00</string>
     <string name="rp_wloszczyzna">Włoszczyzna</string>
     <string name="rp_wloszczyzna_address">ul. Świdnicka 40</string>
     <string name="rp_wloszczyzna_web">www.wloszczyzna.pl</string>

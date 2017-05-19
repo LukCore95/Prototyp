@@ -157,7 +157,7 @@ public final class DataInitializer {
                         17.0310187, 51.1036146, RestPointType.restaurant, res.getString(R.string.rp_haggisPub_address),
                         res.getString(R.string.rp_hanaSushi_web));
                 polishLody=new RestPoint(res.getString(R.string.rp_polishLody),
-                        res.getString(R.string.rp_polishLody_description), 17.0317952, 51.1062136,
+                        res.getString(R.string.rp_polishLody_description), 17.030716, 51.102106,
                         RestPointType.cafe, res.getString(R.string.rp_polishLody_address),
                         res.getString(R.string.rp_polishLody_web));
                 niezlyDym=new RestPoint(res.getString(R.string.rp_niezlyDym), res.getString(R.string.rp_niezlyDym_description),

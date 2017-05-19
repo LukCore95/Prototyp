@@ -718,7 +718,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
        // System.out.println("DENAME: " + deName);
         plName = currentCp.getName();
         textUpperToolbarGerman.setText(deName);
-        textUpperToolbarPolish.setText(plName + ": " + dystansText);
+        textUpperToolbarPolish.setText(plName + ": " + (dystansText!=null?dystansText:""));
         //System.out.println("PLNAME: " + plName);
 
         ImageView menuIcon = (ImageView) findViewById(R.id.route_points_icon);

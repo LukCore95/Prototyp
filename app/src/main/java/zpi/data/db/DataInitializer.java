@@ -139,18 +139,50 @@ public final class DataInitializer {
                 teatrlalek =new InterestingPlace(res.getString(R.string.ip_teatrlalek), res.getString(R.string.ip_teatrlalek_description), 17.033139, 51.105328, "Tutaj będzie adres.", InterestingPlaceType.kultury, teatrLalekPhoto);
                 wat = new InterestingPlace("Wojteks house", "Wojteguuu hałsuu", 16.845156, 51.389567, "Skokowa, ul. Żmigrodzka 11b", InterestingPlaceType.kultury, sadowaPhotos);
 
-                cafeBarMonopol = new RestPoint(res.getString(R.string.rp_cafeBarMonopol), res.getString(R.string.rp_cafeBarMonopol_description), 17.0306989, 51.1060844, RestPointType.cafe, "Tu będzie adres");
-                costacoffee= new RestPoint(res.getString(R.string.re_costaCoffee), res.getString(R.string.re_costaCoffee_description), 17.0321131, 51.103495, RestPointType.cafe, "Tu będzie adres");
-                dinette= new RestPoint(res.getString(R.string.rp_dinette), res.getString(R.string.rp_dinette_description), 17.0313198,51.1060407, RestPointType.cafe, "Tu będzie adres");
-                haggisPub = new RestPoint(res.getString(R.string.rp_haggisPub), res.getString(R.string.rp_haggisPub_description), 17.030317, 51.103787, RestPointType.pub, "Tu będzie adres");
-                hanaSushi=new RestPoint(res.getString(R.string.rp_hanaSushi), res.getString(R.string.rp_hanaSushi_description), 17.0310187, 51.1036146, RestPointType.restaurant, "Tu będzie adres");
-                polishLody=new RestPoint(res.getString(R.string.rp_polishLody), res.getString(R.string.rp_polishLody_description), 17.0317952, 51.1062136, RestPointType.cafe, "Tu będzie adres");
-                niezlyDym=new RestPoint(res.getString(R.string.rp_niezlyDym), res.getString(R.string.rp_niezlyDym), 17.03181, 51.105474, RestPointType.restaurant, "Tu będzie adres");
-                pubWedrowki=new RestPoint(res.getString(R.string.rp_pubWedrowki), res.getString(R.string.rp_pubWedrowki_description), 17.0299611, 51.104158, RestPointType.pub, "Tu będzie adres");
-                staraPaczkarnia=new RestPoint(res.getString(R.string.rp_staraPaczkarnia), res.getString(R.string.rp_staraPaczkarnia_description), 17.0313768, 51.1063027, RestPointType.cafe, "Tu będzie adres");
-                tuttiFrutti = new RestPoint(res.getString(R.string.rp_tuttiFrutti), res.getString(R.string.rp_tuttiFrutti_description), 17.0301108, 51.1035695, RestPointType.cafe, "Tu będzie adres");
-                wloszczyzna=new RestPoint(res.getString(R.string.rp_wloszczyzna), res.getString(R.string.rp_wloszczyzna_description), 17.0320742, 51.1036891, RestPointType.restaurant, "Tu będzie adres");
-                nespressoBoutique =new RestPoint(res.getString(R.string.rp_nespressoBoutique), res.getString(R.string.rp_nespressoBoutique_description), 17.031265, 51.105982, RestPointType.cafe, "Tu będzie adres");
+                cafeBarMonopol = new RestPoint(res.getString(R.string.rp_cafeBarMonopol),
+                        res.getString(R.string.rp_cafeBarMonopol_description), 17.0306989, 51.1060844,
+                        RestPointType.cafe, res.getString(R.string.rp_cafeBarMonopol_address),
+                        res.getString(R.string.rp_cafeBarMonopol_web));
+                costacoffee= new RestPoint(res.getString(R.string.rp_costaCoffee),
+                        res.getString(R.string.rp_costaCoffee_description), 17.0321131, 51.103495,
+                        RestPointType.cafe, res.getString(R.string.rp_cafeBarMonopol_address),
+                        res.getString(R.string.rp_costaCoffee_web));
+                dinette= new RestPoint(res.getString(R.string.rp_dinette), res.getString(R.string.rp_dinette_description),
+                        17.0313198,51.1060407, RestPointType.cafe, res.getString(R.string.rp_dinette_address),
+                        res.getString(R.string.rp_dinette_web));
+                haggisPub = new RestPoint(res.getString(R.string.rp_haggisPub), res.getString(R.string.rp_haggisPub_description),
+                        17.030317, 51.103787, RestPointType.pub, res.getString(R.string.rp_haggisPub_address),
+                        res.getString(R.string.rp_haggisPub_web));
+                hanaSushi=new RestPoint(res.getString(R.string.rp_hanaSushi), res.getString(R.string.rp_hanaSushi_description),
+                        17.0310187, 51.1036146, RestPointType.restaurant, res.getString(R.string.rp_haggisPub_address),
+                        res.getString(R.string.rp_hanaSushi_web));
+                polishLody=new RestPoint(res.getString(R.string.rp_polishLody),
+                        res.getString(R.string.rp_polishLody_description), 17.0317952, 51.1062136,
+                        RestPointType.cafe, res.getString(R.string.rp_polishLody_address),
+                        res.getString(R.string.rp_polishLody_web));
+                niezlyDym=new RestPoint(res.getString(R.string.rp_niezlyDym), res.getString(R.string.rp_niezlyDym),
+                        17.03181, 51.105474, RestPointType.restaurant, res.getString(R.string.rp_niezlyDym_address),
+                        res.getString(R.string.rp_niezlyDym_web));
+                pubWedrowki=new RestPoint(res.getString(R.string.rp_pubWedrowki),
+                        res.getString(R.string.rp_pubWedrowki_description), 17.0299611, 51.104158,
+                        RestPointType.pub, res.getString(R.string.rp_pubWedrowki_address),
+                        res.getString(R.string.rp_pubWedrowki_web));
+                staraPaczkarnia=new RestPoint(res.getString(R.string.rp_staraPaczkarnia),
+                        res.getString(R.string.rp_staraPaczkarnia_description), 17.0313768, 51.1063027,
+                        RestPointType.cafe, res.getString(R.string.rp_staraPaczkarnia_address),
+                        res.getString(R.string.rp_staraPaczkarnia_web));
+                tuttiFrutti = new RestPoint(res.getString(R.string.rp_tuttiFrutti),
+                        res.getString(R.string.rp_tuttiFrutti_description), 17.0301108, 51.1035695,
+                        RestPointType.cafe, res.getString(R.string.rp_tuttiFrutti_address),
+                        res.getString(R.string.rp_tuttiFrutti_web));
+                wloszczyzna=new RestPoint(res.getString(R.string.rp_wloszczyzna),
+                        res.getString(R.string.rp_wloszczyzna_description), 17.0320742, 51.1036891,
+                        RestPointType.restaurant, res.getString(R.string.rp_wloszczyzna_address),
+                        res.getString(R.string.rp_wloszczyzna_web));
+                nespressoBoutique =new RestPoint(res.getString(R.string.rp_nespressoBoutique),
+                        res.getString(R.string.rp_nespressoBoutique_description), 17.031265, 51.105982,
+                        RestPointType.cafe, res.getString(R.string.rp_nespressoBoutique_address),
+                        res.getString(R.string.rp_nespressoBoutique_web));
 
             } catch (DataException de) {
                 System.err.println("Nie udało się załadować danych do bazy: " + de);

@@ -10,17 +10,20 @@ import java.util.List;
 public class RestPoint extends Point {
     private RestPointType type;
     private String address;
+    private String web;
 
-    public RestPoint(String name, String description, double longitude, double latitude, RestPointType type, String address) throws DataException{
+    public RestPoint(String name, String description, double longitude, double latitude, RestPointType type, String address, String web) throws DataException{
         super(name, description, longitude, latitude);
         this.type = type;
         this.address = address;
+        this.web = web;
     }
 
-    public RestPoint(String name, String description, double longitude, double latitude, List<Integer> oldPhotos, RestPointType type, String address) throws DataException{
+    public RestPoint(String name, String description, double longitude, double latitude, List<Integer> oldPhotos, RestPointType type, String address, String web) throws DataException{
         super(name, description, longitude, latitude, oldPhotos);
         this.type = type;
         this.address = address;
+        this.web = web;
     }
 
     public RestPointType getType(){
@@ -29,6 +32,10 @@ public class RestPoint extends Point {
 
     public String getAddress(){
         return address;
+    }
+
+    public String getWeb(){
+        return web;
     }
 
     @Override

@@ -97,6 +97,7 @@ public class InterestingPlaceAdapter extends BaseAdapter {
             public void onClick(View v) {
                 tripController.setNavigation(currentCp);
 
+
                 Toast.makeText(ctx, "Teraz zmierzasz do: " + currentCp.getName(), Toast.LENGTH_SHORT).show();
                 Animation buttonAnim = new AlphaAnimation(0.3f, 1.0f);
                 buttonAnim.setDuration(1000);

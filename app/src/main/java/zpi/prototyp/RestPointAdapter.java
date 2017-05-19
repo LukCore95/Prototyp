@@ -45,9 +45,11 @@ public class RestPointAdapter extends BaseAdapter {
         this.ctx = ctx;
 
         this.fullList=rpList;
+        this.rpList = rpList;
         this.userLoc = userLoc;
         this.tripController = tc;
         //choosePointsOnList();
+        System.out.println("Adapter: " + rpList.size() + " miejsc odpoczynku");
 
     }
 
@@ -75,7 +77,7 @@ public class RestPointAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if(convertView==null){
-            convertView = inflater.inflate(R.layout.ip_list_menu_item, null);
+            convertView = inflater.inflate(R.layout.rp_list_menu_item, null);
         }
         mV = (View) convertView;
 

@@ -86,18 +86,6 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_details);
 
-
-        //UWAGA: do czego to jest? można to usunąc?
-//        final LockScrollView scrollv= (LockScrollView)findViewById(R.id.id_details_przewijanie);
-//        scrollv.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                scrollv.setScrollingEnabled(false);
-//                return v.onTouchEvent(event);
-//            }
-//        });
-
-
         //description
         shortDescription=shortDescription();
         final WebView description = (WebView) findViewById(R.id.description_webview);
@@ -105,7 +93,6 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         description.setBackgroundColor(Color.TRANSPARENT);
         description.loadData(shortDescription, "charset=utf-8" ,"UTF-8");
         clickToReadMoreDetails();
-
 
         closeIB = (ImageButton) findViewById(R.id.closeImageButton);
         closeIB.setOnClickListener(new View.OnClickListener() {
@@ -168,13 +155,6 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
                 }
             }
         });
-
-        //UWAGA CO TO JEST MOZNA TO USUNĄC?
-//        ImageView rno = (ImageView)findViewById(R.id.renoma1_zoom);
-//        rno.setScaleType(ImageView.ScaleType.MATRIX);
-//        Matrix m = new Matrix();
-//        m.postRotate(90);
-//        rno.setImageMatrix(m);
 
         //Zabawa sliderem -> sekcja onResume
 

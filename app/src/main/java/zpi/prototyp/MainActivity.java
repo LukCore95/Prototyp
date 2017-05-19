@@ -268,9 +268,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        /*rpList = (ListView) findViewById(R.id.rp_list_list);
+        rpList = (ListView) findViewById(R.id.rp_list_list);
         rpAdapter = new RestPointAdapter(this, restPoints, tripController.getUserLoc(), tripController);
-        rpList.setAdapter(rpAdapter);*/ //TODO nie działa
+        rpList.setAdapter(rpAdapter); //TODO nie działa
+        rpList.setDivider(null);
         //TODO click listener
         //List<ControlPoint> testCPList = new ArrayList<ControlPoint>();
 
@@ -588,35 +589,33 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                mLastLocation = location;
                mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
-               textUpperToolbarGerman.setText(deName);
-               textUpperToolbarPolish.setText(plName + ": " + dystansText);
-
-               GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
-                       .from(mLatLng)
-                       .to(routeTo)
-                       .transportMode(TransportMode.WALKING)
-                       .unit(Unit.METRIC)
-                       .execute(new DirectionCallback() {
-                           @Override
-                           public void onDirectionSuccess(Direction direction, String rawBody) {
-                               String status = direction.getStatus();
-                               if (direction.isOK()) {
-                                   route = direction.getRouteList().get(0);
-                                   leg = route.getLegList().get(0);
-                                   directionPositionList = leg.getDirectionPoint();
-                                   polylineOptions = DirectionConverter.createPolyline(MainActivity.this, directionPositionList, 5, Color.RED);
-                                   Polyline temp = mGoogleMap.addPolyline(polylineOptions);
-                                   if (mPolyline != null) {
-                                       mPolyline.remove();
-                                       mPolyline = null;
-                                   }
-                                   mPolyline = temp;
-                                   mPolyline.setPattern(pattern);
-                                   dystansInfo = leg.getDistance();
-                                   dystansText = dystansInfo.getText();
-                                   textUpperToolbarGerman.setText(deName);
-                                   textUpperToolbarPolish.setText(plName + ": " + dystansText);
-                               } else {
+        GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
+                .from(mLatLng)
+                .to(routeTo)
+                .transportMode(TransportMode.WALKING)
+                .unit(Unit.METRIC)
+                .execute(new DirectionCallback() {
+                    @Override
+                    public void onDirectionSuccess(Direction direction, String rawBody) {
+                        String status = direction.getStatus();
+                        if(direction.isOK()) {
+                            route = direction.getRouteList().get(0);
+                            leg = route.getLegList().get(0);
+                            directionPositionList = leg.getDirectionPoint();
+                            polylineOptions = DirectionConverter.createPolyline(MainActivity.this, directionPositionList, 5, Color.RED);
+                            Polyline temp = mGoogleMap.addPolyline(polylineOptions);
+                            if(mPolyline != null){
+                                mPolyline.remove();
+                                mPolyline = null;
+                            }
+                            mPolyline = temp;
+                            mPolyline.setPattern(pattern);
+                            dystansInfo = leg.getDistance();
+                            dystansText = dystansInfo.getText();
+                            textUpperToolbarGerman.setText(deName);
+                            textUpperToolbarPolish.setText(plName + ": " + dystansText);
+                        }
+                        else {
 //                            Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();
                                }
                            }
@@ -627,7 +626,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                            }
                        });
                lastUserLoc=location;
-           
+
        }
     }
 
@@ -704,11 +703,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         tripController.saveTripState();
     }
 
-    public void refreshCurrentTarget(){
+    public void refreshCurrentTarget(){//System.out.println("REFRESH");
         Point currentCp = tripController.getCurrentCP();
         routeTo = currentCp.getGeoLoc();
         deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():getString(R.string.ip_navigation_bar_title);
+       // System.out.println("DENAME: " + deName);
         plName = currentCp.getName();
+        textUpperToolbarGerman.setText(deName);
+        textUpperToolbarPolish.setText(plName + ": " + dystansText);
+        //System.out.println("PLNAME: " + plName);
 
         ImageView menuIcon = (ImageView) findViewById(R.id.route_points_icon);
         Drawable img = (currentCp instanceof ControlPoint)?getDrawable(((ControlPoint) currentCp).getIcon()):null;

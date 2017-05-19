@@ -54,7 +54,7 @@ public final class DataInitializer {
             ControlPoint swidnicka = null;
             ControlPoint plteatralny = null;
             ControlPoint sadowa = null;
-            ControlPoint punktTestowy=null;
+            //ControlPoint punktTestowy=null;
 
             InterestingPlace sad=null;
             InterestingPlace promenada=null;
@@ -62,7 +62,7 @@ public final class DataInitializer {
             InterestingPlace opera=null;
             InterestingPlace pomnik_bc=null;
             InterestingPlace teatrlalek =null;
-            InterestingPlace wat = null;
+            //InterestingPlace wat = null;
 
             RestPoint cafeBarMonopol=null;
             RestPoint costacoffee=null;
@@ -129,7 +129,7 @@ public final class DataInitializer {
                 swidnicka = new ControlPoint(res.getString(R.string.swidnicka), res.getString(R.string.swidnicka_german), res.getString(R.string.swidnicka_description), maj131933.getTime(), 17.031117, 51.105059, R.mipmap.marker_swidnicka, R.drawable.oldswidnicka, R.drawable.newswidnicka, R.raw.podwale_renoma_swidnicka_plac_teatralny, swidnickaPhotos);
                 plteatralny = new ControlPoint(res.getString(R.string.placTeatralny), res.getString(R.string.placTeatralny_german), res.getString(R.string.placTeatralny_description), maj131933.getTime(), 17.031921, 51.105483, R.mipmap.marker_plteatralny, R.drawable.oldplteatralny, R.drawable.newplteatralny, R.raw.podwale_renoma_swidnicka_plac_teatralny, plteatralnyPhotos);
                 sadowa = new ControlPoint(res.getString(R.string.sadowa), res.getString(R.string.sadowa_german), res.getString(R.string.sadowa_description), maj151933.getTime(), 17.027947, 51.105328, R.mipmap.marker_sadowa, R.drawable.oldsadowa, R.drawable.oldsadowa, R.raw.sadowa, sadowaPhotos );
-                punktTestowy=new ControlPoint("kakakaka", "hihiihihihih", "ameba ameba", maj131933.getTime(), 16.845005, 51.389996, R.mipmap.marker_plteatralny,R.drawable.oldpodwale, R.drawable.oldplacteatralny1h, R.raw.podwale_renoma_swidnicka_plac_teatralny, sadowaPhotos);
+                //punktTestowy=new ControlPoint("kakakaka", "hihiihihihih", "ameba ameba", maj131933.getTime(), 16.845005, 51.389996, R.mipmap.marker_plteatralny,R.drawable.oldpodwale, R.drawable.oldplacteatralny1h, R.raw.podwale_renoma_swidnicka_plac_teatralny, sadowaPhotos);
 
                 sad=new InterestingPlace(res.getString(R.string.ip_sad), res.getString(R.string.ip_sad_description),17.025995, 51.105936, "Tutaj będzie adres.", InterestingPlaceType.kultury, sadPhoto);
                 promenada = new InterestingPlace(res.getString(R.string.ip_promenada), res.getString(R.string.ip_promenada_description), 17.025415, 51.107015, "Tutaj będzie adres.", InterestingPlaceType.kultury, promenadaPhoto );
@@ -137,7 +137,7 @@ public final class DataInitializer {
                 opera=new InterestingPlace(res.getString(R.string.ip_opera), res.getString(R.string.ip_opera_description), 17.031189, 51.105582, "Tutaj będzie adres.", InterestingPlaceType.kultury, operaPhoto);
                 pomnik_bc=new InterestingPlace(res.getString(R.string.ip_pomnik_bc), res.getString(R.string.ip_pomnik_bc_description), 17.030988, 51.104368, "Tutaj będzie adres.", InterestingPlaceType.kultury, pomnik_bcPhoto);
                 teatrlalek =new InterestingPlace(res.getString(R.string.ip_teatrlalek), res.getString(R.string.ip_teatrlalek_description), 17.033139, 51.105328, "Tutaj będzie adres.", InterestingPlaceType.kultury, teatrLalekPhoto);
-                wat = new InterestingPlace("Wojteks house", "Wojteguuu hałsuu", 16.845156, 51.389567, "Skokowa, ul. Żmigrodzka 11b", InterestingPlaceType.kultury, sadowaPhotos);
+                //wat = new InterestingPlace("Wojteks house", "Wojteguuu hałsuu", 16.845156, 51.389567, "Skokowa, ul. Żmigrodzka 11b", InterestingPlaceType.kultury, sadowaPhotos);
 
                 cafeBarMonopol = new RestPoint(res.getString(R.string.rp_cafeBarMonopol),
                         res.getString(R.string.rp_cafeBarMonopol_description), 17.0306989, 51.1060844,
@@ -208,7 +208,7 @@ public final class DataInitializer {
             testTrasa.add(swidnicka);
             testTrasa.add(renoma);
             testTrasa.add(podwale);
-            testTrasa.add(punktTestowy);
+            //testTrasa.add(punktTestowy);
 
            /* for(ControlPoint cp: testTrasa)
                 System.out.println("Dodany punkt: " + cp.getName());*/
@@ -226,7 +226,7 @@ public final class DataInitializer {
             ipDao.createInterestingPlace(opera);
             ipDao.createInterestingPlace(pomnik_bc);
             ipDao.createInterestingPlace(teatrlalek);
-            ipDao.createInterestingPlace(wat);
+            //ipDao.createInterestingPlace(wat);
 
             RestPointDAO rpDao=new RestPointDAOOptimized(db, db);
 

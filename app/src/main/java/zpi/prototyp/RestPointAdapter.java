@@ -36,6 +36,8 @@ import zpi.utils.DistanceCalculator;
  */
 
 public class RestPointAdapter extends BaseAdapter {
+    private static final String HTTP = "http://";
+
     private MainActivity ctx;
     private List<RestPoint> rpList;
     private List<RestPoint> fullList;
@@ -166,7 +168,7 @@ public class RestPointAdapter extends BaseAdapter {
         web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToWebsite = new Intent(Intent.ACTION_VIEW, Uri.parse(currentCp.getWeb()));
+                Intent goToWebsite = new Intent(Intent.ACTION_VIEW, Uri.parse(HTTP + currentCp.getWeb()));
                 ctx.startActivity(goToWebsite);
             }
         });

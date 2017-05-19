@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private List<ControlPoint> controlPoints;
     //private Trip currentTrip;
     boolean firstRoute=true;
+    Location lastUserLoc=null;
 
 
     @Override
@@ -520,21 +521,24 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onLocationChanged(Location location) {
 
-        LatLng llLoc = new LatLng(location.getLatitude(), location.getLongitude());
-        ipAdapter.setUserLoc(llLoc);
-        ipAdapter.choosePointsOnList();
-        tripController.setUserLoc(new LatLng(location.getLatitude(), location.getLongitude()));
-        adapter.setUserLoc(tripController.getUserLoc());
-        adapter.notifyDataSetChanged();
-        ipAdapter.notifyDataSetChanged();
+
+               if (lastUserLoc==null || DistanceCalculator.distance(lastUserLoc.getLatitude(), lastUserLoc.getLongitude(), location.getLatitude(), location.getLongitude()) >= 0.05||firstRoute) {
+               LatLng llLoc = new LatLng(location.getLatitude(), location.getLongitude());
+               ipAdapter.setUserLoc(llLoc);
+               ipAdapter.choosePointsOnList();
+               tripController.setUserLoc(new LatLng(location.getLatitude(), location.getLongitude()));
+               adapter.setUserLoc(tripController.getUserLoc());
+               adapter.notifyDataSetChanged();
+               ipAdapter.notifyDataSetChanged();
 
 
-        try {
-            if(tripController.checkIfPointReached()==1)
-                Toast.makeText(this, getString(R.string.target_reached_message), Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+               try {
+                   Resources res = this.getResources();
+                   if (tripController.checkIfPointReached() == 1)
+                       Toast.makeText(this, res.getString(R.string.target_reached_message), Toast.LENGTH_SHORT).show();
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
 //        try {
 //            tn = new TripNotificator(controlPoints);
 //            tn.setNotification(this);
@@ -542,50 +546,48 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //            e.printStackTrace();
 //        }
 
-        if(firstRoute)
-        {
+               if (firstRoute) {
 
-            int index=0;
-            float distance=Float.MAX_VALUE;
-            for(int i=0; i<controlPoints.size(); i++)
-            {
-                Location l= new Location(location);
-             //   float tempDistance=l.distanceTo(new Location(controlPoints[i].getLatitude()+ ", " + controlPoints[i].getLongitude()));
-                double tempDistance= DistanceCalculator.distance(location.getLatitude(), location.getLongitude(), controlPoints.get(i).getLatitude(), controlPoints.get(i).getLongitude());
-               //  Toast.makeText(this, tempDistance+" " + controlPoints.get(i).getGermanName(), Toast.LENGTH_LONG).show();
-                if(tempDistance<distance) {
-                    distance = (float)tempDistance;
-                    index = i;
+                   int index = 0;
+                   float distance = Float.MAX_VALUE;
+                   for (int i = 0; i < controlPoints.size(); i++) {
+                       Location l = new Location(location);
+                       //   float tempDistance=l.distanceTo(new Location(controlPoints[i].getLatitude()+ ", " + controlPoints[i].getLongitude()));
+                       double tempDistance = DistanceCalculator.distance(location.getLatitude(), location.getLongitude(), controlPoints.get(i).getLatitude(), controlPoints.get(i).getLongitude());
+                       //  Toast.makeText(this, tempDistance+" " + controlPoints.get(i).getGermanName(), Toast.LENGTH_LONG).show();
+                       if (tempDistance < distance) {
+                           distance = (float) tempDistance;
+                           index = i;
 
-                }
-            }
+                       }
+                   }
 
-            ControlPoint newStartCP = controlPoints.get(index);
-            zpi.data.model.Route route = tripController.getCurrentTrip().getRoute();
-            tripController.setNewTrip(route, newStartCP);
-            controlPoints = tripController.getRouteControlPoints();
-            //adapter = new RouteListAdapter(this, tripController.getCurrentTrip(), tripController.getUserLoc());
-            adapter.setTrip(tripController.getCurrentTrip());
-            //lv.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+                   ControlPoint newStartCP = controlPoints.get(index);
+                   zpi.data.model.Route route = tripController.getCurrentTrip().getRoute();
+                   tripController.setNewTrip(route, newStartCP);
+                   controlPoints = tripController.getRouteControlPoints();
+                   //adapter = new RouteListAdapter(this, tripController.getCurrentTrip(), tripController.getUserLoc());
+                   adapter.setTrip(tripController.getCurrentTrip());
+                   //lv.setAdapter(adapter);
+                   adapter.notifyDataSetChanged();
 
-            firstRoute=false;
-        }
-        try {
-            if(tripController.checkIfPointReached()==1){
-                adapter.setTrip(tripController.getCurrentTrip());
-                adapter.notifyDataSetChanged();
-               // Toast.makeText(this, "OBECNY PUNKT: " + adapter.trip.getCurrentTarget().getName(), Toast.LENGTH_LONG).show();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //Point current = tripController.getCurrentCP();
-        //System.out.println("OBECNY PUNKT: " + current.getName());
-        refreshCurrentTarget();
+                   firstRoute = false;
+               }
+               try {
+                   if (tripController.checkIfPointReached() == 1) {
+                       adapter.setTrip(tripController.getCurrentTrip());
+                       adapter.notifyDataSetChanged();
+                       // Toast.makeText(this, "OBECNY PUNKT: " + adapter.trip.getCurrentTarget().getName(), Toast.LENGTH_LONG).show();
+                   }
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+               //Point current = tripController.getCurrentCP();
+               //System.out.println("OBECNY PUNKT: " + current.getName());
+               refreshCurrentTarget();
 
-        mLastLocation = location;
-        mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+               mLastLocation = location;
+               mLatLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
         GoogleDirection.withServerKey("AIzaSyAPkePZElcxqKVGIDYRJ-94gvhXYREhLTc")
                 .from(mLatLng)
@@ -615,14 +617,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         }
                         else {
 //                            Toast.makeText(MainActivity.this, status, Toast.LENGTH_LONG).show();
-                        }
-                    }
+                               }
+                           }
 
-                    @Override
-                    public void onDirectionFailure(Throwable t) {
+                           @Override
+                           public void onDirectionFailure(Throwable t) {
 //                        Toast.makeText(MainActivity.this, "Ups...", Toast.LENGTH_LONG).show();
-                    }
-                });
+                           }
+                       });
+               lastUserLoc=location;
+
+       }
     }
 
     protected synchronized void buildGoogleApiClient() {

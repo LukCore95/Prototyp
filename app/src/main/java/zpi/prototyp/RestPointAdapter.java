@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,12 @@ import android.view.animation.Animation;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.akexorcist.googledirection.model.Line;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -38,6 +41,8 @@ public class RestPointAdapter extends BaseAdapter {
     private List<RestPoint> fullList;
     private TripController tripController;
     private LatLng userLoc;
+
+
 
     //private static final double RANGE = 20; //4 KM RANGE
 
@@ -86,7 +91,13 @@ public class RestPointAdapter extends BaseAdapter {
         TextView name = (TextView) mV.findViewById(R.id.rp_name);
         TextView tvdist = (TextView) mV.findViewById(R.id.rp_dist);
         TextView tvaddress = (TextView) mV.findViewById(R.id.rp_address);
+        TextView desc = (TextView) mV.findViewById(R.id.rp_desc);
+        Button web = (Button) mV.findViewById(R.id.rp_website);
+        RelativeLayout more_details = (RelativeLayout) mV.findViewById(R.id.rp_more_details);
+        //LinearLayout all = (LinearLayout) mV.findViewById(R.id.rp_list_item_layout);
+        Button navigate = (Button) mV.findViewById(R.id.rp_navigate);
         ImageView image = (ImageView) mV.findViewById(R.id.rp_icon);
+        //more = (ImageView) mV.findViewById(R.id.rp_more);
         //Button navigate = (Button) mV.findViewById(R.id.button_navigate); //TODO navigation
         //RelativeLayout clickDetails = (RelativeLayout) mV.findViewById(R.id.ip_click_details);
 
@@ -95,6 +106,7 @@ public class RestPointAdapter extends BaseAdapter {
         //type.setTypeface(roboto);
         tvdist.setTypeface(roboto);
         tvaddress.setTypeface(roboto);
+        desc.setTypeface(roboto);
         /*navigate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +133,7 @@ public class RestPointAdapter extends BaseAdapter {
         name.setText(currentCp.getName());
         //type.setText(InterestingPlaceType.fromTypeToString(cpType));
         tvaddress.setText(currentCp.getAddress());
+        desc.setText(currentCp.getDescription());
 
         Drawable icon = null;
         switch(rpType){
@@ -146,6 +159,32 @@ public class RestPointAdapter extends BaseAdapter {
         }
         else
             tvdist.setText("");
+
+        if(currentCp.getWeb()==null)
+            web.setVisibility(View.INVISIBLE);
+
+        web.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToWebsite = new Intent(Intent.ACTION_VIEW, Uri.parse(currentCp.getWeb()));
+                ctx.startActivity(goToWebsite);
+            }
+        });
+
+        navigate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tripController.setNavigation(currentCp);
+
+
+                Toast.makeText(ctx, "Teraz zmierzasz do: " + currentCp.getName(), Toast.LENGTH_SHORT).show();
+                Animation buttonAnim = new AlphaAnimation(0.3f, 1.0f);
+                buttonAnim.setDuration(1000);
+                v.setAnimation(buttonAnim);
+                v.startAnimation(buttonAnim);
+                ctx.refreshCurrentTarget();
+            }
+        });
 
         return  mV;
     }

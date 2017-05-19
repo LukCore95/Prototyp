@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/rp_list_item_layout">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -40,32 +41,55 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/rp_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="22dp"
-            android:layout_marginTop="18dp"
-            app:srcCompat="@mipmap/ikona_rozwin" />
-
         <TextView
             android:id="@+id/rp_dist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="22dp"
             android:layout_marginTop="15dp"
-            android:layout_toStartOf="@id/rp_more"
+            android:layout_alignParentEnd="true"
             android:text="TextView"
             android:textColor="@color/ip_list_dist"
             android:textSize="15dp" />
 
     </RelativeLayout>
 
-    <WebView
-        android:id="@+id/rp_webview"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="3dp"
+        android:id="@+id/rp_more_details">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="53dp"
+            android:textColor="@color/ip_list_type"
+            android:textSize="10dp"
+            android:text="Lolikse"
+            android:id="@+id/rp_desc"/>
+        
+        <Button
+            android:layout_width="30px"
+            android:layout_height="30px"
+            android:layout_marginEnd="22dp"
+            android:layout_marginLeft="12px"
+            android:background="@mipmap/ikona_nawiguj"
+            android:text=""
+            android:layout_alignParentEnd="true"
+            android:id="@+id/rp_navigate"/>
+
+        <Button
+            android:layout_width="30px"
+            android:layout_height="30px"
+            android:layout_marginEnd="30px"
+            android:layout_marginLeft="12px"
+            android:background="@mipmap/ikona_strony_www"
+            android:text=""
+            android:layout_toStartOf="@id/rp_navigate"
+            android:id="@+id/rp_website"/>
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/rp_divider"

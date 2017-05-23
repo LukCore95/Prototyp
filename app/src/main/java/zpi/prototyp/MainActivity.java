@@ -490,7 +490,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        { l
 //
 
-        if(getMarkersID(marker.getId()) > interestingPlaces.size()+restPoints.size()) {
+        if(getMarkersID(marker.getId()) >= interestingPlaces.size()+restPoints.size()) {
             Intent intent = new Intent(MainActivity.this, Details.class);
 
             intent.putExtra("nazwaPunktu", basicRoute.get(getMarkersID(marker.getId())-(restPoints.size()+interestingPlaces.size())).getName());

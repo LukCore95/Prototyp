@@ -173,6 +173,7 @@ public final class TripController {
      */
     public int checkIfPointReached() throws Exception {
         Point point=currentTrip.getCurrentTarget();
+
         //Toast.makeText(ctx, "Dystans: " + DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude()), Toast.LENGTH_LONG).show();
         if(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude())<=MIN_DISTANCE)
         {

@@ -204,10 +204,13 @@ public final class DataInitializer {
             }
             LinkedList<ControlPoint> testTrasa = new LinkedList<ControlPoint>();
             testTrasa.add(sadowa);
+        testTrasa.add(podwale);
+        testTrasa.add(renoma);
+        testTrasa.add(swidnicka);
             testTrasa.add(plteatralny);
-            testTrasa.add(swidnicka);
-            testTrasa.add(renoma);
-            testTrasa.add(podwale);
+
+
+
             //testTrasa.add(punktTestowy);
 
            /* for(ControlPoint cp: testTrasa)

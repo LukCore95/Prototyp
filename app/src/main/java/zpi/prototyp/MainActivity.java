@@ -582,8 +582,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                adapter.setUserLoc(tripController.getUserLoc());
                adapter.notifyDataSetChanged();
                ipAdapter.notifyDataSetChanged();
-                   rpAdapter.setUserLoc(tripController.getUserLoc());
-                   rpAdapter.notifyDataSetChanged();
+                  
 
 
                try {

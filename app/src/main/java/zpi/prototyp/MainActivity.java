@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private RouteListAdapter adapter;
     private List<ControlPoint> basicRoute;
     private List<InterestingPlace> interestingPlaces;
+    private ImageView centerLocation;
+    private boolean targetChanged = false;
 
     private SlidingUpPanelLayout slidingUp;
     private LinearLayout bottombar;
@@ -181,10 +183,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         slidingUp = (SlidingUpPanelLayout) findViewById(R.id.sliding_up_panel);
         bottombar = (LinearLayout) findViewById(R.id.bottombarlay);
         food = (ImageButton) findViewById(R.id.food);
+        centerLocation = (ImageView) findViewById(R.id.imageView);
         food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawer.openDrawer(Gravity.START);
+            }
+        });
+        centerLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                centerLocationToDestination();
             }
         });
        // slidingUp.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
@@ -550,8 +559,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onLocationChanged(Location location) {
 
 
-               if (lastUserLoc==null || DistanceCalculator.distance(lastUserLoc.getLatitude(), lastUserLoc.getLongitude(), location.getLatitude(), location.getLongitude()) >= 0.05||firstRoute) {
+               if (lastUserLoc==null || DistanceCalculator.distance(lastUserLoc.getLatitude(), lastUserLoc.getLongitude(), location.getLatitude(), location.getLongitude()) >= 0.05||firstRoute||targetChanged) {
                LatLng llLoc = new LatLng(location.getLatitude(), location.getLongitude());
+               targetChanged = false;
                ipAdapter.setUserLoc(llLoc);
                ipAdapter.choosePointsOnList();
                tripController.setUserLoc(new LatLng(location.getLatitude(), location.getLongitude()));
@@ -734,16 +744,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void refreshCurrentTarget(){//System.out.println("REFRESH");
         Point currentCp = tripController.getCurrentCP();
         routeTo = currentCp.getGeoLoc();
-        deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():getString(R.string.ip_navigation_bar_title);
+        deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():(currentCp instanceof InterestingPlace)?getString(R.string.ip_navigation_bar_title):getString(R.string.rp_navigation_bar_title);
        // System.out.println("DENAME: " + deName);
         plName = currentCp.getName();
         textUpperToolbarGerman.setText(deName);
-        textUpperToolbarPolish.setText(plName + ": " + dystansText);
+        textUpperToolbarPolish.setText(plName + ": " + (dystansText!=null?dystansText:""));
         //System.out.println("PLNAME: " + plName);
 
         ImageView menuIcon = (ImageView) findViewById(R.id.route_points_icon);
         Drawable img = (currentCp instanceof ControlPoint)?getDrawable(((ControlPoint) currentCp).getIcon()):null;
         menuIcon.setImageDrawable(img);
+        targetChanged = true;
 
     }
 

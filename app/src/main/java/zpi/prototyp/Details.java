@@ -25,8 +25,12 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,6 +47,8 @@ import zpi.view.slider.BeforeAfterSlider;
 import zpi.view.slider.BeforeAfterSliderRed;
 
 public class Details extends FragmentActivity implements View.OnTouchListener{
+    private static final int SCROLL_MARGIN = 10;
+    private static final int SCROLL_DURATION = 400;
 
     private SurfaceView surf;
     //private SurfaceHolder hold;
@@ -55,6 +61,9 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     //private Bitmap slider;
     private ImageButton closeIB;
     private MediaPlayer odtworzAudiobook;
+    private TextView placeDescHeader;
+    private RelativeLayout relLayout;
+    private LockScrollView lsv;
     ControlPoint cp;
 
     private BeforeAfterSlider slider;
@@ -73,6 +82,8 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
         super.onCreate(savedInstanceState);
 
+
+
         //connection with a database
         Intent intentM=getIntent();
         controlPointName=intentM.getStringExtra("nazwaPunktu");
@@ -85,7 +96,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_details);
-
+        lsv = (LockScrollView) findViewById(R.id.id_details_przewijanie);
         //description
         shortDescription=shortDescription();
         final WebView description = (WebView) findViewById(R.id.description_webview);
@@ -93,6 +104,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         description.setBackgroundColor(Color.TRANSPARENT);
         description.loadData(shortDescription, "charset=utf-8" ,"UTF-8");
         clickToReadMoreDetails();
+
 
         closeIB = (ImageButton) findViewById(R.id.closeImageButton);
         closeIB.setOnClickListener(new View.OnClickListener() {
@@ -116,10 +128,13 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         d.setTime(cal.getTimeInMillis());
         date.setText(sdf.format(d));
 
+        placeDescHeader = (TextView) findViewById(R.id.textView_opismiejscaHeader);
+        relLayout = (RelativeLayout) findViewById(R.id.layout_naglowekTekstu);
+
         setFont(polishNameHeader,"fonts/montserrat/Montserrat-Light.otf");
         setFont((TextView) findViewById(R.id.textPK),"fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf" );
         setFont(germanNameHeader, "fonts/grobe-deutschmeister/GrobeDeutschmeister.ttf");
-        setFont((TextView) findViewById(R.id.textView_opismiejscaHeader),"fonts/cambria/cambria_bold.ttf");
+        setFont(placeDescHeader,"fonts/cambria/cambria_bold.ttf");
         setFont((TextView) findViewById(R.id.textView_posluchajAudiobooka),"fonts/cambria/cambria_bold.ttf");
         setFont((TextView) findViewById(R.id.textView_galeriaZdjec),"fonts/cambria/cambria_bold.ttf");
         setFont(date, "fonts/cambria/cambria_regular.ttc");
@@ -438,6 +453,8 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
             }
         });
 
+        ObjectAnimator.ofInt(lsv, "scrollY",  (int)relLayout.getY()-SCROLL_MARGIN).setDuration(SCROLL_DURATION).start();
+
     }
 
     private void clickToReadMoreDetails(){
@@ -456,6 +473,9 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
                 clickToReadLessDetails();
             }
         });
+
+        ObjectAnimator.ofInt(lsv, "scrollY",  0).setDuration(SCROLL_DURATION).start();
+
     }
 
     private void setFont(TextView tv, String font)

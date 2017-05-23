@@ -159,8 +159,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+      //  this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimary));
         setContentView(R.layout.activity_main);
 
 
@@ -582,7 +582,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                adapter.setUserLoc(tripController.getUserLoc());
                adapter.notifyDataSetChanged();
                ipAdapter.notifyDataSetChanged();
-                  
+
 
 
                try {

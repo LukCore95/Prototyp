@@ -13,6 +13,7 @@ import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
@@ -94,7 +95,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
         dbHelp.close();
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimary));
         setContentView(R.layout.activity_details);
         lsv = (LockScrollView) findViewById(R.id.id_details_przewijanie);
         //description

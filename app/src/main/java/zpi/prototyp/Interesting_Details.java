@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,7 @@ public class Interesting_Details extends AppCompatActivity {
         setContentView(R.layout.activity_interesting__details);
 //        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
      //   this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimary));
 
         Intent intentM=getIntent();
         interestingPlaceName=intentM.getStringExtra("nazwaPunktu");

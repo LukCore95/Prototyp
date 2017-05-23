@@ -5,27 +5,24 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.view.Window;
 import android.view.WindowManager;
 
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 
 import zpi.data.db.MockDbHelper;
-import zpi.data.db.dao.ControlPointDAO;
-import zpi.data.db.dao.ControlPointDAOOptimized;
 import zpi.data.db.dao.InterestingPlaceDAO;
 import zpi.data.db.dao.InterestingPlaceDAOOptimized;
 import zpi.data.db.dao.RestPointDAO;
 import zpi.data.db.dao.RestPointDAOOptimized;
-import zpi.data.db.dao.RouteDAO;
 import zpi.data.db.dao.RouteDAOOptimized;
 import zpi.data.db.dao.TripDAO;
 import zpi.data.db.dao.TripDAOOptimized;
 import zpi.data.model.ControlPoint;
 import zpi.data.model.DataException;
 import zpi.data.model.InterestingPlace;
+import zpi.data.model.PointAlphabeticComparator;
 import zpi.data.model.RestPoint;
 import zpi.data.model.Route;
 import zpi.data.model.Trip;
@@ -70,6 +67,8 @@ public class SplashScreen extends Activity implements Runnable {
         Trip trip = tripdao.getTrip(1);
         ipList = ipDao.getAllInterestingPlaces();
         rpList = rpDao.getAllRestPoints();
+        Collections.sort(ipList, new PointAlphabeticComparator());
+        Collections.sort(rpList, new PointAlphabeticComparator());
         System.out.println("Wczytano " + rpList.size() + " miejsc odpoczynku");
         if(trip != null) {
             System.out.println("WCZYTANO TRIP. PUNKT STARTOWY: " + trip.getStartPoint().getName());

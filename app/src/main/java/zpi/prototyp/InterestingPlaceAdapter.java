@@ -37,7 +37,7 @@ public class InterestingPlaceAdapter extends BaseAdapter {
     private TripController tripController;
     private LatLng userLoc;
 
-    private static final double RANGE = 20; //4 KM RANGE
+    private static final double RANGE = 2.5; //0.5 KM RANGE
 
     public InterestingPlaceAdapter(MainActivity ctx, List<InterestingPlace> ipList, LatLng userLoc, TripController tc){
         this.ctx = ctx;
@@ -67,6 +67,7 @@ public class InterestingPlaceAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup groupParents){
+        choosePointsOnList();
         InterestingPlace curr = ((InterestingPlace) getItem(position));
 
         View mV;

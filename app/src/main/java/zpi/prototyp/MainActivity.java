@@ -22,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -34,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -102,9 +104,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private List<InterestingPlace> interestingPlaces;
     private ImageView centerLocation;
     private boolean targetChanged = false;
+    private boolean endReached = false;
+    private ImageButton ipSettings;
+    private Switch switch1;
+    private boolean ip_near = true;
 
     private SlidingUpPanelLayout slidingUp;
-    private LinearLayout bottombar;
+    private RelativeLayout bottombar;
     private InterestingPlaceAdapter ipAdapter;
     private ListView ipList;
     private ListView rpList;
@@ -181,8 +187,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         navView = (NavigationView) findViewById(R.id.navigation_view);
         drawer = (DrawerLayout) findViewById(R.id.main_drawer);
         slidingUp = (SlidingUpPanelLayout) findViewById(R.id.sliding_up_panel);
-        bottombar = (LinearLayout) findViewById(R.id.bottombarlay);
+        bottombar = (RelativeLayout) findViewById(R.id.bottombarlay);
         food = (ImageButton) findViewById(R.id.food);
+        /*ipSettings = (ImageButton) findViewById(R.id.ip_settings_button);
+        ipSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+
+            }
+        });*/
         centerLocation = (ImageView) findViewById(R.id.imageView);
         food.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -572,8 +586,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                try {
                    Resources res = this.getResources();
-                   if (tripController.checkIfPointReached() == 1)
+                   int status;
+                   if ((status = tripController.checkIfPointReached()) != 0 && !endReached)
                        Toast.makeText(this, res.getString(R.string.target_reached_message), Toast.LENGTH_SHORT).show();
+                   if(status == 2)
+                       endReached = true;
+
                } catch (Exception e) {
                    e.printStackTrace();
                }

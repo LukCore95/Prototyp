@@ -44,6 +44,8 @@ public class RestPointAdapter extends BaseAdapter {
     private TripController tripController;
     private LatLng userLoc;
 
+    private static final double RANGE = 1; //0.200? KM RANGE
+
 
 
     //private static final double RANGE = 20; //4 KM RANGE
@@ -51,11 +53,11 @@ public class RestPointAdapter extends BaseAdapter {
     public RestPointAdapter(MainActivity ctx, List<RestPoint> rpList, LatLng userLoc, TripController tc){
         this.ctx = ctx;
 
-        this.fullList=rpList;
-        this.rpList = rpList;
+        //this.fullList=rpList;
+        this.fullList = rpList;
         this.userLoc = userLoc;
         this.tripController = tc;
-        //choosePointsOnList();
+        choosePointsOnList();
         System.out.println("Adapter: " + rpList.size() + " miejsc odpoczynku");
 
     }
@@ -78,6 +80,7 @@ public class RestPointAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup groupParents){
+        choosePointsOnList();
         RestPoint curr = ((RestPoint) getItem(position));
 
         View mV;
@@ -195,7 +198,7 @@ public class RestPointAdapter extends BaseAdapter {
         this.userLoc = userLoc;
     }
 
-    /*public void choosePointsOnList()
+    public void choosePointsOnList()
     {
         if(userLoc!=null) {
             rpList = new ArrayList<RestPoint>();
@@ -211,5 +214,5 @@ public class RestPointAdapter extends BaseAdapter {
         {
             rpList=fullList;
         }
-    }*/
+    }
 }

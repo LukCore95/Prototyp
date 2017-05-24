@@ -12,6 +12,7 @@
     <string name="ip_settings_near">Blisko mnie</string>
     <string name="ip_navigation_bar_title">Ciekawe miejsce</string>
     <string name="rp_navigation_bar_title">Odpoczynek</string>
+    <string name="distance">Odległość </string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="renoma">Dom handlowy Renoma</string>
     <string name="renoma_german">Warenhaus Werheim</string>

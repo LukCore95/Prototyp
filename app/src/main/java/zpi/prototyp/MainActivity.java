@@ -791,9 +791,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void refreshCurrentTarget(){//System.out.println("REFRESH");
         Point currentCp = tripController.getCurrentCP();
         routeTo = currentCp.getGeoLoc();
-        deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():(currentCp instanceof InterestingPlace)?getString(R.string.ip_navigation_bar_title):getString(R.string.rp_navigation_bar_title);
+        deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():currentCp.getName();
        // System.out.println("DENAME: " + deName);
-        plName = currentCp.getName();
+        plName = (currentCp instanceof ControlPoint)?currentCp.getName():getString(R.string.distance);
         textUpperToolbarGerman.setText(deName);
         textUpperToolbarPolish.setText(plName + ": " + (dystansText!=null?dystansText:""));
         //System.out.println("PLNAME: " + plName);

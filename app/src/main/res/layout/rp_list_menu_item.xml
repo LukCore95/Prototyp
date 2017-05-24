@@ -6,6 +6,7 @@
     android:id="@+id/rp_list_item_layout">
 
     <RelativeLayout
+        android:id="@+id/rp_click"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -45,9 +46,9 @@
             android:id="@+id/rp_dist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="22dp"
             android:layout_marginTop="15dp"
-            android:layout_alignParentEnd="true"
             android:text="TextView"
             android:textColor="@color/ip_list_dist"
             android:textSize="15dp" />
@@ -69,16 +70,6 @@
             android:textSize="10dp"
             android:text="Lolikse"
             android:id="@+id/rp_desc"/>
-        
-        <Button
-            android:layout_width="30px"
-            android:layout_height="30px"
-            android:layout_marginEnd="22dp"
-            android:layout_marginLeft="12px"
-            android:background="@mipmap/ikona_nawiguj"
-            android:text=""
-            android:layout_alignParentEnd="true"
-            android:id="@+id/rp_navigate"/>
 
         <Button
             android:layout_width="30px"
@@ -87,7 +78,7 @@
             android:layout_marginLeft="12px"
             android:background="@mipmap/ikona_strony_www"
             android:text=""
-            android:layout_toStartOf="@id/rp_navigate"
+            android:layout_alignParentRight="true"
             android:id="@+id/rp_website"/>
     </RelativeLayout>
 

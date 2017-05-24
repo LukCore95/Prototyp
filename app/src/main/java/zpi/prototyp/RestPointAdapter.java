@@ -1,10 +1,12 @@
 package zpi.prototyp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,9 +100,9 @@ public class RestPointAdapter extends BaseAdapter {
         TextView tvaddress = (TextView) mV.findViewById(R.id.rp_address);
         TextView desc = (TextView) mV.findViewById(R.id.rp_desc);
         Button web = (Button) mV.findViewById(R.id.rp_website);
-        RelativeLayout more_details = (RelativeLayout) mV.findViewById(R.id.rp_more_details);
+        RelativeLayout more_details = (RelativeLayout) mV.findViewById(R.id.rp_click);
         //LinearLayout all = (LinearLayout) mV.findViewById(R.id.rp_list_item_layout);
-        Button navigate = (Button) mV.findViewById(R.id.rp_navigate);
+       // Button navigate = (Button) mV.findViewById(R.id.rp_navigate);
         ImageView image = (ImageView) mV.findViewById(R.id.rp_icon);
         //more = (ImageView) mV.findViewById(R.id.rp_more);
         //Button navigate = (Button) mV.findViewById(R.id.button_navigate); //TODO navigation
@@ -176,7 +178,7 @@ public class RestPointAdapter extends BaseAdapter {
             }
         });
 
-        navigate.setOnClickListener(new View.OnClickListener() {
+        /*navigate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tripController.setNavigation(currentCp);
@@ -189,7 +191,34 @@ public class RestPointAdapter extends BaseAdapter {
                 v.startAnimation(buttonAnim);
                 ctx.refreshCurrentTarget();
             }
-        });
+        });*/
+        View.OnClickListener navigateListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Context ctx = v.getContext();
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(ctx);
+                alertBuilder.setMessage(ctx.getString(R.string.rp_navigate_alert_message) + " " + currentCp.getName() + "?");
+                alertBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tripController.setNavigation(currentCp);
+
+
+                        Toast.makeText(ctx, "Teraz zmierzasz do: " + currentCp.getName(), Toast.LENGTH_SHORT).show();
+
+                        ((MainActivity)ctx).refreshCurrentTarget();
+                    }
+                });
+                alertBuilder.setNegativeButton(R.string.no, null);
+
+
+                alertBuilder.create().show();
+
+            }
+        };
+
+        more_details.setOnClickListener(navigateListener);
+        desc.setOnClickListener(navigateListener);
 
         return  mV;
     }

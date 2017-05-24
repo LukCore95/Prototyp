@@ -350,6 +350,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public void onClick(DialogInterface dialog, int which) {
                         zpi.data.model.Route route = tripController.getCurrentTrip().getRoute();
                         tripController.setNewTrip(route, (ControlPoint) parent.getItemAtPosition(position));
+                        endReached = false;
                         adapter.setTrip(tripController.getCurrentTrip());
                         controlPoints = tripController.getRouteControlPoints();
                         ControlPoint firstCp = controlPoints.get(0);
@@ -578,23 +579,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                targetChanged = false;
                ipAdapter.setUserLoc(llLoc);
                ipAdapter.choosePointsOnList();
+               rpAdapter.setUserLoc(llLoc);
+               rpAdapter.choosePointsOnList();
                tripController.setUserLoc(new LatLng(location.getLatitude(), location.getLongitude()));
                adapter.setUserLoc(tripController.getUserLoc());
                adapter.notifyDataSetChanged();
                ipAdapter.notifyDataSetChanged();
+               rpAdapter.notifyDataSetChanged();
 
+               if(!endReached) {
+                   try {
+                       Resources res = this.getResources();
+                       int status;
+                       if ((status = tripController.checkIfPointReached()) != 0)
+                           Toast.makeText(this, res.getString(R.string.target_reached_message), Toast.LENGTH_SHORT).show();
+                       if (status == 2)
+                           endReached = true;
 
-
-               try {
-                   Resources res = this.getResources();
-                   int status;
-                   if ((status = tripController.checkIfPointReached()) != 0 && !endReached)
-                       Toast.makeText(this, res.getString(R.string.target_reached_message), Toast.LENGTH_SHORT).show();
-                   if(status == 2)
-                       endReached = true;
-
-               } catch (Exception e) {
-                   e.printStackTrace();
+                   } catch (Exception e) {
+                       e.printStackTrace();
+                   }
                }
 //        try {
 //            tn = new TripNotificator(controlPoints);

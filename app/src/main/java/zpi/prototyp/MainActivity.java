@@ -105,9 +105,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ImageView centerLocation;
     private boolean targetChanged = false;
     private boolean endReached = false;
+    private boolean slidingUpPanelUp = false;
     private ImageButton ipSettings;
     private Switch switch1;
     private boolean ip_near = true;
+    private TextView noIpText;
+    private TextView noRpText;
 
     private SlidingUpPanelLayout slidingUp;
     private RelativeLayout bottombar;
@@ -171,6 +174,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         controlPoints = tripController.getRouteControlPoints();
         interestingPlaces = SplashScreen.ipList;
         restPoints = SplashScreen.rpList;
+        noIpText = (TextView) findViewById(R.id.ip_no_ip);
+        noRpText = (TextView) findViewById(R.id.rp_no_rp);
         //powiadomienie do pokazania
 //            tn= null;
 //        try {
@@ -215,8 +220,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         bottombar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                slidingUp.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-                System.out.println("KLiknięto bottombar");
+                if(!slidingUpPanelUp) {
+                    slidingUp.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+                    slidingUpPanelUp = true;
+                }
+                else{
+                    slidingUp.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+                    slidingUpPanelUp = false;
+                }
+
             }
         });
         //end kod woja
@@ -270,6 +282,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         textUpperToolbarGerman.setTypeface(deutschmeister);
         textUpperToolbarPolish.setTypeface(roboto);
         textBottomToolbar.setTypeface(roboto);
+        noIpText.setTypeface(roboto);
+        noRpText.setTypeface(roboto);
 
 //        place1 = new LatLng(51.103851, 17.031064);
 //        place2 = new LatLng(51.104082, 17.030082);
@@ -586,6 +600,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                adapter.notifyDataSetChanged();
                ipAdapter.notifyDataSetChanged();
                rpAdapter.notifyDataSetChanged();
+
+               if(ipAdapter.getCount() == 0)
+                   noIpText.setVisibility(View.VISIBLE);
+               else
+                   noIpText.setVisibility(View.GONE);
+
+                   if(rpAdapter.getCount() == 0)
+                       noRpText.setVisibility(View.VISIBLE);
+                   else
+                       noRpText.setVisibility(View.GONE);
 
                if(!endReached) {
                    try {

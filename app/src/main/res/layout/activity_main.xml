@@ -108,6 +108,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/rp_list_list"></ListView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_rp"
+                android:layout_margin="40dp"
+                android:textColor="@color/ip_list_type"
+                android:textSize="11dp"
+                android:visibility="gone"
+                android:id="@+id/rp_no_rp"/>
         </LinearLayout>
 
 
@@ -183,7 +192,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center|top"
-        android:id="@+id/ip_list">
+        android:id="@+id/ip_list"
+        android:background="@color/colorPrimaryDark">
 
         <include
             layout="@layout/bottombar_main"
@@ -195,6 +205,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/ip_list_list"></ListView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_ip"
+            android:layout_margin="40dp"
+            android:textColor="@color/ip_list_type"
+            android:textSize="11dp"
+            android:visibility="gone"
+            android:id="@+id/ip_no_ip"/>
     </LinearLayout>
 
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>

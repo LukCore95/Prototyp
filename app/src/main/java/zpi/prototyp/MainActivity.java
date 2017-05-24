@@ -373,6 +373,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         refreshCurrentTarget();
                     }
                 });
+                alertBuilder.setNeutralButton(getString(R.string.cancel), null);
                 AlertDialog dialog = alertBuilder.create();
                 dialog.show();
             }

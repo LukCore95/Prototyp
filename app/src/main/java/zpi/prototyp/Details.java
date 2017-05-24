@@ -65,6 +65,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
     private TextView placeDescHeader;
     private RelativeLayout relLayout;
     private LockScrollView lsv;
+    private TextView photoTitle;
     ControlPoint cp;
 
     private BeforeAfterSlider slider;
@@ -117,6 +118,8 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
 
         //setting font
         TextView germanNameHeader = (TextView) findViewById(R.id.de_name);
+        photoTitle = (TextView) findViewById(R.id.textView_galeriaZdjec);
+        photoTitle.setText(getString(R.string.string_fotografie) + " " + cp.getName());
         germanNameHeader.setText(cp.getGermanName());
         TextView polishNameHeader = (TextView) findViewById(R.id.pl_name);
         polishNameHeader.setText(cp.getName().toUpperCase());

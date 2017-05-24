@@ -8,6 +8,7 @@
     <string name="rp_navigate_alert_message">Czy chcesz nawigować do</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
+    <string name="back">Wróć</string>
     <string name="target_reached_message">Doszedłeś do celu</string>
     <string name="no_ip">Brak ciekawych miejsc w pobliżu.</string>
     <string name="no_rp">Brak miejsc odpoczynku w pobliżu.</string>

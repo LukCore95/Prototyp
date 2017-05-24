@@ -67,7 +67,8 @@ public class InterestingPlaceAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup groupParents){
-        choosePointsOnList();
+        //choosePointsOnList();
+
         InterestingPlace curr = ((InterestingPlace) getItem(position));
 
         View mV;
@@ -152,7 +153,7 @@ public class InterestingPlaceAdapter extends BaseAdapter {
 
     public void choosePointsOnList()
     {
-        if(userLoc!=null) {
+        if(ctx.getIpNear()&&userLoc!=null) {
             ipList = new ArrayList<InterestingPlace>();
 
             for (int i = 0; i < fullList.size(); i++) {

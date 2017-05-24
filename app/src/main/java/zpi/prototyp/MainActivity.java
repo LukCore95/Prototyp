@@ -194,14 +194,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         slidingUp = (SlidingUpPanelLayout) findViewById(R.id.sliding_up_panel);
         bottombar = (RelativeLayout) findViewById(R.id.bottombarlay);
         food = (ImageButton) findViewById(R.id.food);
-        /*ipSettings = (ImageButton) findViewById(R.id.ip_settings_button);
+        ipSettings = (ImageButton) findViewById(R.id.ip_settings_button);
         ipSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-
+                LayoutInflater inflater = MainActivity.this.getLayoutInflater();
+                View view = inflater.inflate(R.layout.ip_settings, null);
+                builder.setView(view);
+                Switch switch1 = (Switch) view.findViewById(R.id.switch1);
+                switch1.setChecked(ip_near);
+                switch1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ip_near = !ip_near;
+                    }
+                });
+                builder.setNegativeButton(R.string.back, null);
+                builder.create().show();
             }
-        });*/
+        });
         centerLocation = (ImageView) findViewById(R.id.imageView);
         food.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -832,4 +844,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     }*/
+
+    public boolean getIpNear(){
+        return  ip_near;
+    }
 }

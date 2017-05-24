@@ -37,7 +37,7 @@ public class InterestingPlaceAdapter extends BaseAdapter {
     private TripController tripController;
     private LatLng userLoc;
 
-    private static final double RANGE = 40;
+    private static final double RANGE = 0.5;
 
     public InterestingPlaceAdapter(MainActivity ctx, List<InterestingPlace> ipList, LatLng userLoc, TripController tc){
         this.ctx = ctx;

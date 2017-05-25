@@ -237,4 +237,15 @@ public final class TripController {
 
         return index<0?-1: index< cpList.size()?0:1;
     }
+
+    public String getDistanceToText()
+    {
+        int dist = (int)(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, getCurrentCP().getGeoLoc().latitude, getCurrentCP().getGeoLoc().longitude)*1000);
+        String distance="";
+        if(dist >= 2000)
+            distance=("" + String.format("%.1f", ((float)dist)/1000) + "km");
+        else
+            distance="" + dist + "m";
+        return distance;
+    }
 }

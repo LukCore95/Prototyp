@@ -598,7 +598,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
-    public void onLocationChanged(Location location) {
+    public void onLocationChanged(final Location location) {
 
 
                if (lastUserLoc==null || DistanceCalculator.distance(lastUserLoc.getLatitude(), lastUserLoc.getLongitude(), location.getLatitude(), location.getLongitude()) >= 0.05||firstRoute||targetChanged) {
@@ -709,7 +709,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             mPolyline = temp;
                             mPolyline.setPattern(pattern);
                             dystansInfo = leg.getDistance();
-                            dystansText = dystansInfo.getText();
+                            dystansText = tripController.getDistanceToText();
                             textUpperToolbarGerman.setText(deName);
                             textUpperToolbarPolish.setText(plName + ": " + dystansText);
                         }

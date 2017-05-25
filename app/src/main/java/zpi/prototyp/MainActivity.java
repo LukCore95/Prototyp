@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         ipSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), R.style.DialogStyle);
                 LayoutInflater inflater = MainActivity.this.getLayoutInflater();
                 View view = inflater.inflate(R.layout.ip_settings, null);
                 builder.setView(view);
@@ -358,9 +358,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
 
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(parent.getContext());
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(parent.getContext(), R.style.DialogStyle);
                 alertBuilder.setMessage(getString(R.string.routelist_alert_message))
-                        .setTitle(R.string.routePointsMenuTitle);
+                        .setTitle(R.string.routelist_alert_title);
                 alertBuilder.setPositiveButton(R.string.routelist_alert_reply_jump, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -847,5 +847,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public boolean getIpNear(){
         return  ip_near;
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this, R.style.DialogStyle)
+                .setMessage(R.string.quit)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
+
+
     }
 }

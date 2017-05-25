@@ -4,6 +4,8 @@
     <string name="routelist_alert_message">Chcesz przeskoczyć do wybranego punktu, czy rozpocząć od niego nową podróż?</string>
     <string name="routelist_alert_reply_jump">Przeskocz</string>
     <string name="routelist_alert_reply_newtrip">Nowa podróż</string>
+    <string name="routelist_alert_title">Zmiana trasy</string>
+    <string name="quit">Czy na pewno chcesz wyjść?</string>
     <string name="cancel">Anuluj</string>
     <string name="rp_navigate_alert_message">Czy chcesz nawigować do</string>
     <string name="yes">Tak</string>

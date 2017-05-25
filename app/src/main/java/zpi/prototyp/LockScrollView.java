@@ -1,6 +1,7 @@
 package zpi.prototyp;
 
 import android.content.Context;
+import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ScrollView;
@@ -9,7 +10,7 @@ import android.widget.ScrollView;
  * Created by WojciechH on 2017-04-06.
  */
 
-public class LockScrollView extends ScrollView {
+public class LockScrollView extends NestedScrollView {
 
     private boolean mScrollable = true;
 
@@ -26,7 +27,7 @@ public class LockScrollView extends ScrollView {
     }
 
     public LockScrollView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+        super(context, attrs, defStyleAttr);
     }
 
     public void setScrollingEnabled(boolean enabled) {

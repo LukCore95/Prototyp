@@ -104,14 +104,15 @@ public class InterestingPlaceAdapter extends BaseAdapter {
 
                     Toast.makeText(ctx, "Teraz zmierzasz do: " + currentCp.getName(), Toast.LENGTH_SHORT).show();
                     Animation buttonAnim = new AlphaAnimation(1.0f, 0.3f);
-                    buttonAnim.setFillAfter(true);
-                    buttonAnim.setDuration(1000);
+                    //buttonAnim.setFillAfter(true);
+                    buttonAnim.setDuration(1500);
                     v.setAnimation(buttonAnim);
                     v.startAnimation(buttonAnim);
                     ctx.refreshCurrentTarget();
                     InterestingPlaceAdapter.this.notifyDataSetChanged();
                 }
             });
+            //navigate.setBackgroundResource(R.drawable.ikona_nawiguj);
             navigate.setAlpha(1.0f);
 
         }
@@ -127,8 +128,8 @@ public class InterestingPlaceAdapter extends BaseAdapter {
 
                     Toast.makeText(ctx, "Anulowano nawigację do: " + currentCp.getName(), Toast.LENGTH_SHORT).show();
                     Animation buttonAnim = new AlphaAnimation(0.3f, 1.0f);
-                    buttonAnim.setFillAfter(true);
-                    buttonAnim.setDuration(1000);
+                    //buttonAnim.setFillAfter(true);
+                    buttonAnim.setDuration(1500);
                     v.setAnimation(buttonAnim);
                     v.startAnimation(buttonAnim);
                     ctx.refreshCurrentTarget();

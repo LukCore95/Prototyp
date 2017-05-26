@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:id="@+id/ip_click_details"
-        android:layout_width="330dp"
+        android:layout_width="315dp"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -65,8 +65,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="5px"
-            android:layout_marginTop="45px"
+            android:layout_marginEnd="15px"
+            android:layout_marginTop="40px"
             android:text="500m"
             android:textColor="@color/ip_list_dist"
             android:textSize="15dp" />
@@ -74,12 +74,13 @@
 
     <Button
         android:id="@+id/button_navigate"
-        android:layout_width="30px"
-        android:layout_height="30px"
+        android:layout_width="45px"
+        android:layout_height="45px"
         android:layout_toEndOf="@id/ip_click_details"
         android:layout_marginEnd="12px"
         android:layout_marginStart="12px"
-        android:layout_marginTop="48px"
+        android:layout_marginTop="36px"
+        android:padding="10dp"
         android:background="@drawable/ikona_nawiguj" />
 
 </RelativeLayout>

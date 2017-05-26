@@ -125,10 +125,10 @@ public class InterestingPlaceAdapter extends BaseAdapter {
         Drawable icon = null;
         switch(cpType){
             case sakralny:
-                icon = ctx.getDrawable(R.drawable.ikona_kosciol_szara);
+                icon = ctx.getDrawable(R.mipmap.ikona_kosciol_szara);
                 break;
             case kultury:
-                icon = ctx.getDrawable(R.drawable.ikona_budynek_szara);
+                icon = ctx.getDrawable(R.mipmap.ikona_budynek_szara);
                 break;
         }
 

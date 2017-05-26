@@ -19,7 +19,7 @@
             android:layout_marginStart="24px"
             android:layout_marginTop="51px"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ikona_budynek_szara" />
+            app:srcCompat="@mipmap/ikona_budynek_szara" />
 
         <LinearLayout
             android:layout_width="wrap_content"

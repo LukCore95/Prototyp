@@ -135,7 +135,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/napis_menu"/>
+                android:src="@mipmap/napis_menu"/>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

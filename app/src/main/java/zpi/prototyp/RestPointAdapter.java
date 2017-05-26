@@ -196,7 +196,7 @@ public class RestPointAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 final Context ctx = v.getContext();
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(ctx);
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(ctx, R.style.DialogStyle);
                 alertBuilder.setMessage(ctx.getString(R.string.rp_navigate_alert_message) + " " + currentCp.getName() + "?");
                 alertBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override

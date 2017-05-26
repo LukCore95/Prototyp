@@ -21,6 +21,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
+import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -204,9 +206,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 builder.setView(view);
                 Switch switch1 = (Switch) view.findViewById(R.id.switch1);
                 switch1.setChecked(ip_near);
-                switch1.setOnClickListener(new View.OnClickListener() {
+                /*switch1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        ip_near = !ip_near;
+                    }
+                });*/
+                switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         ip_near = !ip_near;
                     }
                 });

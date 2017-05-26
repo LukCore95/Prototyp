@@ -94,20 +94,50 @@ public class InterestingPlaceAdapter extends BaseAdapter {
         type.setTypeface(roboto);
         tvdist.setTypeface(roboto);
         tvaddress.setTypeface(roboto);
-        navigate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tripController.setNavigation(currentCp);
+
+        if(!tripController.getCurrentCP().equals(currentCp)) {
+            navigate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    tripController.setNavigation(currentCp);
 
 
-                Toast.makeText(ctx, "Teraz zmierzasz do: " + currentCp.getName(), Toast.LENGTH_SHORT).show();
-                Animation buttonAnim = new AlphaAnimation(0.3f, 1.0f);
-                buttonAnim.setDuration(1000);
-                v.setAnimation(buttonAnim);
-                v.startAnimation(buttonAnim);
-                ctx.refreshCurrentTarget();
-            }
-        });
+                    Toast.makeText(ctx, "Teraz zmierzasz do: " + currentCp.getName(), Toast.LENGTH_SHORT).show();
+                    Animation buttonAnim = new AlphaAnimation(1.0f, 0.3f);
+                    buttonAnim.setFillAfter(true);
+                    buttonAnim.setDuration(1000);
+                    v.setAnimation(buttonAnim);
+                    v.startAnimation(buttonAnim);
+                    ctx.refreshCurrentTarget();
+                    InterestingPlaceAdapter.this.notifyDataSetChanged();
+                }
+            });
+            navigate.setAlpha(1.0f);
+
+        }
+        else{
+            navigate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int nextIndex = tripController.getRouteControlPoints().indexOf(tripController.getCurrentTrip().getLastVisitedPoint())+1;
+                    if(nextIndex>tripController.getRouteControlPoints().size())
+                        nextIndex--;
+
+                    tripController.setNavigation(tripController.getRouteControlPoints().get(nextIndex));
+
+                    Toast.makeText(ctx, "Anulowano nawigację do: " + currentCp.getName(), Toast.LENGTH_SHORT).show();
+                    Animation buttonAnim = new AlphaAnimation(0.3f, 1.0f);
+                    buttonAnim.setFillAfter(true);
+                    buttonAnim.setDuration(1000);
+                    v.setAnimation(buttonAnim);
+                    v.startAnimation(buttonAnim);
+                    ctx.refreshCurrentTarget();
+                    InterestingPlaceAdapter.this.notifyDataSetChanged();
+                }
+            });
+            navigate.setAlpha(0.3f);
+
+        }
         clickDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

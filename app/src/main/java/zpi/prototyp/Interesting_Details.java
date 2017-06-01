@@ -1,19 +1,24 @@
 package zpi.prototyp;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import zpi.data.db.MockDbHelper;
 import zpi.data.db.dao.InterestingPlaceDAO;
@@ -75,6 +80,9 @@ public class Interesting_Details extends AppCompatActivity {
                 finish();
             }
         });
+        Button navigationDetails=(Button) findViewById(R.id.nawigujDetale);
+        navigationDetails.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/cambria/cambria_bold.ttf"));
+
 
     }
 
@@ -83,4 +91,30 @@ public class Interesting_Details extends AppCompatActivity {
         Typeface descriptionHeaderFont = Typeface.createFromAsset(getAssets(), font);
         tv.setTypeface(descriptionHeaderFont);
     }
+
+    public void nawiguj(View view)
+    {
+                final Context ctx = view.getContext();
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(ctx, R.style.DialogStyle);
+                alertBuilder.setMessage(ctx.getString(R.string.rp_navigate_alert_message) + " " + interestingPlace.getName() + "?");
+                alertBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        RestPointAdapter.tripController.setNavigation(interestingPlace);
+
+
+                        Toast.makeText(ctx, "Teraz zmierzasz do: " + interestingPlace.getName(), Toast.LENGTH_SHORT).show();
+
+                        MainActivity.navigationFromDetails=true;
+
+                    }
+                });
+                alertBuilder.setNegativeButton(R.string.no, null);
+
+
+                alertBuilder.create().show();
+
+            }
+
+
 }

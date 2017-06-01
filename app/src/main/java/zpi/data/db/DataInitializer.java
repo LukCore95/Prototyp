@@ -131,12 +131,12 @@ public final class DataInitializer {
                 sadowa = new ControlPoint(res.getString(R.string.sadowa), res.getString(R.string.sadowa_german), res.getString(R.string.sadowa_description), maj151933.getTime(), 17.027947, 51.105328, R.mipmap.marker_sadowa, R.drawable.oldsadowa, R.drawable.oldsadowa, R.raw.sadowa, sadowaPhotos );
                 //punktTestowy=new ControlPoint("kakakaka", "hihiihihihih", "ameba ameba", maj131933.getTime(), 16.845005, 51.389996, R.mipmap.marker_plteatralny,R.drawable.oldpodwale, R.drawable.oldplacteatralny1h, R.raw.podwale_renoma_swidnicka_plac_teatralny, sadowaPhotos);
 
-                sad=new InterestingPlace(res.getString(R.string.ip_sad), res.getString(R.string.ip_sad_description),17.025995, 51.105936, "Tutaj będzie adres.", InterestingPlaceType.kultury, sadPhoto);
-                promenada = new InterestingPlace(res.getString(R.string.ip_promenada), res.getString(R.string.ip_promenada_description), 17.025415, 51.107015, "Tutaj będzie adres.", InterestingPlaceType.kultury, promenadaPhoto );
-                kosciol_bc=new InterestingPlace(res.getString(R.string.ip_kosciol_bc), res.getString(R.string.ip_kosciol_bc_description), 17.031296, 51.105006, "Tutaj będzie adres.", InterestingPlaceType.sakralny, kosciol_bcPhoto);
-                opera=new InterestingPlace(res.getString(R.string.ip_opera), res.getString(R.string.ip_opera_description), 17.031189, 51.105582, "Tutaj będzie adres.", InterestingPlaceType.kultury, operaPhoto);
-                pomnik_bc=new InterestingPlace(res.getString(R.string.ip_pomnik_bc), res.getString(R.string.ip_pomnik_bc_description), 17.030988, 51.104368, "Tutaj będzie adres.", InterestingPlaceType.kultury, pomnik_bcPhoto);
-                teatrlalek =new InterestingPlace(res.getString(R.string.ip_teatrlalek), res.getString(R.string.ip_teatrlalek_description), 17.033139, 51.105328, "Tutaj będzie adres.", InterestingPlaceType.kultury, teatrLalekPhoto);
+                sad=new InterestingPlace(res.getString(R.string.ip_sad), res.getString(R.string.ip_sad_description),17.025995, 51.105936, res.getString(R.string.ip_sad_address), InterestingPlaceType.kultury, sadPhoto);
+                promenada = new InterestingPlace(res.getString(R.string.ip_promenada), res.getString(R.string.ip_promenada_description), 17.025415, 51.107015, "", InterestingPlaceType.kultury, promenadaPhoto );
+                kosciol_bc=new InterestingPlace(res.getString(R.string.ip_kosciol_bc), res.getString(R.string.ip_kosciol_bc_description), 17.031296, 51.105006, res.getString(R.string.ip_kosciol_bc_address), InterestingPlaceType.sakralny, kosciol_bcPhoto);
+                opera=new InterestingPlace(res.getString(R.string.ip_opera), res.getString(R.string.ip_opera_description), 17.031189, 51.105582, res.getString(R.string.ip_opera_address), InterestingPlaceType.kultury, operaPhoto);
+                pomnik_bc=new InterestingPlace(res.getString(R.string.ip_pomnik_bc), res.getString(R.string.ip_pomnik_bc_description), 17.030988, 51.104368, "", InterestingPlaceType.kultury, pomnik_bcPhoto);
+                teatrlalek =new InterestingPlace(res.getString(R.string.ip_teatrlalek), res.getString(R.string.ip_teatrlalek_description), 17.033139, 51.105328, res.getString(R.string.ip_teatrlalek), InterestingPlaceType.kultury, teatrLalekPhoto);
                 //wat = new InterestingPlace("Wojteks house", "Wojteguuu hałsuu", 16.845156, 51.389567, "Skokowa, ul. Żmigrodzka 11b", InterestingPlaceType.kultury, sadowaPhotos);
 
                 cafeBarMonopol = new RestPoint(res.getString(R.string.rp_cafeBarMonopol),
@@ -145,10 +145,9 @@ public final class DataInitializer {
                         res.getString(R.string.rp_cafeBarMonopol_web));
                 costacoffee= new RestPoint(res.getString(R.string.rp_costaCoffee),
                         res.getString(R.string.rp_costaCoffee_description), 17.0321131, 51.103495,
-                        RestPointType.cafe, res.getString(R.string.rp_cafeBarMonopol_address),
+                        RestPointType.cafe, res.getString(R.string.rp_costaCoffee_address),
                         res.getString(R.string.rp_costaCoffee_web));
-                dinette= new RestPoint(res.getString(R.string.rp_dinette), res.getString(R.string.rp_dinette_description),
-                        17.0313198,51.1060407, RestPointType.cafe, res.getString(R.string.rp_dinette_address),
+                dinette= new RestPoint(res.getString(R.string.rp_dinette), res.getString(R.string.rp_dinette_description), 17.031725,51.105790, RestPointType.cafe, res.getString(R.string.rp_dinette_address),
                         res.getString(R.string.rp_dinette_web));
                 haggisPub = new RestPoint(res.getString(R.string.rp_haggisPub), res.getString(R.string.rp_haggisPub_description),
                         17.030317, 51.103787, RestPointType.pub, res.getString(R.string.rp_haggisPub_address),
@@ -166,9 +165,9 @@ public final class DataInitializer {
                 pubWedrowki=new RestPoint(res.getString(R.string.rp_pubWedrowki),
                         res.getString(R.string.rp_pubWedrowki_description), 17.0299611, 51.104158,
                         RestPointType.pub, res.getString(R.string.rp_pubWedrowki_address),
-                        res.getString(R.string.rp_pubWedrowki_web));
+                        res.getString(R.string.rp_pubWedrowki_web));//17.031265, 51.105982,
                 staraPaczkarnia=new RestPoint(res.getString(R.string.rp_staraPaczkarnia),
-                        res.getString(R.string.rp_staraPaczkarnia_description), 17.0313768, 51.1063027,
+                        res.getString(R.string.rp_staraPaczkarnia_description),  17.031846,51.106474,
                         RestPointType.cafe, res.getString(R.string.rp_staraPaczkarnia_address),
                         res.getString(R.string.rp_staraPaczkarnia_web));
                 tuttiFrutti = new RestPoint(res.getString(R.string.rp_tuttiFrutti),

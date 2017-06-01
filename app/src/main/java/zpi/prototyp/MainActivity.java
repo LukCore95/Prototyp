@@ -523,7 +523,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 icon=R.mipmap.ikona_kawiarni;
             }
 
-            mGoogleMap.addMarker(new MarkerOptions().position(restPoints.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(icon)));
+            mGoogleMap.addMarker(new MarkerOptions().position(restPoints.get(i).getGeoLoc()).icon(BitmapDescriptorFactory.fromResource(icon)).title(restPoints.get(i).getName()).snippet(restPoints.get(i).getAddress()+"\n"));
 
 
         }
@@ -563,6 +563,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 intent.putExtra("nazwaPunktu", interestingPlaces.get(getMarkersID(marker.getId()) - restPoints.size()).getName());
                 startActivity(intent);
             }
+           
         }
 
 //        }

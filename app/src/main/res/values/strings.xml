@@ -36,6 +36,17 @@
     <string name="sadowa">Ulica Sądowa</string>
     <string name="sadowa_german">Neue Graupnerstrasse</string>
     <string name="sadowa_description">Ulica Sądowa swoją nazwę zawdzięcza Sądowi Rejonowemu, który się przy niej znajduje. W budynku sądu, w jednym ze skrzydeł, znajdowało się więzienie i areszt, w którym przesłuchiwano podejrzanych, często w bardzo brutalny sposób. W budynkach przy tej ulicy umiejscowionych jest wiele kancerali, Prokuratura Rejonowa oraz Izba Adwokacka.</string>
+    <string name="pomnikamora">Pomnik Amora na Pegazie</string>
+    <string name="pomnikamora_german">Amor auf dem Pegasus reitend</string>
+    <string name="pomnikamora_description">Pomnik położony w Parku Mikołaja Kopernika nad Fosą Miejską, w ciągu Promenady Staromiejskiej przy Ulicy Teatralnej. Ma on formę plenerowej rzeźby monumentalnej ustawionej na wysokim cokole. Jest on zlokalizowany na wschodnim krańcu parku, z tyłu budynku dawnego pałacu Leipzigerów. Rzeźba została wykonana w 1913 roku. Natomiast pomnik został wybudowany i odsłonięty 14 czerwca 1914 roku. Autorem rzeźby jest Theodor von Gosen. Początkowo dzieło wykorzystane zostało w Pawilonie Związku Artystów Śląskich na Wystawie Stulecia organizowanej w 1913 na terenach wystawowych wokół Hali Stulecia. Na miejsce, na którym znajduje się obecnie, trafiło rok później. To właśnie w tej okolicy Eberhard Mock lubił spędzać wolny czas spacerując i rozmyślając. Zasadniczą częścią pomnika jest rzeźba odlana z brązu o wysokości około 2 m. Jest ona ustawiona na wapiennym postumencie o przekroju poziomym prostokątnym, z cokołem i gzymsem. Sama rzeźba przedstawia dwie mityczne postacie: Amora (postać chłopca ze skrzydłami, ale bez innych typowych atrybutów amora takich jak , łuk i kołczan ze strzałami, choć prawdopodobnie wcześniej częścią rzeźby był łuk), który dosiada Pegaza; symbolizuje związek miłości i poezji. Oczy Amora wykonane zostały z marmuru, a Pegaza z topazu.</string>
+
+    <string name="dawneprezydiumpolicji">Szewska 49</string>
+    <string name="dawneprezydiumpolicji_german">Schuhbrücke 49</string>
+    <string name="dawneprezydiumpolicji_description">Pałac Książąt Legnicko-Brzeskich we Wrocławiu, także Dom Zajezdny Książąt Legnicko-Brzeskich to dawny pałac miejski, znajdujący się we Wrocławiu, przy ulicy Szewskiej 49. Obecnie siedziba Instytutu Historycznego Uniwersytetu Wrocławskiego. Początkowo na miejscu obecnego pałacu istniał w średniowieczu dom zajezdny, urządzony przed 1467 r. przez księcia Mikołaja I, pana zastawnego na Brzegu, w kamienicy z XIV w., pełniącej prawdopodobnie funkcję zbrojowni. Książę Jerzy II ok. 1560 r. wzniósł w tym miejscu okazały renesansowy pałac, z zapleczem gospodarczym sięgającym ul. Kuźniczej. Miał on trzy kondygnacje i 9 osi okiennych. Mieścił na parterze obszerna sień i kaplicę. Główne wejście zdobił portal z herbami Piastów i Hohenzollernów. Kolejna przebudowa nastąpiła ok. 1670 r. za sprawą księcia Chrystiana II. Wnętrza ozdobiono stiukami, zmieniono elewację frontową. W takim stanie pałac przeszedł w 1709 r. z rąk księcia Leopolda Holsztyńskiego, syna Karoliny, ostatniej z linii śląskiej Piastów, w ręce sióstr urszulanek, które zaadaptowały go na szkołę dla dziewcząt. Po jej przeniesieniu do klasztoru w 1811 r. budynek został przejęty przez policję. W tym okresie miała miejsce kolejna przebudowa w wyniku której całe założenie wyniosło 4 skrzydła, z wewnętrznym dziedzińcem. Budowa nowego prezydium policji w latach 1925-1927 pozwoliła przekazać dotychczasową jej siedzibę na potrzeby dydaktyczne Uniwersytetowi Wrocławskiemu. Po 1945 r. znalazły w nim miejsce trzy instytuty: Historyczny, Historii Sztuki i Filologii Klasycznej. Dzisiaj ten adres kojarzy nam się przede wszystkim z kryminałami Marka Krajewskiego. Niektórzy uważają, że Eberhard Mock jest przekleństwem Szewskiej 49. Eberhard Mock sprawił, że współczesny budynek Instytutu Historii funkcjonuje w świadomości wrocławian, a nawet większości studentów historii, jako Prezydium Policji.</string>
+
+    <string name="zajazdpodzlotagesia">Ofiar Oświęcimskich 27/29</string>
+    <string name="zajazdpodzlotagesia_german">Junkerstrasse 27/29</string>
+    <string name="zajazdpodzlotagesia_description">Dawniej w tym miejscu mieścił się zajazd "Pod Złotą Gęsią". Co ciekawe, właśnie we wnętrzu tej restauracji w 1843 roku zainstalowano jako pierwsze w całym ówczesnym Wrocławiu oświetlenie gazowe. To właśnie do tego hotelu Eberhard Mock wysłał prostytutkę z jej koleżanką z gimnazjum do Maassa. Sam Juliusz Słowacki, w liście do matki Salomei informującym o pobycie w tym hotelu w 1831 roku, pisze tak: "Niegodziwy Wrocław, w „Goldene Gans“ zdarli mnie okropnie, bo za dni 16 zapłaciłem 30 talarów, i miałem tylko tę przyjemność, że mieszkałem w zupełnie starożytnej kamienicy, której dachy wyższe są niż trzypiętrowe ściany, a pod dachami pieje kogut i krzyczą koty.".</string>
     <string name="renoma_description_short">Teren przy skrzyżowaniu ul. Świdnickiej i Podwale –
         obecnie zajmowany przez Renomę – aż do XVII w. był praktycznie niezabudowany, stanowił
         jedynie przedpole średniowiecznych fortyfikacji miejskich. Na miejscu teraźniejszego
@@ -67,23 +78,33 @@
     <string name="routePointsMenuExplanation">Wybierz punkt, do którego chcesz nawigować</string>
     <string name="ip_sad">"Sąd Rejonowy"</string>
     <string name="ip_sad_description">"Gmach wybudowano w latach 1845-1852, a następnie dwukrotnie go powiększano: w latach 1881-1887. Oscar Knorr rozbudował go w stronę Podwala i ul. Muzealnej i w 1930 r. Werner Haberland zastąpił stare skrzydło wzdłuż ul. Sądowej, nowym modernistycznym budynkiem. Cały zespół składa się z trójskrzydłowego budynku sądu między ul. Podwale, Muzealną, Sądową i Świebodzką oraz więzienia na planie krzyża greckiego. Narożnik, w którym pierwotnie mieściło się główne wejście, sala rozpraw na 1. piętrze i kaplica na drugim, flankują ośmioboczne wieże, w których znajdują się klatki schodowe. Sąd zakomponowany jest jako neogotycka twierdza-zamek zbudowany z czerwonej cegły, ozdobiony tylko piaskowcowymi gzymsami i pasami żółtej cegły."</string>
+    <string name="ip_sad_address">ul. Sądowa 1</string>
     <string name="ip_promenada">Promenada Staromiejska</string>
     <string name="ip_promenada_description">Promenada utworzona została wzdłuż starych fortyfikacji obronnych i jest jednym z ulubionych miejsc spacerowych Wrocławian. Ciągnie się ona wzdłuż Fosy Miejskiej oraz na niewielkim odcinku wzdłuż Odry. Promenada stawi obszar miejskiej przestrzeni zielonej, ale jej teren jest dosyć ubogi pod względem przyrodniczym. Jest wyznaczona od mostu generała Wladysława Sikorskiego, aż do Mostu Piaskowego. </string>
     <string name="ip_kosciol_bc">"Kościół Bożego Ciała</string>
     <string name="ip_kosciol_bc_description">Historia kościoła pod wezwaniem Bożego Ciała łączy sie z zakonem Joanitów. Jako datę początku jego budowy podaje się rok 1318. Kościół jest budowlą gotycką, bazylikową, z trzema nawami, jedną z trzech największych piętnastowiecznych w mieście, obok kościoła św. Barbary (dziś cerkiew Narodzenia Przenajświętszej Bogurodzicy) i klasztoru Bernardynów (dziś Muzeum Architektury). Nie ma i nigdy nie miał głównej wieży, co jest rzadkie dla kościołów gotyckich, ale wymagane przez ówczesną regułę rycerskiego zakonu joannitów – zakon ten kładł nacisk na śluby ubóstwa, a wieża w średniowieczu była oznaką dominacji.</string>
+    <string name="ip_kosciol_bc_address"></string>
     <string name="ip_opera">Opera Wrocławska</string>
     <string name="ip_opera_description">Gmach Teatru Miejskiego wzniesiono przy ulicy Świdnickiej w latach 1839–1841 według projektu Carla Ferdinanda Langhansa, z nowoczesną sceną i widownią na około 1600 miejsc. Tradycje operowe we Wrocławiu sięgają pierwszej połowy XVIII wieku, wówczas Ballhaus (Dom Zabaw), odwiedzały teatry wędrowne. Duże znaczenie miała działalność włoskiej trupy operowej, utrzymującej stały kontakt z teatrami w Bolonii i Wenecji oraz z Antonio Vivaldim. W ciągu swojego istnienia, Opera była kilkukrotnie remontowana i przebudowywana, ostatni raz w latach 1997-2006. W bardzo bogato zdobionym wnętrzu zachowało się większość zdobień z XIX wieku, m.in.: plafon z portretami kompozytorów, główny żyrandol (przerobiony z gazowego na elektryczny) oraz loża cesarska. Sumaryczna powierzchnia złocona prawdziwym złotem wynosi 10 tysięcy m², a powierzchnia kryształowych luster 200 m². </string>
+    <string name="ip_opera_address">ul. Świdnicka 35</string>
     <string name="ip_pomnik_bc">Pomnik Bolesława Chrobrego</string>
     <string name="ip_pomnik_bc_description">Pomnik konny Bolesłąwa Chrobrego został odsłonięty 15 września 2007 roku. Jest to pierwszy konny pomnik powstały w powojennym Wrocławiu. Powstał na miejscu stojącego w tym miejscu, prze drokiem 1945, pomnika cesarza Wilhelma I. Na cokole znajduje się wstęga z napisami w języku polskim, niemieckim i czeskim, mapą Europy z roku 1000 oraz płaskorzeźbami. W dłoni, król Polski, trzyma wlącznię św. Maurycego, jako symbol władzy cesarskiej. </string>
     <string name="ip_teatrlalek">Teatr Lalek</string>
     <string name="ip_teatrlalek_description">Neobarokowy budynek dawnego klubu kupieckiego został zbudowany w latach 1892 - 1894. Wrocławski Teatr Lalek ma w swoim stałym repertuarze adaptacje utworów z kanonu literatury dziecięcej i młodzieżowej oraz najpopularniejszych baśni, gra jednak nie tylko klasykę. Ostatnie premiery to w większości przedstawienia powstałe w oparciu o współczesne sztuki napisane specjalnie dla Teatru – nowoczesne i odważne spektakle wykraczające poza konwencję tradycyjnego teatru lalkowego.</string>
+    <string name="ip_teatrlalek_address">pl. Teatralny 4</string>
     <string name="ip_list_header">Inne ciekawe miejsca</string>
+    <string name="ip_kosciolswmacieja">Kościół św. Macieja</string>
+    <string name="ip_kosciolswmacieja_description">Kościół św. Macieja Apostoła we Wrocławiu to gotycki kościół z cegły, zbudowany na planie krzyża, jednonawowy z transeptem i wieżą. Znajduje się po wschodniej stronie ul. Szewskiej, nosząc adres pl. bpa Nankiera 17. Historia kościoła sięga pierwszej ćwierci XIII wieku. Uszkodzony podczas walk roku 1945 (spłonęły dachy wieży i nawy) kościół długo stał zaniedbany, dach pokryto prowizorycznie dopiero w 1949. W 1958 kościół uległ poważnemu uszkodzeniu, zawaliła się część północnego ramienia transeptu i zniszczona została renesansowa ambona z 1607. Ostatecznie odbudowany został w latach 1961–1966, m.in. przez Olgierda Czernera. Konsekracja kościoła nastąpiła 23 października 1966. Wieża nakryta jest prowizorycznym daszkiem namiotowym i nadal oczekuje na rekonstrukcję hełmu. Obecnie pełni funkcję rzymskokatolickiego kościoła rektoralnego, obok znajduje się siedziba duszpasterstwa akademickiego "Maciejówka". W krypcie kościoła pochowany jest znany śląski mistyk, teolog i poeta Johannes Scheffler, znany lepiej jako Angelus Silesius. Na murze przy wejściu do kościoła znajdują się dwie tablice pamiątkowe, poświęcone właśnie Angelusowi Silesiusowi, który był tu duszpasterzem oraz polskiemu kompozytorowi Emanuelowi Kani (1827–1887), który w kościele św. Macieja był organistą. W ostatnim okresie w wieży kościoła podczas remontu znaleziono fragmenty gotyckich malowideł naściennych, które pokryto w 1655 warstwą pobiały. Przed kościołem znajduje się okazała barokowa rzeźba św. Jana Nepomucena z 1723 dłuta Jana Jerzego Urbańskiego.</string>
+    <string name="ip_kosciolswmacieja_address">pl.Nankiera 17</string>
+    <string name="ip_barokowyogrod">Barokowy ogród Ossolineum</string>
+    <string name="ip_barokowyogrod_description"> Przed II Wojną Światową plac ten był boiskiem przy sąsiadującym z nim gimnazjum. Dzisiaj to częste miejsce wytchnienia turystów zwiedzających wrocławską Starówkę. Wejścia są od strony ul. Szewskiej, pl. Nankiera oraz ul. Grodzkiej. W ogrodzie znajduje się jeden z nielicznych wrocławskich pomników poświęconych ofiarom I Wojny Światowej – figura Chrystusa autorstwa Theodora von Gosena, jest dedykowana uczniom i nauczycielom Gimnazjum Świętego Macieja. Drugi z pomników poświęcony jest Angelusowi Silesiusowi, barokowemu poecie.</string>
+    <string name="ip_ossolineum">Zakład Narodowy im. Ossolińskich</string>
+    <string name="ip_ossolineum_description">Zakład Narodowy im. Ossolińskich (tzw. Ossolineum) to polski instytut naukowy i kulturalny we Wrocławiu. Był jednym z najważniejszych ośrodków kultury polskiej, o czym decydowały przede wszystkim bogate zbiory biblioteczne, pod względem wartości drugie w kraju po Bibliotece Jagiellońskiej. Źródłem utrzymania Zakładu stały się dochody z majątków ziemskich fundatora, zarządzanych przez dożywotnich kuratorów. Po wysiedleniu Polaków ze Lwowa i odłączeniu miasta od Polski w 1945 Ossolineum zostało przeniesione do Wrocławia, gdzie znajduje się do dzisiaj. W gmachu obecnego Ossolineum przed II wojną światową mieściło się gimnazjum katolickie św. Macieja.</string>
+    <string name="ip_ossolineum_address">ul. Szewska 37</string>
     <string name="rp_cafeBarMonopol">Cafe Bar Monopol</string>
     <string name="rp_cafeBarMonopol_address">ul. Heleny Modrzejewskiej 2</string>
     <string name="rp_cafeBarMonopol_web">www.monopolwroclaw.hotel.com.pl</string>
-    <string name="rp_cafeBarMonopol_description">
-        Niedziela – Czwartek: 10:00 – 03:00\nPiątek – Sobota: 10:00 – 05:00
-    </string>
+    <string name="rp_cafeBarMonopol_description">Niedziela – Czwartek: 10:00 – 03:00\nPiątek – Sobota: 10:00 – 05:00</string>
     <string name="rp_costaCoffee">COSTA COFFEE</string>
     <string name="rp_costaCoffee_address">ul. Świdnicka 40</string>
     <string name="rp_costaCoffee_web">www.costacoffee.pl</string>
@@ -140,8 +161,98 @@
     <string name="rp_nespressoBoutique">Nespresso  Boutique</string>
     <string name="rp_nespressoBoutique_address">ul. Heleny Modrzejewskiej 2</string>
     <string name="rp_nespressoBoutique_web">www.facebook.com/nespressowroclaw</string>
-    <string name="rp_nespressoBoutique_description">
-        Poniedziałek – Piątek: 10:00 – 19:00\nSobota – Niedziela: 10:00 – 18:00</string>
-
+    <string name="rp_nespressoBoutique_description">Poniedziałek – Piątek: 10:00 – 19:00\nSobota – Niedziela: 10:00 – 18:00</string>
+    <string name="rp_mis">Miś SC. Bar mleczny</string>
+    <string name="rp_mis_description">Poniedziałek – Piątek: 07:00 – 18:00
+    Sobota: 08:00 – 17:00
+    Niedziela: Zamknięte</string>
+    <string name="rp_mis_address">ul. Kuźnicza 48</string>
+    <string name="rp_mis_web"> www.facebook.com/pages/Bar-Miś/111350402278724</string>
+    <string name="rp_kalambur">Art Cafe Kalambur</string>
+    <string name="rp_kalambur_description">
+    Niedziela – Środa: 12:00 – 02:00
+    Czwartek – Sobota: 12:00 – 04:00</string>
+    <string name="rp_kalambur_address"> ul. Kuźnicza 29A</string>
+    <string name="rp_kalambur_web">www.kalambur.org</string>
+    <string name="rp_darea">Darea</string>
+    <string name="rp_darea_description">Poniedziałek – Niedziela: 12:00 – 23:00</string>
+    <string name="rp_darea_adress">ul. Kuźnicza 43</string>
+    <string name="rp_darea_web">www.darea.pl</string>
+    <string name="rp_patelnia">Patelnia</string>
+    <string name="rp_patelnia_description">Niedziela – Poniedziałek: 12:00 – 20:00
+    Wtorek – Czwartek: 12:00 – 21:00
+    Piątek – Sobota: 12:00 – 02:00</string>
+    <string name="rp_patelnia_address">ul. Kuźnicza 29</string>
+    <string name="rp_patelnia_web"> www.facebook.com/patelnia</string>
+    <string name="rp_sushirolka">Sushirolka</string>
+    <string name="rp_sushirolka_description">Poniedziałek – Piątek: 10:00 – 20:00
+    Sobota – Niedziela: 11:00 – 20:00</string>
+    <string name="rp_sushirolka_address">ul. Kuźnicza 25</string>
+    <string name="rp_sushirolka_web">www.sushirolka.pl</string>
+    <string name="rp_kuzniasokow">Kuźnia Soków</string>
+    <string name="rp_kuzniasokow_description">
+    Poniedziałek – Niedziela: 10:00 – 19:00</string>
+    <string name="rp_kuzniasokow_address_">ul. Kuźnicza 25/1a</string>
+    <string name="rp_kuzniasokow_web">www.facebook.com/KuzniaSokowWroclaw</string>
+    <string name="rp_uff">UFF Klub</string>
+    <string name="rp_uff_description">Niedziela – Czwartek: 10:00 – 00:00
+    Piątek – Sobota: 10:00 – 03:00</string>
+    <string name="rp_uff_address">pl. Nankiera 1</string>
+    <string name="rp_uff_web">www.facebook.com/uffklub</string>
+    <string name="rp_fccaffe">FC Caffe</string>
+    <string name="rp_fccaffe_description">Poniedziałek – Piątek: 07:30 – 21:00
+    Sobota: 08:00 – 21:00
+    Niedziela: 09:00 – 21:00</string>
+    <string name="rp_fccaffe_address">ul. Kuźnicza 30</string>
+    <string name="rp_fccaffe_web">www.facebook.com/fccaffewro</string>
+    <string name="rp_bohema">NBohema</string>
+    <string name="rp_bohema_description">
+    Poniedziałek – Niedziela: 17:00 – 05:00</string>
+    <string name="rp_bohema_address">ul. Ofiar Oświęcimskich 15</string>
+    <string name="rp_bohema_web">www.facebook.com/BohemaWroc</string>
+    <string name="rp_lotkury">Kawiarnia Lot Kury</string>
+    <string name="rp_lotkury_description">Niedziela – Poniedziałek: 10:00 – 23:00
+    Wtorek – Czwartek: 10:00 – 00:00
+    Piątek – Sobota: 10:00 – 03:00</string>
+    <string name="rp_lotkury_address">ul. Ofiar Oświęcimskich 17</string>
+    <string name="rp_lotkury_web"> www.lotkury.pl</string>
+    <string name="rp_kontynuacja">Kontynuacja</string>
+    <string name="rp_kontynuacja_description">Niedziela – Czwartek: 16:00 – 01:00
+    Piątek: 16:00 – 02:00
+    Sobota: 16:00 – 03:00</string>
+    <string name="rp_kontynuacja_address">ul. Ofiar Oświęcimskich 17</string>
+    <string name="rp_kontynuacja_web">www.facebook.com/kontynuacja</string>
+    <string name="rp_szklarnia">NSzklarnia</string>
+    <string name="rp_szklarnia_description">Poniedziałek – Czwartek: 16:00 – 01:00
+    Piątek – Sobota: 16:00 – 04:00
+    Niedziela: 16:00 – 00:00</string>
+    <string name="rp_szklarnia_address">ul. Ofiar Oświęcimskich 19</string>
+    <string name="rp_szklarnia_web">www.facebook.com/klubszklarnia</string>
+    <string name="rp_leonidas">Cafe Leonidas</string>
+    <string name="rp_leonidas_description">Poniedziałek – Piątek: 09:00 – 22:00
+    Sobota: 10:00 – 22:00
+    Niedziela: 11:00 – 22:00</string>
+    <string name="rp_leonidas_address">ul. Ofiar Oświęcimskich 21</string>
+    <string name="rp_leonidas_web"></string>
+    <string name="rp_vivereitaliano">Vivere Italiano</string>
+    <string name="rp_vivereitaliano_description">Poniedziałek – Niedziela: 12:00 – 23:00</string>
+    <string name="rp_vivereitaliano_address">ul. Ofiar Oświęcimskich 21</string>
+    <string name="rp_vivereitaliano_web">www.vivereitaliano.pl</string>
+    <string name="rp_cegielnia">Cegielnia</string>
+    <string name="rp_cegielnia_description">Poniedziałek – Niedziela: 12:00 – 23:00</string>
+    <string name="rp_cegielnia_address">ul. Świdnicka 5</string>
+    <string name="rp_cegielnia_web">www.facebook.com/CEGIELNIABISTRO</string>
+    <string name="rp_manousch">Mama Manousch - Food &amp; Wine</string>
+    <string name="rp_manousch_description">Poniedziałek – Czwartek: 12:00 – 22:30
+    Piątek: 12:00 – 23:00
+    Sobota: 11:00 – 23:00
+    Niedziela: 11:00 – 22:</string>
+    <string name="rp_manoush_address">ul. Świdnicka 4</string>
+    <string name="rp_manoush_web">www.mama-manousch.com</string>
+    <string name="rp_boladosse">Bola Dosse</string>
+    <string name="rp_boladosse_description">Poniedziałek – Piątek: 11:00 – 22:00
+    Sobota – Niedziela: 10:00 – 22:00</string>
+    <string name="rp_boladosse_address">ul. Świdnicka 9</string>
+    <string name="rp_boladosse_web">www.boladosse.pl</string>
 
 </resources>

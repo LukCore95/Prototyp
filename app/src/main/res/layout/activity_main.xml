@@ -177,29 +177,30 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/route_points_head"
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:background="@drawable/tlo_mapa"
-                android:orientation="vertical"
-                android:id="@+id/route_points_head">
+                android:layout_height="50dp"
+                android:background="@mipmap/tlo_mapa"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/route_points_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_margin="21px"
-                    android:src="@mipmap/marker_renoma" />
+                <!--<ImageView-->
+                <!--android:id="@+id/route_points_icon"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="start"-->
+                <!--android:layout_margin="21px"-->
+                <!--android:src="@mipmap/marker_renoma" />-->
 
                 <TextView
                     android:id="@+id/route_points_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/route_points_icon"
                     android:layout_marginLeft="21px"
                     android:text="@string/routePointsMenuTitle"
                     android:textColor="@color/routePointsTitle"
                     android:textSize="17dp" />
+                <!--android:layout_below="@id/route_points_icon"-->
+
 
                 <TextView
                     android:id="@+id/route_points_explanation"

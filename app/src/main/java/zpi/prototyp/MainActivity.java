@@ -821,8 +821,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //System.out.println("PLNAME: " + plName);
 
         ImageView menuIcon = (ImageView) findViewById(R.id.route_points_icon);
-        Drawable img = (currentCp instanceof ControlPoint)?getDrawable(((ControlPoint) currentCp).getIcon()):null;
-        menuIcon.setImageDrawable(img);
+//        Drawable img = (currentCp instanceof ControlPoint)?getDrawable(((ControlPoint) currentCp).getIcon()):null;
+//        menuIcon.setImageDrawable(img);
         targetChanged = true;
 
     }

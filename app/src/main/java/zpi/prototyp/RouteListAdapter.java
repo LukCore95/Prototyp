@@ -80,13 +80,13 @@ public class RouteListAdapter extends BaseAdapter {
         polish.setText(currentCp.getName());
         german.setText(currentCp.getGermanName());
         if(position == (lastPosition+1)){
-            img.setImageDrawable(ctx.getDrawable(R.drawable.pkt_akt));
+            img.setImageDrawable(ctx.getDrawable(R.mipmap.pkt_akt));
         }
         else if(position <= lastPosition){
-            img.setImageDrawable(ctx.getDrawable(R.drawable.pkt_odw));
+            img.setImageDrawable(ctx.getDrawable(R.mipmap.pkt_odw));
         }
         else{
-            img.setImageDrawable(ctx.getDrawable(R.drawable.pkt_n_odw));
+            img.setImageDrawable(ctx.getDrawable(R.mipmap.pkt_n_odw));
         }
 
 

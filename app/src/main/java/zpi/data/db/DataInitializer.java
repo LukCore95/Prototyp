@@ -173,10 +173,12 @@ public final class DataInitializer {
                 renoma = new ControlPoint(res.getString(R.string.renoma), res.getString(R.string.renoma_german), res.getString(R.string.renoma_description), maj131933.getTime(), 17.031064, 51.103851, R.mipmap.marker_renoma, R.drawable.foto_stare, R.drawable.foto_nowe, R.raw.podwale_renoma_swidnicka_plac_teatralny, renomaPhotos);
                 swidnicka = new ControlPoint(res.getString(R.string.swidnicka), res.getString(R.string.swidnicka_german), res.getString(R.string.swidnicka_description), maj131933.getTime(), 17.031117, 51.105059, R.mipmap.marker_swidnicka, R.drawable.oldswidnicka, R.drawable.newswidnicka, R.raw.podwale_renoma_swidnicka_plac_teatralny, swidnickaPhotos);
                 plteatralny = new ControlPoint(res.getString(R.string.placTeatralny), res.getString(R.string.placTeatralny_german), res.getString(R.string.placTeatralny_description), maj131933.getTime(), 17.031921, 51.105483, R.mipmap.marker_plteatralny, R.drawable.oldplteatralny, R.drawable.newplteatralny, R.raw.podwale_renoma_swidnicka_plac_teatralny, plteatralnyPhotos);
-                sadowa = new ControlPoint(res.getString(R.string.sadowa), res.getString(R.string.sadowa_german), res.getString(R.string.sadowa_description), maj151933.getTime(), 17.027947, 51.105328, R.mipmap.marker_sadowa, R.drawable.oldsadowa, R.drawable.newsadowa, R.raw.sadowa, sadowaPhotos );
+                sadowa = new ControlPoint(res.getString(R.string.sadowa), res.getString(R.string.sadowa_german), res.getString(R.string.sadowa_description), maj151933.getTime(), 17.027947, 51.105328, R.mipmap.marker_sadowa, R.drawable.oldsadowa1, R.drawable.newsadowa, R.raw.sadowa, sadowaPhotos );
                 pomnikamora=new ControlPoint(res.getString(R.string.pomnikamora), res.getString(R.string.pomnikamora_german), res.getString(R.string.pomnikamora_description), maj151933.getTime(), 17.0352593, 51.104268, R.mipmap.marker_amor, R.drawable.oldpomnikamora, R.drawable.newpomnikamora, R.raw.pomnik_amora, pomnikamoraPhotos );
                 szewska=new ControlPoint(res.getString(R.string.szewska), res.getString(R.string.szewska_german),res.getString(R.string.szewska_description), maj131933.getTime(), 17.035566, 51.112735, R.mipmap.marker_szewska, R.drawable.oldszewska49, R.drawable.newszewska49, R.raw.szewska, szewskaPhotos);
                 ofiarOswiecimskich=new ControlPoint(res.getString(R.string.ofiaroswiecimskich), res.getString(R.string.ofiaroswiecimskich_german), res.getString(R.string.ofiaroswiecimskich_description), lipiec141934.getTime(),17.0323972, 51.1083705, R.mipmap.marker_ofiaroswiecimskich, R.drawable.oldofiaroswiecimskich, R.drawable.newofiaroswiecimskich, R.raw.ofiaroswiecimskich, ofiarOswiecimskichPhotos);
+                biskupia=new ControlPoint(res.getString(R.string.biskupia), res.getString(R.string.biskupia_german), res.getString(R.string.biskupia_description), maj131933.getTime(), 17.0359827,51.1087502, R.mipmap.marker_biskupia, R.drawable.oldbiskupia, R.drawable.newbiskupia, R.raw.biskupia, biskupiaPhotos);
+                placWolnosci=new ControlPoint(res.getString(R.string.placWolnosci), res.getString(R.string.placWolnosci_german), res.getString(R.string.placWolnosci_description), maj131933.getTime(), 17.0276188, 51.1068292, R.mipmap.marker_placwolnosci, R.drawable.oldplacwolnosci, R.drawable.newplacwolnosci, R.raw.placwolnosci, placWolnosciPhotos);
                 //punktTestowy=new ControlPoint("kakakaka", "hihiihihihih", "ameba ameba", maj131933.getTime(), 16.845005, 51.389996, R.mipmap.marker_plteatralny,R.drawable.oldpodwale, R.drawable.oldplacteatralny1h, R.raw.podwale_renoma_swidnicka_plac_teatralny, sadowaPhotos);
 
                 sad=new InterestingPlace(res.getString(R.string.ip_sad), res.getString(R.string.ip_sad_description),17.025995, 51.105936, res.getString(R.string.ip_sad_address), InterestingPlaceType.kultury, sadPhoto);
@@ -251,11 +253,16 @@ public final class DataInitializer {
             }
             LinkedList<ControlPoint> testTrasa = new LinkedList<ControlPoint>();
             testTrasa.add(sadowa);
-        testTrasa.add(podwale);
-        testTrasa.add(renoma);
-        testTrasa.add(swidnicka);
+            testTrasa.add(podwale);
+            testTrasa.add(renoma);
+            testTrasa.add(swidnicka);
             testTrasa.add(plteatralny);
-        testTrasa.add(pomnikamora);
+            testTrasa.add(pomnikamora);
+            testTrasa.add(biskupia);
+            testTrasa.add(szewska);
+            testTrasa.add(ofiarOswiecimskich);
+            testTrasa.add(placWolnosci);
+
 
 
 

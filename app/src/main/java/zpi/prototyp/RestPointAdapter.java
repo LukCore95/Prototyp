@@ -43,7 +43,7 @@ public class RestPointAdapter extends BaseAdapter {
     private MainActivity ctx;
     private List<RestPoint> rpList;
     private List<RestPoint> fullList;
-    private TripController tripController;
+    protected static TripController tripController;
     private LatLng userLoc;
 
     private static final double RANGE = 0.2;

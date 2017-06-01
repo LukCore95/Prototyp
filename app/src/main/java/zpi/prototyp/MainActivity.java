@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private boolean ip_near = true;
     private TextView noIpText;
     private TextView noRpText;
+    public static boolean navigationFromDetails;
 
     private SlidingUpPanelLayout slidingUp;
     private RelativeLayout bottombar;
@@ -168,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         this.getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimary));
         setContentView(R.layout.activity_main);
 
-
+        navigationFromDetails=false;
         //wczytanie z bazy danych TUTAJ
 
        // currentTrip=SplashScreen.getTrip();
@@ -563,7 +564,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 intent.putExtra("nazwaPunktu", interestingPlaces.get(getMarkersID(marker.getId()) - restPoints.size()).getName());
                 startActivity(intent);
             }
-           
+
         }
 
 //        }
@@ -609,7 +610,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onLocationChanged(final Location location) {
 
-
+                if(navigationFromDetails)
+                {
+                    refreshCurrentTarget();
+                    navigationFromDetails=false;
+                }
                if (lastUserLoc==null || DistanceCalculator.distance(lastUserLoc.getLatitude(), lastUserLoc.getLongitude(), location.getLatitude(), location.getLongitude()) >= 0.05||firstRoute||targetChanged) {
                LatLng llLoc = new LatLng(location.getLatitude(), location.getLongitude());
                targetChanged = false;
@@ -810,7 +815,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         tripController.saveTripState();
     }
 
-    public void refreshCurrentTarget(){//System.out.println("REFRESH");
+    public  void refreshCurrentTarget(){//System.out.println("REFRESH");
         Point currentCp = tripController.getCurrentCP();
         routeTo = currentCp.getGeoLoc();
         deName = (currentCp instanceof ControlPoint)?((ControlPoint) currentCp).getGermanName():currentCp.getName();

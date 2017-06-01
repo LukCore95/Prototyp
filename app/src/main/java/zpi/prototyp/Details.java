@@ -195,7 +195,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             //check if image needs to be rotated
             String name=getResources().getResourceName(photosId.get(i));
-            String n=name.charAt(name.length()-1)+"";
+            final String n=name.charAt(name.length()-1)+"";
             if(n.equals("h"))
             {
                 imageView.setRotation(270);
@@ -205,6 +205,7 @@ public class Details extends FragmentActivity implements View.OnTouchListener{
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     zoomImageFromThumb(imageView, photosId.get(temp),
                             (ImageView) findViewById(R.id.zoom));
                 }

@@ -33,8 +33,10 @@ import zpi.prototyp.R;
  */
 public final class DataInitializer {
     private static final int YEAR_1933 = 1933;
+    private static final int YEAR_1934 = 1934;
     private static final int DAY_13 = 13;
     private static final int DAY_15 = 15;
+    private static final int DAY_14 = 14;
 
     /**
      * You cannot instantiate this class.
@@ -54,6 +56,11 @@ public final class DataInitializer {
             ControlPoint swidnicka = null;
             ControlPoint plteatralny = null;
             ControlPoint sadowa = null;
+            ControlPoint pomnikamora=null;
+            ControlPoint biskupia=null;
+            ControlPoint szewska=null;
+            ControlPoint ofiarOswiecimskich=null;
+            ControlPoint placWolnosci= null;
             //ControlPoint punktTestowy=null;
 
             InterestingPlace sad=null;
@@ -86,12 +93,18 @@ public final class DataInitializer {
             List<Integer> swidnickaPhotos = new ArrayList<Integer>();
             List<Integer> plteatralnyPhotos = new ArrayList<Integer>();
             List<Integer> sadowaPhotos = new ArrayList<Integer>();
+            List<Integer> pomnikamoraPhotos=new ArrayList<Integer>();
+            List<Integer> biskupiaPhotos=new ArrayList<Integer>();
+            List<Integer> szewskaPhotos=new ArrayList<Integer>();
+            List<Integer> ofiarOswiecimskichPhotos=new ArrayList<Integer>();
+            List<Integer> placWolnosciPhotos=new ArrayList<Integer>();
             List<Integer> sadPhoto=new ArrayList<Integer>();
             List<Integer> promenadaPhoto=new ArrayList<Integer>();
             List<Integer> operaPhoto = new ArrayList<Integer>();
             List<Integer> kosciol_bcPhoto=new ArrayList<Integer>();
             List<Integer> pomnik_bcPhoto=new ArrayList<Integer>();
             List<Integer> teatrLalekPhoto=new ArrayList<Integer>();
+
 
             podwalePhotos.add(new Integer(R.drawable.oldpodwaleh));
             podwalePhotos.add(new Integer(R.drawable.oldpodwale2h));
@@ -110,6 +123,35 @@ public final class DataInitializer {
             plteatralnyPhotos.add(new Integer(R.drawable.oldplacteatralny2h));
             sadowaPhotos.add(new Integer(R.drawable.oldsadowa1h));
             sadowaPhotos.add(new Integer(R.drawable.oldsadowa2h));
+            pomnikamoraPhotos.add(new Integer(R.drawable.oldpomnikamora1h));
+            pomnikamoraPhotos.add(new Integer(R.drawable.oldpomnikamora2));
+            pomnikamoraPhotos.add(new Integer(R.drawable.oldpomnikamora3));
+            pomnikamoraPhotos.add(new Integer(R.drawable.oldpomnikamora4h));
+            pomnikamoraPhotos.add(new Integer(R.drawable.oldpomnikamora5h));
+            pomnikamoraPhotos.add(new Integer(R.drawable.oldpomnikamora6h));
+            ofiarOswiecimskichPhotos.add(new Integer(R.drawable.oldofiaroswiecimskich1));
+            ofiarOswiecimskichPhotos.add(new Integer(R.drawable.oldofiaroswiecimskich2h));
+            ofiarOswiecimskichPhotos.add(new Integer(R.drawable.oldofiaroswiecimskich3h));
+            ofiarOswiecimskichPhotos.add(new Integer(R.drawable.oldofiaroswiecimskich4h));
+            ofiarOswiecimskichPhotos.add(new Integer(R.drawable.oldofiaroswiecimskich5h));
+            szewskaPhotos.add(new Integer(R.drawable.oldszewska491h));
+            biskupiaPhotos.add(new Integer(R.drawable.oldbiskupia1));
+            biskupiaPhotos.add(new Integer(R.drawable.oldbiskupia1));
+            biskupiaPhotos.add(new Integer(R.drawable.oldbiskupia2));
+            biskupiaPhotos.add(new Integer(R.drawable.oldbiskupia3h));
+            biskupiaPhotos.add(new Integer(R.drawable.oldbiskupia4));
+            biskupiaPhotos.add(new Integer(R.drawable.oldbiskupia5h));
+            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci1h));
+            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci2h));
+            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci3h));
+            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci6h));
+            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci5h));
+            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci7h));
+            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci8h));
+            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci9h));
+            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci10h));
+
+
             //interesting place photos
             operaPhoto.add(new Integer(R.drawable.ip_opera));
             kosciol_bcPhoto.add(new Integer(R.drawable.ip_kosciol_bc));
@@ -120,15 +162,20 @@ public final class DataInitializer {
 
             Calendar maj131933 = Calendar.getInstance();
             Calendar maj151933 = Calendar.getInstance();
+            Calendar lipiec141934 =Calendar.getInstance();
             maj131933.set(YEAR_1933, Calendar.MAY, DAY_13);
             maj151933.set(YEAR_1933, Calendar.MAY, DAY_15);
+            lipiec141934.set(YEAR_1934, Calendar.JULY, DAY_14);
+
 
             try {
                 podwale = new ControlPoint(res.getString(R.string.podwale), res.getString(R.string.podwale_german), res.getString(R.string.podwale_description), maj131933.getTime(), 17.030082, 51.104082, R.mipmap.marker_podwale, R.drawable.oldpodwale, R.drawable.newpodwale, R.raw.podwale_renoma_swidnicka_plac_teatralny, podwalePhotos);
                 renoma = new ControlPoint(res.getString(R.string.renoma), res.getString(R.string.renoma_german), res.getString(R.string.renoma_description), maj131933.getTime(), 17.031064, 51.103851, R.mipmap.marker_renoma, R.drawable.foto_stare, R.drawable.foto_nowe, R.raw.podwale_renoma_swidnicka_plac_teatralny, renomaPhotos);
                 swidnicka = new ControlPoint(res.getString(R.string.swidnicka), res.getString(R.string.swidnicka_german), res.getString(R.string.swidnicka_description), maj131933.getTime(), 17.031117, 51.105059, R.mipmap.marker_swidnicka, R.drawable.oldswidnicka, R.drawable.newswidnicka, R.raw.podwale_renoma_swidnicka_plac_teatralny, swidnickaPhotos);
                 plteatralny = new ControlPoint(res.getString(R.string.placTeatralny), res.getString(R.string.placTeatralny_german), res.getString(R.string.placTeatralny_description), maj131933.getTime(), 17.031921, 51.105483, R.mipmap.marker_plteatralny, R.drawable.oldplteatralny, R.drawable.newplteatralny, R.raw.podwale_renoma_swidnicka_plac_teatralny, plteatralnyPhotos);
-                sadowa = new ControlPoint(res.getString(R.string.sadowa), res.getString(R.string.sadowa_german), res.getString(R.string.sadowa_description), maj151933.getTime(), 17.027947, 51.105328, R.mipmap.marker_sadowa, R.drawable.oldsadowa, R.drawable.oldsadowa, R.raw.sadowa, sadowaPhotos );
+                sadowa = new ControlPoint(res.getString(R.string.sadowa), res.getString(R.string.sadowa_german), res.getString(R.string.sadowa_description), maj151933.getTime(), 17.027947, 51.105328, R.mipmap.marker_sadowa, R.drawable.oldsadowa1h, R.drawable.oldsadowa1h, R.raw.sadowa, sadowaPhotos );
+                pomnikamora=new ControlPoint(res.getString(R.string.pomnikamora), res.getString(R.string.pomnikamora_german), res.getString(R.string.pomnikamora_description), maj151933.getTime(), 17.0352593, 51.104268, R.mipmap.marker_amor, R.drawable.oldpomnikamora, R.drawable.newpomnikamora, R.raw.pomnik_amora, pomnikamoraPhotos );
+
                 //punktTestowy=new ControlPoint("kakakaka", "hihiihihihih", "ameba ameba", maj131933.getTime(), 16.845005, 51.389996, R.mipmap.marker_plteatralny,R.drawable.oldpodwale, R.drawable.oldplacteatralny1h, R.raw.podwale_renoma_swidnicka_plac_teatralny, sadowaPhotos);
 
                 sad=new InterestingPlace(res.getString(R.string.ip_sad), res.getString(R.string.ip_sad_description),17.025995, 51.105936, res.getString(R.string.ip_sad_address), InterestingPlaceType.kultury, sadPhoto);
@@ -207,6 +254,7 @@ public final class DataInitializer {
         testTrasa.add(renoma);
         testTrasa.add(swidnicka);
             testTrasa.add(plteatralny);
+        testTrasa.add(pomnikamora);
 
 
 

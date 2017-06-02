@@ -151,7 +151,11 @@ public class InterestingPlaceAdapter extends BaseAdapter {
         InterestingPlaceType cpType = currentCp.getType();
         name.setText(currentCp.getName());
         type.setText(InterestingPlaceType.fromTypeToString(cpType));
-        tvaddress.setText(currentCp.getAddress());
+        if(currentCp.getAddress()!=null)
+            tvaddress.setText(currentCp.getAddress());
+        else{
+            tvaddress.setVisibility(View.GONE);
+        }
 
         Drawable icon = null;
         switch(cpType){

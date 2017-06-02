@@ -27,7 +27,7 @@ import zpi.utils.DistanceCalculator;
  */
 
 public final class TripController {
-    protected static final float MIN_DISTANCE=0.05f; //activation distance
+    protected static final float MIN_DISTANCE=0.04f; //activation distance
     protected static final float MIN_DISTANCE_IP=0.1f;
     private Trip currentTrip;
     private Context ctx;
@@ -175,7 +175,7 @@ public final class TripController {
         Point point=currentTrip.getCurrentTarget();
 
         //Toast.makeText(ctx, "Dystans: " + DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude()), Toast.LENGTH_LONG).show();
-        if(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude())<=MIN_DISTANCE)
+        if((point instanceof ControlPoint)?DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude())<=MIN_DISTANCE:DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, point.getLatitude(), point.getLongitude())<=MIN_DISTANCE_IP)
         {
             tripNotificator.setNotification(ctx, point);
             int nextControlPoint = nextControlPoint();

@@ -11,8 +11,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -33,7 +31,7 @@ public class Interesting_Details extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_interesting__details);
+        setContentView(R.layout.activity_interesting_details);
 //        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
      //   this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimary));

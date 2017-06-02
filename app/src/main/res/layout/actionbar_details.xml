@@ -13,13 +13,12 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <ImageButton
+            android:id="@+id/closeImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/actionbar_newspaper_icon"
-            android:layout_alignParentStart="true" />
+            android:background="@null"
+            android:src="@mipmap/actionbar_back_icon" />
 
         <TextView
             android:id="@+id/textPK"
@@ -35,12 +34,6 @@
             android:textColor="@color/colorTextBar"
             android:textSize="26dp" />
 
-        <ImageButton
-            android:id="@+id/closeImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:src="@mipmap/actionbar_cancel_icon" />
     </LinearLayout>
 
 </android.support.v7.widget.Toolbar>

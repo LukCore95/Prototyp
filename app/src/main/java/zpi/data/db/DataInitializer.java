@@ -61,6 +61,7 @@ public final class DataInitializer {
             ControlPoint szewska=null;
             ControlPoint ofiarOswiecimskich=null;
             ControlPoint placWolnosci= null;
+            ControlPoint kameleon = null;
             //ControlPoint punktTestowy=null;
 
             InterestingPlace sad=null;
@@ -98,6 +99,7 @@ public final class DataInitializer {
             List<Integer> szewskaPhotos=new ArrayList<Integer>();
             List<Integer> ofiarOswiecimskichPhotos=new ArrayList<Integer>();
             List<Integer> placWolnosciPhotos=new ArrayList<Integer>();
+            List<Integer> kameleonPhotos = new ArrayList<Integer>();
             List<Integer> sadPhoto=new ArrayList<Integer>();
             List<Integer> promenadaPhoto=new ArrayList<Integer>();
             List<Integer> operaPhoto = new ArrayList<Integer>();
@@ -150,6 +152,16 @@ public final class DataInitializer {
             placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci8h));
             placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci9h));
             placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci10h));
+            kameleonPhotos.add(new Integer(R.drawable.oldkameleon1));
+            kameleonPhotos.add(new Integer(R.drawable.oldkameleon2));
+            kameleonPhotos.add(new Integer(R.drawable.oldkameleon3));
+            kameleonPhotos.add(new Integer(R.drawable.oldkameleon4));
+            kameleonPhotos.add(new Integer(R.drawable.oldkameleon5h));
+            kameleonPhotos.add(new Integer(R.drawable.oldkameleon6h));
+            kameleonPhotos.add(new Integer(R.drawable.oldkameleon7h));
+            kameleonPhotos.add(new Integer(R.drawable.oldkameleon8));
+
+
 
 
             //interesting place photos
@@ -179,6 +191,7 @@ public final class DataInitializer {
                 ofiarOswiecimskich=new ControlPoint(res.getString(R.string.ofiaroswiecimskich), res.getString(R.string.ofiaroswiecimskich_german), res.getString(R.string.ofiaroswiecimskich_description), lipiec141934.getTime(),17.0323972, 51.1083705, R.mipmap.marker_ofiaroswiecimskich, R.drawable.oldofiaroswiecimskich, R.drawable.newofiaroswiecimskich, R.raw.ofiaroswiecimskich, ofiarOswiecimskichPhotos);
                 biskupia=new ControlPoint(res.getString(R.string.biskupia), res.getString(R.string.biskupia_german), res.getString(R.string.biskupia_description), maj131933.getTime(), 17.0359827,51.1087502, R.mipmap.marker_biskupia, R.drawable.oldbiskupia, R.drawable.newbiskupia, R.raw.biskupia, biskupiaPhotos);
                 placWolnosci=new ControlPoint(res.getString(R.string.placWolnosci), res.getString(R.string.placWolnosci_german), res.getString(R.string.placWolnosci_description), maj131933.getTime(), 17.0276188, 51.1068292, R.mipmap.marker_placwolnosci, R.drawable.oldplacwolnosci, R.drawable.newplacwolnosci, R.raw.placwolnosci, placWolnosciPhotos);
+                kameleon=new ControlPoint(res.getString(R.string.kameleon), res.getString(R.string.kameleon_german), res.getString(R.string.kameleon_description), lipiec141934.getTime(), 17.033954, 51.108502, R.mipmap.marker_kameleon, R.drawable.oldkameleon, R.drawable.newkameleon, R.raw.placwolnosci, kameleonPhotos);
                 //punktTestowy=new ControlPoint("kakakaka", "hihiihihihih", "ameba ameba", maj131933.getTime(), 16.845005, 51.389996, R.mipmap.marker_plteatralny,R.drawable.oldpodwale, R.drawable.oldplacteatralny1h, R.raw.podwale_renoma_swidnicka_plac_teatralny, sadowaPhotos);
 
                 sad=new InterestingPlace(res.getString(R.string.ip_sad), res.getString(R.string.ip_sad_description),17.025995, 51.105936, res.getString(R.string.ip_sad_address), InterestingPlaceType.kultury, sadPhoto);
@@ -186,7 +199,7 @@ public final class DataInitializer {
                 kosciol_bc=new InterestingPlace(res.getString(R.string.ip_kosciol_bc), res.getString(R.string.ip_kosciol_bc_description), 17.031296, 51.105006, res.getString(R.string.ip_kosciol_bc_address), InterestingPlaceType.sakralny, kosciol_bcPhoto);
                 opera=new InterestingPlace(res.getString(R.string.ip_opera), res.getString(R.string.ip_opera_description), 17.031189, 51.105582, res.getString(R.string.ip_opera_address), InterestingPlaceType.kultury, operaPhoto);
                 pomnik_bc=new InterestingPlace(res.getString(R.string.ip_pomnik_bc), res.getString(R.string.ip_pomnik_bc_description), 17.030988, 51.104368, "", InterestingPlaceType.kultury, pomnik_bcPhoto);
-                teatrlalek =new InterestingPlace(res.getString(R.string.ip_teatrlalek), res.getString(R.string.ip_teatrlalek_description), 17.033139, 51.105328, res.getString(R.string.ip_teatrlalek), InterestingPlaceType.kultury, teatrLalekPhoto);
+                teatrlalek =new InterestingPlace(res.getString(R.string.ip_teatrlalek), res.getString(R.string.ip_teatrlalek_description), 17.033139, 51.105328, res.getString(R.string.ip_teatrlalek_address), InterestingPlaceType.kultury, teatrLalekPhoto);
                 //wat = new InterestingPlace("Wojteks house", "Wojteguuu hałsuu", 16.845156, 51.389567, "Skokowa, ul. Żmigrodzka 11b", InterestingPlaceType.kultury, sadowaPhotos);
 
                 cafeBarMonopol = new RestPoint(res.getString(R.string.rp_cafeBarMonopol),
@@ -260,6 +273,7 @@ public final class DataInitializer {
             testTrasa.add(pomnikamora);
             testTrasa.add(biskupia);
             testTrasa.add(szewska);
+            testTrasa.add(kameleon);
             testTrasa.add(ofiarOswiecimskich);
             testTrasa.add(placWolnosci);
 

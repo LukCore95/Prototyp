@@ -73,7 +73,7 @@
     <ImageView
         android:id="@+id/interesting_place_image"
         android:layout_width="match_parent"
-        android:layout_height="465px"
+        android:layout_height="230dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/interesting_place_newspaperHeader"

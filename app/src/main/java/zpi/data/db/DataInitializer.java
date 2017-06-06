@@ -270,12 +270,12 @@ public final class DataInitializer {
             testTrasa.add(renoma);
             testTrasa.add(swidnicka);
             testTrasa.add(plteatralny);
-            testTrasa.add(pomnikamora);
-            testTrasa.add(biskupia);
-            testTrasa.add(szewska);
-            testTrasa.add(kameleon);
-            testTrasa.add(ofiarOswiecimskich);
-            testTrasa.add(placWolnosci);
+         //   testTrasa.add(pomnikamora);
+          //  testTrasa.add(biskupia);
+           // testTrasa.add(szewska);
+           // testTrasa.add(kameleon);
+            //testTrasa.add(ofiarOswiecimskich);
+           // testTrasa.add(placWolnosci);
 
 
 

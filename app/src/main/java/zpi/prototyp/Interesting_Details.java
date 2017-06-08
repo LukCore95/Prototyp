@@ -78,10 +78,7 @@ public class Interesting_Details extends AppCompatActivity {
                 finish();
             }
         });
-        Button navigationDetails=(Button) findViewById(R.id.nawigujDetale);
-        navigationDetails.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/cambria/cambria_bold.ttf"));
-
-
+        ImageButton navigationDetails=(ImageButton) findViewById(R.id.nawigujDetale);
     }
 
     private void setFont(TextView tv, String font)

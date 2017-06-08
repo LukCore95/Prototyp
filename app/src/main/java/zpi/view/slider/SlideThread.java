@@ -171,7 +171,9 @@ public class SlideThread extends Thread {
 
         //decode bitmaps
         Resources res = ctx.getResources();
+
         photos[0] = BitmapFactory.decodeResource(res, iPhotos[0]);
+        System.out.println("BITMAPA: " + photos[0].getByteCount());
         photos[1] = BitmapFactory.decodeResource(res, iPhotos[1]);
         background = BitmapFactory.decodeResource(res, iBackground);
         backgroundDeeper = BitmapFactory.decodeResource(res, iBackgroundDeeper);

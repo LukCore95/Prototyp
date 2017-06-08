@@ -146,20 +146,20 @@ public final class DataInitializer {
             placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci1h));
             placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci2h));
             placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci3h));
-            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci6h));
-            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci5h));
-            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci7h));
-            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci8h));
-            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci9h));
-            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci10h));
-            kameleonPhotos.add(new Integer(R.drawable.oldkameleon1));
-            kameleonPhotos.add(new Integer(R.drawable.oldkameleon2));
-            kameleonPhotos.add(new Integer(R.drawable.oldkameleon3));
-            kameleonPhotos.add(new Integer(R.drawable.oldkameleon4));
-            kameleonPhotos.add(new Integer(R.drawable.oldkameleon5h));
-            kameleonPhotos.add(new Integer(R.drawable.oldkameleon6h));
-            kameleonPhotos.add(new Integer(R.drawable.oldkameleon7h));
-            kameleonPhotos.add(new Integer(R.drawable.oldkameleon8));
+//            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci6h));
+//            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci5h));
+//            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci7h));
+//            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci8h));
+//            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci9h));
+//            placWolnosciPhotos.add(new Integer(R.drawable.oldplacwolnosci10h));
+            //kameleonPhotos.add(new Integer(R.drawable.oldkameleon1));
+          //  kameleonPhotos.add(new Integer(R.drawable.oldkameleon2));
+           kameleonPhotos.add(new Integer(R.drawable.oldkameleon3));
+           kameleonPhotos.add(new Integer(R.drawable.oldkameleon4));
+         //   kameleonPhotos.add(new Integer(R.drawable.oldkameleon5h));
+          //  kameleonPhotos.add(new Integer(R.drawable.oldkameleon6h));
+        //    kameleonPhotos.add(new Integer(R.drawable.oldkameleon7h));
+         //   kameleonPhotos.add(new Integer(R.drawable.oldkameleon8));
 
 
 
@@ -270,12 +270,12 @@ public final class DataInitializer {
             testTrasa.add(renoma);
             testTrasa.add(swidnicka);
             testTrasa.add(plteatralny);
-         //   testTrasa.add(pomnikamora);
-          //  testTrasa.add(biskupia);
-           // testTrasa.add(szewska);
-           // testTrasa.add(kameleon);
-            //testTrasa.add(ofiarOswiecimskich);
-           // testTrasa.add(placWolnosci);
+            testTrasa.add(pomnikamora);
+            testTrasa.add(biskupia);
+            testTrasa.add(szewska);
+            testTrasa.add(kameleon);
+            testTrasa.add(ofiarOswiecimskich);
+            testTrasa.add(placWolnosci);
 
 
 

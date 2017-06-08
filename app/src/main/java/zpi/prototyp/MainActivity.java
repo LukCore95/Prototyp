@@ -552,15 +552,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if(getMarkersID(marker.getId()) >= interestingPlaces.size()+restPoints.size()) {
             Intent intent = new Intent(MainActivity.this, Details.class);
-
+            //Toast.makeText(this, getMarkersID(marker.getId())-(restPoints.size()+interestingPlaces.size()),Toast.LENGTH_LONG ).show();
             intent.putExtra("nazwaPunktu", basicRoute.get(getMarkersID(marker.getId())-(restPoints.size()+interestingPlaces.size())).getName());
             startActivity(intent);
         }
         else
         {
-            if(getMarkersID(marker.getId()) >restPoints.size()) {
+            if(getMarkersID(marker.getId()) >=restPoints.size()) {
                 Intent intent = new Intent(MainActivity.this, Interesting_Details.class);
-
+              //  Toast.makeText(this, getMarkersID(marker.getId())-(restPoints.size()+interestingPlaces.size()),Toast.LENGTH_LONG ).show();
                 intent.putExtra("nazwaPunktu", interestingPlaces.get(getMarkersID(marker.getId()) - restPoints.size()).getName());
                 startActivity(intent);
             }
@@ -643,7 +643,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                        Resources res = this.getResources();
                        int status;
                        if ((status = tripController.checkIfPointReached()) != 0)
-                           Toast.makeText(this, res.getString(R.string.target_reached_message), Toast.LENGTH_SHORT).show();
+                          // Toast.makeText(this, res.getString(R.string.target_reached_message), Toast.LENGTH_SHORT).show();
                        if (status == 2)
                            endReached = true;
 

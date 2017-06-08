@@ -102,7 +102,10 @@ public class InterestingPlaceAdapter extends BaseAdapter {
                     tripController.setNavigation(currentCp);
 
 
-                    Toast.makeText(ctx, "Teraz zmierzasz do: " + currentCp.getName(), Toast.LENGTH_SHORT).show();
+                    Toast toast =Toast.makeText(ctx, "   Teraz zmierzasz do: " + currentCp.getName() + "    ", Toast.LENGTH_SHORT);
+                    View toastView=toast.getView();
+                    toastView.setBackgroundColor(ctx.getResources().getColor(R.color.colorBackground));
+                    toast.show();
                     Animation buttonAnim = new AlphaAnimation(1.0f, 0.3f);
                     //buttonAnim.setFillAfter(true);
                     buttonAnim.setDuration(1500);
@@ -126,7 +129,10 @@ public class InterestingPlaceAdapter extends BaseAdapter {
 
                     tripController.setNavigation(tripController.getRouteControlPoints().get(nextIndex));
 
-                    Toast.makeText(ctx, "Anulowano nawigację do: " + currentCp.getName(), Toast.LENGTH_SHORT).show();
+                    Toast toast1= Toast.makeText(ctx, "    Anulowano nawigację do: " + currentCp.getName() + "   ", Toast.LENGTH_SHORT);
+                    View toastView1=toast1.getView();
+                    toastView1.setBackgroundColor(ctx.getResources().getColor(R.color.colorBackground));
+                    toast1.show();
                     Animation buttonAnim = new AlphaAnimation(0.3f, 1.0f);
                     //buttonAnim.setFillAfter(true);
                     buttonAnim.setDuration(1500);

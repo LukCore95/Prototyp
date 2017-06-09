@@ -98,7 +98,10 @@ public class Interesting_Details extends AppCompatActivity {
                         RestPointAdapter.tripController.setNavigation(interestingPlace);
 
 
-                        Toast.makeText(ctx, "Teraz zmierzasz do: " + interestingPlace.getName(), Toast.LENGTH_SHORT).show();
+                        Toast toast =Toast.makeText(ctx, "Teraz zmierzasz do: " + interestingPlace.getName(), Toast.LENGTH_SHORT);
+                        View toastView1=toast.getView();
+                        toastView1.setBackgroundColor(ctx.getResources().getColor(R.color.colorBackground));
+                        toast.show();
 
                         MainActivity.navigationFromDetails=true;
 

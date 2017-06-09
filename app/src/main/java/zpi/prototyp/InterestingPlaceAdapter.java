@@ -129,7 +129,8 @@ public class InterestingPlaceAdapter extends BaseAdapter {
 
                     tripController.setNavigation(tripController.getRouteControlPoints().get(nextIndex));
 
-                    Toast toast1= Toast.makeText(ctx, "    Anulowano nawigację do: " + currentCp.getName() + "   ", Toast.LENGTH_SHORT);
+                    Toast toast1= Toast.makeText(ctx, "    An" +
+                            "ulowano nawigację do: " + currentCp.getName() + "   ", Toast.LENGTH_SHORT);
                     View toastView1=toast1.getView();
                     toastView1.setBackgroundColor(ctx.getResources().getColor(R.color.colorBackground));
                     toast1.show();

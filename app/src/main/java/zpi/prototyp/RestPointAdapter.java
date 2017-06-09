@@ -46,7 +46,7 @@ public class RestPointAdapter extends BaseAdapter {
     protected static TripController tripController;
     private LatLng userLoc;
 
-    private static final double RANGE = 0.2;
+    private static final double RANGE = 5.2;
 
 
 

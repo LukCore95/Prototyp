@@ -21,5 +21,10 @@ public interface RouteDAO extends DAO {
      */
     public int createRoute(Route newRoute);
 
+    /**
+     * Returns a route that has given id
+     * @param id Id of a needed Route
+     * @return Requested route
+     */
     public Route getRoute(int id);
 }

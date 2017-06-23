@@ -24,5 +24,9 @@ public interface RestPointDAO extends DAO {
      */
     public int createRestPoint(RestPoint newRestPoint);
 
+    /**
+     * Gets the list of all rest points in database.
+     * @return List of all rest points in database.
+     */
     public List<RestPoint> getAllRestPoints();
 }

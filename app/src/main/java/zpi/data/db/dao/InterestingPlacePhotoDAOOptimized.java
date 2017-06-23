@@ -11,9 +11,12 @@ import zpi.data.db.MockContract;
 import zpi.data.model.InterestingPlace;
 
 /**
- * Created by Ania on 2017-04-25.
+ * @author Wojciech Michałowski
+ * Optimized implementation od InterestingPlacePhotoDAO interface. Using this class requires injection of readable and/or writable database. Writable database can be null if
+ * you're not planning to use writing method createInterestingPlace. Using method createInterestingPlace with a null-writableDb DAO object will result in Exception.
+ * To get your instance of readable/writable database simply call getWritableDatabase()/getReadableDatabase() of your MockDbHelper object. After performing DB operations on this class
+ * you need to close database connection by calling close() method of the database object.
  */
-
 public class InterestingPlacePhotoDAOOptimized implements InterestingPlacePhotoDAO {
     SQLiteDatabase readableDb;
     SQLiteDatabase writableDb;

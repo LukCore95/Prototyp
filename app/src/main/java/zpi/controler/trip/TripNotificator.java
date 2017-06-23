@@ -20,41 +20,45 @@ import zpi.prototyp.R;
 import zpi.utils.DistanceCalculator;
 
 /**
- * Created by Adrianna on 11/05/2017.
+ * @author Adrianna Łapucha
+ * Controller that manages notificator behaviour.
  */
-
 public class TripNotificator {
     int minDistance=50;
     private Context context;
 
     public List<ControlPoint> controlPoints;
 
+    /**
+     * Main public, empty constructor.
+     */
     public TripNotificator()
     {
 
     }
 
-    public  void setNotification(Context ctx, Point point)
-    {
+    /**
+     * Displays notification about reached current target.
+     * @param ctx Context of application
+     * @param point Reached target point
+     */
+    public  void setNotification(Context ctx, Point point) {
 
 
-            long[] pattern1 = {0, 1000, 1000};
-            NotificationCompat.Builder mBuilder =   new NotificationCompat.Builder(ctx)
-                    .setSmallIcon(R.mipmap.actionbar_marker_icon) // notification icon
-                    .setContentTitle("Doszedłeś do punktu " + point.getName()+"!") // title for notification
-                    .setContentText("Stuknij, aby wyświetlić detale!") // message for notification
-                    .setAutoCancel(true)
-                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                    .setVibrate(pattern1); // clear notification after click
-            Intent intent = new Intent(ctx, MainActivity.class);
-            PendingIntent pi = PendingIntent.getActivity(ctx,0,intent,PendingIntent.FLAG_ONE_SHOT);
-            mBuilder.setContentIntent(pi);
-            NotificationManager mNotificationManager =
-                    (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotificationManager.notify(0, mBuilder.build());
+        long[] pattern1 = {0, 1000, 1000};
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ctx)
+                .setSmallIcon(R.mipmap.actionbar_marker_icon) // notification icon
+                .setContentTitle("Doszedłeś do punktu " + point.getName() + "!") // title for notification
+                .setContentText("Stuknij, aby wyświetlić detale!") // message for notification
+                .setAutoCancel(true)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setVibrate(pattern1); // clear notification after click
+        Intent intent = new Intent(ctx, MainActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(ctx, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        mBuilder.setContentIntent(pi);
+        NotificationManager mNotificationManager =
+                (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(0, mBuilder.build());
 
     }
-
-
-
 }

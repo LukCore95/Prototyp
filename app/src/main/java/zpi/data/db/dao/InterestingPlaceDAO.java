@@ -24,5 +24,9 @@ public interface InterestingPlaceDAO extends DAO {
      */
     public int createInterestingPlace(InterestingPlace newInterestingPlace);
 
+    /**
+     * Gets the list of all interesting places
+     * @return List of all interesint places in the app.
+     */
     public List<InterestingPlace> getAllInterestingPlaces();
 }

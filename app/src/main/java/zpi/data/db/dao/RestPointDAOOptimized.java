@@ -15,9 +15,12 @@ import zpi.data.model.RestPoint;
 import zpi.data.model.RestPointType;
 
 /**
- * Created by Ania on 2017-04-25.
+ * @author Wojciech Michałowski
+ * Optimized implementation od RestPointDAO interface. Using this class requires injection of readable and/or writable database. Writable database can be null if
+ * you're not planning to use writing method createInterestingPlace. Using method createInterestingPlace with a null-writableDb DAO object will result in Exception.
+ * To get your instance of readable/writable database simply call getWritableDatabase()/getReadableDatabase() of your MockDbHelper object. After performing DB operations on this class
+ * you need to close database connection by calling close() method of the database object.
  */
-
 public class RestPointDAOOptimized implements RestPointDAO {
     SQLiteDatabase readableDb;
     SQLiteDatabase writableDb;

@@ -72,19 +72,6 @@ public class MockDbHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    /*public SQLiteDatabase enableReading(){
-        return getReadableDatabase();
-    }
-
-    public SQLiteDatabase enableWriting(){
-        return getWritableDatabase();
-    }
-
-    public void closeDb(SQLiteDatabase db){
-        if(db.isOpen())
-            db.close();
-    }*/
-
     private void createTables(SQLiteDatabase db){
         db.execSQL(MockContract.ControlPointPhotoCreation);
         db.execSQL(MockContract.InterestingPlacePhotoCreation);

@@ -20,9 +20,6 @@ public class MockContract {
     public static final String ControlPointPhotoCreation = "create table " + ControlPointPhotoEntry.TABLE_NAME + " (" + ControlPointPhotoEntry.COLUMN_NAME_ID + " integer not null primary key, " + ControlPointPhotoEntry.COLUMN_NAME_POINT + " integer(10) not null, foreign key(" + ControlPointPhotoEntry.COLUMN_NAME_POINT + ") references " + ControlPointEntry.TABLE_NAME + "(" + ControlPointEntry.COLUMN_NAME_ID + "));";
 
 
-    //private static final String controlPointsInsertion =
-
-
     /**
      * Constructor is private because this class is not to instatiate!
      */
@@ -140,13 +137,4 @@ public class MockContract {
         public static final String COLUMN_NAME_ID = "ID";
         public static final String COLUMN_NAME_POINT = "ControlPointID";
     }
-
-    /**
-     * Returns complete DDL that creates Mock database.
-     * @return DDL code
-     */
-    /*public static String createTables(){
-        return RouteCreation + " " + ControlPointCreation + " " + TripCreation + " " + RoutePointCreation + " " + InterestingPlaceCreation + " " +
-                RestPointCreation + " " + RestPointPhotoCreation + " " + InterestingPlacePhotoCreation + " " + ControlPointPhotoCreation;
-    }*/
 }

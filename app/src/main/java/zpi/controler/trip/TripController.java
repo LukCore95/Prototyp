@@ -23,9 +23,10 @@ import zpi.data.model.Trip;
 import zpi.utils.DistanceCalculator;
 
 /**
- * Created by Ania on 2017-05-04.
+ * @author Wojciech Michałowski
+ * @author Adrianna Łapucha
+ * Main controller of app's work. Manages the route during app's running.
  */
-
 public final class TripController {
     protected static final float MIN_DISTANCE=0.03f; //activation distance
     protected static final float MIN_DISTANCE_IP=0.1f;
@@ -238,6 +239,10 @@ public final class TripController {
         return index<0?-1: index< cpList.size()?0:1;
     }
 
+    /**
+     * Gets the formatted string, that represents distance to current target.
+     * @return Formatted string representing distance.
+     */
     public String getDistanceToText()
     {
         int dist = (int)(DistanceCalculator.distance(userLoc.latitude, userLoc.longitude, getCurrentCP().getGeoLoc().latitude, getCurrentCP().getGeoLoc().longitude)*1000);

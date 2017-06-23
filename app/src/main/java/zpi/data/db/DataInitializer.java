@@ -28,8 +28,7 @@ import zpi.prototyp.R;
  * @author Wojciech Michałowski
  * This static class should be use to insert data to the Mock database while initializing or updating the database.
  * During the updating application and adding new control points, routes or other points please modify ONLY the method InitializeData of this class!
- * Do so by adding new insertion method calls and new object that needs to be inserted while checking the old and new version numbers.
- * oldVersion variable while 0 means that the database will be created, not upgraded.
+ * Do so by adding new insertion method calls and new object that needs to be inserted.
  */
 public final class DataInitializer {
     private static final int YEAR_1933 = 1933;
